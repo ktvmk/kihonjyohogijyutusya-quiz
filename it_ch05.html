@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第5章 システムの構成要素｜基本情報技術者</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Hiragino Sans','Noto Sans JP','Meiryo',sans-serif;background:#f5f5f0;color:#333;line-height:1.8;padding:0 0 60px 0}.header{background:linear-gradient(135deg,#e65100,#ff8f00);color:#fff;padding:24px 20px;text-align:center}.header h1{font-size:1.3em;margin-bottom:4px}.header .sub{font-size:.85em;opacity:.8}.container{max-width:720px;margin:0 auto;padding:16px}.nav-tabs{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap}.nav-tab{padding:10px 14px;border:2px solid #e65100;border-radius:8px;background:#fff;color:#e65100;font-weight:bold;font-size:.82em;cursor:pointer;transition:all .2s}.nav-tab:hover,.nav-tab.active{background:#e65100;color:#fff}.section{display:none}.section.active{display:block}.lesson-card{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.lesson-card h2{color:#e65100;font-size:1.2em;margin-bottom:16px;padding-bottom:8px;border-bottom:3px solid #ffe0b2}.lesson-card h3{color:#ff8f00;font-size:1.05em;margin:20px 0 10px 0}.key-point{background:#fff3e0;border-left:4px solid #e65100;padding:14px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-size:.95em}.key-point strong{color:#e65100}.vocab{display:inline-block;background:#e3f2fd;border:1px solid #64b5f6;border-radius:6px;padding:2px 8px;margin:2px 4px;font-weight:bold;font-size:.9em;color:#1565c0}.example{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:14px 16px;margin:12px 0;font-size:.9em}.formula{background:#fce4ec;border-left:4px solid #e91e63;padding:14px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-family:monospace;font-size:.95em;line-height:2}.compare{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}.compare-box{background:#fff;border:2px solid #e0e0e0;border-radius:10px;padding:14px;font-size:.9em}.compare-box h4{font-size:.95em;margin-bottom:8px;text-align:center}.compare-box.good{border-color:#4caf50}.compare-box.good h4{color:#2e7d32}.compare-box.bad{border-color:#ff9800}.compare-box.bad h4{color:#e65100}
+.quiz-area{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.quiz-area h2{color:#e65100;margin-bottom:16px}.question-card{background:#fafafa;border:1px solid #e0e0e0;border-radius:10px;padding:20px;margin:16px 0}.q-number{font-size:.8em;color:#999;margin-bottom:6px}.q-text{font-size:1.05em;font-weight:bold;margin-bottom:14px;line-height:1.6}.choices{list-style:none}.choices li{padding:12px 16px;margin:6px 0;border:2px solid #e0e0e0;border-radius:8px;cursor:pointer;transition:all .2s;font-size:.95em}.choices li:hover{border-color:#e65100;background:#fff3e0}.choices li.correct{border-color:#4caf50;background:#e8f5e9}.choices li.wrong{border-color:#f44336;background:#ffebee}.explanation{display:none;margin-top:12px;padding:14px;background:#f5f5f5;border-radius:8px;font-size:.9em;line-height:1.7}.explanation.show{display:block}.result-area{display:none;text-align:center;padding:30px;background:#fff;border-radius:12px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.result-score{font-size:2.5em;font-weight:bold;color:#e65100;margin:10px 0}.btn{display:inline-block;padding:12px 28px;background:#e65100;color:#fff;border:none;border-radius:8px;font-size:1em;cursor:pointer;margin:8px}.btn:hover{background:#ff8f00}.btn-outline{background:#fff;color:#e65100;border:2px solid #e65100}.progress-bar{width:100%;height:6px;background:#e0e0e0;border-radius:3px;margin:12px 0}.progress-fill{height:100%;background:#e65100;border-radius:3px;transition:width .3s}.back-link{display:inline-block;margin:16px 0;color:#e65100;text-decoration:none;font-weight:bold}
+</style>
+</head>
+<body>
+<div class="header"><h1>第5章 システムの構成要素</h1><div class="sub">基本情報技術者試験 Web教材</div></div>
+<div class="container">
+<a href="../../teaching/桑名看護専門学校/web教材/apps.html" class="back-link">&#x1F3E0; アプリ一覧</a>
+<div class="nav-tabs">
+<div class="nav-tab active" onclick="showSection('lesson1')">① 処理形態</div>
+<div class="nav-tab" onclick="showSection('lesson2')">② システム構成・信頼性</div>
+<div class="nav-tab" onclick="showSection('lesson3')">③ 性能指標</div>
+<div class="nav-tab" onclick="showSection('lesson4')">④ 稼働率の計算</div>
+<div class="nav-tab" onclick="showSection('quiz')">確認テスト</div>
+</div>
+
+<!-- ===== レッスン1: 処理形態 ===== -->
+<div id="lesson1" class="section active">
+<div class="lesson-card">
+<h2>① 処理の仕方によるシステムの分類</h2>
+
+<p>システムとは、手作業をコンピュータで自動化するための仕組みです。処理の仕方には<strong>集中処理</strong>と<strong>分散処理</strong>があります。</p>
+
+<div class="compare">
+<div class="compare-box good">
+<h4>集中処理</h4>
+<strong>1台</strong>の大型コンピュータ（ホストコンピュータ）がすべてを処理
+</div>
+<div class="compare-box bad">
+<h4>分散処理</h4>
+ネットワークでつながれた<strong>複数</strong>のコンピュータが処理を分担
+</div>
+</div>
+
+<h3>分散処理の3種類</h3>
+<div class="key-point">
+<span class="vocab">クライアントサーバシステム</span><br>
+・<strong>クライアント</strong>（サービスを利用する側）がサーバに処理を要求<br>
+・<strong>サーバ</strong>（サービスを提供する側）が処理を実行<br>
+・クライアントに専用ソフトのインストールが必要<br><br>
+
+<span class="vocab">3層クライアントサーバシステム</span><br>
+・①クライアント → ②アプリケーションサーバ → ③データベースサーバ の3層<br>
+・各層が役割分担して処理する<br><br>
+
+<span class="vocab">Webシステム</span> ← <strong>試験最頻出！</strong><br>
+・3層クライアントサーバシステムの一種<br>
+・クライアントソフトに<strong>Webブラウザ</strong>を使う<br>
+・専用ソフトのインストール<strong>不要</strong><br>
+・処理結果は<strong>HTML形式</strong>でクライアントに返される
+</div>
+
+<div class="example"><strong>Webシステムのメリット：</strong><br>
+・使い慣れたWebブラウザが使える<br>
+・システム変更時もクライアントへのソフト再インストールが不要<br>
+・業務処理はサーバ側で実行 → クライアントは結果を表示するだけ</div>
+</div>
+</div>
+
+<!-- ===== レッスン2: システム構成・信頼性 ===== -->
+<div id="lesson2" class="section">
+<div class="lesson-card">
+<h2>② システム構成と信頼性</h2>
+
+<h3>3種類のシステム構成</h3>
+<div class="key-point">
+<span class="vocab">シンプレックスシステム</span>：1台だけ。最もシンプル。1箇所でも故障 → システム停止<br><br>
+<span class="vocab">デュプレックスシステム</span>：<strong>現用系＋待機系</strong>の2台構成。現用系が壊れたら待機系に切替え<br><br>
+<span class="vocab">デュアルシステム</span>：2台が<strong>同じ処理</strong>を同時に実行し、<strong>結果を照合</strong>。処理能力は1台分と同じ
+</div>
+
+<div class="compare">
+<div class="compare-box good">
+<h4>デュプレックス</h4>
+現用系が壊れたら<strong>待機系が引き継ぐ</strong><br>
+（予備を持っておく方式）
+</div>
+<div class="compare-box bad">
+<h4>デュアル</h4>
+2台が同じ処理を行い<strong>結果を照合</strong><br>
+（ダブルチェックの方式）
+</div>
+</div>
+
+<h3>ホットスタンバイとコールドスタンバイ</h3>
+<p>デュプレックスシステムの待機系の状態には2種類あります。</p>
+<div class="compare">
+<div class="compare-box good">
+<h4>ホットスタンバイ</h4>
+待機系にも<strong>電源を入れて</strong>起動しておく<br>
+→ 障害時に<strong>すぐ切替え</strong>可能（高速）<br>
+→ 運用コスト<strong>高い</strong>
+</div>
+<div class="compare-box bad">
+<h4>コールドスタンバイ</h4>
+待機系は<strong>電源OFF</strong>で停止<br>
+→ 切替えに<strong>時間がかかる</strong><br>
+→ 運用コスト<strong>安い</strong>
+</div>
+</div>
+
+<h3>信頼性を高める設計</h3>
+<div class="key-point">
+<span class="vocab">フォールトトレラント</span>：システムが部分的に故障しても、<strong>全体として必要な機能を維持</strong>する設計<br><br>
+<span class="vocab">フェールソフト</span>：障害時に性能が落ちても<strong>動作を継続</strong>させる設計（例：エンジン1つ故障でも飛行継続）<br>
+※ 限定的に動作している状態を「縮退運転（フォールバック）」という<br><br>
+<span class="vocab">フェールセーフ</span>：障害時に<strong>安全を優先してシステムを停止</strong>（例：人が近づいたらロボットアーム停止）<br><br>
+<span class="vocab">フールプルーフ</span>：人間が<strong>誤った操作をしてもシステムに異常が起こらない</strong>設計（例：ドアを閉めないと動かない電子レンジ） ← <strong>頻出！</strong>
+</div>
+
+<h3>RAID</h3>
+<p><span class="vocab">RAID</span>（Redundant Arrays of Inexpensive Disks）は、複数のハードディスクを1つのように扱う技術です。</p>
+
+<div class="key-point">
+<strong>試験に出る3つのレベル：</strong><br><br>
+<span class="vocab">RAID 0（ストライピング）</span>：データを<strong>分散して書き込む</strong><br>
+→ 読み書きが<strong>高速化</strong>。ただし信頼性は<strong>上がらない</strong>（むしろ下がる）<br><br>
+<span class="vocab">RAID 1（ミラーリング）</span>：同じデータを<strong>複数のディスクにコピー</strong><br>
+→ <strong>信頼性が向上</strong>。ただし保存容量は半減、コスト増<br><br>
+<span class="vocab">RAID 5</span>：データ＋パリティ（誤り訂正符号）を分散して書き込む<br>
+→ 信頼性と容量のバランスが良い
+</div>
+</div>
+</div>
+
+<!-- ===== レッスン3: 性能指標 ===== -->
+<div id="lesson3" class="section">
+<div class="lesson-card">
+<h2>③ システムの性能指標</h2>
+
+<h3>3つの性能指標</h3>
+<div class="key-point">
+<span class="vocab">スループット</span>：単位時間あたりに処理される<strong>仕事の量</strong>（「何件できるか」）<br><br>
+<span class="vocab">ターンアラウンドタイム</span>：<strong>入力→処理→出力</strong>の全工程にかかる合計時間<br><br>
+<span class="vocab">レスポンスタイム（応答時間）</span>：<strong>処理だけ</strong>にかかる時間（入力・出力の時間は含まない）
+</div>
+
+<div class="example"><strong>違いの覚え方：</strong><br>
+ターンアラウンドタイム = 入力＋処理＋出力（<strong>全部入り</strong>）<br>
+レスポンスタイム = 処理だけ（入力・出力は<strong>含まない</strong>）</div>
+
+<h3>ベンチマークテスト</h3>
+<div class="key-point">
+<span class="vocab">ベンチマークテスト</span>とは、<strong>標準的なプログラムやデータ</strong>を使ってシステムの処理性能を測定するテスト。<br><br>
+キーワード：「使用目的に合わせて選定した<strong>標準的な</strong>プログラム」
+</div>
+
+<h3>スケールアウトとスケールアップ</h3>
+<div class="compare">
+<div class="compare-box good">
+<h4>スケールアウト</h4>
+サーバの<strong>台数を増やす</strong>ことでシステム全体の処理能力を向上
+</div>
+<div class="compare-box bad">
+<h4>スケールアップ</h4>
+個々のサーバの<strong>性能を上げる</strong>（CPU交換、メモリ増設など）ことで処理能力を向上
+</div>
+</div>
+
+<div class="example"><strong>覚え方：</strong><br>
+スケール<strong>アウト</strong> = <strong>外（台数）</strong>を増やす<br>
+スケール<strong>アップ</strong> = <strong>上（性能）</strong>を上げる</div>
+</div>
+</div>
+
+<!-- ===== レッスン4: 稼働率の計算 ===== -->
+<div id="lesson4" class="section">
+<div class="lesson-card">
+<h2>④ システムの信頼性指標と稼働率の計算</h2>
+
+<h3>RASIS（5つの評価指標）</h3>
+<div class="key-point">
+<strong>R</strong>eliability（信頼性）── 障害の起こりにくさ<br>
+<strong>A</strong>vailability（可用性）── いつでもサービスが使えるか<br>
+<strong>S</strong>erviceability（保守性）── 復旧のしやすさ<br>
+<strong>I</strong>ntegrity（完全性）── データが壊れていないこと<br>
+<strong>S</strong>ecurity（安全性）── 許可された人だけがアクセスできること
+</div>
+
+<h3>MTBF と MTTR</h3>
+
+<div class="formula"><strong>MTBF（平均故障間隔）</strong> = 稼働時間の合計 ÷ 故障回数<br><br>
+→ <strong>故障せずに動いていた時間</strong>の平均。大きいほど信頼性が<strong>高い</strong><br>
+→ MTBFを長くするには<strong>予防保守</strong>が有効<br><br>
+<strong>MTTR（平均修復時間）</strong> = 故障時間の合計 ÷ 故障回数<br><br>
+→ <strong>修理にかかった時間</strong>の平均。小さいほど保守性が<strong>高い</strong></div>
+
+<div class="example"><strong>例：</strong>あるシステムが 50時間稼働→故障修理50時間→70時間稼働→故障修理70時間→60時間稼働→故障修理60時間<br>
+MTBF = (50+70+60) ÷ 3 = <strong>60時間</strong><br>
+MTTR = (50+70+60) ÷ 3 = <strong>60時間</strong></div>
+
+<h3>稼働率</h3>
+
+<div class="formula"><strong>稼働率</strong> = MTBF ÷ (MTBF + MTTR)<br><br>
+→ システムが<strong>故障せずに動いていた時間の割合</strong><br>
+→ 稼働率1.0 = 一度も故障していない</div>
+
+<div class="example"><strong>例：</strong>MTBF=3,000時間、MTTR=1,000時間<br>
+稼働率 = 3,000 ÷ (3,000+1,000) = 3,000 ÷ 4,000 = <strong>0.75 (75%)</strong></div>
+
+<h3>直列・並列システムの稼働率</h3>
+
+<div class="formula"><strong>直列システム</strong>（どちらも動かないとダメ）：<br>
+稼働率 = A × B<br><br>
+例：A=0.9, B=0.8 → 0.9 × 0.8 = <strong>0.72</strong><br><br>
+<strong>並列システム</strong>（どちらか動けばOK）：<br>
+稼働率 = 1 − (1−A) × (1−B)<br><br>
+例：A=0.9, B=0.8 → 1 − (1−0.9)×(1−0.8) = 1 − 0.1×0.2 = 1 − 0.02 = <strong>0.98</strong></div>
+
+<div class="key-point" style="background:#e8f5e9;border-color:#4caf50">
+<strong style="color:#2e7d32">稼働率の計算のコツ</strong><br><br>
+<strong>直列</strong>：かけ算（両方動く確率）→ 稼働率は<strong>下がる</strong><br>
+<strong>並列</strong>：「1 − 両方壊れる確率」→ 稼働率は<strong>上がる</strong><br><br>
+<strong>多重化システム</strong>：小さい部分から順に計算 → 最後に全体を計算
+</div>
+
+<div class="example"><strong>MTBF改善の計算問題（頻出パターン）：</strong><br>
+今年度：MTBF=3,000時間、MTTR=1,000時間<br>
+翌年度：MTBFを20%改善、MTTRを10%改善<br><br>
+新MTBF = 3,000 + 3,000×0.2 = <strong>3,600時間</strong>（増える）<br>
+新MTTR = 1,000 − 1,000×0.1 = <strong>900時間</strong>（減る）<br>
+稼働率 = 3,600 ÷ (3,600+900) = 3,600 ÷ 4,500 = <strong>0.8 (80%)</strong></div>
+</div>
+</div>
+
+<!-- ===== 確認テスト ===== -->
+<div id="quiz" class="section">
+<div class="quiz-area">
+<h2>確認テスト ── 第5章</h2>
+<p style="color:#666;font-size:.9em;margin-bottom:16px">全問ランダム出題・選択肢シャッフル。何度でも挑戦できます。</p>
+<div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+<div id="quizContainer"></div>
+<div style="text-align:center;margin-top:20px"><button class="btn" id="submitBtn" onclick="submitQuiz()" style="display:none">結果を見る</button></div>
+</div>
+<div class="result-area" id="resultArea"><h2>結果</h2><div class="result-score" id="resultScore"></div><div id="resultMsg" style="font-size:1.1em;margin:10px 0"></div><button class="btn" onclick="retryQuiz()">もう一度</button><button class="btn btn-outline" onclick="showSection('lesson1')">レッスンに戻る</button></div>
+</div>
+</div>
+
+<script>
+const allQuestions=[
+{q:'Webシステムの特徴として適切なものはどれか。',choices:['クライアントに専用ソフトのインストールが必要','業務処理はサーバ側で実行し、クライアントはHTMLに従って結果を表示する','クライアント側でHTMLプログラムを動作させる','サーバにHTTP要求を待ち受けるサービスをクライアントに常駐させる'],answer:1,explanation:'<strong>Webシステム</strong>では、業務処理はサーバ側で実行し、クライアント（Webブラウザ）はHTMLの記述に従って結果を画面に表示します。専用ソフトのインストールは不要です。'},
+{q:'一つの処理を2系統のシステムで独立に行い、結果を照合する方式はどれか。',choices:['シンプレックスシステム','デュプレックスシステム','デュアルシステム','クライアントサーバシステム'],answer:2,explanation:'<strong>デュアルシステム</strong>は、2台のコンピュータが同じ処理を行い、結果を照合する方式です。デュプレックスシステム（現用系＋待機系）との混同に注意！'},
+{q:'現用系が故障した時、あらかじめ起動して待機している待機系に速やかに切り替えるシステムはどれか。',choices:['コールドスタンバイシステム','ホットスタンバイシステム','デュアルシステム','シンプレックスシステム'],answer:1,explanation:'<strong>ホットスタンバイシステム</strong>は、待機系にも電源を入れて起動しておき、障害時に速やかに切り替える方式です。コールドスタンバイは待機系の電源がOFFなので切替えに時間がかかります。'},
+{q:'システムが部分的に故障しても、全体として必要な機能を維持するシステムは何か。',choices:['フォールトトレラントシステム','フェールセーフ','フールプルーフ','スタンバイシステム'],answer:0,explanation:'<strong>フォールトトレラントシステム</strong>は、部分的な故障があってもシステム全体の機能を維持する設計です。Fault（障害）＋Tolerant（耐性がある）という意味です。'},
+{q:'利用者が誤った操作をしてもシステムに異常が起こらないようにする設計はどれか。',choices:['フォールトトレラント','フェールソフト','フェールセーフ','フールプルーフ'],answer:3,explanation:'<strong>フールプルーフ</strong>は、人間が間違った使い方をしてもシステムに異常が起こらないようにする設計です。例：ドアを閉めないと加熱できない電子レンジ。'},
+{q:'障害が起きた場合に性能が落ちてもシステム全体は動作させ続ける設計はどれか。',choices:['フォールトトレラント','フェールソフト','フェールセーフ','フールプルーフ'],answer:1,explanation:'<strong>フェールソフト</strong>は、障害時に性能が低下しても動作を継続させる設計です。この限定的な動作状態を「縮退運転（フォールバック）」といいます。例：飛行機はエンジン1つが故障しても飛行を継続できます。'},
+{q:'データを分散して複数の磁気ディスクに書き込むことでデータ入出力の高速化を図る方式はどれか。',choices:['ストライピング','ミラーリング','ディスクキャッシュ','スワッピング'],answer:0,explanation:'<strong>ストライピング（RAID 0）</strong>は、データを複数のディスクに分散して書き込む方式です。並列アクセスにより高速化できますが、1つでもディスクが壊れると全体が動作しなくなるため、信頼性は上がりません。'},
+{q:'RAIDの分類でミラーリングを用いることで信頼性を高める方式はどれか。',choices:['RAID 0','RAID 1','RAID 3','RAID 5'],answer:1,explanation:'<strong>RAID 1（ミラーリング）</strong>は、複数のハードディスクに同じデータを書き込む方式です。1つのディスクが壊れても別のディスクからデータを読めるため、信頼性が向上します。'},
+{q:'コンピュータシステムが単位時間当たりに処理する仕事の量を表す用語はどれか。',choices:['スループット','ターンアラウンドタイム','タイムスライス','レスポンスタイム'],answer:0,explanation:'<strong>スループット</strong>は単位時間当たりに処理される仕事の量です。ターンアラウンドタイムは入力〜出力の合計時間、レスポンスタイムは処理だけの時間です。'},
+{q:'入力から出力が完了するまでの全工程にかかる合計時間を何というか。',choices:['スループット','ターンアラウンドタイム','レスポンスタイム','ベンチマークテスト'],answer:1,explanation:'<strong>ターンアラウンドタイム</strong>は「入力＋処理＋出力」の全工程にかかる合計時間です。レスポンスタイムは処理だけの時間で、入出力の時間は含みません。'},
+{q:'サーバの台数を増やすことでシステム全体の処理能力を向上させることを何というか。',choices:['スケールアウト','スケールアップ','クラウドコンピューティング','サーバ仮想化'],answer:0,explanation:'<strong>スケールアウト</strong>はサーバの台数を増やすことで処理能力を向上させます。スケールアップは個々のサーバの性能を上げる（CPU交換やメモリ増設など）ことです。'},
+{q:'ベンチマークテストの説明として適切なものはどれか。',choices:['監視プログラムでシステムの稼働状態を測定する','使用目的に合わせた標準的なプログラムでシステムの処理性能を測定する','モデルを作って模擬的に実験するプログラムで性能を評価する','机上で命令の出現回数から処理時間を推定する'],answer:1,explanation:'<strong>ベンチマークテスト</strong>は「使用目的に合わせて選定した<strong>標準的な</strong>プログラム」を使ってシステムの性能を測定します。「標準的なプログラム」がキーワードです。'},
+{q:'システムの予防保守によって長くなる指標はどれか。',choices:['MTBF','MTTR','稼働率','レスポンスタイム'],answer:0,explanation:'<strong>MTBF（平均故障間隔）</strong>は故障せずに動いていた時間の平均です。定期メンテナンス（予防保守）により故障を未然に防ぐことで、MTBFを長くできます。'},
+{q:'MTBF=3,000時間、MTTR=1,000時間のシステムの稼働率は何%か。',choices:['25%','50%','70%','75%'],answer:3,explanation:'稼働率 = MTBF ÷ (MTBF + MTTR) = 3,000 ÷ (3,000 + 1,000) = 3,000 ÷ 4,000 = <strong>0.75 = 75%</strong>'},
+{q:'稼働率0.9の装置Aと稼働率0.8の装置Bが直列に接続されている。システム全体の稼働率はいくつか。',choices:['0.72','0.85','0.90','0.98'],answer:0,explanation:'直列システムの稼働率 = A × B = 0.9 × 0.8 = <strong>0.72</strong>。直列では両方動いている必要があるため、稼働率は個別より下がります。'},
+{q:'稼働率0.9の装置Aと稼働率0.8の装置Bが並列に接続されている。システム全体の稼働率はいくつか。',choices:['0.72','0.85','0.90','0.98'],answer:3,explanation:'並列システムの稼働率 = 1 − (1−A) × (1−B) = 1 − (1−0.9) × (1−0.8) = 1 − 0.1 × 0.2 = 1 − 0.02 = <strong>0.98</strong>。並列ではどちらかが動けばよいので稼働率は上がります。'},
+{q:'MTBF=3,000時間(20%改善)、MTTR=1,000時間(10%改善)の翌年度の稼働率は何%か。',choices:['69%','73%','77%','80%'],answer:3,explanation:'新MTBF = 3,000 + 3,000×0.2 = 3,600時間（改善＝増える）<br>新MTTR = 1,000 − 1,000×0.1 = 900時間（改善＝減る）<br>稼働率 = 3,600 ÷ (3,600+900) = 3,600 ÷ 4,500 = <strong>0.8 = 80%</strong>'}
+];
+let questions=[],answered=0;
+function shuffleArray(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
+function initQuiz(){questions=shuffleArray(allQuestions);answered=0;document.getElementById('submitBtn').style.display='none';document.getElementById('resultArea').style.display='none';document.getElementById('progressFill').style.width='0%';const c=document.getElementById('quizContainer');c.innerHTML='';questions.forEach((q,idx)=>{const sc=q.choices.map((c,i)=>({text:c,origIdx:i}));for(let i=sc.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[sc[i],sc[j]]=[sc[j],sc[i]]}q._shuffled=sc;q._selected=null;let h=`<div class="question-card"><div class="q-number">問題 ${idx+1} / ${questions.length}</div><div class="q-text">${q.q}</div><ul class="choices">`;sc.forEach((c,ci)=>{h+=`<li onclick="selectChoice(${idx},${ci})" id="q${idx}c${ci}">${c.text}</li>`});h+=`</ul><div class="explanation" id="exp${idx}"><div id="expText${idx}"></div></div></div>`;c.innerHTML+=h})}
+function selectChoice(qi,ci){const q=questions[qi];if(q._selected!==null)return;q._selected=ci;answered++;const corr=q.answer,sel=q._shuffled[ci].origIdx,ok=sel===corr;q._shuffled.forEach((c,i)=>{const li=document.getElementById(`q${qi}c${i}`);if(c.origIdx===corr)li.classList.add('correct');if(i===ci&&!ok)li.classList.add('wrong')});const e=document.getElementById(`exp${qi}`),t=document.getElementById(`expText${qi}`);t.innerHTML=(ok?'<span style="color:#4caf50;font-weight:bold">&#x2B55; 正解！</span>':'<span style="color:#f44336;font-weight:bold">&#x274C; 不正解</span>')+'<br>'+q.explanation;e.classList.add('show');document.getElementById('progressFill').style.width=(answered/questions.length*100)+'%';if(answered===questions.length)document.getElementById('submitBtn').style.display='inline-block'}
+function submitQuiz(){let c=0;questions.forEach(q=>{if(q._selected!==null&&q._shuffled[q._selected].origIdx===q.answer)c++});document.getElementById('resultArea').style.display='block';document.getElementById('resultScore').textContent=`${c} / ${questions.length}`;const p=c/questions.length*100;let m='';if(p===100)m='満点！完璧です！';else if(p>=80)m='よく理解できています！';else if(p>=60)m='合格ライン！もう少し復習しましょう。';else m='レッスンをもう一度確認しましょう。';document.getElementById('resultMsg').textContent=m;document.getElementById('resultArea').scrollIntoView({behavior:'smooth'})}
+function retryQuiz(){initQuiz();document.getElementById('quizContainer').scrollIntoView({behavior:'smooth'})}
+function showSection(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');const tabs=document.querySelectorAll('.nav-tab');const ids=['lesson1','lesson2','lesson3','lesson4','quiz'];tabs[ids.indexOf(id)].classList.add('active');if(id==='quiz')initQuiz();window.scrollTo({top:0,behavior:'smooth'})}
+initQuiz();
+</script>
+</body>
+</html>

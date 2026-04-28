@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第9章 データベース｜基本情報技術者</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Hiragino Sans','Noto Sans JP','Meiryo',sans-serif;background:#f5f5f0;color:#333;line-height:1.8;padding:0 0 60px 0}.header{background:linear-gradient(135deg,#e65100,#ff8f00);color:#fff;padding:24px 20px;text-align:center}.header h1{font-size:1.3em;margin-bottom:4px}.header .sub{font-size:.85em;opacity:.8}.container{max-width:720px;margin:0 auto;padding:16px}.nav-tabs{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap}.nav-tab{padding:10px 14px;border:2px solid #e65100;border-radius:8px;background:#fff;color:#e65100;font-weight:bold;font-size:.82em;cursor:pointer;transition:all .2s}.nav-tab:hover,.nav-tab.active{background:#e65100;color:#fff}.section{display:none}.section.active{display:block}.lesson-card{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.lesson-card h2{color:#e65100;font-size:1.2em;margin-bottom:16px;padding-bottom:8px;border-bottom:3px solid #ffe0b2}.lesson-card h3{color:#ff8f00;font-size:1.05em;margin:20px 0 10px 0}.key-point{background:#fff3e0;border-left:4px solid #e65100;padding:14px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-size:.95em}.key-point strong{color:#e65100}.vocab{display:inline-block;background:#e3f2fd;border:1px solid #64b5f6;border-radius:6px;padding:2px 8px;margin:2px 4px;font-weight:bold;font-size:.9em;color:#1565c0}.example{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:14px 16px;margin:12px 0;font-size:.9em}.formula{background:#fce4ec;border-left:4px solid #e91e63;padding:14px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-family:monospace;font-size:.95em;line-height:2}.compare{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}.compare-box{background:#fff;border:2px solid #e0e0e0;border-radius:10px;padding:14px;font-size:.9em}.compare-box h4{font-size:.95em;margin-bottom:8px;text-align:center}.compare-box.good{border-color:#4caf50}.compare-box.good h4{color:#2e7d32}.compare-box.bad{border-color:#ff9800}.compare-box.bad h4{color:#e65100}
+.quiz-area{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.quiz-area h2{color:#e65100;margin-bottom:16px}.question-card{background:#fafafa;border:1px solid #e0e0e0;border-radius:10px;padding:20px;margin:16px 0}.q-number{font-size:.8em;color:#999;margin-bottom:6px}.q-text{font-size:1.05em;font-weight:bold;margin-bottom:14px;line-height:1.6}.choices{list-style:none}.choices li{padding:12px 16px;margin:6px 0;border:2px solid #e0e0e0;border-radius:8px;cursor:pointer;transition:all .2s;font-size:.95em}.choices li:hover{border-color:#e65100;background:#fff3e0}.choices li.correct{border-color:#4caf50;background:#e8f5e9}.choices li.wrong{border-color:#f44336;background:#ffebee}.explanation{display:none;margin-top:12px;padding:14px;background:#f5f5f5;border-radius:8px;font-size:.9em;line-height:1.7}.explanation.show{display:block}.result-area{display:none;text-align:center;padding:30px;background:#fff;border-radius:12px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.result-score{font-size:2.5em;font-weight:bold;color:#e65100;margin:10px 0}.btn{display:inline-block;padding:12px 28px;background:#e65100;color:#fff;border:none;border-radius:8px;font-size:1em;cursor:pointer;margin:8px}.btn:hover{background:#ff8f00}.btn-outline{background:#fff;color:#e65100;border:2px solid #e65100}.progress-bar{width:100%;height:6px;background:#e0e0e0;border-radius:3px;margin:12px 0}.progress-fill{height:100%;background:#e65100;border-radius:3px;transition:width .3s}.back-link{display:inline-block;margin:16px 0;color:#e65100;text-decoration:none;font-weight:bold}
+.sql-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.88em}
+.sql-table th{background:#e65100;color:#fff;padding:6px;border:1px solid #ccc}
+.sql-table td{padding:6px;border:1px solid #ccc;background:#fff}
+</style>
+</head>
+<body>
+<div class="header"><h1>第9章 データベース</h1><div class="sub">基本情報技術者試験 Web教材</div></div>
+<div class="container">
+<a href="../../teaching/桑名看護専門学校/web教材/apps.html" class="back-link">&#x1F3E0; アプリ一覧</a>
+<div class="nav-tabs">
+<div class="nav-tab active" onclick="showSection('lesson1')">① DB基本・関係DB</div>
+<div class="nav-tab" onclick="showSection('lesson2')">② 正規化</div>
+<div class="nav-tab" onclick="showSection('lesson3')">③ SQL・DBMS</div>
+<div class="nav-tab" onclick="showSection('lesson4')">④ トランザクション</div>
+<div class="nav-tab" onclick="showSection('quiz')">確認テスト</div>
+</div>
+
+<!-- ===== レッスン1: DB基本 ===== -->
+<div id="lesson1" class="section active">
+<div class="lesson-card">
+<h2>① データベースの基本と関係データベース</h2>
+
+<p><span class="vocab">データベース</span>とは、データを一元管理するために集められた情報の集まりです。4大経営資源（ヒト・モノ・カネ・情報）の「情報」を管理する重要な仕組みです。</p>
+
+<h3>データモデル</h3>
+<div class="key-point">
+<span class="vocab">データモデル</span>：現実世界のデータの相互関係をわかりやすく表した図（データベースの設計図）<br><br>
+種類：階層データモデル、ネットワークデータモデル、<strong>関係データモデル</strong><br>
+→ 現在最も普及しているのは<span class="vocab">関係データモデル</span>（関係モデル）
+</div>
+
+<h3>関係データベース</h3>
+<p><span class="vocab">関係データベース</span>とは、データを<strong>2次元の表（テーブル）</strong>で管理するデータベースです。</p>
+
+<div class="key-point">
+<strong>用語の使い分け：</strong><br><br>
+関係データベースでは…<br>
+・<span class="vocab">テーブル</span>（表）：データの集まり<br>
+・<span class="vocab">レコード</span>（行）：横の並び<br>
+・<span class="vocab">列</span>：縦の並び（データの属性）<br><br>
+関係データモデル（設計図）では…<br>
+・<span class="vocab">関係</span>＝テーブル、<span class="vocab">組</span>＝レコード、<span class="vocab">属性</span>＝列
+</div>
+
+<div class="example"><strong>学生テーブルの例：</strong>
+<table class="sql-table">
+<tr><th>学生番号</th><th>学生名</th><th>電話番号</th></tr>
+<tr><td>1</td><td>山田太郎</td><td>090-9999-9999</td></tr>
+<tr><td>2</td><td>鈴木愛子</td><td>080-8888-8888</td></tr>
+<tr><td>3</td><td>上峰亜衣</td><td>090-1234-5678</td></tr>
+</table>
+レコード数 3、列数 3
+</div>
+
+<h3>主キーと外部キー</h3>
+<div class="key-point">
+<span class="vocab">主キー</span>：テーブル内のレコードを<strong>一意に識別</strong>するための列<br>
+→ 重複してはいけない / NULL（空）ではいけない<br>
+→ 例：学生番号、社員番号<br><br>
+<span class="vocab">複合主キー</span>：複数の属性の組み合わせで主キーになるもの<br><br>
+<span class="vocab">外部キー</span>：<strong>他のテーブルの主キーを参照</strong>する列<br>
+→ テーブル同士の関連を表す<br>
+→ 例：学生テーブルの「教員番号」が、教員テーブルの主キー「教員番号」を参照
+</div>
+</div>
+</div>
+
+<!-- ===== レッスン2: 正規化 ===== -->
+<div id="lesson2" class="section">
+<div class="lesson-card">
+<h2>② 正規化と関数従属</h2>
+
+<p><span class="vocab">正規化</span>とは、データベースの設計時に、<strong>データの重複や更新時の矛盾が生じないように</strong>テーブルを整理することです。</p>
+
+<h3>関数従属</h3>
+<p><span class="vocab">関数従属</span>とは、ある属性Aの値が決まると、別の属性Bの値が<strong>一意に決まる</strong>関係です。</p>
+
+<div class="key-point">
+<strong>3つの関数従属：</strong><br><br>
+<span class="vocab">完全関数従属</span>：属性が<strong>主キー全体</strong>に関数従属している<br>
+→ 例：[学生番号] が決まると [学生名] が決まる<br><br>
+<span class="vocab">部分関数従属</span>：属性が<strong>主キーの一部</strong>に関数従属している（複合主キーの場合）<br>
+→ 例：複合主キー[学生番号,試験ID]のうち、[学生番号]だけで[学生名]が決まる<br><br>
+<span class="vocab">推移的関数従属</span>：属性が<strong>主キー以外の属性を介して</strong>間接的に主キーに従属<br>
+→ 例：[学生番号]→[教員番号]→[教員名]
+</div>
+
+<h3>正規化の手順</h3>
+<div class="key-point" style="background:#e8f5e9;border-color:#4caf50">
+<strong style="color:#2e7d32">正規化のゴール：</strong>部分関数従属と推移的関数従属を取り除き、<strong>完全関数従属だけを残すこと</strong><br>
+（＝すべての矢印が主キーから出るようにテーブルを分割）
+</div>
+
+<div class="key-point">
+<span class="vocab">非正規形</span>：属性に繰り返しがある状態（正規化前）<br><br>
+<span class="vocab">第1正規形</span>：属性の<strong>繰り返しがない</strong>状態にする<br>
+→ レコードを追加して繰り返しを解消<br><br>
+<span class="vocab">第2正規形</span>：<strong>部分関数従属をなくす</strong><br>
+→ テーブルを分割して、複合主キーの一部に従属する属性を別テーブルに<br><br>
+<span class="vocab">第3正規形</span>：<strong>推移的関数従属をなくす</strong><br>
+→ テーブルをさらに分割して、主キー以外の属性に従属する属性を別テーブルに
+</div>
+
+<div class="example"><strong>覚え方：</strong><br>
+第1正規化 → 繰り返し除去<br>
+第2正規化 → <strong>部分</strong>関数従属除去<br>
+第3正規化 → <strong>推移的</strong>関数従属除去</div>
+</div>
+</div>
+
+<!-- ===== レッスン3: SQL・DBMS ===== -->
+<div id="lesson3" class="section">
+<div class="lesson-card">
+<h2>③ SQLとデータベース管理システム（DBMS）</h2>
+
+<p><span class="vocab">DBMS</span>（DataBase Management System）とは、データベースを管理するシステムです。主な機能は「データ操作」「トランザクション管理」「排他制御」の3つです。</p>
+
+<h3>関係演算の3種類</h3>
+<div class="key-point">
+<span class="vocab">選択</span>：テーブルから条件を満たす<strong>レコード（行）</strong>を取り出す<br>
+<span class="vocab">射影</span>：テーブルから指定した<strong>列</strong>を取り出す<br>
+<span class="vocab">結合</span>：複数のテーブルを<strong>くっつけて</strong>1つのテーブルのように扱う
+</div>
+
+<h3>SQL ── SELECT文</h3>
+<p><span class="vocab">SQL</span>は、データベースを操作するための言語です。最頻出なのが<strong>SELECT文</strong>です。</p>
+
+<div class="formula"><strong>SELECT文の基本構文：</strong><br><br>
+SELECT 列名<br>
+FROM テーブル名<br>
+WHERE 条件式<br><br>
+<strong>例：学生名が「鈴木愛子」のレコードを取り出す</strong><br>
+SELECT *<br>
+FROM 学生<br>
+WHERE 学生名 = '鈴木愛子'
+</div>
+
+<div class="key-point">
+<strong>SELECT文のポイント：</strong><br>
+・SELECT 列名 → <strong>取り出す列</strong>を指定（* ですべての列）<br>
+・FROM テーブル名 → <strong>検索対象のテーブル</strong><br>
+・WHERE 条件式 → <strong>取り出すレコードの条件</strong>（省略可）<br>
+・複数列は「,」区切り
+</div>
+
+<div class="key-point">
+<strong>比較演算子：</strong>= 、≠（&lt;&gt;）、&gt;、&lt;、&gt;=、&lt;=<br><br>
+<strong>論理演算子：</strong>AND（かつ）、OR（または）、NOT（否定）<br><br>
+<strong>テーブルの結合：</strong><br>
+FROM テーブル1, テーブル2<br>
+WHERE テーブル1.列 = テーブル2.列
+</div>
+
+<h3>ビュー</h3>
+<div class="key-point">
+<span class="vocab">ビュー</span>：既存のテーブルから必要な部分だけを抜き出した<strong>仮想的なテーブル</strong><br>
+・元のテーブル（実表）のデータを変更すると、ビューにも反映される<br>
+・ビューは実データを持たず、SELECTの結果を都度生成
+</div>
+
+<h3>インデックス</h3>
+<div class="key-point">
+<span class="vocab">インデックス</span>（索引）：データベースの<strong>検索を高速化</strong>する機能<br>
+・「列」と「レコードの位置を指すポインタ」で構成<br>
+・本の索引と同じ仕組み<br>
+・ただし、データ更新時にインデックスの再構築が必要なため、更新は遅くなる
+</div>
+</div>
+</div>
+
+<!-- ===== レッスン4: トランザクション ===== -->
+<div id="lesson4" class="section">
+<div class="lesson-card">
+<h2>④ トランザクション管理・障害回復・排他制御</h2>
+
+<h3>トランザクション</h3>
+<div class="key-point">
+<span class="vocab">トランザクション</span>：関連する複数の処理の<strong>まとまり</strong>（ユーザーから見た1つの処理）<br><br>
+例：銀行の振込処理＝「出金」＋「入金」の2処理 → 両方成功しないとダメ
+</div>
+
+<h3>ACID特性（トランザクションに必要な4つの性質）</h3>
+
+<div class="key-point">
+<span class="vocab">A</span> - <strong>原子性（Atomicity）</strong>：トランザクション内の処理が<strong>「すべて実行される」か「すべて取り消される」</strong>かのどちらか ← <strong>最頻出！</strong><br><br>
+<span class="vocab">C</span> - <strong>一貫性（Consistency）</strong>：トランザクションの前後でデータベースに<strong>矛盾がない</strong><br><br>
+<span class="vocab">I</span> - <strong>独立性（Isolation）</strong>：1つのトランザクションが<strong>他のトランザクションの影響を受けない</strong><br><br>
+<span class="vocab">D</span> - <strong>耐久性（Durability）</strong>：完了後にハードウェア障害が発生しても<strong>結果が保証</strong>される
+</div>
+
+<h3>障害回復（リカバリ）</h3>
+
+<div class="key-point">
+<strong>障害回復に必要な2つのファイル：</strong><br><br>
+<span class="vocab">バックアップファイル</span>：データベース全体を保存したファイル（定期取得）<br><br>
+<span class="vocab">ログファイル（ジャーナルファイル）</span>：トランザクション前後の状態を保存<br>
+・<strong>更新前ログ</strong>：トランザクション直前の状態<br>
+・<strong>更新後ログ</strong>：トランザクション完了後の状態
+</div>
+
+<div class="compare">
+<div class="compare-box good">
+<h4>ロールバック</h4>
+<strong>トランザクション実行中</strong>に障害発生<br><br>
+→ トランザクション<strong>開始直前</strong>の状態に戻す<br>
+→ <strong>更新前ログ</strong>を使用
+</div>
+<div class="compare-box bad">
+<h4>ロールフォワード</h4>
+<strong>トランザクション完了後</strong>に障害発生<br><br>
+→ トランザクション<strong>完了直後</strong>の状態に戻す<br>
+→ <strong>バックアップ ＋ 更新後ログ</strong>を使用
+</div>
+</div>
+
+<h3>排他制御（ロック）</h3>
+<div class="key-point">
+<span class="vocab">排他制御</span>：複数の人が同じデータを同時に更新しようとした際、<strong>データに矛盾が生じないようにする</strong>機能<br><br>
+<span class="vocab">ロック</span>：データへの読み書きを一時的に制限する機能<br>
+<span class="vocab">アンロック</span>：ロックの解除
+</div>
+
+<div class="compare">
+<div class="compare-box good">
+<h4>共有ロック</h4>
+<strong>読み出しのみ</strong>OK（複数可）<br>
+書き込みNG<br><br>
+→ データの参照時に使用
+</div>
+<div class="compare-box bad">
+<h4>専有ロック（排他ロック）</h4>
+かけた人だけ<strong>読み書きOK</strong><br>
+他はNG<br><br>
+→ データの更新時に使用
+</div>
+</div>
+
+<div class="key-point" style="background:#fce4ec;border-color:#e91e63">
+<strong style="color:#e91e63">第9章の最重要まとめ</strong><br><br>
+・関係データベース：テーブル（表）＝レコード（行）＋列<br>
+・主キー＝レコードを一意に識別、外部キー＝他テーブルへの参照<br>
+・正規化：第1（繰り返し除去）→第2（部分関数従属除去）→第3（推移的関数従属除去）<br>
+・SELECT/FROM/WHEREの構文<br>
+・ACID：原子性・一貫性・独立性・耐久性<br>
+・ロールバック＝更新前ログ、ロールフォワード＝バックアップ＋更新後ログ<br>
+・共有ロック＝読み出しのみ、専有ロック＝排他
+</div>
+</div>
+</div>
+
+<!-- ===== 確認テスト ===== -->
+<div id="quiz" class="section">
+<div class="quiz-area">
+<h2>確認テスト ── 第9章</h2>
+<p style="color:#666;font-size:.9em;margin-bottom:16px">全問ランダム出題・選択肢シャッフル。何度でも挑戦できます。</p>
+<div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+<div id="quizContainer"></div>
+<div style="text-align:center;margin-top:20px"><button class="btn" id="submitBtn" onclick="submitQuiz()" style="display:none">結果を見る</button></div>
+</div>
+<div class="result-area" id="resultArea"><h2>結果</h2><div class="result-score" id="resultScore"></div><div id="resultMsg" style="font-size:1.1em;margin:10px 0"></div><button class="btn" onclick="retryQuiz()">もう一度</button><button class="btn btn-outline" onclick="showSection('lesson1')">レッスンに戻る</button></div>
+</div>
+</div>
+
+<script>
+const allQuestions=[
+{q:'データを2次元の表（テーブル）で管理するデータベースはどれか。',choices:['階層データベース','ネットワークデータベース','関係データベース','オブジェクト指向データベース'],answer:2,explanation:'<strong>関係データベース</strong>はデータを2次元の表（テーブル）で管理するデータベースで、現在最も普及しています。関係データモデルをコンピュータ上に実装したものです。'},
+{q:'テーブルの中からレコードを一意に識別するための列を何というか。',choices:['主キー','外部キー','インデックス','ビュー'],answer:0,explanation:'<strong>主キー</strong>はテーブルの中から特定のレコードを一意に識別するための列です。重複してはいけない、NULL（空）ではいけないという制約があります。'},
+{q:'他のテーブルの主キーを参照する列を何というか。',choices:['主キー','外部キー','複合主キー','インデックス'],answer:1,explanation:'<strong>外部キー</strong>は他のテーブルの主キーを参照する列で、テーブル同士の関連を表します。学生テーブルの「教員番号」列が、教員テーブルの主キー「教員番号」を参照するような使い方をします。'},
+{q:'正規化の目的として最も適切なものはどれか。',choices:['データの検索を高速化する','データの重複や更新時の矛盾を防ぐ','データの暗号化を行う','データを圧縮してサイズを小さくする'],answer:1,explanation:'<strong>正規化</strong>の目的は、データの重複や更新時の矛盾を防ぐことです。具体的には、部分関数従属と推移的関数従属を取り除き、完全関数従属だけを残すためにテーブルを分割します。'},
+{q:'属性に繰り返しがある状態から、属性の繰り返しがない状態にすることを何というか。',choices:['第1正規化','第2正規化','第3正規化','第4正規化'],answer:0,explanation:'<strong>第1正規化</strong>は、属性の繰り返しがない状態にすることです。非正規形のテーブルを第1正規形にするにはレコードを追加して繰り返しを解消します。'},
+{q:'部分関数従属をなくすのは第何正規化か。',choices:['第1正規化','第2正規化','第3正規化','第4正規化'],answer:1,explanation:'<strong>第2正規化</strong>では、部分関数従属を取り除きます。複合主キーの一部にしか従属しない属性を別テーブルに分割します。第3正規化は推移的関数従属を取り除きます。'},
+{q:'推移的関数従属を取り除くのは第何正規化か。',choices:['第1正規化','第2正規化','第3正規化','第4正規化'],answer:2,explanation:'<strong>第3正規化</strong>では、推移的関数従属（主キー以外の属性を介して間接的に主キーに従属する関係）を取り除きます。'},
+{q:'SQLでテーブルから条件を満たすレコード（行）を取り出す関係演算は何か。',choices:['選択','射影','結合','和集合'],answer:0,explanation:'<strong>選択</strong>は、テーブルから条件を満たすレコード（行）を取り出す関係演算です。一方、<strong>射影</strong>は指定した列を取り出す演算です。'},
+{q:'SELECT文で「学生テーブルから学生名が鈴木愛子のレコードを取り出す」SQLとして正しいのはどれか。',choices:["SELECT * FROM 学生 IF 学生名 = '鈴木愛子'","SELECT * FROM 学生 WHERE 学生名 = '鈴木愛子'","SELECT 学生 WHERE 学生名 = '鈴木愛子'","FROM 学生 SELECT * WHERE 学生名 = '鈴木愛子'"],answer:1,explanation:'SELECT文の基本構文は「SELECT 列名 FROM テーブル名 WHERE 条件式」です。条件指定にはIFではなく<strong>WHERE</strong>を使います。'},
+{q:'データベースの検索を高速化する機能はどれか。',choices:['ビュー','インデックス','トランザクション','ロック'],answer:1,explanation:'<strong>インデックス（索引）</strong>はデータベースの検索を高速化する機能です。「列」と「レコードの位置を指し示すポインタ」で構成され、本の索引と同じ仕組みです。'},
+{q:'ACID特性のうち、「トランザクション内の処理がすべて実行されるか、すべてが取り消されるかのどちらかになること」を何というか。',choices:['原子性（Atomicity）','一貫性（Consistency）','独立性（Isolation）','耐久性（Durability）'],answer:0,explanation:'<strong>原子性（Atomicity）</strong>は、トランザクション内の処理がすべて実行されるか、すべてが取り消されるかのどちらかになる性質です。中途半端な状態にならないことを保証します。銀行の振込で「出金だけ実行されて入金は失敗」のような状態を防ぎます。'},
+{q:'ACID特性のうち、「1つのトランザクションの処理結果が他のトランザクションの影響を受けないこと」を何というか。',choices:['原子性','一貫性','独立性','耐久性'],answer:2,explanation:'<strong>独立性（Isolation）</strong>は、あるトランザクションが他のトランザクションの影響を受けずに実行される性質です。並行して実行されるトランザクションが互いに干渉しないことを保証します。'},
+{q:'トランザクションの前後の状態を保存したファイルを何というか。',choices:['バックアップファイル','ログファイル（ジャーナルファイル）','データファイル','インデックスファイル'],answer:1,explanation:'<strong>ログファイル（ジャーナルファイル）</strong>はトランザクションの前後の状態を保存したファイルです。更新前ログ（開始直前）と更新後ログ（完了後）の2種類があります。'},
+{q:'トランザクション実行中に障害が発生した際、開始直前の状態に戻す障害回復手法はどれか。',choices:['ロールバック','ロールフォワード','リストア','チェックポイント'],answer:0,explanation:'<strong>ロールバック</strong>はトランザクション実行中に障害が発生した際、更新前ログファイルを使ってトランザクション開始直前の状態に戻す手法です。'},
+{q:'ロールフォワードで障害回復する際に使用するファイルの組み合わせはどれか。',choices:['更新前ログファイルのみ','バックアップファイルと更新後ログファイル','バックアップファイルと更新前ログファイル','更新後ログファイルのみ'],answer:1,explanation:'<strong>ロールフォワード</strong>では、<strong>バックアップファイル</strong>と<strong>更新後ログファイル</strong>を使ってトランザクション完了直後の状態に戻します。バックアップを復元してから、その時点以降のログを順に適用します。'},
+{q:'複数の人が同じデータを同時に更新しようとした場合に、データに矛盾が生じないようにする機能は何か。',choices:['トランザクション管理','排他制御','障害回復','正規化'],answer:1,explanation:'<strong>排他制御</strong>は、複数の人が同じデータを同時に更新しようとした場合にデータに矛盾が生じないようにする機能です。ロック機能を使ってデータの一貫性を保ちます。'},
+{q:'ロックをかけたトランザクションのみがデータを読み書きでき、他のトランザクションは読み書きできないロックは何か。',choices:['共有ロック','専有ロック（排他ロック）','楽観ロック','タイムロック'],answer:1,explanation:'<strong>専有ロック（排他ロック）</strong>は、ロックをかけたトランザクションのみがデータを読み書きでき、他のトランザクションは一切アクセスできません。データを更新する際に使われます。共有ロックは複数のトランザクションが読み出しのみ可能です。'}
+];
+let questions=[],answered=0;
+function shuffleArray(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
+function initQuiz(){questions=shuffleArray(allQuestions);answered=0;document.getElementById('submitBtn').style.display='none';document.getElementById('resultArea').style.display='none';document.getElementById('progressFill').style.width='0%';const c=document.getElementById('quizContainer');c.innerHTML='';questions.forEach((q,idx)=>{const sc=q.choices.map((c,i)=>({text:c,origIdx:i}));for(let i=sc.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[sc[i],sc[j]]=[sc[j],sc[i]]}q._shuffled=sc;q._selected=null;let h=`<div class="question-card"><div class="q-number">問題 ${idx+1} / ${questions.length}</div><div class="q-text">${q.q}</div><ul class="choices">`;sc.forEach((c,ci)=>{h+=`<li onclick="selectChoice(${idx},${ci})" id="q${idx}c${ci}">${c.text}</li>`});h+=`</ul><div class="explanation" id="exp${idx}"><div id="expText${idx}"></div></div></div>`;c.innerHTML+=h})}
+function selectChoice(qi,ci){const q=questions[qi];if(q._selected!==null)return;q._selected=ci;answered++;const corr=q.answer,sel=q._shuffled[ci].origIdx,ok=sel===corr;q._shuffled.forEach((c,i)=>{const li=document.getElementById(`q${qi}c${i}`);if(c.origIdx===corr)li.classList.add('correct');if(i===ci&&!ok)li.classList.add('wrong')});const e=document.getElementById(`exp${qi}`),t=document.getElementById(`expText${qi}`);t.innerHTML=(ok?'<span style="color:#4caf50;font-weight:bold">&#x2B55; 正解！</span>':'<span style="color:#f44336;font-weight:bold">&#x274C; 不正解</span>')+'<br>'+q.explanation;e.classList.add('show');document.getElementById('progressFill').style.width=(answered/questions.length*100)+'%';if(answered===questions.length)document.getElementById('submitBtn').style.display='inline-block'}
+function submitQuiz(){let c=0;questions.forEach(q=>{if(q._selected!==null&&q._shuffled[q._selected].origIdx===q.answer)c++});document.getElementById('resultArea').style.display='block';document.getElementById('resultScore').textContent=`${c} / ${questions.length}`;const p=c/questions.length*100;let m='';if(p===100)m='満点！完璧です！';else if(p>=80)m='よく理解できています！';else if(p>=60)m='合格ライン！もう少し復習しましょう。';else m='レッスンをもう一度確認しましょう。';document.getElementById('resultMsg').textContent=m;document.getElementById('resultArea').scrollIntoView({behavior:'smooth'})}
+function retryQuiz(){initQuiz();document.getElementById('quizContainer').scrollIntoView({behavior:'smooth'})}
+function showSection(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');const tabs=document.querySelectorAll('.nav-tab');const ids=['lesson1','lesson2','lesson3','lesson4','quiz'];tabs[ids.indexOf(id)].classList.add('active');if(id==='quiz')initQuiz();window.scrollTo({top:0,behavior:'smooth'})}
+initQuiz();
+</script>
+</body>
+</html>

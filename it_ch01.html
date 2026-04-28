@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第1章 基礎理論① ── データと数値｜基本情報技術者</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Hiragino Sans','Noto Sans JP','Meiryo',sans-serif;background:#f5f5f0;color:#333;line-height:1.8;padding:0 0 60px 0}.header{background:linear-gradient(135deg,#e65100,#ff8f00);color:#fff;padding:24px 20px;text-align:center}.header h1{font-size:1.3em;margin-bottom:4px}.header .sub{font-size:.85em;opacity:.8}.container{max-width:720px;margin:0 auto;padding:16px}.nav-tabs{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap}.nav-tab{padding:10px 14px;border:2px solid #e65100;border-radius:8px;background:#fff;color:#e65100;font-weight:bold;font-size:.82em;cursor:pointer;transition:all .2s}.nav-tab:hover,.nav-tab.active{background:#e65100;color:#fff}.section{display:none}.section.active{display:block}.lesson-card{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.lesson-card h2{color:#e65100;font-size:1.2em;margin-bottom:16px;padding-bottom:8px;border-bottom:3px solid #ffe0b2}.lesson-card h3{color:#ff8f00;font-size:1.05em;margin:20px 0 10px 0}.key-point{background:#fff3e0;border-left:4px solid #e65100;padding:14px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-size:.95em}.key-point strong{color:#e65100}.vocab{display:inline-block;background:#e3f2fd;border:1px solid #64b5f6;border-radius:6px;padding:2px 8px;margin:2px 4px;font-weight:bold;font-size:.9em;color:#1565c0}.example{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:14px 16px;margin:12px 0;font-size:.9em}.formula{background:#fce4ec;border-left:4px solid #e91e63;padding:14px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-family:monospace;font-size:.95em}.quiz-area{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.quiz-area h2{color:#e65100;margin-bottom:16px}.question-card{background:#fafafa;border:1px solid #e0e0e0;border-radius:10px;padding:20px;margin:16px 0}.q-number{font-size:.8em;color:#999;margin-bottom:6px}.q-text{font-size:1.05em;font-weight:bold;margin-bottom:14px;line-height:1.6}.choices{list-style:none}.choices li{padding:12px 16px;margin:6px 0;border:2px solid #e0e0e0;border-radius:8px;cursor:pointer;transition:all .2s;font-size:.95em}.choices li:hover{border-color:#e65100;background:#fff3e0}.choices li.correct{border-color:#4caf50;background:#e8f5e9}.choices li.wrong{border-color:#f44336;background:#ffebee}.explanation{display:none;margin-top:12px;padding:14px;background:#f5f5f5;border-radius:8px;font-size:.9em;line-height:1.7}.explanation.show{display:block}.result-area{display:none;text-align:center;padding:30px;background:#fff;border-radius:12px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.result-score{font-size:2.5em;font-weight:bold;color:#e65100;margin:10px 0}.btn{display:inline-block;padding:12px 28px;background:#e65100;color:#fff;border:none;border-radius:8px;font-size:1em;cursor:pointer;margin:8px}.btn:hover{background:#ff8f00}.btn-outline{background:#fff;color:#e65100;border:2px solid #e65100}.progress-bar{width:100%;height:6px;background:#e0e0e0;border-radius:3px;margin:12px 0}.progress-fill{height:100%;background:#e65100;border-radius:3px;transition:width .3s}.back-link{display:inline-block;margin:16px 0;color:#e65100;text-decoration:none;font-weight:bold}
+</style>
+</head>
+<body>
+<div class="header"><h1>第1章 基礎理論① ── データと数値</h1><div class="sub">基本情報技術者試験 Web教材</div></div>
+<div class="container">
+<a href="../../teaching/桑名看護専門学校/web教材/apps.html" class="back-link">&#x1F3E0; アプリ一覧</a>
+<div class="nav-tabs">
+<div class="nav-tab active" onclick="showSection('lesson1')">① データの単位</div>
+<div class="nav-tab" onclick="showSection('lesson2')">② 基数変換</div>
+<div class="nav-tab" onclick="showSection('lesson3')">③ 負の数とシフト演算</div>
+<div class="nav-tab" onclick="showSection('quiz')">確認テスト</div>
+</div>
+
+<div id="lesson1" class="section active">
+<div class="lesson-card">
+<h2>① データの単位</h2>
+<h3>ビットとバイト</h3>
+<p>コンピュータは全ての情報を<span class="vocab">0</span>と<span class="vocab">1</span>の2種類の数字で表現します。この0または1の1桁分を<span class="vocab">ビット（bit）</span>と呼びます。</p>
+<div class="key-point"><strong>ビット（bit）</strong>：情報の最小単位。0か1のどちらかを表す。<br><strong>バイト（Byte）</strong>：8ビット = 1バイト。半角英数字1文字分。</div>
+<h3>nビットで表せる状態の数</h3>
+<div class="formula"><strong>nビットで表せる状態の数 = 2<sup>n</sup></strong><br><br>1ビット → 2<sup>1</sup> = <strong>2通り</strong>（0, 1）<br>2ビット → 2<sup>2</sup> = <strong>4通り</strong>（00, 01, 10, 11）<br>3ビット → 2<sup>3</sup> = <strong>8通り</strong>（000〜111）<br>8ビット（1バイト）→ 2<sup>8</sup> = <strong>256通り</strong></div>
+<div class="example">試験で頻出：「32ビットで表現できるパターン数は24ビットの何倍か？」→ 2<sup>32</sup> ÷ 2<sup>24</sup> = 2<sup>8</sup> = <strong>256倍</strong></div>
+<h3>データの大きさの単位</h3>
+<div class="key-point"><strong>K（キロ）</strong>= 約1,000（正確には1,024 = 2<sup>10</sup>）<br><strong>M（メガ）</strong>= 約100万（1,024K）<br><strong>G（ギガ）</strong>= 約10億（1,024M）<br><strong>T（テラ）</strong>= 約1兆（1,024G）</div>
+</div>
+</div>
+
+<div id="lesson2" class="section">
+<div class="lesson-card">
+<h2>② 基数変換</h2>
+<h3>10進数・2進数・16進数</h3>
+<div class="key-point"><span class="vocab">10進数</span>：値が10になると桁が上がる（0〜9を使う）。普段の生活で使う。<br><span class="vocab">2進数</span>：値が2になると桁が上がる（0と1だけ）。コンピュータ内部の表現。<br><span class="vocab">16進数</span>：値が16になると桁が上がる（0〜9とA〜Fを使う）。メモリアドレスなどに使用。</div>
+<div class="example">10進数の「10」は…<br>・2進数では「1010」<br>・16進数では「A」</div>
+
+<h3>桁の重み</h3>
+<p><span class="vocab">桁の重み</span>とは、各桁の位置が持つ値の大きさのことです。</p>
+<div class="formula"><strong>10進数の桁の重み：</strong><br>7297 = 7×10<sup>3</sup> + 2×10<sup>2</sup> + 9×10<sup>1</sup> + 7×10<sup>0</sup><br>= 7000 + 200 + 90 + 7<br><br><strong>2進数の桁の重み：</strong><br>1011 = 1×2<sup>3</sup> + 0×2<sup>2</sup> + 1×2<sup>1</sup> + 1×2<sup>0</sup><br>= 8 + 0 + 2 + 1 = <strong>11</strong>（10進数）</div>
+
+<h3>2進数 → 10進数</h3>
+<div class="key-point">各桁に<strong>桁の重み（2<sup>n</sup>）</strong>をかけて、全部たし合わせる。</div>
+<div class="example">2進数「10110」を10進数に変換：<br>1×2<sup>4</sup> + 0×2<sup>3</sup> + 1×2<sup>2</sup> + 1×2<sup>1</sup> + 0×2<sup>0</sup><br>= 16 + 0 + 4 + 2 + 0 = <strong>22</strong></div>
+
+<h3>10進数 → 2進数</h3>
+<div class="key-point"><strong>整数部</strong>：2で割り続けて、余りを下から読む。<br><strong>小数部</strong>：2をかけ続けて、整数部を上から読む。</div>
+<div class="example">10進数「22」を2進数に変換：<br>22÷2=11 余り<strong>0</strong><br>11÷2=5 余り<strong>1</strong><br>5÷2=2 余り<strong>1</strong><br>2÷2=1 余り<strong>0</strong><br>1÷2=0 余り<strong>1</strong><br>↑下から読む → <strong>10110</strong></div>
+
+<h3>2進数 ↔ 16進数</h3>
+<div class="key-point">2進数を<strong>4桁ずつ区切って</strong>、それぞれを16進数に変換する。</div>
+<div class="example">2進数「10110100」→ 「1011 | 0100」→ 「B4」（16進数）<br>16進数「3F」→ 「0011 | 1111」→ 「00111111」（2進数）</div>
+</div>
+</div>
+
+<div id="lesson3" class="section">
+<div class="lesson-card">
+<h2>③ 負の2進数とシフト演算</h2>
+<h3>負の2進数の表し方</h3>
+<p>2進数では「-」記号を使わず、別の方法でマイナスを表現します。</p>
+<div class="key-point"><span class="vocab">2の補数</span>：負の2進数を表す最も一般的な方法。<br><br><strong>作り方：</strong><br>① すべてのビットを反転する（0→1, 1→0）<br>② 反転した結果に1を加える<br><br><strong>例：</strong>8ビットで「-2」を表す<br>2 = 00000010<br>①反転 → 11111101<br>②+1 → <strong>11111110</strong>（これが-2）</div>
+<div class="key-point"><strong>符号ビット</strong>：先頭のビットで正負を判別<br>・先頭が<strong>0</strong> → 正の数<br>・先頭が<strong>1</strong> → 負の数</div>
+
+<h3>シフト演算</h3>
+<p>ビット列を左右にずらすことで、かけ算・わり算を高速に行えます。</p>
+<div class="key-point"><span class="vocab">論理シフト</span>：符号を考慮せず、単純にビットをずらす。空いた場所には0を入れる。<br><br><span class="vocab">算術シフト</span>：符号ビット（先頭）を固定したまま、残りのビットをずらす。負の数に使う。</div>
+<div class="formula"><strong>左に1つシフト = ×2（2倍）</strong><br><strong>右に1つシフト = ÷2（1/2倍）</strong><br><br>左に3つシフト = ×2<sup>3</sup> = ×8<br>右に5つシフト = ÷2<sup>5</sup> = ÷32</div>
+<div class="example">試験で頻出：「正の整数xを2ビット左にシフトして、xを加える」→ x×4 + x = <strong>5x</strong></div>
+</div>
+</div>
+
+<div id="quiz" class="section">
+<div class="quiz-area">
+<h2>確認テスト（第1章）</h2><p>12問出題します。</p>
+<div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+<div id="quizContainer"></div>
+<div style="text-align:center;margin-top:20px"><button class="btn" id="submitBtn" onclick="submitQuiz()" style="display:none">結果を見る</button></div>
+</div>
+<div class="result-area" id="resultArea"><h2>結果</h2><div class="result-score" id="resultScore"></div><div id="resultMsg" style="font-size:1.1em;margin:10px 0"></div><button class="btn" onclick="retryQuiz()">もう一度</button><button class="btn btn-outline" onclick="showSection('lesson1')">レッスンに戻る</button></div>
+</div>
+</div>
+
+<script>
+const allQuestions=[
+{q:'情報の最小単位は何か。',choices:['バイト','ビット','キロバイト','ワード'],answer:1,explanation:'ビット（bit）は0か1の1桁分で、情報の最小単位です。8ビットで1バイトになります。'},
+{q:'1バイトは何ビットか。',choices:['4ビット','8ビット','16ビット','32ビット'],answer:1,explanation:'1バイト = 8ビットです。半角英数字1文字分に相当します。'},
+{q:'8ビットで表現できる状態の数はいくつか。',choices:['8通り','64通り','128通り','256通り'],answer:3,explanation:'nビットで表せる状態数 = 2^n なので、2^8 = 256通りです。'},
+{q:'32ビットで表現できるパターン数は24ビットの何倍か。',choices:['8倍','32倍','128倍','256倍'],answer:3,explanation:'2^32 ÷ 2^24 = 2^(32-24) = 2^8 = 256倍です。'},
+{q:'2進数「1011」を10進数に変換するといくつか。',choices:['9','10','11','13'],answer:2,explanation:'1×2³ + 0×2² + 1×2¹ + 1×2⁰ = 8 + 0 + 2 + 1 = 11です。'},
+{q:'10進数「13」を2進数に変換するとどれか。',choices:['1011','1101','1110','1001'],answer:1,explanation:'13÷2=6余り1, 6÷2=3余り0, 3÷2=1余り1, 1÷2=0余り1 → 下から読んで1101です。'},
+{q:'16進数で使われるアルファベットの「A」は10進数でいくつか。',choices:['9','10','11','16'],answer:1,explanation:'16進数では0〜9の次にA=10, B=11, C=12, D=13, E=14, F=15を使います。'},
+{q:'2進数「10110100」を16進数に変換するとどれか。',choices:['A4','B4','C4','D4'],answer:1,explanation:'4桁ずつ区切ると「1011 | 0100」。1011=B, 0100=4 なので「B4」です。'},
+{q:'2の補数で負の数を作るとき、最初にすることは何か。',choices:['2を足す','すべてのビットを反転する','先頭に1を付ける','2で割る'],answer:1,explanation:'2の補数は「すべてのビットを反転して1を加える」ことで作ります。'},
+{q:'8ビットの2進数で、先頭ビットが1の場合、その数は何を意味するか。',choices:['正の数','負の数','小数','エラー'],answer:1,explanation:'先頭のビット（符号ビット）が1なら負の数、0なら正の数を表します。'},
+{q:'ビット列を左に1つシフトすると、値は何倍になるか。',choices:['1/2倍','2倍','4倍','8倍'],answer:1,explanation:'左に1つシフト = ×2（2倍）です。左に2つなら4倍、3つなら8倍になります。'},
+{q:'正の整数xを2ビット左にシフトしてxを加えると、結果はxの何倍か。',choices:['3倍','4倍','5倍','6倍'],answer:2,explanation:'2ビット左シフト = x×4。そこにxを加えると x×4 + x = 5xです。'}
+];
+let questions=[],answered=0;function shuffleArray(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
+function initQuiz(){questions=shuffleArray(allQuestions);answered=0;document.getElementById('submitBtn').style.display='none';document.getElementById('resultArea').style.display='none';document.getElementById('progressFill').style.width='0%';const c=document.getElementById('quizContainer');c.innerHTML='';questions.forEach((q,idx)=>{const sc=q.choices.map((c,i)=>({text:c,origIdx:i}));for(let i=sc.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[sc[i],sc[j]]=[sc[j],sc[i]]}q._shuffled=sc;q._selected=null;let h=`<div class="question-card"><div class="q-number">問題 ${idx+1} / ${questions.length}</div><div class="q-text">${q.q}</div><ul class="choices">`;sc.forEach((c,ci)=>{h+=`<li onclick="selectChoice(${idx},${ci})" id="q${idx}c${ci}">${c.text}</li>`});h+=`</ul><div class="explanation" id="exp${idx}"><div id="expText${idx}"></div></div></div>`;c.innerHTML+=h})}
+function selectChoice(qi,ci){const q=questions[qi];if(q._selected!==null)return;q._selected=ci;answered++;const corr=q.answer,sel=q._shuffled[ci].origIdx,ok=sel===corr;q._shuffled.forEach((c,i)=>{const li=document.getElementById(`q${qi}c${i}`);if(c.origIdx===corr)li.classList.add('correct');if(i===ci&&!ok)li.classList.add('wrong')});const e=document.getElementById(`exp${qi}`),t=document.getElementById(`expText${qi}`);t.innerHTML=(ok?'<span style="color:#4caf50;font-weight:bold">⭕ 正解！</span>':'<span style="color:#f44336;font-weight:bold">❌ 不正解</span>')+'<br>'+q.explanation;e.classList.add('show');document.getElementById('progressFill').style.width=(answered/questions.length*100)+'%';if(answered===questions.length)document.getElementById('submitBtn').style.display='inline-block'}
+function submitQuiz(){let c=0;questions.forEach(q=>{if(q._selected!==null&&q._shuffled[q._selected].origIdx===q.answer)c++});document.getElementById('resultArea').style.display='block';document.getElementById('resultScore').textContent=`${c} / ${questions.length}`;const p=c/questions.length*100;let m='';if(p===100)m='満点！完璧です！';else if(p>=80)m='よく理解できています！';else if(p>=60)m='合格ライン！もう少し復習しましょう。';else m='レッスンをもう一度確認しましょう。';document.getElementById('resultMsg').textContent=m;document.getElementById('resultArea').scrollIntoView({behavior:'smooth'})}
+function retryQuiz(){initQuiz();document.getElementById('quizContainer').scrollIntoView({behavior:'smooth'})}
+function showSection(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');const tabs=document.querySelectorAll('.nav-tab');const ids=['lesson1','lesson2','lesson3','quiz'];tabs[ids.indexOf(id)].classList.add('active');if(id==='quiz')initQuiz();window.scrollTo({top:0,behavior:'smooth'})}
+initQuiz();
+</script>
+</body>
+</html>

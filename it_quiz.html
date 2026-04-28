@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>基本情報技術者 Web教材｜レッスン＆確認テスト</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Hiragino Sans','Noto Sans JP','Meiryo',sans-serif;background:#f5f5f0;color:#333;line-height:1.8;padding:0 0 60px 0}
+.header{background:linear-gradient(135deg,#e65100,#ff8f00);color:#fff;padding:28px 20px;text-align:center}.header h1{font-size:1.4em;margin-bottom:4px}.header .sub{font-size:.85em;opacity:.8}
+.container{max-width:760px;margin:0 auto;padding:16px}
+.back-link{display:inline-block;margin:12px 0;color:#e65100;text-decoration:none;font-weight:bold;font-size:.95em}
+
+/* 章選択 */
+.ch-select{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap}
+.ch-btn{padding:10px 16px;border:2px solid #e65100;border-radius:8px;background:#fff;color:#e65100;font-weight:bold;font-size:.85em;cursor:pointer;transition:all .2s}
+.ch-btn:hover,.ch-btn.active{background:#e65100;color:#fff}
+
+/* モード選択 */
+.mode-bar{display:flex;gap:0;margin:16px 0;border-radius:10px;overflow:hidden;border:2px solid #e65100}
+.mode-btn{flex:1;padding:12px;text-align:center;background:#fff;color:#e65100;font-weight:bold;font-size:.88em;cursor:pointer;transition:all .2s;border:none}
+.mode-btn:not(:last-child){border-right:1px solid #ffe0b2}
+.mode-btn:hover{background:#fff3e0}
+.mode-btn.active{background:#e65100;color:#fff}
+.mode-btn.exam-btn{color:#e91e63;font-weight:bold}
+.mode-btn.exam-btn.active{background:#e91e63;color:#fff}
+
+/* セクション */
+.section{display:none}.section.active{display:block}
+
+/* レッスンカード */
+.lesson-card{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.lesson-card h2{color:#e65100;font-size:1.15em;margin-bottom:16px;padding-bottom:8px;border-bottom:3px solid #ffe0b2}
+.lesson-card h3{color:#ff8f00;font-size:1.02em;margin:20px 0 10px 0}
+.key-point{background:#fff3e0;border-left:4px solid #e65100;padding:14px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-size:.93em}
+.key-point strong{color:#e65100}
+.vocab{display:inline-block;background:#e3f2fd;border:1px solid #64b5f6;border-radius:6px;padding:2px 8px;margin:2px 4px;font-weight:bold;font-size:.88em;color:#1565c0}
+.formula{background:#fce4ec;border-left:4px solid #e91e63;padding:14px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-family:monospace;font-size:.93em;line-height:2}
+.example{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:14px 16px;margin:12px 0;font-size:.88em}
+.person{background:#e8f5e9;border-left:4px solid #4caf50;padding:12px 16px;margin:12px 0;border-radius:0 8px 8px 0}
+.person strong{color:#2e7d32}
+
+/* レッスン内のナビ */
+.lesson-nav{display:flex;gap:6px;margin:12px 0;flex-wrap:wrap}
+.lesson-nav-btn{padding:8px 14px;border:2px solid #ff8f00;border-radius:8px;background:#fff;color:#ff8f00;font-size:.82em;font-weight:bold;cursor:pointer;transition:all .2s}
+.lesson-nav-btn:hover,.lesson-nav-btn.active{background:#ff8f00;color:#fff}
+
+/* クイズ */
+.quiz-area{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.quiz-area h2{color:#e65100;margin-bottom:16px}
+.question-card{background:#fafafa;border:1px solid #e0e0e0;border-radius:10px;padding:20px;margin:16px 0}.q-number{font-size:.8em;color:#999;margin-bottom:6px}.q-text{font-size:1.02em;font-weight:bold;margin-bottom:14px;line-height:1.6}
+.choices{list-style:none}.choices li{padding:12px 16px;margin:6px 0;border:2px solid #e0e0e0;border-radius:8px;cursor:pointer;transition:all .2s;font-size:.93em}.choices li:hover{border-color:#e65100;background:#fff3e0}.choices li.correct{border-color:#4caf50;background:#e8f5e9}.choices li.wrong{border-color:#f44336;background:#ffebee}
+.explanation{display:none;margin-top:12px;padding:14px;background:#f5f5f5;border-radius:8px;font-size:.88em;line-height:1.7}.explanation.show{display:block}
+.result-area{display:none;text-align:center;padding:30px;background:#fff;border-radius:12px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.result-score{font-size:2.5em;font-weight:bold;color:#e65100;margin:10px 0}
+.btn{display:inline-block;padding:12px 28px;background:#e65100;color:#fff;border:none;border-radius:8px;font-size:1em;cursor:pointer;margin:8px}.btn:hover{background:#ff8f00}.btn-outline{background:#fff;color:#e65100;border:2px solid #e65100}
+.progress-bar{width:100%;height:6px;background:#e0e0e0;border-radius:3px;margin:12px 0}.progress-fill{height:100%;background:#e65100;border-radius:3px;transition:width .3s}
+
+/* インタラクティブ：シフト演算 */
+.shift-demo{background:#fff;border:2px solid #e65100;border-radius:12px;padding:20px;margin:16px 0;text-align:center}
+.shift-demo h4{color:#e65100;margin-bottom:12px;font-size:.95em}
+.bit-row{display:flex;justify-content:center;gap:4px;margin:10px 0}
+.bit-cell{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:6px;font-weight:bold;font-size:1.1em;font-family:monospace;transition:all .4s ease}
+.bit-1{background:#e65100;color:#fff}
+.bit-0{background:#f5f5f5;color:#999;border:1px solid #ddd}
+.bit-new{background:#4caf50;color:#fff}
+.bit-out{opacity:.3;transform:scale(.7)}
+.shift-info{font-size:.9em;color:#666;margin:8px 0}
+.shift-result{font-size:1.1em;font-weight:bold;color:#e65100;margin:8px 0}
+.shift-controls{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:12px 0}
+.shift-btn{padding:8px 16px;border:2px solid #e65100;border-radius:8px;background:#fff;color:#e65100;font-weight:bold;font-size:.85em;cursor:pointer;transition:all .2s}
+.shift-btn:hover{background:#e65100;color:#fff}
+
+/* インタラクティブ：論理回路 */
+.logic-demo{background:#fff;border:2px solid #1B3A5C;border-radius:12px;padding:20px;margin:16px 0}
+.logic-demo h4{color:#1B3A5C;margin-bottom:12px;font-size:.95em}
+.gate-selector{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:10px 0}
+.gate-btn{padding:6px 14px;border:2px solid #1B3A5C;border-radius:6px;background:#fff;color:#1B3A5C;font-weight:bold;font-size:.82em;cursor:pointer;transition:all .2s}
+.gate-btn:hover,.gate-btn.active{background:#1B3A5C;color:#fff}
+.gate-visual{display:flex;align-items:center;justify-content:center;gap:20px;margin:16px 0;flex-wrap:wrap}
+.input-box{text-align:center}
+.input-label{font-size:.8em;color:#999;margin-bottom:4px}
+.input-toggle{width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4em;font-weight:bold;cursor:pointer;transition:all .3s;border:3px solid}
+.input-toggle.on{background:#e65100;color:#fff;border-color:#e65100}
+.input-toggle.off{background:#f5f5f5;color:#999;border-color:#ddd}
+.gate-arrow{font-size:1.5em;color:#999}
+.gate-symbol{width:70px;height:50px;display:flex;align-items:center;justify-content:center;border-radius:8px;font-weight:bold;font-size:.9em;color:#fff}
+.gate-symbol.and-gate{background:#1565c0}
+.gate-symbol.or-gate{background:#2e7d32}
+.gate-symbol.xor-gate{background:#e65100}
+.gate-symbol.not-gate{background:#6a1b9a}
+.gate-symbol.nand-gate{background:#c62828}
+.gate-symbol.nor-gate{background:#4e342e}
+.output-box{text-align:center}
+.output-display{width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4em;font-weight:bold;transition:all .3s;border:3px solid}
+.output-1{background:#4caf50;color:#fff;border-color:#4caf50}
+.output-0{background:#f5f5f5;color:#999;border-color:#ddd}
+.truth-table{margin:12px auto;border-collapse:collapse;font-size:.85em}
+.truth-table th,.truth-table td{border:1px solid #ddd;padding:6px 14px;text-align:center}
+.truth-table th{background:#1B3A5C;color:#fff}
+.truth-table .highlight{background:#fff3e0;font-weight:bold}
+</style>
+</head>
+<body>
+<div class="header"><h1>基本情報技術者 Web教材</h1><div class="sub">レッスン＆確認テスト</div></div>
+<div class="container">
+<a href="../../teaching/桑名看護専門学校/web教材/apps.html" class="back-link">&#x1F3E0; アプリ一覧に戻る</a>
+
+<div class="lesson-card" style="border-left:4px solid #e65100">
+<h2 style="font-size:1.05em">基本情報技術者試験とは</h2>
+<p>IPA（情報処理推進機構）が実施する<strong>国家試験</strong>。ITエンジニアの登竜門。受験資格なし、受験料7,500円、CBT方式（PC受験）で随時受験可能。合格率は約<strong>41%</strong>。</p>
+
+<div class="key-point" style="background:#fff3e0">
+<strong>試験の構成</strong><br><br>
+<span style="font-size:1.05em"><strong>科目A</strong>（90分・60問・四択）</span><br>
+テクノロジ系（第1〜13章）＋ マネジメント系（第14〜15章）＋ ストラテジ系（第16〜21章）<br><br>
+<span style="font-size:1.05em"><strong>科目B</strong>（100分・20問・多肢選択）</span><br>
+アルゴリズムとプログラミング（16問）＋ 情報セキュリティ（4問）<br><br>
+<strong style="color:#e91e63">合格基準：1000点満点中 600点以上（両科目とも）</strong>
+</div>
+
+<div class="key-point">
+<strong>科目A 分野別の出題数の目安（60問中）</strong><br><br>
+<span style="font-family:monospace;font-size:.9em">
+セキュリティ（第11章）&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 約<strong>8問</strong> ← 最多！<br>
+企業活動（第20章）&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 約<strong>5問</strong><br>
+基礎理論（第1〜2章）&nbsp;&nbsp;&nbsp;&nbsp; 約<strong>4問</strong> ← いまここ<br>
+アルゴリズム（第3章）&nbsp;&nbsp;&nbsp;&nbsp; 約<strong>3問</strong><br>
+コンピュータ構成（第4章）&nbsp; 約<strong>3問</strong><br>
+システム構成（第5章）&nbsp;&nbsp;&nbsp;&nbsp; 約<strong>3問</strong><br>
+データベース（第9章）&nbsp;&nbsp;&nbsp;&nbsp; 約<strong>3問</strong><br>
+ネットワーク（第10章）&nbsp;&nbsp;&nbsp; 約<strong>3問</strong><br>
+その他各分野&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 各<strong>1〜3問</strong>
+</span>
+</div>
+</div>
+
+<div class="ch-select">
+<div class="ch-btn active" onclick="selectChapter(1)">第1章 基礎理論①</div>
+<div class="ch-btn" onclick="selectChapter(2)">第2章 基礎理論②</div>
+<div class="ch-btn" onclick="window.open('it_ch03.html','_blank')" style="background:#fff3e0">第3章 アルゴリズム ↗</div>
+<div class="ch-btn" onclick="window.open('it_ch04.html','_blank')" style="background:#fff3e0">第4章 構成要素 ↗</div>
+<div class="ch-btn" onclick="window.open('it_ch05.html','_blank')" style="background:#fff3e0">第5章 システム ↗</div>
+<div class="ch-btn" onclick="window.open('it_ch06.html','_blank')" style="background:#fff3e0">第6章 ソフトウェア ↗</div>
+<div class="ch-btn" onclick="window.open('it_ch07.html','_blank')" style="background:#fff3e0">第7章 ハードウェア ↗</div>
+<div class="ch-btn" onclick="window.open('it_ch08.html','_blank')" style="background:#fff3e0">第8章 UI・マルチメディア ↗</div>
+<div class="ch-btn" onclick="window.open('it_ch09.html','_blank')" style="background:#fff3e0">第9章 データベース ↗</div>
+</div>
+
+<div class="mode-bar">
+<div class="mode-btn active" onclick="selectMode('lesson')">レッスン</div>
+<div class="mode-btn" onclick="selectMode('quiz')">確認テスト</div>
+<div class="mode-btn exam-btn" onclick="selectMode('exam')">過去問レベル</div>
+</div>
+
+<!-- ===== 第1章 レッスン ===== -->
+<div id="ch1-lesson" class="section active">
+<div class="lesson-nav">
+<div class="lesson-nav-btn active" onclick="showSub('ch1l',0)">① データの単位</div>
+<div class="lesson-nav-btn" onclick="showSub('ch1l',1)">② 基数変換</div>
+<div class="lesson-nav-btn" onclick="showSub('ch1l',2)">③ 負の数・シフト演算</div>
+</div>
+
+<div class="ch1l sub0 section active">
+<div class="lesson-card">
+<h2>① データの単位</h2>
+
+<h3>ビット（bit）とは</h3>
+<p>コンピュータは全ての情報を<span class="vocab">0</span>と<span class="vocab">1</span>の2種類の数字だけで表現します。この0または1の1桁分を<span class="vocab">ビット（bit）</span>と呼び、情報の最小単位です。</p>
+
+<div class="key-point"><strong>なぜ0と1だけ？</strong><br>コンピュータの内部は電気回路でできていて、「電圧が高い（1）」か「電圧が低い（0）」かの2つの状態しか区別できません。そのため、すべてのデータを0と1の組み合わせで表します。</div>
+
+<h3>バイト（Byte）とは</h3>
+<div class="key-point"><span class="vocab">バイト（Byte）</span> = 8ビットのまとまり。<br>半角英数字1文字分のデータ量に相当します。<br><br>例：文字「A」はコンピュータ内部では「01000001」（8ビット＝1バイト）で表されます。</div>
+
+<h3>nビットで表せる状態の数</h3>
+<p>ビット数が増えるほど、表現できるパターンが増えます。</p>
+<div class="formula"><strong>nビットで表せる状態の数 = 2<sup>n</sup></strong><br><br>
+1ビット → 2<sup>1</sup> = <strong>2通り</strong>（0, 1）<br>
+2ビット → 2<sup>2</sup> = <strong>4通り</strong>（00, 01, 10, 11）<br>
+3ビット → 2<sup>3</sup> = <strong>8通り</strong>（000〜111）<br>
+8ビット（1バイト）→ 2<sup>8</sup> = <strong>256通り</strong><br>
+16ビット → 2<sup>16</sup> = <strong>65,536通り</strong><br>
+32ビット → 2<sup>32</sup> = <strong>約43億通り</strong></div>
+
+<div class="example"><strong>頻出問題：</strong>「32ビットで表現できるパターン数は24ビットの何倍か？」<br>→ 2<sup>32</sup> ÷ 2<sup>24</sup> = 2<sup>32-24</sup> = 2<sup>8</sup> = <strong>256倍</strong><br>ポイント：指数の引き算で求められます。</div>
+
+<h3>データの大きさの単位</h3>
+<p>大量のデータを扱うとき、ビットやバイトだけでは数が大きくなりすぎるため、接頭辞を使います。</p>
+<div class="key-point">
+<strong>K（キロ）</strong>= 約1,000（正確には 1,024 = 2<sup>10</sup>）<br>
+<strong>M（メガ）</strong>= 約100万（1,024K = 2<sup>20</sup>）<br>
+<strong>G（ギガ）</strong>= 約10億（1,024M = 2<sup>30</sup>）<br>
+<strong>T（テラ）</strong>= 約1兆（1,024G = 2<sup>40</sup>）<br><br>
+覚え方：<strong>K → M → G → T</strong> の順に約1,000倍ずつ大きくなる
+</div>
+
+<div class="example"><strong>身近な例：</strong><br>
+・スマホの写真1枚 → 約3〜5<strong>MB</strong>（メガバイト）<br>
+・音楽1曲 → 約5〜10<strong>MB</strong><br>
+・スマホのストレージ → 128<strong>GB</strong>（ギガバイト）<br>
+・ハードディスク → 1〜4<strong>TB</strong>（テラバイト）</div>
+</div>
+</div>
+
+<div class="ch1l sub1 section">
+<div class="lesson-card">
+<h2>② 基数変換</h2>
+
+<h3>10進数・2進数・16進数とは</h3>
+<p>私たちが普段使っている数の数え方は<span class="vocab">10進数</span>（0〜9の10種類の数字を使い、10になると桁が上がる）です。コンピュータの世界では、これ以外の数え方も使います。</p>
+
+<div class="key-point">
+<span class="vocab">10進数</span>：0〜9を使う。10で桁が上がる。日常生活で使用。<br><br>
+<span class="vocab">2進数</span>：0と1だけ。2で桁が上がる。コンピュータ内部の表現。<br>
+→ 10進数の「5」は2進数では「101」<br><br>
+<span class="vocab">16進数</span>：0〜9とA〜Fを使う。16で桁が上がる。メモリアドレス等に使用。<br>
+→ A=10, B=11, C=12, D=13, E=14, F=15
+</div>
+
+<div class="example"><strong>10進数の「26」を各進数で表すと：</strong><br>
+・2進数 →「11010」<br>
+・8進数 →「32」（3×8 + 2 = 26）<br>
+・16進数 →「1A」（1×16 + A(10) = 26）</div>
+
+<div class="key-point"><strong>8進数とは？</strong><br>
+<span class="vocab">8進数</span>：0〜7の8種類の数字を使い、8で桁が上がる。<br><br>
+試験ではたまにしか出ませんが、出たときに知らないと解けません。<br>
+変換方法は10進数・2進数と同じ考え方です。<br><br>
+
+<strong>10進数 → 8進数：</strong>8で割り続けて余りを下から読む<br>
+<span style="font-family:monospace">
+26÷8=3 余り<strong>2</strong> ↑<br>
+3÷8=0 &nbsp;余り<strong>3</strong> ↓ → 答え：<strong>32</strong>（8進数）
+</span><br><br>
+
+<strong>8進数 → 10進数：</strong>各桁×8<sup>n</sup>を足す<br>
+<span style="font-family:monospace">
+32（8進数）= 3×8<sup>1</sup> + 2×8<sup>0</sup> = 24+2 = <strong>26</strong>
+</span><br><br>
+
+<strong>2進数 ↔ 8進数：</strong>3桁ずつ区切る（16進数は4桁、8進数は3桁）<br>
+<span style="font-family:monospace">
+2進数 011 010 → 3 2 → 8進数 <strong>32</strong><br>
+（3桁の重みは <strong>4・2・1</strong>）
+</span>
+</div>
+
+<div class="key-point"><strong>10進小数 → 8進小数の変換</strong><br><br>
+整数部は8で割りますが、<strong>小数部は8をかけ続けて</strong>、整数部分を上から読みます。<br><br>
+
+<span style="font-family:monospace">
+例：0.5 を8進数に変換<br>
+0.5 × 8 = <strong>4</strong>.0 ← 整数部の4を取り出す。小数部が0になったので終了！<br>
+答え：<strong>0.4</strong>（8進小数）→ <strong>有限小数</strong><br><br>
+
+例：0.3 を8進数に変換<br>
+0.3 × 8 = <strong>2</strong>.4<br>
+0.4 × 8 = <strong>3</strong>.2<br>
+0.2 × 8 = <strong>1</strong>.6<br>
+0.6 × 8 = <strong>4</strong>.8<br>
+0.8 × 8 = <strong>6</strong>.4 ← また0.4が出た！終わらない…<br>
+答え：0.23146… → <strong>無限小数（循環小数）</strong>
+</span><br><br>
+<strong>ポイント：</strong>かけ算の結果の小数部が<strong>0になれば有限小数</strong>、<strong>同じ数が繰り返し出てきたら無限小数</strong>です。
+</div>
+
+<h3>桁の重み</h3>
+<p><span class="vocab">桁の重み</span>とは、各桁の位置が持つ値の大きさです。右端が最も軽く、左に行くほど重くなります。</p>
+<div class="formula"><strong>10進数の例：</strong> 7297<br>
+= 7×10<sup>3</sup> + 2×10<sup>2</sup> + 9×10<sup>1</sup> + 7×10<sup>0</sup><br>
+= 7000 + 200 + 90 + 7<br><br>
+<strong>2進数の例：</strong> 1011<br>
+= 1×2<sup>3</sup> + 0×2<sup>2</sup> + 1×2<sup>1</sup> + 1×2<sup>0</sup><br>
+= 8 + 0 + 2 + 1 = <strong>11</strong>（10進数）</div>
+
+<h3>2進数 → 10進数の変換</h3>
+<div class="key-point">各桁に<strong>桁の重み（2<sup>n</sup>）</strong>をかけて、全部たし合わせるだけです。</div>
+<div class="formula"><strong>例：2進数「10110」→ 10進数</strong><br>
+1×2<sup>4</sup> + 0×2<sup>3</sup> + 1×2<sup>2</sup> + 1×2<sup>1</sup> + 0×2<sup>0</sup><br>
+= 16 + 0 + 4 + 2 + 0 = <strong>22</strong></div>
+
+<h3>10進数 → 2進数の変換</h3>
+<div class="key-point">
+<strong>整数部：</strong>2で割り続けて、余りを<strong>下から上に</strong>読む。<br>
+<strong>小数部：</strong>2をかけ続けて、整数部を<strong>上から下に</strong>読む。
+</div>
+<div class="formula"><strong>例：10進数「22」→ 2進数</strong><br>
+22÷2=11 余り<strong>0</strong> ↑<br>
+11÷2=5 &nbsp;余り<strong>1</strong> ｜<br>
+5÷2=2 &nbsp;&nbsp;余り<strong>1</strong> ｜ 下から読む<br>
+2÷2=1 &nbsp;&nbsp;余り<strong>0</strong> ｜<br>
+1÷2=0 &nbsp;&nbsp;余り<strong>1</strong> ↓<br>
+答え：<strong>10110</strong></div>
+
+<h3>2進数 ↔ 16進数の変換</h3>
+<div class="key-point"><strong>なぜ4桁ずつ？</strong><br>
+2進数の4桁 = 2<sup>4</sup> = <strong>16通り</strong>（0〜15）。これは16進数の1桁（0〜F）とぴったり対応します。だから4桁ずつ区切れば、そのまま16進数になるのです。</div>
+
+<div class="key-point"><strong>覚えるのは「8・4・2・1」だけ！</strong><br><br>
+2進数の4桁には、左から順に<strong style="font-size:1.3em;color:#e65100">8 &nbsp; 4 &nbsp; 2 &nbsp; 1</strong> という重みがあります。<br>
+1がついている桁の数字を足すだけで、10進数（＝16進数の1桁）に変換できます。<br><br>
+
+<span style="font-family:monospace;font-size:1.1em;line-height:2.5">
+&nbsp; &nbsp; 重み → &nbsp;<strong style="color:#e65100">8</strong> &nbsp; <strong style="color:#e65100">4</strong> &nbsp; <strong style="color:#e65100">2</strong> &nbsp; <strong style="color:#e65100">1</strong><br>
+例① &nbsp; &nbsp; &nbsp; &nbsp; 0 &nbsp; 0 &nbsp; 0 &nbsp; 0 &nbsp; → 何も足さない &nbsp; = <strong>0</strong><br>
+例② &nbsp; &nbsp; &nbsp; &nbsp; 0 &nbsp; 0 &nbsp; 0 &nbsp; 1 &nbsp; → &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1 = <strong>1</strong><br>
+例③ &nbsp; &nbsp; &nbsp; &nbsp; 0 &nbsp; 1 &nbsp; 0 &nbsp; 0 &nbsp; → &nbsp; &nbsp; 4 &nbsp; &nbsp; &nbsp; &nbsp; = <strong>4</strong><br>
+例④ &nbsp; &nbsp; &nbsp; &nbsp; 0 &nbsp; 1 &nbsp; 0 &nbsp; 1 &nbsp; → &nbsp; &nbsp; 4 &nbsp;+ &nbsp;1 = <strong>5</strong><br>
+例⑤ &nbsp; &nbsp; &nbsp; &nbsp; 1 &nbsp; 0 &nbsp; 1 &nbsp; 1 &nbsp; → 8 &nbsp; &nbsp; +2+1 = <strong>11 → B</strong><br>
+例⑥ &nbsp; &nbsp; &nbsp; &nbsp; 1 &nbsp; 1 &nbsp; 1 &nbsp; 1 &nbsp; → 8+4+2+1 = <strong>15 → F</strong>
+</span></div>
+
+<div class="key-point" style="background:#e8f5e9;border-color:#4caf50"><strong>「4桁で区切る」と「8桁の重みで計算」の違い</strong><br><br>
+
+どちらも2進数→10進数の変換をしていますが、<strong>目的が違います</strong>。<br><br>
+
+<strong style="color:#2e7d32">① 16進数に変換したいとき → 4桁ずつ区切る</strong><br>
+4桁の重みは <strong>8・4・2・1</strong>（最大15=F）<br>
+<span style="font-family:monospace">
+10110100 → 1011 | 0100<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;8+2+1=<strong>11(B)</strong> | 4=<strong>4</strong> → <strong>B4</strong>（16進数）
+</span><br><br>
+
+<strong style="color:#1565c0">② そのまま10進数にしたいとき → 8桁全部の重みを使う</strong><br>
+8桁の重みは <strong>128・64・32・16・8・4・2・1</strong><br>
+<span style="font-family:monospace">
+10110100<br>
+128+32+16+4=<strong>180</strong>（10進数）
+</span><br><br>
+
+<strong>同じ「10110100」でも：</strong><br>
+・16進数にしたいなら → 4桁で区切って → <strong>B4</strong><br>
+・10進数にしたいなら → 8桁全部で計算 → <strong>180</strong><br>
+（B4を10進数にしても 11×16+4=180 で同じ値です！）
+</div>
+
+<div class="example"><strong>10〜15は A〜F に置き換えるだけ：</strong><br>
+10=<strong>A</strong> &nbsp; 11=<strong>B</strong> &nbsp; 12=<strong>C</strong> &nbsp; 13=<strong>D</strong> &nbsp; 14=<strong>E</strong> &nbsp; 15=<strong>F</strong><br><br>
+つまり、どんな4桁の2進数でも「8・4・2・1」で足し算するだけで16進数に変換できます。<strong>対応表を丸暗記する必要はありません。</strong></div>
+
+<div class="formula"><strong>2進数→16進数の例：</strong><br><br>
+10110100<br>
+↓ 4桁ずつ区切る<br>
+<strong>1011</strong> | <strong>0100</strong><br>
+↓ それぞれ上の表で変換<br>
+1011 = 8+0+2+1 = 11 → <strong>B</strong><br>
+0100 = 0+4+0+0 = 4 &nbsp;→ <strong>4</strong><br>
+↓ 並べる<br>
+答え：<strong>B4</strong></div>
+
+<div class="formula"><strong>16進数→2進数の例：</strong><br><br>
+3F<br>
+↓ 1桁ずつ4桁の2進数に変換<br>
+3 → <strong>0011</strong>（0+0+2+1=3）<br>
+F → <strong>1111</strong>（8+4+2+1=15）<br>
+↓ 並べる<br>
+答え：<strong>00111111</strong></div>
+
+<div class="example"><strong>試験のコツ：</strong>基数変換は計算量が多く時間がかかるため、コストパフォーマンスが悪い問題です。計算が苦手な人は後回しにして、他の問題を先に解くのが得策です。</div>
+</div>
+</div>
+
+<div class="ch1l sub2 section">
+<div class="lesson-card">
+<h2>③ 負の2進数とシフト演算</h2>
+
+<h3>負の2進数の表し方</h3>
+<p>10進数にはマイナス記号「-」がありますが、2進数では0と1しか使えないため、別の方法でマイナスを表現します。</p>
+
+<div class="key-point"><strong>3つの表現方法</strong><br>
+<span class="vocab">絶対値表現</span>：先頭ビットを符号（0=正、1=負）として使い、残りで値を表す<br>
+<span class="vocab">1の補数</span>：全ビットを反転（0→1, 1→0）する<br>
+<span class="vocab">2の補数</span>：全ビット反転＋1を加える（<strong>最もよく使われる</strong>）</div>
+
+<div class="formula"><strong>2の補数の作り方（8ビットで「-2」を表す例）：</strong><br><br>
++2 = 00000010<br>
+① 全ビット反転 → 11111101<br>
+② +1を加える &nbsp; → <strong>11111110</strong>（これが-2）</div>
+
+<div class="key-point"><strong>なぜ+1を加えるのか？</strong><br><br>
+ポイントは「元の数と足したら、ちょうど0になる」ようにすることです。<br><br>
+
+<span style="font-family:monospace;font-size:1.05em">
+ステップ①：反転しただけの場合<br>
+&nbsp; 00000010（+2）<br>
++11111101（反転しただけ）<br>
+──────────<br>
+=11111111 &nbsp;← <strong>0にならない！</strong><br><br>
+
+ステップ②：反転＋1の場合<br>
+&nbsp; 00000010（+2）<br>
++11111110（反転＋1）<br>
+──────────<br>
+=00000000 &nbsp;← <strong>ちょうど0になる！</strong>
+</span><br><br>
+
+（8ビットからあふれた9桁目の1は捨てられるので、結果はきれいに0）<br><br>
+つまり +2 と足して0になる数 = <strong>-2</strong> ということです。<br>
+反転しただけでは「11111111」になって0にならないので、+1して調整するのです。</div>
+
+<div class="key-point"><strong>逆の操作：2の補数を10進数に戻すには？</strong><br><br>
+先頭ビットが1（＝負の数）のとき、もう一度「反転＋1」をすれば元の正の数がわかります。<br><br>
+
+<span style="font-family:monospace;font-size:1.05em">
+例：11010110 は10進数でいくつ？<br><br>
+先頭が1 → 負の数だ！<br><br>
+① 全ビット反転<br>
+&nbsp; 11010110 → 00101001<br><br>
+② +1を加える<br>
+&nbsp; 00101001 + 1 = 00101010<br><br>
+③ 00101010を10進数にする<br>
+&nbsp; 各ビットの上に重みを書いて、1がある桁だけ足す：<br><br>
+&nbsp; 重み → <strong style="color:#e65100">128 &nbsp;64 &nbsp;32 &nbsp;16 &nbsp;&nbsp;8 &nbsp;&nbsp;4 &nbsp;&nbsp;2 &nbsp;&nbsp;1</strong><br>
+&nbsp; ビット → &nbsp;0 &nbsp;&nbsp;0 &nbsp;&nbsp;<strong style="color:#e91e63">1</strong> &nbsp;&nbsp;0 &nbsp;&nbsp;<strong style="color:#e91e63">1</strong> &nbsp;&nbsp;0 &nbsp;&nbsp;<strong style="color:#e91e63">1</strong> &nbsp;&nbsp;0<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;↓ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;↓ &nbsp; &nbsp; &nbsp; &nbsp;↓<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<strong>32</strong> &nbsp;&nbsp;＋ &nbsp;<strong>8</strong> &nbsp;&nbsp;＋ &nbsp;<strong>2</strong> &nbsp;＝ <strong>42</strong><br>
+&nbsp; （1がある桁は32の桁、8の桁、2の桁 → この3つを足す）<br><br>
+④ 元が負の数なので → 答えは <strong style="font-size:1.2em;color:#e91e63">-42</strong>
+</span></div>
+
+<div class="key-point"><strong>符号ビット</strong>：先頭のビットで正負を判別<br>
+・先頭が<strong>0</strong> → 正の数<br>
+・先頭が<strong>1</strong> → 負の数<br><br>
+<strong>なぜ2の補数が使われるのか？</strong><br>
+2の補数を使うと、引き算を足し算として計算できるため、コンピュータの回路が単純になります。</div>
+
+<div class="key-point"><strong>nビットで表せる数の範囲</strong><br><br>
+
+<strong>符号なし</strong>（正の数だけ）の場合：<br>
+全ビットを値に使える → <strong>0 〜 2<sup>n</sup>-1</strong><br>
+例：8ビット → 0〜255 / 16ビット → 0〜65535<br><br>
+
+<strong>符号付き</strong>（正と負の両方）の場合：<br>
+先頭1ビットが符号（0=正、1=負）、残り(n-1)ビットが値<br>
+→ <strong>-2<sup>n-1</sup> 〜 2<sup>n-1</sup>-1</strong><br><br>
+
+<span style="font-family:monospace">
+例：符号付き8ビット<br>
+&nbsp; 先頭1ビット=符号、残り7ビット=値<br>
+&nbsp; 正の最大値：0<strong>1111111</strong> = 2<sup>7</sup>-1 = <strong>127</strong><br>
+&nbsp; 負の最小値：1<strong>0000000</strong> = -2<sup>7</sup> = <strong>-128</strong><br><br>
+
+例：符号付き16ビット<br>
+&nbsp; 先頭1ビット=符号、残り15ビット=値<br>
+&nbsp; 正の最大値：0<strong>111111111111111</strong> = 2<sup>15</sup>-1 = <strong>32767</strong><br>
+&nbsp; 負の最小値：1<strong>000000000000000</strong> = -2<sup>15</sup> = <strong>-32768</strong>
+</span><br><br>
+<strong>覚え方：</strong>「符号付き」と言われたら、ビット数から1を引いた数で2の累乗を計算し、-1する。</div>
+
+<h3>シフト演算</h3>
+<p>ビット列を左右にずらす操作を<span class="vocab">シフト演算</span>と呼びます。かけ算やわり算を高速に行えます。</p>
+
+<div class="key-point">
+<span class="vocab">論理シフト</span>：符号を考慮せず、単純にビットをずらす。空いた場所には0を入れる。正の数に使用。<br><br>
+<span class="vocab">算術シフト</span>：符号ビット（先頭）を固定したまま、残りのビットをずらす。負の数でも正しく計算できる。
+</div>
+
+<div class="formula"><strong>シフト演算の効果：</strong><br>
+<strong>左に1つシフト = ×2</strong>（2倍）<br>
+<strong>左に2つシフト = ×4</strong>（4倍）<br>
+<strong>左に3つシフト = ×8</strong>（8倍）<br>
+<strong>右に1つシフト = ÷2</strong>（1/2倍）<br>
+<strong>右に5つシフト = ÷32</strong>（1/32倍）<br><br>
+一般化：<strong>左にnシフト = ×2<sup>n</sup></strong> / <strong>右にnシフト = ÷2<sup>n</sup></strong></div>
+
+<div class="example"><strong>超頻出問題：</strong><br>
+「正の整数xを2ビット左にシフトして、xを加える。結果はxの何倍か。」<br><br>
+
+<strong>具体的な数字で考えてみましょう（x=3の場合）：</strong><br><br>
+
+<span style="font-family:monospace">
+① まず x=3 を2ビット左にシフトする<br>
+&nbsp; &nbsp;3 = 00000011<br>
+&nbsp; &nbsp;左に2つシフト → 00001100 = <strong>12</strong><br>
+&nbsp; &nbsp;（3の4倍 = 12。左2シフト = 4倍だから当然！）<br><br>
+
+② 次に「xを加える」ので、シフト結果に元のx=3を足す<br>
+&nbsp; &nbsp;12 + 3 = <strong>15</strong><br><br>
+
+③ 15 は 3 の何倍？ → 15 ÷ 3 = <strong>5倍</strong>
+</span><br><br>
+
+<strong>式にすると：</strong><br>
+左2シフト（4倍にしたもの）＋ 元の値（1倍）＝ <strong>5倍</strong><br><br>
+
+<strong>xがいくつでも同じ：</strong><br>
+x=10 → 40+10=50（5倍）<br>
+x=7 → 28+7=35（5倍）
+</div>
+
+<div class="example"><strong>応用：9倍にするには？</strong><br>
+3ビット左シフト（8倍）＋ 元の値（1倍）＝ <strong>9倍</strong><br>
+x=3 → 24+3=27（3の9倍）</div>
+
+<div class="shift-demo">
+<h4>シフト演算を体験してみよう</h4>
+<p style="font-size:.88em;color:#666;margin-bottom:12px">下のボタンを押すと、ビット（0と1の列）が左右にずれます。<br><strong>左にずらす＝値が2倍</strong>、<strong>右にずらす＝値が半分</strong>になることを確認してください。</p>
+<div style="display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap">
+<div style="text-align:center"><div style="font-size:.8em;color:#999">2進数</div><div class="bit-row" id="shiftBits"></div></div>
+<div style="font-size:1.5em;color:#e65100">＝</div>
+<div style="text-align:center"><div style="font-size:.8em;color:#999">10進数</div><div style="font-size:2em;font-weight:bold;color:#e65100" id="shiftDecimalDisplay">5</div></div>
+</div>
+<div class="shift-result" id="shiftMessage" style="min-height:1.5em"></div>
+<div class="shift-controls">
+<div class="shift-btn" onclick="doShift('left')">◀ 左にシフト</div>
+<div class="shift-btn" onclick="doShift('right')">右にシフト ▶</div>
+<div class="shift-btn" onclick="resetShift()" style="border-color:#999;color:#999">リセット</div>
+</div>
+<div style="font-size:.82em;color:#888;margin-top:8px">左に1回 = ×2 / 左に2回 = ×4 / 左に3回 = ×8 …</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ===== 第2章 レッスン ===== -->
+<div id="ch2-lesson" class="section">
+<div class="lesson-nav">
+<div class="lesson-nav-btn active" onclick="showSub('ch2l',0)">① 論理演算</div>
+<div class="lesson-nav-btn" onclick="showSub('ch2l',1)">② 論理回路</div>
+<div class="lesson-nav-btn" onclick="showSub('ch2l',2)">③ AI（人工知能）</div>
+</div>
+
+<div class="ch2l sub0 section active">
+<div class="lesson-card">
+<h2>① 集合と論理演算</h2>
+
+<h3>集合とベン図</h3>
+<p><span class="vocab">集合</span>とは、はっきりとした条件でグループ分けされた「もの」の集まりです。集合の関係を視覚的に表した図を<span class="vocab">ベン図</span>と呼びます。</p>
+<div class="key-point"><strong>ベン図の読み方</strong><br>
+2つの円が重なる部分 = 両方に共通する要素（AND）<br>
+2つの円の全体 = どちらかに含まれる要素（OR）<br>
+重ならない部分だけ = 片方にだけ含まれる要素（XOR）</div>
+
+<h3>論理演算とは</h3>
+<p>私たちが普段使う「+, -, ×, ÷」は四則演算ですが、コンピュータは0と1しか扱えないため、<span class="vocab">論理演算</span>という別の計算方法を使います。</p>
+
+<div class="key-point"><strong>基本の4つの論理演算</strong><br><br>
+<span class="vocab">AND（論理積）</span>：AとBの<strong>両方が1</strong>のときだけ結果が1<br>
+→ 「AかつB」。条件を全て満たすときだけ真。<br><br>
+<span class="vocab">OR（論理和）</span>：AとBの<strong>少なくとも一方が1</strong>なら結果が1<br>
+→ 「AまたはB」。どちらか一つでも満たせば真。<br><br>
+<span class="vocab">XOR（排他的論理和）</span>：AとBが<strong>異なる</strong>ときに結果が1<br>
+→ 「AかBのどちらか一方だけ」が真のとき。<br><br>
+<span class="vocab">NOT（否定）</span>：入力の<strong>反対</strong>が結果（0→1, 1→0）</div>
+
+<div class="formula"><strong>真理値表（必ず覚える！）</strong><br><br>
+A B | AND &nbsp;OR &nbsp;XOR &nbsp;NAND &nbsp;NOR<br>
+0 0 | &nbsp;0 &nbsp;&nbsp;&nbsp;0 &nbsp;&nbsp;&nbsp;0 &nbsp;&nbsp;&nbsp;&nbsp;1 &nbsp;&nbsp;&nbsp;&nbsp;1<br>
+0 1 | &nbsp;0 &nbsp;&nbsp;&nbsp;1 &nbsp;&nbsp;&nbsp;1 &nbsp;&nbsp;&nbsp;&nbsp;1 &nbsp;&nbsp;&nbsp;&nbsp;0<br>
+1 0 | &nbsp;0 &nbsp;&nbsp;&nbsp;1 &nbsp;&nbsp;&nbsp;1 &nbsp;&nbsp;&nbsp;&nbsp;1 &nbsp;&nbsp;&nbsp;&nbsp;0<br>
+1 1 | &nbsp;1 &nbsp;&nbsp;&nbsp;1 &nbsp;&nbsp;&nbsp;0 &nbsp;&nbsp;&nbsp;&nbsp;0 &nbsp;&nbsp;&nbsp;&nbsp;0</div>
+
+<div class="key-point"><strong>NAND と NOR</strong><br>
+<span class="vocab">NAND</span> = NOT + AND（ANDの結果を反転）<br>
+<span class="vocab">NOR</span> = NOT + OR（ORの結果を反転）<br><br>
+NANDだけで全ての論理演算が作れるため、実際のCPUではNAND回路が基本部品として使われています。</div>
+
+<div class="logic-demo">
+<h4>論理演算を体験してみよう</h4>
+<p style="font-size:.88em;color:#666;margin-bottom:8px">① 上のボタンで演算の種類を選ぶ → ② A・Bの丸をタップして0/1を切り替える → ③ 出力とベン図が変わることを確認！</p>
+<div class="gate-selector">
+<div class="gate-btn active" onclick="setGate('AND')">AND</div>
+<div class="gate-btn" onclick="setGate('OR')">OR</div>
+<div class="gate-btn" onclick="setGate('XOR')">XOR</div>
+<div class="gate-btn" onclick="setGate('NAND')">NAND</div>
+<div class="gate-btn" onclick="setGate('NOR')">NOR</div>
+<div class="gate-btn" onclick="setGate('NOT')">NOT</div>
+</div>
+<div style="font-size:.95em;font-weight:bold;color:#1B3A5C;text-align:center;margin:8px 0" id="gateDescription">AND = AとBの両方が1のときだけ、結果が1</div>
+
+<!-- ベン図 -->
+<div style="text-align:center;margin:12px 0">
+<svg id="vennSvg" width="220" height="150" viewBox="0 0 220 150">
+<circle cx="80" cy="75" r="55" fill="none" stroke="#1565c0" stroke-width="2" id="vennA"/>
+<circle cx="140" cy="75" r="55" fill="none" stroke="#e65100" stroke-width="2" id="vennB"/>
+<text x="45" y="45" font-size="14" fill="#1565c0" font-weight="bold">A</text>
+<text x="165" y="45" font-size="14" fill="#e65100" font-weight="bold">B</text>
+<!-- 塗りつぶし用のパス -->
+<clipPath id="clipA"><circle cx="80" cy="75" r="55"/></clipPath>
+<clipPath id="clipB"><circle cx="140" cy="75" r="55"/></clipPath>
+<!-- AND: AとBの重なり -->
+<circle cx="140" cy="75" r="55" clip-path="url(#clipA)" id="vennAND" fill="#e65100" opacity="0.4"/>
+<!-- OR: A全体 + B全体 -->
+<circle cx="80" cy="75" r="55" id="vennOrA" fill="none" opacity="0.3"/>
+<circle cx="140" cy="75" r="55" id="vennOrB" fill="none" opacity="0.3"/>
+</svg>
+<div style="font-size:.82em;color:#888" id="vennLabel">色がついた部分 = 結果が1になる範囲</div>
+</div>
+
+<div class="gate-visual">
+<div class="input-box"><div class="input-label">入力A</div><div class="input-toggle off" id="inputA" onclick="toggleInput('A')">0</div></div>
+<div class="input-box" id="inputBbox"><div class="input-label">入力B</div><div class="input-toggle off" id="inputB" onclick="toggleInput('B')">0</div></div>
+<div class="gate-arrow">→</div>
+<div class="gate-symbol and-gate" id="gateSymbol">AND</div>
+<div class="gate-arrow">→</div>
+<div class="output-box"><div class="input-label">出力</div><div class="output-display output-0" id="gateOutput">0</div></div>
+</div>
+<table class="truth-table" id="truthTable">
+<tr><th>A</th><th>B</th><th id="ttHeader">AND</th></tr>
+<tr><td>0</td><td>0</td><td>0</td></tr>
+<tr><td>0</td><td>1</td><td>0</td></tr>
+<tr><td>1</td><td>0</td><td>0</td></tr>
+<tr><td>1</td><td>1</td><td>1</td></tr>
+</table>
+</div>
+
+<h3>逆ポーランド表記法</h3>
+<div class="key-point"><span class="vocab">逆ポーランド表記法（後置記法）</span>：演算子を数値の後ろに書く方法。コンピュータ内部の計算に使われます。<br><br>
+<strong>通常（中置記法）</strong>：3 + 5 → 8<br>
+<strong>逆ポーランド</strong>：3 5 + → 8<br><br>
+<strong>複雑な例：</strong><br>
+通常：(3 + 5) × 2<br>
+逆ポーランド：3 5 + 2 ×<br>
+読み方：左から読んで、演算子が来たら直前の2つの数で計算する</div>
+</div>
+</div>
+
+<div class="ch2l sub1 section">
+<div class="lesson-card">
+<h2>② 論理回路と加算回路</h2>
+
+<h3>論理回路とMIL記号</h3>
+<p>前節で学んだ論理演算を電子回路で実現したものが<span class="vocab">論理回路</span>です。回路図では<span class="vocab">MIL記号</span>で表記します。</p>
+
+<div class="key-point"><strong>MIL記号の特徴（形で覚える！）</strong><br><br>
+<strong>AND</strong>：半円形（D型）。「両方」が必要。<br>
+<strong>OR</strong>：先端が尖った形。「どちらか」でOK。<br>
+<strong>NOT</strong>：三角形の先端に小さな丸。丸が「否定」を表す。<br>
+<strong>NAND</strong>：ANDの先端に丸をつけたもの。<br>
+<strong>NOR</strong>：ORの先端に丸をつけたもの。<br>
+<strong>XOR</strong>：ORの左側に縦線を追加。</div>
+
+<div class="example"><strong>試験対策：</strong>MIL記号の形を暗記する必要はありませんが、各論理演算の意味（真理値表）は必ず覚えてください。複雑な回路はベン図を使って解くのが最も確実です。</div>
+
+<h3>加算回路</h3>
+<p>論理回路を組み合わせることで、コンピュータはたし算ができるようになります。</p>
+
+<div class="key-point"><span class="vocab">半加算器（Half Adder）</span><br>
+下の位からの桁上がりを<strong>考慮しない</strong>加算回路。<br>
+構成：<strong>XOR</strong>（和を計算）＋ <strong>AND</strong>（桁上げを計算）<br>
+入力：2つ（A, B）</div>
+
+<div class="key-point"><span class="vocab">全加算器（Full Adder）</span><br>
+下の位からの桁上がりを<strong>考慮する</strong>加算回路。<br>
+構成：<strong>半加算器×2 ＋ OR×1</strong><br>
+入力：3つ（A, B, 下の位からの桁上がり）<br><br>
+<strong>使い分け：</strong>1桁目は半加算器、2桁目以降は全加算器</div>
+
+<h3>オートマトン</h3>
+<div class="key-point"><span class="vocab">オートマトン</span>：複雑なシステムを「入力」「状態」「出力」の3つで単純化したモデル。<br><br>
+<strong>例：自動販売機</strong><br>
+入力＝お金 → 状態＝合計金額 → 出力＝商品<br><br>
+<span class="vocab">状態遷移表</span>：入力に応じて状態がどう変わるかの表<br>
+<span class="vocab">状態遷移図</span>：状態を円、遷移を矢印で表した図<br>
+・円 = 状態（二重丸 = 受理状態）<br>
+・矢印上のラベル = 入力/出力</div>
+</div>
+</div>
+
+<div class="ch2l sub2 section">
+<div class="lesson-card">
+<h2>③ AI（人工知能）</h2>
+
+<p><span class="vocab">AI（Artificial Intelligence：人工知能）</span>は、人間の知的な振る舞いをコンピュータで再現する技術です。近年の試験で最も出題が増えている分野です。</p>
+
+<h3>AIの主要技術</h3>
+<div class="key-point">
+<span class="vocab">機械学習（Machine Learning）</span><br>
+人間の学習能力をコンピュータで再現する技術。データを与えることで、コンピュータ自身が将来予測や意思決定を行えるようになる。<br><br>
+
+<span class="vocab">ニューラルネットワーク</span><br>
+人間の脳の神経回路（ニューロン）を模したモデル。機械学習の一種。<br><br>
+
+<span class="vocab">ディープラーニング（深層学習）</span><br>
+ニューラルネットワークを何層にも重ねた（多層化した）モデル。画像認識、音声認識、自然言語処理などで圧倒的な性能を発揮。<br><br>
+
+<span class="vocab">生成AI</span><br>
+テキスト、画像、音声などのオリジナルコンテンツを生成するAI。ChatGPT、DALL-E等。
+</div>
+
+<h3>機械学習の3つの手法</h3>
+<div class="key-point">
+<span class="vocab">教師あり学習</span><br>
+入力データ＋正解データ（ラベル）をセットで与えて学習。<br>
+例：犬の画像に「犬」というラベルを付けて大量に学習 → 新しい画像が犬かどうか判定できる<br><br>
+
+<span class="vocab">教師なし学習</span><br>
+入力データのみ（正解なし）で学習。人間にも正解がわからないデータの分類に使う。<br>
+例：顧客の購買データから、似た傾向のグループに自動で分類（クラスタリング）<br><br>
+
+<span class="vocab">強化学習</span><br>
+試行錯誤しながら、報酬を最大化するように学習。<br>
+例：囲碁AI「AlphaGo」が勝利という報酬を目指して対戦を繰り返し、世界チャンピオンに勝利</div>
+
+<h3>生成AI関連の重要用語</h3>
+<div class="key-point">
+<span class="vocab">プロンプト</span>：生成AIに与える指示（質問や命令文）<br>
+<span class="vocab">プロンプトエンジニアリング</span>：より良い結果を得るためにプロンプトを工夫すること<br>
+<span class="vocab">基盤モデル</span>：膨大なデータで事前学習した汎用的なAIモデル（GPT等）<br>
+<span class="vocab">ファインチューニング</span>：基盤モデルに特定分野のデータで追加学習を行い調整すること<br>
+<span class="vocab">ハルシネーション</span>：AIが事実と異なる情報をもっともらしく生成してしまう現象<br>
+<span class="vocab">ディープフェイク</span>：AIで生成された偽の動画や画像
+</div>
+
+<div class="example"><strong>試験のポイント：</strong>AI分野は毎年新しい用語が追加されています。特に「教師あり学習」「教師なし学習」「強化学習」の違いは必ず出題されます。具体例とセットで覚えましょう。</div>
+</div>
+</div>
+</div>
+
+<!-- ===== クイズエリア ===== -->
+<div id="quiz-area" class="section">
+<div class="quiz-area">
+<h2 id="quizTitle">確認テスト</h2>
+<div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+<div id="quizContainer"></div>
+<div style="text-align:center;margin-top:20px"><button class="btn" id="submitBtn" onclick="submitQuiz()" style="display:none">結果を見る</button></div>
+</div>
+<div class="result-area" id="resultArea"><h2>結果</h2><div class="result-score" id="resultScore"></div><div id="resultMsg" style="font-size:1.1em;margin:10px 0"></div><button class="btn" onclick="startQuiz()">もう一度</button><button class="btn btn-outline" onclick="selectMode('lesson')">レッスンに戻る</button></div>
+</div>
+
+</div>
+
+<script>
+const examPool={1:[
+{q:'32ビットで表現できるビットパターンの個数は、24ビットで表現できる個数の何倍か。（H28）',choices:['8','16','128','256'],answer:3,explanation:'32ビットの状態数÷24ビットの状態数。指数の割り算は引き算で、2の(32-24)乗=2の8乗=256倍。指数法則を使うのがポイントです'},
+{q:'次の10進小数のうち、8進数に変換すると有限小数になるものはどれか。',choices:['0.3','0.4','0.5','0.7'],answer:2,explanation:'小数を8進数に変換するには「×8」を繰り返します。小数部が0になれば有限小数、ならなければ無限小数です。0.5×8=4.0 → 小数部が0！→ 有限小数（0.4）。一方 0.3×8=2.4, 0.4×8=3.2, 0.2×8=1.6… と永遠に続くので無限小数です。'},
+{q:'16進小数2B.Dを10進数に変換した値に最も近いものはどれか。',choices:['43.8125','43.8','44.8125','42.8125'],answer:0,explanation:'16進数の各桁を10進数に変換します。2B.D → 整数部：2×16+B(11)=43。小数部：D(13)÷16=0.8125。合わせて43.8125'},
+{q:'10進数の演算式7÷32の結果を2進数で表したものはどれか。（H31）',choices:['0.001011','0.001101','0.00111','0.0111'],answer:2,explanation:'まず7を2進数にすると111。÷32は2の5乗で割ること＝右に5ビットシフト。111を右に5つずらすと0.00111になります'},
+{q:'正の整数xを2ビット左にシフトしてxを加えると何倍か。（H28）',choices:['3','4','5','6'],answer:2,explanation:'2ビット左シフト＝4倍（2の2乗=4）。それに元のx（1倍）を足す。4倍+1倍=5倍。x=3なら12+3=15で確かに5倍'},
+{q:'8ビットの2の補数11010110を10進数にすると？',choices:['-42','-43','-44','-38'],answer:0,explanation:'先頭が1なので負の数です。元の正の数を知るには、もう一度「2の補数」の手順（反転＋1）を行います。① 11010110を全ビット反転 → 00101001 ② +1を加える → 00101010 ③ 00101010を10進数にする：0+0+32+0+8+0+2+0 = 42 ④ 元が負の数なので答えは -42 です。'},
+{q:'負の整数を2の補数で表す8ビット10110100を10進数にすると？',choices:['-76','-75','-74','-180'],answer:0,explanation:'先頭が1なので負の数です。元の正の数を求めます。① 10110100を全ビット反転 → 01001011 ② +1を加える → 01001100 ③ 01001100を10進数にする：0+64+0+0+8+4+0+0 = 76 ④ 元が負の数なので答えは -76 です。'},
+{q:'符号付き16ビットの正の最大値はいくつか。',choices:['32767','32768','65535','65536'],answer:0,explanation:'「符号付き」＝先頭1ビットを正負の判定に使う（0=正、1=負）。残りの15ビットで値を表す。正の最大値は15ビットが全部1のとき → 0111111111111111 → 2の15乗-1 = 32767。ちなみに「符号なし」16ビットなら全部値に使えるので最大値は2の16乗-1 = 65535。'},
+{q:'8ビット「10100000」を右に3ビット論理シフトした結果は？',choices:['00010100','11110100','01010000','00101000'],answer:0,explanation:'10100000を右に3つずらします。右端の3ビット(000)は捨て、左端に0を3つ入れる→00010100。値は160÷8=20になります'},
+{q:'2進数「101」と「110」の和を求めよ。',choices:['1011','1001','1100','1111'],answer:0,explanation:'2進数の筆算です。右の桁から：1+0=1、0+1=1、1+1=10（桁上がり）。結果は1011。10進数で確認：5+6=11、1011=8+2+1=11で合ってます'}
+],2:[
+{q:'X NAND Yは NOT(X AND Y)。X OR Yを NANDだけで表すと？（H29）',choices:['(X NAND X) NAND (Y NAND Y)','(X NAND Y) NAND (X NAND Y)','X NAND (Y NAND Y)','(X NAND X) NAND Y'],answer:0,explanation:'NOT X = X NAND X（自分自身とNANDすると否定になる）。OR = NOT(NOT A AND NOT B) なので、(X NAND X) NAND (Y NAND Y) で OR を表現できます'},
+{q:'半加算器の2つの素子A,Bの適切な組合せは？（H29）',choices:['A=AND, B=OR','A=XOR, B=AND','A=NAND, B=NOR','A=XOR, B=OR'],answer:1,explanation:'半加算器はXORとANDの2つで構成。XORが和（1+1=0のように桁上がりなしの結果）、ANDが桁上げ（1+1のときの繰り上がり1）を計算します'},
+{q:'全加算器にx=1,y=0,z=1を入力したときのc(桁上げ)とs(和)は？（H21改）',choices:['c=1,s=0','c=0,s=0','c=1,s=1','c=0,s=1'],answer:0,explanation:'全加算器に1,0,1を入力。2進数で1+0+1=10。つまり和(s)は0、桁上げ(c)は1です。10進数で考えても1+0+1=2、2進数の10は10進数の2なので正しい'},
+{q:'初期状態S0で入力「0,1,1」→最終状態は？ S0-(0)→S1, S0-(1)→S0, S1-(0)→S0, S1-(1)→S1',choices:['S0','S1','受理不可','不定'],answer:1,explanation:'状態遷移を1つずつ追います。S0で入力0→S1に遷移。S1で入力1→S1のまま。S1で入力1→S1のまま。最終状態はS1です'},
+{q:'ディープラーニングの説明として最も適切なものは？（R1改）',choices:['人間がルールをプログラムする','ニューラルネットワークを多層化して学習','DBから知識を検索','統計的に平均値を求める'],answer:1,explanation:'ディープラーニング＝ニューラルネットワークを何層にも重ねた技術。人間がルールを決めるのではなく、大量データから自動で画像の特徴などを学習します'},
+{q:'教師あり学習の説明として最も適切なものは？',choices:['入力のみで分類','正解ラベル付きデータで学習','試行錯誤で報酬最大化','テキストから文章生成'],answer:1,explanation:'教師あり学習は「この画像は犬」のように正解ラベル付きデータで学習。入力だけ与える教師なし学習や、報酬で学ぶ強化学習とは違います'},
+{q:'基盤モデルに追加学習を行い特定用途に調整することを何というか。',choices:['ファインチューニング','プロンプトエンジニアリング','転移学習','データオーグメンテーション'],answer:0,explanation:'基盤モデル（GPTなど）は汎用的に作られています。これに医療や法律など特定分野のデータを追加で学習させ、その分野に特化させることをファインチューニングといいます'},
+{q:'XOR：A=0,B=0の出力は？',choices:['0','1','不定','エラー'],answer:0,explanation:'XORは入力が異なるときに1、同じときに0。A=0,B=0は同じなので0。ちなみにA=1,B=1も同じなので0。XORで1になるのはA≠Bのときだけ'},
+{q:'NOT(A AND B)を満たさない入力は？',choices:['A=0,B=0','A=0,B=1','A=1,B=0','A=1,B=1'],answer:3,explanation:'NOT(A AND B)は「ANDの結果を反転」。A=1,B=1のときAND=1、それをNOTすると0。つまりこの組み合わせだけ結果が0になり、式を満たしません'},
+{q:'逆ポーランド「A B + C D - ×」を中置記法にすると？',choices:['(A+B)×(C-D)','A+B×C-D','(A×B)+(C-D)','A+(B×C)-D'],answer:0,explanation:'逆ポーランドは左から読みます。A B +でA+B。C D -でC-D。最後の×で直前の2つの結果をかける。よって(A+B)×(C-D)です'}
+]};
+const questionPool={1:[
+{q:'情報の最小単位は何か。',choices:['バイト','ビット','キロバイト','ワード'],answer:1,explanation:'ビット（bit）はコンピュータが扱う情報の最小単位です。電圧の高い（1）低い（0）で1桁分の情報を表します。8ビットまとまると1バイトになります。'},
+{q:'1バイトは何ビットか。',choices:['4','8','16','32'],answer:1,explanation:'1バイト（Byte）= 8ビットです。半角英数字1文字分のデータ量。例えば文字「A」は01000001の8ビット（1バイト）で表されます。'},
+{q:'8ビットで表現できる状態数は？',choices:['8','64','128','256'],answer:3,explanation:'nビットで表せる状態数 = 2のn乗。8ビットなら2の8乗 = 256通り。0〜255の数字を表現できます。'},
+{q:'32ビットは24ビットの何倍のパターン数か。',choices:['8','32','128','256'],answer:3,explanation:'32ビットの状態数は2の32乗、24ビットは2の24乗。何倍かは割り算で、2の32乗÷2の24乗 = 2の(32-24)乗 = 2の8乗 = 256倍です。指数の引き算がポイント！'},
+{q:'2進数「1011」は10進数でいくつか。',choices:['9','10','11','13'],answer:2,explanation:'2進数の各桁に重み（左から8, 4, 2, 1）を割り当てます。1011 → 1がある桁は8の桁、2の桁、1の桁 → 8+2+1 = 11（10進数）。'},
+{q:'10進数「13」を2進数にすると？',choices:['1011','1101','1110','1001'],answer:1,explanation:'10進数→2進数は「2で割って余りを下から読む」。13÷2=6余り1、6÷2=3余り0、3÷2=1余り1、1÷2=0余り1。余りを下から読むと1101。'},
+{q:'16進数「A」は10進数でいくつか。',choices:['9','10','11','16'],answer:1,explanation:'16進数では10以上の数をアルファベットで表します。A=10, B=11, C=12, D=13, E=14, F=15。つまりAは10進数の10です。'},
+{q:'2進数「10110100」を16進数にすると？',choices:['A4','B4','C4','D4'],answer:1,explanation:'2進数を4桁ずつ区切って16進数に変換します。1011 → 重み8+0+2+1=11 → 11はB。0100 → 重み0+4+0+0=4。並べてB4。'},
+{q:'2の補数で最初にすることは？',choices:['2を足す','全ビット反転','先頭に1','2で割る'],answer:1,explanation:'2の補数の作り方は2ステップ：①全ビット反転（0→1, 1→0）→ ②その結果に1を加える。こうすると元の数と足してちょうど0になる数＝負の数が作れます。'},
+{q:'先頭ビット1は何を意味するか。',choices:['正の数','負の数','小数','エラー'],answer:1,explanation:'2の補数表現では先頭ビット（符号ビット）が0なら正の数、1なら負の数を表します。例：01111111=+127、10000000=-128（8ビットの場合）。'},
+{q:'左に1シフトすると値は何倍か。',choices:['1/2','2','4','8'],answer:1,explanation:'ビットを左に1つずらすと、全ての桁の重みが2倍になるため、値も2倍になります。例：00000101(=5)を左1シフト→00001010(=10)。5の2倍で10！'},
+{q:'xを2ビット左シフト+xすると何倍か。',choices:['3','4','5','6'],answer:2,explanation:'2ビット左シフト=値が4倍（2の2乗=4）。そこに元のx（1倍）を足すので、4倍+1倍=5倍。例：x=3なら、3×4=12、12+3=15、15÷3=5倍。'}
+],2:[
+{q:'両方1のときだけ1になる演算は？',choices:['OR','AND','XOR','NOT'],answer:1,explanation:'AND（論理積）は「AかつB」。両方が1のときだけ結果が1になります。どちらか一方でも0なら結果は0。'},
+{q:'AとBが異なるときに1になる演算は？',choices:['AND','OR','XOR','NAND'],answer:2,explanation:'XOR（排他的論理和）は「AかBのどちらか一方だけ」が1のときに結果が1。両方0や両方1のときは結果が0になります。'},
+{q:'NOT演算で入力0の出力は？',choices:['0','1','2','不定'],answer:1,explanation:'NOT（否定）は入力をそのまま反転します。0を入れると1が出る、1を入れると0が出る。最もシンプルな論理演算です。'},
+{q:'NANDとは何か。',choices:['ANDの反転','ORの反転','XORの反転','NOTを2回'],answer:0,explanation:'NAND = NOT + AND。まずANDを計算して、その結果を反転します。両方1のときだけ0、それ以外は1。ANDの真逆です。'},
+{q:'A=1,B=1のときA XOR Bは？',choices:['0','1','2','不定'],answer:0,explanation:'XORは「異なるときに1」なので、A=1, B=1と同じ値のときは結果が0です。A=0, B=0のときも0。違うときだけ1になるのがXORの特徴。'},
+{q:'「3 5 + 2 ×」はどの表記法か。',choices:['中置記法','前置記法','後置記法','ハンガリー'],answer:2,explanation:'演算子（+や×）が数値の後ろにあるので「後置記法」＝逆ポーランド表記法です。コンピュータ内部ではスタックと組み合わせてこの方式で計算しています。'},
+{q:'半加算器の素子の組み合わせは？',choices:['ANDとOR','XORとAND','NANDとNOR','XORとOR'],answer:1,explanation:'半加算器は2つの素子で構成。XORが「和の1桁目」を計算し、ANDが「桁上げ（繰り上がり）」を計算します。1+1=10のとき、XOR→0（和）、AND→1（桁上げ）。'},
+{q:'全加算器の入力は何個か。',choices:['1','2','3','4'],answer:2,explanation:'全加算器は半加算器と違い、下の位からの桁上がりも入力に含めます。そのため入力はA, B, 下からの桁上がりCの3つ。2桁目以降の計算に使います。'},
+{q:'オートマトンの3要素に含まれないのは？',choices:['入力','状態','出力','メモリ'],answer:3,explanation:'オートマトンはシステムを「入力（何を受け取るか）」「状態（今どういう状態か）」「出力（何を返すか）」の3つで単純化したモデル。メモリは含まれません。'},
+{q:'脳の神経回路を模したAI技術は？',choices:['機械学習','ニューラルネットワーク','データマイニング','ビッグデータ'],answer:1,explanation:'ニューラルネットワークは人間の脳にある神経細胞（ニューロン）のつながり方をコンピュータ上で再現した技術です。画像認識や音声認識の基盤になっています。'},
+{q:'正解データ付きで学習する手法は？',choices:['教師あり','教師なし','強化学習','転移学習'],answer:0,explanation:'教師あり学習は「この画像は犬です」のように入力データと正解ラベルをセットで与えて学習させます。大量のラベル付きデータが必要ですが、精度が高いのが特徴。'},
+{q:'報酬を最大化するように学習する手法は？',choices:['教師あり','教師なし','強化学習','深層学習'],answer:2,explanation:'強化学習は「やってみる→結果が良ければ報酬→同じ行動を増やす」の繰り返しで学習します。ゲームAI（AlphaGoなど）や自動運転に使われています。'},
+{q:'生成AIへの指示を何というか。',choices:['クエリ','コマンド','プロンプト','パラメータ'],answer:2,explanation:'プロンプトは生成AI（ChatGPTなど）に対して与える指示文のことです。「要約して」「翻訳して」のような文章を入力するとAIが応答を生成します。'},
+{q:'AIが事実と異なる情報を生成することを何というか。',choices:['ディープフェイク','ハルシネーション','オーバーフィッティング','バイアス'],answer:1,explanation:'ハルシネーション（幻覚）は、AIが存在しない事実をあたかも本当のように生成してしまう現象です。もっともらしい文章だが内容が間違っている、という問題が起きます。'},
+{q:'強化学習の例として最も適切なものは？',choices:['画像分類','スパムフィルタ','ゲームAI','顔認識'],answer:2,explanation:'強化学習は「報酬を最大化する」方式。ゲームAIの場合、勝利=報酬として何万回も対戦を繰り返し、勝つための行動パターンを自ら学んでいきます。囲碁のAlphaGoが有名。'}
+]};
+
+let currentChapter=1,currentMode='lesson',questions=[],answered=0;
+
+function selectChapter(ch){currentChapter=ch;document.querySelectorAll('.ch-btn').forEach((b,i)=>b.classList.toggle('active',i===ch-1));updateView()}
+function selectMode(mode){currentMode=mode;document.querySelectorAll('.mode-btn').forEach(b=>{b.classList.remove('active');if(mode==='lesson'&&b.textContent==='レッスン')b.classList.add('active');if(mode==='quiz'&&b.textContent==='確認テスト')b.classList.add('active');if(mode==='exam'&&b.textContent==='過去問レベル')b.classList.add('active')});if(mode==='quiz'||mode==='exam')startQuiz();updateView()}
+function updateView(){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));if(currentMode==='lesson'){document.getElementById(`ch${currentChapter}-lesson`).classList.add('active');const subs=document.querySelectorAll(`.ch${currentChapter}l`);subs.forEach((s,i)=>s.classList.toggle('active',i===0));const parent=document.getElementById(`ch${currentChapter}-lesson`);parent.querySelectorAll('.lesson-nav-btn').forEach((t,i)=>t.classList.toggle('active',i===0))}else{document.getElementById('quiz-area').classList.add('active')}}
+function showSub(prefix,idx){document.querySelectorAll(`.${prefix}`).forEach((s,i)=>s.classList.toggle('active',i===idx));const parent=document.querySelectorAll(`.${prefix}`)[0].closest('.section');parent.querySelectorAll('.lesson-nav-btn').forEach((t,i)=>t.classList.toggle('active',i===idx))}
+function shuffleArray(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
+function startQuiz(){const pool=currentMode==='exam'?(examPool[currentChapter]||[]):(questionPool[currentChapter]||[]);questions=shuffleArray(pool);answered=0;const ml=currentMode==='exam'?'過去問レベル':'確認テスト';document.getElementById('quizTitle').textContent=`${ml}（第${currentChapter}章）`;document.getElementById('submitBtn').style.display='none';document.getElementById('resultArea').style.display='none';document.getElementById('progressFill').style.width='0%';const c=document.getElementById('quizContainer');c.innerHTML='';questions.forEach((q,idx)=>{const sc=q.choices.map((c,i)=>({text:c,origIdx:i}));for(let i=sc.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[sc[i],sc[j]]=[sc[j],sc[i]]}q._shuffled=sc;q._selected=null;let h=`<div class="question-card"><div class="q-number">問題 ${idx+1}/${questions.length}</div><div class="q-text">${q.q}</div><ul class="choices">`;sc.forEach((c,ci)=>{h+=`<li onclick="pick(${idx},${ci})" id="q${idx}c${ci}">${c.text}</li>`});h+=`</ul><div class="explanation" id="exp${idx}"><div id="expT${idx}"></div></div></div>`;c.innerHTML+=h})}
+function pick(qi,ci){const q=questions[qi];if(q._selected!==null)return;q._selected=ci;answered++;const ok=q._shuffled[ci].origIdx===q.answer;q._shuffled.forEach((c,i)=>{const li=document.getElementById(`q${qi}c${i}`);if(c.origIdx===q.answer)li.classList.add('correct');if(i===ci&&!ok)li.classList.add('wrong')});document.getElementById(`exp${qi}`).classList.add('show');document.getElementById(`expT${qi}`).innerHTML=(ok?'<span style="color:#4caf50;font-weight:bold">⭕ 正解！</span>':'<span style="color:#f44336;font-weight:bold">❌ 不正解</span>')+'<br>'+q.explanation;document.getElementById('progressFill').style.width=(answered/questions.length*100)+'%';if(answered===questions.length)document.getElementById('submitBtn').style.display='inline-block'}
+function submitQuiz(){let c=0;questions.forEach(q=>{if(q._selected!==null&&q._shuffled[q._selected].origIdx===q.answer)c++});document.getElementById('resultArea').style.display='block';document.getElementById('resultScore').textContent=`${c}/${questions.length}`;const p=c/questions.length*100;document.getElementById('resultMsg').textContent=p===100?'満点！完璧！':p>=80?'よく理解できています！':p>=60?'合格ライン！復習しましょう。':'レッスンをもう一度確認しましょう。';document.getElementById('resultArea').scrollIntoView({behavior:'smooth'})}
+startQuiz();
+
+// === シフト演算デモ ===
+let shiftVal=5,shiftCount=0,shiftOriginal=5;
+function renderShift(msg){
+  const bits=shiftVal.toString(2).padStart(8,'0');
+  const container=document.getElementById('shiftBits');
+  container.innerHTML='';
+  for(let i=0;i<8;i++){const d=document.createElement('div');d.className='bit-cell '+(bits[i]==='1'?'bit-1':'bit-0');d.textContent=bits[i];container.appendChild(d)}
+  document.getElementById('shiftDecimalDisplay').textContent=shiftVal;
+  document.getElementById('shiftMessage').innerHTML=msg||'';
+}
+function doShift(dir){
+  const prev=shiftVal;
+  if(dir==='left'){if(shiftVal<128){shiftVal*=2;shiftCount++}else{renderShift('<span style="color:#f44336">これ以上左にシフトできません（オーバーフロー）</span>');return}}
+  else{shiftVal=Math.floor(shiftVal/2);shiftCount--}
+  const arrow=dir==='left'?'◀':'▶';
+  const op=dir==='left'?'×2':'÷2';
+  const total=dir==='left'?Math.pow(2,shiftCount):Math.pow(2,-shiftCount);
+  let msg=`${arrow} ${prev} ${op} = <strong style="color:#e65100;font-size:1.2em">${shiftVal}</strong>`;
+  if(Math.abs(shiftCount)>1){msg+=`<br><span style="font-size:.85em;color:#888">元の値${shiftOriginal}の ${shiftCount>0?'×'+Math.pow(2,shiftCount):'÷'+Math.pow(2,-shiftCount)} 倍（${Math.abs(shiftCount)}回シフト）</span>`}
+  renderShift(msg);
+}
+function resetShift(){shiftVal=5;shiftCount=0;shiftOriginal=5;renderShift('リセットしました。ボタンを押してシフトしてみましょう。')}
+renderShift('ボタンを押してビットを左右にずらしてみましょう。');
+
+// === 論理演算デモ ===
+let gateType='AND',inputA=0,inputB=0;
+const gateColors={AND:'and-gate',OR:'or-gate',XOR:'xor-gate',NAND:'nand-gate',NOR:'nor-gate',NOT:'not-gate'};
+const gateDescs={AND:'AND = AとBの<strong>両方が1</strong>のときだけ、結果が1',OR:'OR = AとBの<strong>どちらか一方でも1</strong>なら、結果が1',XOR:'XOR = AとBが<strong>異なる</strong>ときだけ、結果が1',NAND:'NAND = ANDの<strong>反対</strong>（両方1のときだけ0、それ以外は1）',NOR:'NOR = ORの<strong>反対</strong>（両方0のときだけ1、それ以外は0）',NOT:'NOT = 入力を<strong>反転</strong>する（0→1、1→0）'};
+const truthTables={AND:[[0,0,0],[0,1,0],[1,0,0],[1,1,1]],OR:[[0,0,0],[0,1,1],[1,0,1],[1,1,1]],XOR:[[0,0,0],[0,1,1],[1,0,1],[1,1,0]],NAND:[[0,0,1],[0,1,1],[1,0,1],[1,1,0]],NOR:[[0,0,1],[0,1,0],[1,0,0],[1,1,0]],NOT:[[0,1],[1,0]]};
+
+function calcGate(){switch(gateType){case'AND':return inputA&inputB;case'OR':return inputA|inputB;case'XOR':return inputA^inputB;case'NAND':return(inputA&inputB)?0:1;case'NOR':return(inputA|inputB)?0:1;case'NOT':return inputA?0:1}}
+
+function updateVenn(){
+  const svg=document.getElementById('vennSvg');
+  // ベン図の塗り分け
+  const and=document.getElementById('vennAND');
+  const orA=document.getElementById('vennOrA');
+  const orB=document.getElementById('vennOrB');
+  // リセット
+  and.setAttribute('opacity','0');orA.setAttribute('fill','none');orB.setAttribute('fill','none');
+  const color='rgba(230,81,0,0.3)';
+  if(gateType==='AND'){and.setAttribute('opacity','0.4');and.setAttribute('fill','#e65100')}
+  else if(gateType==='OR'){orA.setAttribute('fill',color);orA.setAttribute('opacity','0.3');orB.setAttribute('fill',color);orB.setAttribute('opacity','0.3')}
+  else if(gateType==='XOR'){orA.setAttribute('fill','rgba(21,101,192,0.25)');orA.setAttribute('opacity','0.4');orB.setAttribute('fill','rgba(230,81,0,0.25)');orB.setAttribute('opacity','0.4');and.setAttribute('opacity','0.5');and.setAttribute('fill','#fff')}
+  else if(gateType==='NAND'){/* 全体を薄く、AND部分を白で抜く */orA.setAttribute('fill',color);orA.setAttribute('opacity','0.3');orB.setAttribute('fill',color);orB.setAttribute('opacity','0.3');and.setAttribute('opacity','0.6');and.setAttribute('fill','#f5f5f0')}
+  else if(gateType==='NOR'){/* 外側だけ＝描画が難しいので説明テキストで補完 */}
+  else if(gateType==='NOT'){orA.setAttribute('fill','none');orB.setAttribute('fill','none')}
+  // ベン図の説明
+  const labels={AND:'重なった部分だけが1',OR:'どちらかの円に入っていれば1',XOR:'重ならない部分だけが1',NAND:'重なった部分以外が1',NOR:'どちらの円にも入っていない部分が1',NOT:'ベン図は使いません（1入力のため）'};
+  document.getElementById('vennLabel').textContent=labels[gateType]||'';
+  document.getElementById('vennSvg').style.display=gateType==='NOT'?'none':'block';
+}
+
+function updateGate(){
+  const out=calcGate();
+  document.getElementById('gateOutput').textContent=out;document.getElementById('gateOutput').className='output-display '+(out?'output-1':'output-0');
+  document.getElementById('inputA').textContent=inputA;document.getElementById('inputA').className='input-toggle '+(inputA?'on':'off');
+  document.getElementById('inputB').textContent=inputB;document.getElementById('inputB').className='input-toggle '+(inputB?'on':'off');
+  const sym=document.getElementById('gateSymbol');sym.textContent=gateType;sym.className='gate-symbol '+gateColors[gateType];
+  document.getElementById('inputBbox').style.display=gateType==='NOT'?'none':'';
+  document.getElementById('gateDescription').innerHTML=gateDescs[gateType]||'';
+  // 真理値表
+  const tt=truthTables[gateType];const isNot=gateType==='NOT';
+  let html=isNot?'<tr><th>A</th><th>'+gateType+'</th></tr>':'<tr><th>A</th><th>B</th><th>'+gateType+'</th></tr>';
+  tt.forEach(r=>{
+    const active=isNot?(r[0]===inputA):(r[0]===inputA&&r[1]===inputB);
+    html+=`<tr class="${active?'highlight':''}">`+(isNot?`<td>${r[0]}</td><td>${r[1]}</td>`:`<td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td>`)+'</tr>';
+  });
+  document.getElementById('truthTable').innerHTML=html;
+  updateVenn();
+}
+function toggleInput(which){if(which==='A')inputA=inputA?0:1;else inputB=inputB?0:1;updateGate()}
+function setGate(g){gateType=g;document.querySelectorAll('.gate-btn').forEach(b=>b.classList.toggle('active',b.textContent===g));updateGate()}
+updateGate();
+</script>
+</body>
+</html>

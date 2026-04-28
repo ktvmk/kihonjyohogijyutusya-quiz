@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第7章 ハードウェア｜基本情報技術者</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Hiragino Sans','Noto Sans JP','Meiryo',sans-serif;background:#f5f5f0;color:#333;line-height:1.8;padding:0 0 60px 0}.header{background:linear-gradient(135deg,#e65100,#ff8f00);color:#fff;padding:24px 20px;text-align:center}.header h1{font-size:1.3em;margin-bottom:4px}.header .sub{font-size:.85em;opacity:.8}.container{max-width:720px;margin:0 auto;padding:16px}.nav-tabs{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap}.nav-tab{padding:10px 14px;border:2px solid #e65100;border-radius:8px;background:#fff;color:#e65100;font-weight:bold;font-size:.82em;cursor:pointer;transition:all .2s}.nav-tab:hover,.nav-tab.active{background:#e65100;color:#fff}.section{display:none}.section.active{display:block}.lesson-card{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.lesson-card h2{color:#e65100;font-size:1.2em;margin-bottom:16px;padding-bottom:8px;border-bottom:3px solid #ffe0b2}.lesson-card h3{color:#ff8f00;font-size:1.05em;margin:20px 0 10px 0}.key-point{background:#fff3e0;border-left:4px solid #e65100;padding:14px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-size:.95em}.key-point strong{color:#e65100}.vocab{display:inline-block;background:#e3f2fd;border:1px solid #64b5f6;border-radius:6px;padding:2px 8px;margin:2px 4px;font-weight:bold;font-size:.9em;color:#1565c0}.example{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:14px 16px;margin:12px 0;font-size:.9em}.formula{background:#fce4ec;border-left:4px solid #e91e63;padding:14px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-family:monospace;font-size:.95em;line-height:2}.compare{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}.compare-box{background:#fff;border:2px solid #e0e0e0;border-radius:10px;padding:14px;font-size:.9em}.compare-box h4{font-size:.95em;margin-bottom:8px;text-align:center}.compare-box.good{border-color:#4caf50}.compare-box.good h4{color:#2e7d32}.compare-box.bad{border-color:#ff9800}.compare-box.bad h4{color:#e65100}
+.quiz-area{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.quiz-area h2{color:#e65100;margin-bottom:16px}.question-card{background:#fafafa;border:1px solid #e0e0e0;border-radius:10px;padding:20px;margin:16px 0}.q-number{font-size:.8em;color:#999;margin-bottom:6px}.q-text{font-size:1.05em;font-weight:bold;margin-bottom:14px;line-height:1.6}.choices{list-style:none}.choices li{padding:12px 16px;margin:6px 0;border:2px solid #e0e0e0;border-radius:8px;cursor:pointer;transition:all .2s;font-size:.95em}.choices li:hover{border-color:#e65100;background:#fff3e0}.choices li.correct{border-color:#4caf50;background:#e8f5e9}.choices li.wrong{border-color:#f44336;background:#ffebee}.explanation{display:none;margin-top:12px;padding:14px;background:#f5f5f5;border-radius:8px;font-size:.9em;line-height:1.7}.explanation.show{display:block}.result-area{display:none;text-align:center;padding:30px;background:#fff;border-radius:12px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.result-score{font-size:2.5em;font-weight:bold;color:#e65100;margin:10px 0}.btn{display:inline-block;padding:12px 28px;background:#e65100;color:#fff;border:none;border-radius:8px;font-size:1em;cursor:pointer;margin:8px}.btn:hover{background:#ff8f00}.btn-outline{background:#fff;color:#e65100;border:2px solid #e65100}.progress-bar{width:100%;height:6px;background:#e0e0e0;border-radius:3px;margin:12px 0}.progress-fill{height:100%;background:#e65100;border-radius:3px;transition:width .3s}.back-link{display:inline-block;margin:16px 0;color:#e65100;text-decoration:none;font-weight:bold}
+</style>
+</head>
+<body>
+<div class="header"><h1>第7章 ハードウェア</h1><div class="sub">基本情報技術者試験 Web教材</div></div>
+<div class="container">
+<a href="../../teaching/桑名看護専門学校/web教材/apps.html" class="back-link">&#x1F3E0; アプリ一覧</a>
+<div class="nav-tabs">
+<div class="nav-tab active" onclick="showSection('lesson1')">① 半導体メモリ</div>
+<div class="nav-tab" onclick="showSection('lesson2')">② メモリセル・電子部品</div>
+<div class="nav-tab" onclick="showSection('quiz')">確認テスト</div>
+</div>
+
+<!-- ===== レッスン1: 半導体メモリ ===== -->
+<div id="lesson1" class="section active">
+<div class="lesson-card">
+<h2>① 半導体メモリ</h2>
+
+<p><span class="vocab">半導体</span>とは、電気を通す「導体」と通さない「絶縁体」の中間の性質を持つ物質です。温度変化や不純物で電気抵抗が変わります。<span class="vocab">半導体メモリ</span>は、この性質を使ってデータを保存する装置です。</p>
+
+<h3>RAMとROMの違い</h3>
+<div class="compare">
+<div class="compare-box good">
+<h4>RAM（Random Access Memory）</h4>
+<span class="vocab">揮発性メモリ</span><br>
+電源を切ると<strong>データが消える</strong><br>
+用途：主記憶装置、キャッシュメモリ
+</div>
+<div class="compare-box bad">
+<h4>ROM（Read Only Memory）</h4>
+<span class="vocab">不揮発性メモリ</span><br>
+電源を切っても<strong>データが残る</strong><br>
+用途：SSD、USBメモリ
+</div>
+</div>
+
+<h3>RAMの種類：DRAMとSRAM</h3>
+
+<div class="key-point">
+<span class="vocab">DRAM</span>（Dynamic RAM）<br>
+・絶えず<span class="vocab">リフレッシュ</span>（電荷の再書込み）が必要<br>
+・回路が単純 → <strong>大容量を安く作れる</strong><br>
+・主に<strong>主記憶装置（メインメモリ）</strong>で使用<br>
+・<span class="vocab">SDRAM</span>（Synchronous DRAM）：クロックと同期して動作するDRAM
+</div>
+
+<div class="key-point">
+<span class="vocab">SRAM</span>（Static RAM）<br>
+・リフレッシュ<strong>不要</strong> → <strong>非常に高速</strong><br>
+・値段が<strong>高い</strong><br>
+・主に<strong>キャッシュメモリ</strong>で使用
+</div>
+
+<div class="compare">
+<div class="compare-box good">
+<h4>DRAM</h4>
+リフレッシュ：<strong>必要</strong><br>
+速度：中速<br>
+価格：<strong>安い</strong>（大容量向き）<br>
+用途：<strong>主記憶装置</strong>
+</div>
+<div class="compare-box bad">
+<h4>SRAM</h4>
+リフレッシュ：<strong>不要</strong><br>
+速度：<strong>高速</strong><br>
+価格：高い<br>
+用途：<strong>キャッシュメモリ</strong>
+</div>
+</div>
+
+<h3>フラッシュメモリ</h3>
+<div class="key-point">
+<span class="vocab">フラッシュメモリ</span>：電気的にデータの書き換えができる<strong>ROM（不揮発性メモリ）</strong><br><br>
+・SSD、USBメモリの中身はすべてフラッシュメモリ<br>
+・データの読み書き：<span class="vocab">ページ</span>単位<br>
+・データの消去：<span class="vocab">ブロック</span>単位（ページより大きい単位）<br><br>
+<strong style="color:#e91e63">試験キーワード：「ブロック単位で電気的にデータを消去」→ フラッシュメモリ</strong>
+</div>
+</div>
+</div>
+
+<!-- ===== レッスン2: メモリセル・電子部品 ===== -->
+<div id="lesson2" class="section">
+<div class="lesson-card">
+<h2>② メモリセルと電子部品</h2>
+
+<h3>メモリセルとは</h3>
+<p><span class="vocab">メモリセル</span>とは、半導体メモリの中で「0」か「1」を1ビット保存する<strong>最小単位の入れ物</strong>です。半導体メモリは無数のメモリセルで構成されています。</p>
+
+<h3>DRAMとSRAMの内部構造</h3>
+
+<div class="compare">
+<div class="compare-box good">
+<h4>DRAM → コンデンサ</h4>
+<span class="vocab">コンデンサ</span>：電荷を蓄える電子部品<br><br>
+・電荷の<strong>有無</strong>で0/1を記憶<br>
+・電荷はすぐ放電 → <strong>リフレッシュが必要</strong><br>
+・構造が単純 → <strong>高集積化・低コスト</strong>
+</div>
+<div class="compare-box bad">
+<h4>SRAM → フリップフロップ回路</h4>
+<span class="vocab">フリップフロップ回路</span>：2つの安定状態を持つ順序回路<br><br>
+・電流が流れ続ける限り状態を<strong>保持</strong><br>
+・リフレッシュ不要 → <strong>高速</strong><br>
+・構造が複雑 → <strong>高コスト・低集積</strong>
+</div>
+</div>
+
+<div class="example"><strong>試験での出題パターン：</strong><br>
+・「コンデンサに蓄えた電荷の有無で記憶」→ <strong>DRAM</strong>（またはSDRAM）<br>
+・「フリップフロップ回路を利用」→ <strong>SRAM</strong><br>
+・「二つの安定状態をもつ順序回路」→ <strong>フリップフロップ回路</strong></div>
+
+<h3>その他のハードウェア用語</h3>
+
+<div class="key-point">
+<span class="vocab">チャタリング</span>：機械式スイッチのON/OFFが切り替わる短い間に、<strong>意図しないON/OFFが繰り返される</strong>現象<br>
+例：マウスを1回クリックしたのにダブルクリックと認識される
+</div>
+
+<div class="key-point">
+<span class="vocab">7セグメントLED</span>：<strong>7つのLED</strong>（＋小数点用1つ = 計8個）を組み合わせて数字を表示するディスプレイ<br><br>
+・<strong>アノードコモン型</strong>：低い電圧で光る<br>
+・<strong>カソードコモン型</strong>：高い電圧で光る
+</div>
+
+<div class="key-point" style="background:#fce4ec;border-color:#e91e63">
+<strong style="color:#e91e63">第7章の最重要まとめ</strong><br><br>
+・RAM＝揮発性（電源OFF→消える）、ROM＝不揮発性（残る）<br>
+・DRAM＝リフレッシュ必要・安い → 主記憶<br>
+・SRAM＝リフレッシュ不要・高速 → キャッシュ<br>
+・フラッシュメモリ＝ROM、ブロック単位消去 → SSD/USBメモリ<br>
+・DRAM → コンデンサ（電荷の有無）<br>
+・SRAM → フリップフロップ回路（2つの安定状態）
+</div>
+</div>
+</div>
+
+<!-- ===== 確認テスト ===== -->
+<div id="quiz" class="section">
+<div class="quiz-area">
+<h2>確認テスト ── 第7章</h2>
+<p style="color:#666;font-size:.9em;margin-bottom:16px">全問ランダム出題・選択肢シャッフル。何度でも挑戦できます。</p>
+<div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+<div id="quizContainer"></div>
+<div style="text-align:center;margin-top:20px"><button class="btn" id="submitBtn" onclick="submitQuiz()" style="display:none">結果を見る</button></div>
+</div>
+<div class="result-area" id="resultArea"><h2>結果</h2><div class="result-score" id="resultScore"></div><div id="resultMsg" style="font-size:1.1em;margin:10px 0"></div><button class="btn" onclick="retryQuiz()">もう一度</button><button class="btn btn-outline" onclick="showSection('lesson1')">レッスンに戻る</button></div>
+</div>
+</div>
+
+<script>
+const allQuestions=[
+{q:'電源を切るとデータが消える半導体メモリ（揮発性メモリ）はどれか。',choices:['RAM','ROM','フラッシュメモリ','EEPROM'],answer:0,explanation:'<strong>RAM（Random Access Memory）</strong>は揮発性メモリで、電源を切るとデータが消えます。ROM（Read Only Memory）は不揮発性メモリで、電源を切ってもデータが保持されます。'},
+{q:'電源を切ってもデータが保持される半導体メモリ（不揮発性メモリ）はどれか。',choices:['RAM','DRAM','SRAM','ROM'],answer:3,explanation:'<strong>ROM（Read Only Memory）</strong>は不揮発性メモリで、電源を切ってもデータが保持されます。DRAM、SRAMはいずれもRAMの一種で揮発性です。'},
+{q:'リフレッシュ操作が必要で、主記憶装置（メインメモリ）に使われるメモリはどれか。',choices:['DRAM','SRAM','ROM','フラッシュメモリ'],answer:0,explanation:'<strong>DRAM（Dynamic RAM）</strong>は絶えずリフレッシュ（電荷の再書込み）が必要ですが、回路が単純で大容量を安く作れるため、主記憶装置に使われます。'},
+{q:'リフレッシュが不要で高速に動作し、キャッシュメモリに使われるメモリはどれか。',choices:['DRAM','SRAM','SDRAM','フラッシュメモリ'],answer:1,explanation:'<strong>SRAM（Static RAM）</strong>はリフレッシュ不要で非常に高速に動作します。ただし高価なため、主にキャッシュメモリで使われます。'},
+{q:'DRAMの特徴として正しいものはどれか。',choices:['リフレッシュが不要で高速に動作する','メモリセル構造が単純で高集積化でき、ビット単価が安い','電源を切ってもデータが保持される','ブロック単位でデータの消去ができる'],answer:1,explanation:'<strong>DRAM</strong>はメモリセル構造（コンデンサ）が単純で高集積化しやすく、ビット単価を安くできます。リフレッシュが必要で、電源を切るとデータが消える揮発性メモリです。'},
+{q:'クロックと同期して動作するDRAMの種類はどれか。',choices:['SRAM','SDRAM','EEPROM','フラッシュメモリ'],answer:1,explanation:'<strong>SDRAM（Synchronous DRAM）</strong>はクロック信号と同期して動作するDRAMです。Synchronous＝「同期」の意味で、クロックに合わせてデータの読み書きを行います。'},
+{q:'ブロック単位で電気的にデータの消去ができるメモリはどれか。',choices:['DRAM','SRAM','SDRAM','フラッシュメモリ'],answer:3,explanation:'<strong>フラッシュメモリ</strong>は電気的にデータの書き換えができるROM（不揮発性メモリ）で、データの消去はブロック単位で行います。SSDやUSBメモリの中身です。'},
+{q:'SSDやUSBメモリの内部に使われている半導体メモリはどれか。',choices:['DRAM','SRAM','SDRAM','フラッシュメモリ'],answer:3,explanation:'SSDやUSBメモリの内部には<strong>フラッシュメモリ</strong>が使われています。フラッシュメモリは不揮発性（ROM）なので、電源を切ってもデータが残ります。'},
+{q:'コンデンサに蓄えた電荷の有無で情報を記憶するメモリはどれか。',choices:['SRAM','DRAM（SDRAM）','EEPROM','フラッシュメモリ'],answer:1,explanation:'<strong>DRAM</strong>のメモリセルには<strong>コンデンサ</strong>が使われており、電荷の有無で0/1を記憶します。電荷はすぐに放電してしまうため、定期的なリフレッシュが必要です。SDRAMもDRAMの一種です。'},
+{q:'メモリセルにフリップフロップ回路を利用したものはどれか。',choices:['DRAM','SDRAM','SRAM','EEPROM'],answer:2,explanation:'<strong>SRAM</strong>のメモリセルには<strong>フリップフロップ回路</strong>が使われています。フリップフロップ回路は2つの安定状態を持ち、電流が流れ続ける限り状態を保持するため、リフレッシュが不要です。'},
+{q:'二つの安定状態をもつ順序回路はどれか。',choices:['カウンタ回路','コンデンサ','フリップフロップ回路','論理回路'],answer:2,explanation:'<strong>フリップフロップ回路</strong>は「2つの安定状態」を持つ順序回路で、SRAMのメモリセルに使われています。電流が流れている間、一方の状態を保持し続けます。'},
+{q:'機械式スイッチのON/OFFが切り替わる短い間に、意図しないON/OFFが繰り返される現象は何か。',choices:['チャタリング','フリッカリング','ジッタリング','バッファリング'],answer:0,explanation:'<strong>チャタリング</strong>は、機械式スイッチの接点が振動し、短時間に意図しないON/OFFが繰り返される現象です。マウスの1回クリックがダブルクリックと認識されるのが典型例です。'}
+];
+let questions=[],answered=0;
+function shuffleArray(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
+function initQuiz(){questions=shuffleArray(allQuestions);answered=0;document.getElementById('submitBtn').style.display='none';document.getElementById('resultArea').style.display='none';document.getElementById('progressFill').style.width='0%';const c=document.getElementById('quizContainer');c.innerHTML='';questions.forEach((q,idx)=>{const sc=q.choices.map((c,i)=>({text:c,origIdx:i}));for(let i=sc.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[sc[i],sc[j]]=[sc[j],sc[i]]}q._shuffled=sc;q._selected=null;let h=`<div class="question-card"><div class="q-number">問題 ${idx+1} / ${questions.length}</div><div class="q-text">${q.q}</div><ul class="choices">`;sc.forEach((c,ci)=>{h+=`<li onclick="selectChoice(${idx},${ci})" id="q${idx}c${ci}">${c.text}</li>`});h+=`</ul><div class="explanation" id="exp${idx}"><div id="expText${idx}"></div></div></div>`;c.innerHTML+=h})}
+function selectChoice(qi,ci){const q=questions[qi];if(q._selected!==null)return;q._selected=ci;answered++;const corr=q.answer,sel=q._shuffled[ci].origIdx,ok=sel===corr;q._shuffled.forEach((c,i)=>{const li=document.getElementById(`q${qi}c${i}`);if(c.origIdx===corr)li.classList.add('correct');if(i===ci&&!ok)li.classList.add('wrong')});const e=document.getElementById(`exp${qi}`),t=document.getElementById(`expText${qi}`);t.innerHTML=(ok?'<span style="color:#4caf50;font-weight:bold">&#x2B55; 正解！</span>':'<span style="color:#f44336;font-weight:bold">&#x274C; 不正解</span>')+'<br>'+q.explanation;e.classList.add('show');document.getElementById('progressFill').style.width=(answered/questions.length*100)+'%';if(answered===questions.length)document.getElementById('submitBtn').style.display='inline-block'}
+function submitQuiz(){let c=0;questions.forEach(q=>{if(q._selected!==null&&q._shuffled[q._selected].origIdx===q.answer)c++});document.getElementById('resultArea').style.display='block';document.getElementById('resultScore').textContent=`${c} / ${questions.length}`;const p=c/questions.length*100;let m='';if(p===100)m='満点！完璧です！';else if(p>=80)m='よく理解できています！';else if(p>=60)m='合格ライン！もう少し復習しましょう。';else m='レッスンをもう一度確認しましょう。';document.getElementById('resultMsg').textContent=m;document.getElementById('resultArea').scrollIntoView({behavior:'smooth'})}
+function retryQuiz(){initQuiz();document.getElementById('quizContainer').scrollIntoView({behavior:'smooth'})}
+function showSection(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');const tabs=document.querySelectorAll('.nav-tab');const ids=['lesson1','lesson2','quiz'];tabs[ids.indexOf(id)].classList.add('active');if(id==='quiz')initQuiz();window.scrollTo({top:0,behavior:'smooth'})}
+initQuiz();
+</script>
+</body>
+</html>

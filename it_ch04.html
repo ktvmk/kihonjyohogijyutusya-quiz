@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第4章 コンピュータの構成要素｜基本情報技術者</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Hiragino Sans','Noto Sans JP','Meiryo',sans-serif;background:#f5f5f0;color:#333;line-height:1.8;padding:0 0 60px 0}.header{background:linear-gradient(135deg,#e65100,#ff8f00);color:#fff;padding:24px 20px;text-align:center}.header h1{font-size:1.3em;margin-bottom:4px}.header .sub{font-size:.85em;opacity:.8}.container{max-width:720px;margin:0 auto;padding:16px}.nav-tabs{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap}.nav-tab{padding:10px 14px;border:2px solid #e65100;border-radius:8px;background:#fff;color:#e65100;font-weight:bold;font-size:.82em;cursor:pointer;transition:all .2s}.nav-tab:hover,.nav-tab.active{background:#e65100;color:#fff}.section{display:none}.section.active{display:block}.lesson-card{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.lesson-card h2{color:#e65100;font-size:1.2em;margin-bottom:16px;padding-bottom:8px;border-bottom:3px solid #ffe0b2}.lesson-card h3{color:#ff8f00;font-size:1.05em;margin:20px 0 10px 0}.key-point{background:#fff3e0;border-left:4px solid #e65100;padding:14px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-size:.95em}.key-point strong{color:#e65100}.vocab{display:inline-block;background:#e3f2fd;border:1px solid #64b5f6;border-radius:6px;padding:2px 8px;margin:2px 4px;font-weight:bold;font-size:.9em;color:#1565c0}.example{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:14px 16px;margin:12px 0;font-size:.9em}.formula{background:#fce4ec;border-left:4px solid #e91e63;padding:14px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-family:monospace;font-size:.95em;line-height:2}.compare{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}.compare-box{background:#fff;border:2px solid #e0e0e0;border-radius:10px;padding:14px;font-size:.9em}.compare-box h4{font-size:.95em;margin-bottom:8px;text-align:center}.compare-box.good{border-color:#4caf50}.compare-box.good h4{color:#2e7d32}.compare-box.bad{border-color:#ff9800}.compare-box.bad h4{color:#e65100}
+.quiz-area{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.quiz-area h2{color:#e65100;margin-bottom:16px}.question-card{background:#fafafa;border:1px solid #e0e0e0;border-radius:10px;padding:20px;margin:16px 0}.q-number{font-size:.8em;color:#999;margin-bottom:6px}.q-text{font-size:1.05em;font-weight:bold;margin-bottom:14px;line-height:1.6}.choices{list-style:none}.choices li{padding:12px 16px;margin:6px 0;border:2px solid #e0e0e0;border-radius:8px;cursor:pointer;transition:all .2s;font-size:.95em}.choices li:hover{border-color:#e65100;background:#fff3e0}.choices li.correct{border-color:#4caf50;background:#e8f5e9}.choices li.wrong{border-color:#f44336;background:#ffebee}.explanation{display:none;margin-top:12px;padding:14px;background:#f5f5f5;border-radius:8px;font-size:.9em;line-height:1.7}.explanation.show{display:block}.result-area{display:none;text-align:center;padding:30px;background:#fff;border-radius:12px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.result-score{font-size:2.5em;font-weight:bold;color:#e65100;margin:10px 0}.btn{display:inline-block;padding:12px 28px;background:#e65100;color:#fff;border:none;border-radius:8px;font-size:1em;cursor:pointer;margin:8px}.btn:hover{background:#ff8f00}.btn-outline{background:#fff;color:#e65100;border:2px solid #e65100}.progress-bar{width:100%;height:6px;background:#e0e0e0;border-radius:3px;margin:12px 0}.progress-fill{height:100%;background:#e65100;border-radius:3px;transition:width .3s}.back-link{display:inline-block;margin:16px 0;color:#e65100;text-decoration:none;font-weight:bold}
+/* 記憶装置の階層図 */
+.memory-hierarchy{display:flex;flex-direction:column;align-items:center;gap:4px;margin:16px 0}
+.mem-level{text-align:center;padding:10px;border-radius:8px;font-size:.85em;font-weight:bold;color:#fff;transition:transform .2s}
+.mem-level:hover{transform:scale(1.03)}
+</style>
+</head>
+<body>
+<div class="header"><h1>第4章 コンピュータの構成要素</h1><div class="sub">基本情報技術者試験 Web教材</div></div>
+<div class="container">
+<a href="../../teaching/桑名看護専門学校/web教材/apps.html" class="back-link">&#x1F3E0; アプリ一覧</a>
+<div class="nav-tabs">
+<div class="nav-tab active" onclick="showSection('lesson1')">① CPU</div>
+<div class="nav-tab" onclick="showSection('lesson2')">② CPUの処理の流れ</div>
+<div class="nav-tab" onclick="showSection('lesson3')">③ 記憶装置</div>
+<div class="nav-tab" onclick="showSection('lesson4')">④ 入出力</div>
+<div class="nav-tab" onclick="showSection('quiz')">確認テスト</div>
+</div>
+
+<!-- ===== レッスン1: CPU ===== -->
+<div id="lesson1" class="section active">
+<div class="lesson-card">
+<h2>① CPU（プロセッサ）</h2>
+
+<p><span class="vocab">CPU</span>（Central Processing Unit：中央処理装置）は、コンピュータの<strong>頭脳</strong>にあたる装置です。人間の脳のように、計算や判断を行います。試験では「プロセッサ」と呼ばれることもあります。</p>
+
+<h3>CPUの性能を測る3つの指標</h3>
+
+<div class="key-point">
+<strong>（1）クロック周波数</strong><br><br>
+CPUの<strong>動作の速さ</strong>を表す指標。単位は<span class="vocab">Hz（ヘルツ）</span>。<br><br>
+コンピュータ内部には<span class="vocab">発振器</span>（メトロノームのような装置）があり、CPUはそのテンポに合わせて処理します。1秒間に発生する信号の回数がクロック周波数です。<br><br>
+現代のCPUは<strong>GHz（ギガヘルツ）</strong>単位 → 1GHz = 1秒間に10億回のテンポ
+</div>
+
+<div class="formula"><strong>1秒間に実行できる命令数の公式：</strong><br><br>
+1秒間に実行できる命令数 = クロック周波数 ÷ 1命令あたりのクロック数<br><br>
+<strong>例：</strong>クロック周波数 2.5GHz、1命令あたり平均2クロックの場合<br>
+= 25億 ÷ 2 = <strong>12.5億命令/秒</strong>
+</div>
+
+<div class="key-point">
+<strong>（2）MIPS（ミップス）</strong><br><br>
+<span class="vocab">MIPS</span>（Million Instructions Per Second）= CPUが1秒間に<strong>何百万個</strong>の命令を実行できるかを表す単位。<br><br>
+例：2MIPS = 1秒間に200万個の命令を実行できる
+</div>
+
+<div class="formula"><strong>MIPSの公式：</strong><br><br>
+MIPS = 1秒 ÷ 平均命令実行時間 × 10<sup>-6</sup><br><br>
+<strong>逆に平均命令実行時間を求める場合：</strong><br>
+平均命令実行時間 = 1秒 ÷ (MIPS × 10<sup>6</sup>)<br><br>
+<strong>例：</strong>50MIPSの平均命令実行時間<br>
+= 1 ÷ (50 × 10<sup>6</sup>) = 0.02マイクロ秒 = <strong>20ナノ秒</strong>
+</div>
+
+<div class="example"><strong>単位の換算（よく使うので覚えよう）：</strong><br>
+・1秒 = 1,000ミリ秒（ms）<br>
+・1ミリ秒 = 1,000マイクロ秒（μs）<br>
+・1マイクロ秒 = 1,000ナノ秒（ns）<br>
+つまり：1秒 = 10<sup>9</sup> ナノ秒</div>
+
+<div class="key-point">
+<strong>（3）コア</strong><br><br>
+<span class="vocab">コア</span> = CPU内にある「演算を行う装置」。<br>
+1つのCPUに複数のコアを搭載したものを<span class="vocab">マルチコアプロセッサ</span>という。<br><br>
+<span class="vocab">デュアルコア</span>：2コア ／ <span class="vocab">クアッドコア</span>：4コア<br>
+コアが多い ＝ 同時に複数の処理ができる ＝ 高性能
+</div>
+</div>
+</div>
+
+<!-- ===== レッスン2: CPUの処理の流れ ===== -->
+<div id="lesson2" class="section">
+<div class="lesson-card">
+<h2>② CPUが処理する流れ</h2>
+
+<h3>主記憶装置のしくみ</h3>
+<p><span class="vocab">主記憶装置</span>（メインメモリ）は、命令やデータを一時的に格納しておく装置です。内部は細かく区分けされ、各区画に<span class="vocab">アドレス（番地）</span>が割り振られています。</p>
+
+<div class="key-point">
+CPUは主記憶装置から<strong>「命令」</strong>と<strong>「データ」</strong>を取り出して計算し、結果を主記憶装置に戻します。<br><br>
+命令の構成：<span class="vocab">命令部</span>（何をするか）＋ <span class="vocab">アドレス部</span>（データの場所）
+</div>
+
+<h3>3つのレジスタ</h3>
+<p><span class="vocab">レジスタ</span>とは、CPU内にある小さな記憶装置です。主記憶装置から読み込んだ命令やデータを一時的に格納します。</p>
+
+<div class="key-point">
+<strong>試験頻出の3つのレジスタ：</strong><br><br>
+<span class="vocab">プログラムカウンター</span>（プログラムレジスタ）：<strong>次の命令のアドレス</strong>を格納<br>
+→ 参照されるたびに自動的に次のアドレスに更新される<br><br>
+<span class="vocab">命令レジスタ</span>：主記憶装置から取り出した<strong>命令</strong>を格納<br>
+→ 命令を取り出して格納することを「フェッチ」という<br><br>
+<span class="vocab">汎用レジスタ</span>：計算対象の<strong>データ</strong>を格納
+</div>
+
+<div class="example"><strong>CPUの処理手順（6ステップ）：</strong><br>
+① プログラムカウンターのアドレスを見て、主記憶装置に命令を取りに行く<br>
+② プログラムカウンターが自動で次のアドレスに更新される<br>
+③ 取り出した命令を命令レジスタに格納（＝フェッチ）<br>
+④ 命令デコーダ（命令解読器）が命令を解読<br>
+⑤ 解読結果に従い、主記憶装置からデータを取り出す<br>
+⑥ データを汎用レジスタに格納し、演算を実行</div>
+
+<h3>アドレス指定方式</h3>
+<p>命令のアドレス部でデータの場所を指定する方法です。試験では<strong>間接アドレス指定</strong>が頻出です。</p>
+
+<div class="compare">
+<div class="compare-box good">
+<h4>直接アドレス指定</h4>
+アドレス部に<strong>有効アドレス</strong>が直接入っている<br>
+→ 1回のアクセスでデータに到達
+</div>
+<div class="compare-box bad">
+<h4>間接アドレス指定</h4>
+アドレス部が指す先に<strong>有効アドレスが入っている</strong><br>
+→ 2回のアクセスが必要（間接的）
+</div>
+</div>
+
+<div class="key-point">
+<strong>間接アドレス指定のポイント：</strong><br>
+メリット：大きなサイズのアドレスを扱える<br>
+デメリット：主記憶へのアクセスが<strong>2回</strong>必要で遅い
+</div>
+
+<h3>割込み</h3>
+<p><span class="vocab">割込み</span>とは、現在実行中のプログラムを<strong>中断</strong>して、別の処理を優先的に実行させることです。</p>
+
+<div class="key-point">
+<strong>割込み発生時の動作：</strong><br>
+① プログラムカウンターの値を<strong>退避</strong>（別の場所に保存）<br>
+② 割り込んできた命令のアドレスをプログラムカウンターにセット<br>
+③ 割込み処理が完了したら、退避していたアドレスを<strong>復帰</strong>させて元の処理を再開
+</div>
+
+<div class="compare">
+<div class="compare-box good">
+<h4>内部割込み</h4>
+<strong>実行中のプログラムが原因</strong><br>
+例：ゼロ除算、オーバーフロー、未定義命令の実行
+</div>
+<div class="compare-box bad">
+<h4>外部割込み</h4>
+<strong>プログラム以外が原因</strong><br>
+例：タイマ割込み、入出力完了、電源異常
+</div>
+</div>
+
+<div class="example"><strong>見分け方のコツ：</strong><br>
+「プログラムのバグや仕様が原因か？」→ Yes なら<strong>内部</strong>割込み<br>
+「ハードウェアや外部イベントが原因か？」→ Yes なら<strong>外部</strong>割込み</div>
+</div>
+</div>
+
+<!-- ===== レッスン3: 記憶装置 ===== -->
+<div id="lesson3" class="section">
+<div class="lesson-card">
+<h2>③ さまざまな記憶装置</h2>
+
+<p>コンピュータには複数の記憶装置があり、それぞれ<strong>速度</strong>と<strong>容量</strong>が異なります。</p>
+
+<h3>3種類の記憶装置</h3>
+
+<!-- 記憶装置の階層図 -->
+<div class="memory-hierarchy">
+<div class="mem-level" style="width:40%;background:#e91e63">レジスタ（CPU内）<br><small>超高速・極小容量</small></div>
+<div class="mem-level" style="width:55%;background:#e65100">キャッシュメモリ<br><small>高速・小容量</small></div>
+<div class="mem-level" style="width:70%;background:#ff8f00">主記憶装置（メインメモリ）<br><small>中速・中容量</small></div>
+<div class="mem-level" style="width:90%;background:#ffa726;color:#333">補助記憶装置（HDD・SSD）<br><small>低速・大容量</small></div>
+</div>
+
+<div class="key-point">
+<strong>（1）主記憶装置</strong>（メインメモリ）<br>
+・CPUが直接読み書きする記憶装置<br>
+・データを<strong>高速</strong>に出し入れできる<br>
+・電源を切ると<strong>データが消える</strong>（揮発性）<br><br>
+<strong>（2）補助記憶装置</strong>（HDD、SSD）<br>
+・データを<strong>長期的に保存</strong>する記憶装置<br>
+・電源を切っても<strong>データが消えない</strong>（不揮発性）<br>
+・主記憶より<strong>遅い</strong>が<strong>大容量</strong><br><br>
+<strong>（3）キャッシュメモリ</strong><br>
+・CPUと主記憶装置の<strong>間</strong>にある<strong>超高速</strong>の記憶装置<br>
+・CPUの待ち時間を短縮するために使う<br>
+・高価なので<strong>小容量</strong>
+</div>
+
+<h3>キャッシュメモリとヒット率</h3>
+<p>キャッシュメモリは小容量なので、必要なデータが常にあるとは限りません。</p>
+
+<div class="key-point">
+<span class="vocab">ヒット率</span> = 必要なデータが<strong>キャッシュメモリ上にある確率</strong><br><br>
+ヒット率が高い → キャッシュからデータを取得 → <strong>高速</strong><br>
+ヒット率が低い → 主記憶まで取りに行く → <strong>遅い</strong>
+</div>
+
+<div class="formula"><strong>実効アクセス時間の公式：</strong><br><br>
+実効アクセス時間<br>
+= キャッシュのアクセス時間 × ヒット率<br>
++ 主記憶のアクセス時間 × (1 - ヒット率)<br><br>
+<strong>例：</strong>キャッシュ 10ns、主記憶 60ns、ヒット率 0.9<br>
+= 10 × 0.9 + 60 × (1 - 0.9)<br>
+= 9 + 6 = <strong>15ナノ秒</strong>
+</div>
+
+<div class="example"><strong>ヒット率を求める問題も出る！</strong><br>
+上の例の逆パターン：実効アクセス時間が15ns → ヒット率xを求める<br>
+15 = 10x + 60(1-x) → 15 = 10x + 60 - 60x → 50x = 45 → <strong>x = 0.9</strong></div>
+
+<h3>キャッシュメモリの書き込み方式</h3>
+
+<div class="compare">
+<div class="compare-box good">
+<h4>ライトスルー方式</h4>
+キャッシュと主記憶の<strong>両方に同時</strong>に書き込む<br><br>
+メリット：仕組みがシンプル<br>
+デメリット：毎回主記憶にも書くので遅い
+</div>
+<div class="compare-box bad">
+<h4>ライトバック方式</h4>
+キャッシュ<strong>だけ</strong>に書き込み、追い出す時に主記憶へ<br><br>
+メリット：<strong>書き込みが速い</strong><br>
+デメリット：制御が複雑
+</div>
+</div>
+
+<h3>メモリインタリーブ</h3>
+<div class="key-point">
+<span class="vocab">メモリインタリーブ</span>とは、主記憶装置を複数の<span class="vocab">バンク</span>に分割し、各バンクに<strong>並列</strong>にアクセスすることでCPUからのアクセスを高速化する技術。<br><br>
+キーワード：「バンクに分割」「並列にアクセス」
+</div>
+</div>
+</div>
+
+<!-- ===== レッスン4: 入出力 ===== -->
+<div id="lesson4" class="section">
+<div class="lesson-card">
+<h2>④ 入出力インタフェースと入出力装置</h2>
+
+<h3>入出力インタフェースとは</h3>
+<p>機器同士をつなぐための<strong>ケーブルの接続口の形状やデータ転送方式</strong>のことです。</p>
+
+<div class="key-point">
+<strong>データ伝送方式の2種類：</strong><br><br>
+<span class="vocab">シリアルインタフェース</span>：1本の信号線で1ビットずつ順次転送<br>
+→ 現在の<strong>主流</strong>（高速化しやすい）<br><br>
+<span class="vocab">パラレルインタフェース</span>：複数の信号線で複数ビットを同時転送<br>
+→ 同期が難しく、現在はあまり使われない
+</div>
+
+<h3>USB</h3>
+<p><span class="vocab">USB</span>（Universal Serial Bus）は、最も普及している<strong>シリアルインタフェース</strong>の規格です。</p>
+
+<div class="key-point">
+<strong>USBの規格と最大転送速度：</strong><br><br>
+USB 1.0：12Mbps（フルスピード）<br>
+USB 2.0：480Mbps（ハイスピード）<br>
+<span class="vocab">USB 3.0</span>：<strong>5Gbps</strong>（スーパースピード） ← <strong>試験最頻出！</strong><br><br>
+USB 2.0 → 3.0 で約<strong>10倍</strong>に高速化<br><br>
+<strong>Type-C</strong>：上下どちらでも挿せるコネクタ形状 ← <strong>よく出る！</strong>
+</div>
+
+<h3>周辺機器の接続方式</h3>
+
+<div class="key-point">
+<span class="vocab">スター接続</span>：PCのコネクタに周辺機器をそれぞれ直接つなぐ<br><br>
+<span class="vocab">ツリー接続</span>：ハブ（集線装置）を使って枝分かれさせて接続<br><br>
+<span class="vocab">デイジーチェーン接続</span>：周辺機器を<strong>数珠つなぎ</strong>に接続 ← <strong>頻出！</strong><br>
+利点：ハブ不要、配線すっきり<br>
+欠点：機器が多いと伝送速度が落ちる
+</div>
+
+<h3>デバイスドライバ</h3>
+<div class="key-point">
+<span class="vocab">デバイスドライバ</span> = PCに接続された<strong>周辺機器を制御するソフトウェア</strong><br>
+通常は周辺機器をPCに接続したとき自動的にインストールされる
+</div>
+
+<h3>入出力装置</h3>
+
+<div class="key-point">
+<strong>ディスプレイの解像度：</strong><br>
+<span class="vocab">dpi</span>（dot per inch）= <strong>1インチあたりのドット数</strong><br>
+dpiが大きいほど、きれいな表示ができる<br><br>
+<strong>文字の大きさ：</strong><br>
+<span class="vocab">ポイント</span> = 文字の大きさの単位。1ポイント = <strong>1/72インチ</strong>
+</div>
+
+<div class="formula"><strong>dpi計算問題の解き方（頻出！）：</strong><br><br>
+96dpiのディスプレイに12ポイントの文字を表示 → 何ドット？<br><br>
+① ポイント → インチに変換：12 × 1/72 = 1/6 インチ<br>
+② インチ → ドットに変換：1/6 × 96 = <strong>16ドット</strong>
+</div>
+
+<div class="key-point">
+<strong>3Dプリンター</strong><br>
+3次元データをもとに<strong>立体物を造形</strong>する機械。<br>
+代表的な方式：<span class="vocab">熱溶解積層方式</span>（熱で溶かした樹脂を積み重ねる）<br><br>
+※「立体物を造形」というキーワードが出たら3Dプリンター
+</div>
+</div>
+</div>
+
+<!-- ===== 確認テスト ===== -->
+<div id="quiz" class="section">
+<div class="quiz-area">
+<h2>確認テスト ── 第4章</h2>
+<p style="color:#666;font-size:.9em;margin-bottom:16px">全問ランダム出題・選択肢シャッフル。何度でも挑戦できます。</p>
+<div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+<div id="quizContainer"></div>
+<div style="text-align:center;margin-top:20px"><button class="btn" id="submitBtn" onclick="submitQuiz()" style="display:none">結果を見る</button></div>
+</div>
+<div class="result-area" id="resultArea"><h2>結果</h2><div class="result-score" id="resultScore"></div><div id="resultMsg" style="font-size:1.1em;margin:10px 0"></div><button class="btn" onclick="retryQuiz()">もう一度</button><button class="btn btn-outline" onclick="showSection('lesson1')">レッスンに戻る</button></div>
+</div>
+</div>
+
+<script>
+const allQuestions=[
+{q:'CPUの動作の速さを表す指標で、単位がHz（ヘルツ）であるものはどれか。',choices:['MIPS','クロック周波数','コア数','バス幅'],answer:1,explanation:'<strong>クロック周波数</strong>はCPUの動作速度を表す指標で、単位はHz（ヘルツ）です。1GHz = 1秒間に10億回の信号を発生。クロック周波数が大きいほど高性能です。'},
+{q:'1GHzのCPUで、1命令あたり平均0.8クロックの場合、1秒間に実行できる命令数は何万個か。',choices:['80,000','100,000','125,000','200,000'],answer:2,explanation:'1秒間に実行できる命令数 = クロック周波数 ÷ 1命令あたりのクロック数 = 10億 ÷ 0.8 = 12.5億 = <strong>125,000万個</strong>です。'},
+{q:'平均命令実行時間が20ナノ秒のコンピュータの性能は何MIPSか。',choices:['5','10','20','50'],answer:3,explanation:'MIPS = 1秒 ÷ (平均命令実行時間 × 10<sup>6</sup>) = 1 ÷ (20 × 10<sup>-9</sup>) × 10<sup>-6</sup> = <strong>50MIPS</strong>。20ナノ秒 = 0.02マイクロ秒なので、1 ÷ 0.02 = 50 (百万命令/秒) です。'},
+{q:'次の命令が格納されたアドレスを保持するレジスタはどれか。',choices:['命令レジスタ','汎用レジスタ','プログラムカウンター','アキュムレーター'],answer:2,explanation:'<strong>プログラムカウンター</strong>（プログラムレジスタ）は「次の命令のアドレス」を格納するレジスタです。命令レジスタは「命令そのもの」、汎用レジスタは「データ」を格納します。'},
+{q:'主記憶装置から命令を取り出して命令レジスタに格納する操作を何というか。',choices:['デコード','フェッチ','エンコード','ストア'],answer:1,explanation:'主記憶装置から命令を取り出して命令レジスタに格納する操作を<strong>フェッチ</strong>（命令取り出し）といいます。フェッチ後、命令デコーダで命令がデコード（解読）されます。'},
+{q:'アドレス部の値が主記憶装置上のアドレスを指し、そのアドレスに有効アドレスが入っている方式はどれか。',choices:['直接アドレス指定','間接アドレス指定','即値アドレス指定','相対アドレス指定'],answer:1,explanation:'<strong>間接アドレス指定</strong>は、アドレス部が直接データの場所を示すのではなく、「データの場所が書かれている場所」を示す方式です。主記憶へのアクセスが2回必要になるのがデメリットです。'},
+{q:'ゼロで除算を実行したことによる割込みは、内部割込みと外部割込みのどちらに分類されるか。',choices:['内部割込み','外部割込み','どちらにも該当しない','どちらにも該当する'],answer:0,explanation:'ゼロ除算は<strong>実行中のプログラムが原因</strong>で発生するエラーなので、<strong>内部割込み</strong>に分類されます。外部割込みは、タイマや入出力完了など、プログラム以外が原因のものです。'},
+{q:'インターバルタイマによって指定時間が経過した時に生じる割込みは何に分類されるか。',choices:['内部割込み','外部割込み','プログラム割込み','ページフォールト'],answer:1,explanation:'タイマ割込みは<strong>実行中のプログラム以外が原因</strong>（ハードウェアのタイマ）なので、<strong>外部割込み</strong>に分類されます。ラウンドロビン方式でCPUの使用権を切り替える際に使われます。'},
+{q:'CPUと主記憶装置の間に置かれ、CPUの待ち時間を短縮するための高速な記憶装置は何か。',choices:['補助記憶装置','レジスタ','キャッシュメモリ','フラッシュメモリ'],answer:2,explanation:'<strong>キャッシュメモリ</strong>は、CPUと主記憶装置の処理速度の差を埋めるために使われる超高速の記憶装置です。頻繁に使うデータをキャッシュに保存することで、CPUの待ち時間を短縮します。'},
+{q:'キャッシュメモリのアクセス時間が10ns、主記憶のアクセス時間が60ns、ヒット率が0.9のとき、実効アクセス時間は何ナノ秒か。',choices:['10','15','35','60'],answer:1,explanation:'実効アクセス時間 = 10 × 0.9 + 60 × (1 - 0.9) = 9 + 6 = <strong>15ナノ秒</strong>。ヒット率が高いほど、キャッシュからの高速読み出しが多くなり、実効アクセス時間は短くなります。'},
+{q:'キャッシュメモリだけにデータを書き込み、キャッシュからデータが追い出される時に主記憶に書き込む方式はどれか。',choices:['ライトスルー方式','ライトバック方式','リードスルー方式','メモリインタリーブ'],answer:1,explanation:'<strong>ライトバック方式</strong>は、通常はキャッシュメモリだけに書き込み、データが追い出される時に主記憶に書き込む方式です。ライトスルー方式は、毎回キャッシュと主記憶の両方に書き込みます。'},
+{q:'主記憶装置を複数のバンクに分割し、各バンクに並列にアクセスしてCPUからのアクセスを高速化する手法はどれか。',choices:['パイプライン処理','メモリインタリーブ','仮想記憶','キャッシュメモリ'],answer:1,explanation:'<strong>メモリインタリーブ</strong>は、主記憶装置を複数のバンクに分割して並列にアクセスする高速化技術です。「バンクに分割」「並列にアクセス」がキーワードです。'},
+{q:'USB 3.0の最大転送速度はどれか。',choices:['12Mbps','480Mbps','5Gbps','10Gbps'],answer:2,explanation:'<strong>USB 3.0</strong>の最大転送速度は<strong>5Gbps</strong>（スーパースピード）です。USB 2.0（480Mbps）から約10倍に高速化されました。'},
+{q:'周辺機器を数珠つなぎに接続する方式はどれか。',choices:['スター接続','ツリー接続','デイジーチェーン接続','メッシュ接続'],answer:2,explanation:'<strong>デイジーチェーン接続</strong>は周辺機器を数珠つなぎに接続する方式です。ハブが不要で配線がすっきりしますが、機器が多いと伝送速度が落ちるデメリットがあります。'},
+{q:'PCに接続された周辺機器を制御するソフトウェアは何か。',choices:['デバイスドライバ','ファームウェア','ミドルウェア','インストーラ'],answer:0,explanation:'<strong>デバイスドライバ</strong>は、PCに接続された周辺機器を制御するソフトウェアです。通常、周辺機器をPCに接続した時に自動的にインストールされます。'},
+{q:'96dpiのディスプレイに12ポイントの文字を表示する場合、正方フォントの縦は何ドットか。（1ポイント＝1/72インチ）',choices:['8','12','14','16'],answer:3,explanation:'① 12ポイント → インチに変換：12 × 1/72 = 1/6インチ<br>② インチ → ドットに変換：1/6 × 96 = <strong>16ドット</strong><br>ポイント→インチ→ドットの2段階で計算するのがコツです。'},
+{q:'3次元データをもとに立体物を造形する機械はどれか。',choices:['インクジェットプリンター','レーザープリンター','3Dプリンター','プロッター'],answer:2,explanation:'<strong>3Dプリンター</strong>は3次元データをもとに立体物を造形する機械です。代表的な出力方式に熱溶解積層方式（熱で溶かした樹脂を積み重ねる）があります。「立体物を造形」がキーワードです。'}
+];
+let questions=[],answered=0;
+function shuffleArray(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
+function initQuiz(){questions=shuffleArray(allQuestions);answered=0;document.getElementById('submitBtn').style.display='none';document.getElementById('resultArea').style.display='none';document.getElementById('progressFill').style.width='0%';const c=document.getElementById('quizContainer');c.innerHTML='';questions.forEach((q,idx)=>{const sc=q.choices.map((c,i)=>({text:c,origIdx:i}));for(let i=sc.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[sc[i],sc[j]]=[sc[j],sc[i]]}q._shuffled=sc;q._selected=null;let h=`<div class="question-card"><div class="q-number">問題 ${idx+1} / ${questions.length}</div><div class="q-text">${q.q}</div><ul class="choices">`;sc.forEach((c,ci)=>{h+=`<li onclick="selectChoice(${idx},${ci})" id="q${idx}c${ci}">${c.text}</li>`});h+=`</ul><div class="explanation" id="exp${idx}"><div id="expText${idx}"></div></div></div>`;c.innerHTML+=h})}
+function selectChoice(qi,ci){const q=questions[qi];if(q._selected!==null)return;q._selected=ci;answered++;const corr=q.answer,sel=q._shuffled[ci].origIdx,ok=sel===corr;q._shuffled.forEach((c,i)=>{const li=document.getElementById(`q${qi}c${i}`);if(c.origIdx===corr)li.classList.add('correct');if(i===ci&&!ok)li.classList.add('wrong')});const e=document.getElementById(`exp${qi}`),t=document.getElementById(`expText${qi}`);t.innerHTML=(ok?'<span style="color:#4caf50;font-weight:bold">&#x2B55; 正解！</span>':'<span style="color:#f44336;font-weight:bold">&#x274C; 不正解</span>')+'<br>'+q.explanation;e.classList.add('show');document.getElementById('progressFill').style.width=(answered/questions.length*100)+'%';if(answered===questions.length)document.getElementById('submitBtn').style.display='inline-block'}
+function submitQuiz(){let c=0;questions.forEach(q=>{if(q._selected!==null&&q._shuffled[q._selected].origIdx===q.answer)c++});document.getElementById('resultArea').style.display='block';document.getElementById('resultScore').textContent=`${c} / ${questions.length}`;const p=c/questions.length*100;let m='';if(p===100)m='満点！完璧です！';else if(p>=80)m='よく理解できています！';else if(p>=60)m='合格ライン！もう少し復習しましょう。';else m='レッスンをもう一度確認しましょう。';document.getElementById('resultMsg').textContent=m;document.getElementById('resultArea').scrollIntoView({behavior:'smooth'})}
+function retryQuiz(){initQuiz();document.getElementById('quizContainer').scrollIntoView({behavior:'smooth'})}
+function showSection(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');const tabs=document.querySelectorAll('.nav-tab');const ids=['lesson1','lesson2','lesson3','lesson4','quiz'];tabs[ids.indexOf(id)].classList.add('active');if(id==='quiz')initQuiz();window.scrollTo({top:0,behavior:'smooth'})}
+initQuiz();
+</script>
+</body>
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第6章 ソフトウェアとハードウェア｜基本情報技術者</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Hiragino Sans','Noto Sans JP','Meiryo',sans-serif;background:#f5f5f0;color:#333;line-height:1.8;padding:0 0 60px 0}.header{background:linear-gradient(135deg,#e65100,#ff8f00);color:#fff;padding:24px 20px;text-align:center}.header h1{font-size:1.3em;margin-bottom:4px}.header .sub{font-size:.85em;opacity:.8}.container{max-width:720px;margin:0 auto;padding:16px}.nav-tabs{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap}.nav-tab{padding:10px 14px;border:2px solid #e65100;border-radius:8px;background:#fff;color:#e65100;font-weight:bold;font-size:.82em;cursor:pointer;transition:all .2s}.nav-tab:hover,.nav-tab.active{background:#e65100;color:#fff}.section{display:none}.section.active{display:block}.lesson-card{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.lesson-card h2{color:#e65100;font-size:1.2em;margin-bottom:16px;padding-bottom:8px;border-bottom:3px solid #ffe0b2}.lesson-card h3{color:#ff8f00;font-size:1.05em;margin:20px 0 10px 0}.key-point{background:#fff3e0;border-left:4px solid #e65100;padding:14px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-size:.95em}.key-point strong{color:#e65100}.vocab{display:inline-block;background:#e3f2fd;border:1px solid #64b5f6;border-radius:6px;padding:2px 8px;margin:2px 4px;font-weight:bold;font-size:.9em;color:#1565c0}.example{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:14px 16px;margin:12px 0;font-size:.9em}.formula{background:#fce4ec;border-left:4px solid #e91e63;padding:14px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-family:monospace;font-size:.95em;line-height:2}.compare{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}.compare-box{background:#fff;border:2px solid #e0e0e0;border-radius:10px;padding:14px;font-size:.9em}.compare-box h4{font-size:.95em;margin-bottom:8px;text-align:center}.compare-box.good{border-color:#4caf50}.compare-box.good h4{color:#2e7d32}.compare-box.bad{border-color:#ff9800}.compare-box.bad h4{color:#e65100}
+.quiz-area{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.quiz-area h2{color:#e65100;margin-bottom:16px}.question-card{background:#fafafa;border:1px solid #e0e0e0;border-radius:10px;padding:20px;margin:16px 0}.q-number{font-size:.8em;color:#999;margin-bottom:6px}.q-text{font-size:1.05em;font-weight:bold;margin-bottom:14px;line-height:1.6}.choices{list-style:none}.choices li{padding:12px 16px;margin:6px 0;border:2px solid #e0e0e0;border-radius:8px;cursor:pointer;transition:all .2s;font-size:.95em}.choices li:hover{border-color:#e65100;background:#fff3e0}.choices li.correct{border-color:#4caf50;background:#e8f5e9}.choices li.wrong{border-color:#f44336;background:#ffebee}.explanation{display:none;margin-top:12px;padding:14px;background:#f5f5f5;border-radius:8px;font-size:.9em;line-height:1.7}.explanation.show{display:block}.result-area{display:none;text-align:center;padding:30px;background:#fff;border-radius:12px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.result-score{font-size:2.5em;font-weight:bold;color:#e65100;margin:10px 0}.btn{display:inline-block;padding:12px 28px;background:#e65100;color:#fff;border:none;border-radius:8px;font-size:1em;cursor:pointer;margin:8px}.btn:hover{background:#ff8f00}.btn-outline{background:#fff;color:#e65100;border:2px solid #e65100}.progress-bar{width:100%;height:6px;background:#e0e0e0;border-radius:3px;margin:12px 0}.progress-fill{height:100%;background:#e65100;border-radius:3px;transition:width .3s}.back-link{display:inline-block;margin:16px 0;color:#e65100;text-decoration:none;font-weight:bold}
+</style>
+</head>
+<body>
+<div class="header"><h1>第6章 ソフトウェアとハードウェア</h1><div class="sub">基本情報技術者試験 Web教材</div></div>
+<div class="container">
+<a href="../../teaching/桑名看護専門学校/web教材/apps.html" class="back-link">&#x1F3E0; アプリ一覧</a>
+<div class="nav-tabs">
+<div class="nav-tab active" onclick="showSection('lesson1')">① OS（ジョブ・タスク）</div>
+<div class="nav-tab" onclick="showSection('lesson2')">② 記憶管理・仮想記憶</div>
+<div class="nav-tab" onclick="showSection('lesson3')">③ ファイル・開発ツール</div>
+<div class="nav-tab" onclick="showSection('quiz')">確認テスト</div>
+</div>
+
+<!-- ===== レッスン1: OS（ジョブ・タスク管理） ===== -->
+<div id="lesson1" class="section active">
+<div class="lesson-card">
+<h2>① OS ── ジョブ管理とタスク管理</h2>
+
+<p><span class="vocab">OS</span>（Operating System）は、アプリケーションソフトウェアとハードウェアの間で処理を仲介するソフトウェアです。Windows、macOS、iOS、Androidなどが代表例です。</p>
+
+<div class="key-point">
+<strong>OSの4つの機能</strong><br>
+(1) ジョブ管理 (2) タスク管理 (3) 記憶管理 (4) データ管理
+</div>
+
+<h3>（1）ジョブ管理</h3>
+<p>ユーザーがコンピュータに依頼する仕事の単位を<span class="vocab">ジョブ</span>といいます。OSはジョブの実行順序を管理し、CPUを効率的に使います。</p>
+
+<div class="key-point">
+<span class="vocab">スプーリング</span>：CPUと低速の入出力装置（プリンターなど）の間のデータ転送を、<strong>高速の補助記憶装置に仲介させる</strong>技術<br><br>
+→ CPUがプリンターの処理完了を待たずに別のジョブを実行できる<br><br>
+<span class="vocab">バッファ</span>：処理速度の異なる2つの装置の差を補うために、データを<strong>一時的に保存</strong>する記憶装置（緩衝記憶装置）
+</div>
+
+<h3>（2）タスク管理</h3>
+<p>OSがCPUに出す命令の単位を<span class="vocab">タスク</span>（プロセス）といいます。</p>
+
+<div class="example"><strong>ジョブとタスクの違い：</strong><br>
+・<strong>ジョブ</strong> = 人間がコンピュータに出す命令<br>
+・<strong>タスク</strong> = OSがCPU（ハードウェア）に出す命令</div>
+
+<div class="key-point">
+<strong>マルチタスク</strong><br>
+複数のタスクを頻繁にすばやく切り替え、<strong>あたかも同時に実行されているように見せる</strong>技術。<br>
+※ 実際にはCPUの1つのコアは一度に1つの処理しかできない
+</div>
+
+<div class="key-point">
+<strong>タスクの3つの状態：</strong><br><br>
+<span class="vocab">実行可能状態</span>：いつでもタスクを実行できる状態<br>
+<span class="vocab">実行状態</span>：タスクを実行中の状態<br>
+<span class="vocab">待ち状態</span>：入出力処理の完了を待っている状態<br><br>
+<span class="vocab">ディスパッチ</span>：実行可能状態のタスクを実行状態に移すこと
+</div>
+
+<div class="compare">
+<div class="compare-box good">
+<h4>プリエンプティブ</h4>
+CPUの使用権を<strong>OSが管理</strong><br>
+優先度の高いタスクが来たら<strong>横取り</strong>して切替え<br>
+（現在の主流）
+</div>
+<div class="compare-box bad">
+<h4>ノンプリエンプティブ</h4>
+CPUの使用権を<strong>タスクが管理</strong><br>
+現在のタスクが<strong>完了するまで</strong>切替えない
+</div>
+</div>
+
+<div class="key-point">
+<strong>タスクスケジューリングの方式：</strong><br><br>
+<span class="vocab">到着順方式</span>：先に来たタスクを先に実行<br>
+<span class="vocab">処理時間順方式</span>：処理時間の短いタスクを先に実行<br>
+<span class="vocab">優先度順方式</span>：優先度の高いタスクを先に実行<br>
+<span class="vocab">ラウンドロビン方式</span>：タスクを<strong>一定時間ごとに切り替えて</strong>実行 ← <strong>頻出！</strong>
+</div>
+</div>
+</div>
+
+<!-- ===== レッスン2: 記憶管理・仮想記憶 ===== -->
+<div id="lesson2" class="section">
+<div class="lesson-card">
+<h2>② 記憶管理と仮想記憶</h2>
+
+<h3>仮想記憶管理</h3>
+<p><span class="vocab">仮想記憶</span>とは、補助記憶装置の一部を<strong>あたかも主記憶装置であるかのように扱う</strong>技術です。主記憶が足りない場合でもプログラムを実行できるようになります。</p>
+
+<div class="key-point">
+<span class="vocab">仮想記憶</span>：補助記憶装置上の「論理的な記憶領域」<br>
+<span class="vocab">実記憶</span>：主記憶装置上の「物理的な記憶領域」
+</div>
+
+<h3>ページング方式</h3>
+<p>試験で最も頻出の仮想記憶管理方式です。</p>
+
+<div class="key-point">
+<span class="vocab">ページング方式</span>：仮想記憶と実記憶を<span class="vocab">ページ</span>と呼ぶ<strong>固定長</strong>の領域に分割して管理する方式<br><br>
+・仮想記憶のアドレス → <span class="vocab">仮想アドレス</span><br>
+・実記憶のアドレス → <span class="vocab">実アドレス</span>（物理アドレス）<br><br>
+<span class="vocab">ページイン</span>：仮想記憶から実記憶にページを読み込むこと<br>
+<span class="vocab">ページアウト</span>：実記憶から仮想記憶にページを追い出すこと
+</div>
+
+<div class="key-point" style="background:#fce4ec;border-color:#e91e63">
+<strong style="color:#e91e63">ページフォールト</strong><br>
+CPUが必要とするページが実記憶に存在しないときに発生する<strong>割込み</strong>。<br>
+→ 仮想記憶からページインして実記憶に読み込む<br><br>
+<strong>ページフォールトが頻発すると…</strong><br>
+ページイン/ページアウトが繰り返され、システムの処理速度が著しく低下。<br>
+この現象を<span class="vocab">スラッシング</span>という。← <strong>超頻出！</strong>
+</div>
+
+<div class="example"><strong>スラッシングへの対策：</strong><br>
+・実記憶（主記憶）の容量を増やす<br>
+・実行するプログラムの数を減らす</div>
+
+<h3>フラグメンテーション</h3>
+<div class="key-point">
+<span class="vocab">フラグメンテーション</span>：メモリの確保と解放を繰り返すうちに、メモリ上に<strong>使えない小さな空き領域</strong>が散らばること（断片化）<br><br>
+<span class="vocab">デフラグメンテーション</span>（ガベージコレクション）：散らばった空き領域を<strong>整理・統合</strong>してフラグメンテーションを解消すること
+</div>
+</div>
+</div>
+
+<!-- ===== レッスン3: ファイル・開発ツール ===== -->
+<div id="lesson3" class="section">
+<div class="lesson-card">
+<h2>③ ファイルシステムと開発ツール</h2>
+
+<h3>ディレクトリとパス</h3>
+<p><span class="vocab">ディレクトリ</span>（フォルダ）は、ファイルを整理するための入れ物です。ディレクトリは階層構造（木構造）になっています。</p>
+
+<div class="key-point">
+<strong>ルートディレクトリ</strong>：ディレクトリ階層の最上位<br>
+<strong>カレントディレクトリ</strong>：現在作業中のディレクトリ<br>
+<strong>サブディレクトリ</strong>：あるディレクトリの下にあるディレクトリ
+</div>
+
+<div class="compare">
+<div class="compare-box good">
+<h4>絶対パス</h4>
+<strong>ルートディレクトリ</strong>を起点にしてファイルの場所を指定<br>
+例：/home/user/file.txt
+</div>
+<div class="compare-box bad">
+<h4>相対パス</h4>
+<strong>カレントディレクトリ</strong>を起点にしてファイルの場所を指定<br>
+例：../data/file.txt
+</div>
+</div>
+
+<div class="example"><strong>特殊な記号：</strong><br>
+「..」（ドットドット）= 1つ上のディレクトリ（親ディレクトリ）<br>
+「.」（ドット）= カレントディレクトリ自身</div>
+
+<h3>開発ツール（言語プロセッサ）</h3>
+<p>人間が書いたプログラム（ソースコード）をコンピュータが実行できる形式（機械語）に変換する必要があります。</p>
+
+<div class="key-point">
+<strong>変換方式の2種類：</strong><br><br>
+<span class="vocab">コンパイラ</span>：ソースコードを<strong>一括で</strong>機械語に翻訳してから実行<br>
+→ 翻訳に時間がかかるが、<strong>実行速度は速い</strong><br><br>
+<span class="vocab">インタプリタ</span>：ソースコードを<strong>1行ずつ</strong>翻訳しながら実行<br>
+→ すぐに実行開始できるが、<strong>実行速度は遅い</strong>
+</div>
+
+<div class="key-point">
+<strong>プログラム実行までの流れ：</strong><br><br>
+① <span class="vocab">コンパイラ</span>：ソースコード → 機械語（オブジェクトコード）に翻訳<br>
+② <span class="vocab">リンカ</span>（連係編集プログラム）：複数のオブジェクトコードを<strong>結合</strong>して実行可能ファイルを作成<br>
+③ <span class="vocab">ローダ</span>：実行可能ファイルを<strong>主記憶装置に読み込む</strong>
+</div>
+
+<h3>OSS（オープンソースソフトウェア）</h3>
+<div class="key-point">
+<span class="vocab">OSS</span>とは、ソースコードが<strong>公開</strong>されていて、誰でも自由に利用・改良・再配布できるソフトウェア<br><br>
+代表例：Linux（OS）、Apache（Webサーバ）、MySQL（データベース）、Firefox（ブラウザ）
+</div>
+</div>
+</div>
+
+<!-- ===== 確認テスト ===== -->
+<div id="quiz" class="section">
+<div class="quiz-area">
+<h2>確認テスト ── 第6章</h2>
+<p style="color:#666;font-size:.9em;margin-bottom:16px">全問ランダム出題・選択肢シャッフル。何度でも挑戦できます。</p>
+<div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+<div id="quizContainer"></div>
+<div style="text-align:center;margin-top:20px"><button class="btn" id="submitBtn" onclick="submitQuiz()" style="display:none">結果を見る</button></div>
+</div>
+<div class="result-area" id="resultArea"><h2>結果</h2><div class="result-score" id="resultScore"></div><div id="resultMsg" style="font-size:1.1em;margin:10px 0"></div><button class="btn" onclick="retryQuiz()">もう一度</button><button class="btn btn-outline" onclick="showSection('lesson1')">レッスンに戻る</button></div>
+</div>
+</div>
+
+<script>
+const allQuestions=[
+{q:'CPUと低速の入出力装置の間のデータ転送を、高速の補助記憶装置に仲介させる技術は何か。',choices:['スプーリング','バッファリング','キャッシング','スワッピング'],answer:0,explanation:'<strong>スプーリング</strong>は、CPUとプリンターなどの低速装置の間に補助記憶装置を介在させ、CPUが待たされることを防ぐ技術です。プリンターの印刷待ちで最もよく使われます。'},
+{q:'OSがCPUに出す命令の単位を何というか。',choices:['ジョブ','タスク','スレッド','バッチ'],answer:1,explanation:'<strong>タスク（プロセス）</strong>はOSがCPUに出す命令の単位です。一方、人間がコンピュータに出す命令の単位は「ジョブ」です。この違いは頻出です。'},
+{q:'複数のタスクを頻繁に切り替えて、あたかも同時に実行されているように見せる技術はどれか。',choices:['マルチプロセッサ','マルチタスク','マルチコア','マルチユーザー'],answer:1,explanation:'<strong>マルチタスク</strong>は、OSがタスクをすばやく切り替えることで、あたかも同時に実行されているように見せる技術です。実際にはCPUの1コアは一度に1つの処理しか実行できません。'},
+{q:'実行可能状態のタスクを実行状態に移すことを何というか。',choices:['ディスパッチ','フェッチ','スワップ','コンテキストスイッチ'],answer:0,explanation:'<strong>ディスパッチ</strong>は、実行可能状態のタスクを実行状態に移す（CPUの使用権を割り当てる）操作です。'},
+{q:'CPUの使用権をOSが管理し、優先度の高いタスクが来たら横取りして切り替える方式はどれか。',choices:['プリエンプティブ','ノンプリエンプティブ','ラウンドロビン','到着順'],answer:0,explanation:'<strong>プリエンプティブ</strong>はCPUの使用権をOSが管理する方式で、優先度の高いタスクが発生したら現在のタスクから使用権を横取りします。preemptive＝「横取り」の意味です。'},
+{q:'タスクを一定時間ごとに切り替えて実行するスケジューリング方式はどれか。',choices:['到着順方式','処理時間順方式','優先度順方式','ラウンドロビン方式'],answer:3,explanation:'<strong>ラウンドロビン方式</strong>は、各タスクに一定のCPU時間（タイムスライス）を割り当て、時間が来たら次のタスクに切り替える方式です。公平にCPUを配分できます。'},
+{q:'補助記憶装置の一部をあたかも主記憶装置であるかのように扱う技術は何か。',choices:['キャッシュメモリ','仮想記憶','RAID','メモリインタリーブ'],answer:1,explanation:'<strong>仮想記憶</strong>は、補助記憶装置（HDDやSSD）の一部を主記憶の拡張として使い、主記憶の容量を超えるプログラムも実行できるようにする技術です。'},
+{q:'ページング方式で、必要なページが実記憶に存在しないときに発生する割込みは何か。',choices:['ページイン','ページアウト','ページフォールト','スラッシング'],answer:2,explanation:'<strong>ページフォールト</strong>は、CPUが必要とするページが実記憶に存在しないときに発生する割込みです。これにより仮想記憶からページインが実行されます。'},
+{q:'ページフォールトが頻発し、ページイン/ページアウトが繰り返されてシステムの処理速度が著しく低下する現象は何か。',choices:['フラグメンテーション','スラッシング','デッドロック','ボトルネック'],answer:1,explanation:'<strong>スラッシング</strong>は、ページフォールトが頻発してページの入れ替えが繰り返され、CPUが本来の処理を行えなくなる現象です。対策は主記憶の増設やプログラム数の削減です。'},
+{q:'メモリの確保と解放を繰り返すうちに、使えない小さな空き領域が散らばる現象は何か。',choices:['スラッシング','フラグメンテーション','ガベージコレクション','デフラグメンテーション'],answer:1,explanation:'<strong>フラグメンテーション</strong>（断片化）は、メモリの使用と解放を繰り返すことで空き領域が細かく散らばる現象です。解消にはデフラグメンテーション（ガベージコレクション）を行います。'},
+{q:'ルートディレクトリを起点にしてファイルの場所を指定する方法は何か。',choices:['絶対パス','相対パス','仮想パス','論理パス'],answer:0,explanation:'<strong>絶対パス</strong>はルートディレクトリ（最上位）を起点にファイルの場所を指定します。一方、<strong>相対パス</strong>はカレントディレクトリ（現在の場所）を起点にします。'},
+{q:'ソースコードを一括で機械語に翻訳してから実行する言語プロセッサはどれか。',choices:['コンパイラ','インタプリタ','リンカ','ローダ'],answer:0,explanation:'<strong>コンパイラ</strong>はソースコードを一括で機械語に翻訳します。翻訳に時間がかかりますが、実行速度は速くなります。一方、インタプリタは1行ずつ翻訳しながら実行します。'},
+{q:'ソースコードを1行ずつ翻訳しながら実行する言語プロセッサはどれか。',choices:['コンパイラ','インタプリタ','リンカ','ローダ'],answer:1,explanation:'<strong>インタプリタ</strong>はソースコードを1行ずつ翻訳しながら実行します。すぐに実行を開始できますが、コンパイラ方式と比べて実行速度は遅くなります。'},
+{q:'複数のオブジェクトコードを結合して1つの実行可能ファイルを作成するプログラムはどれか。',choices:['コンパイラ','インタプリタ','リンカ','ローダ'],answer:2,explanation:'<strong>リンカ</strong>（連係編集プログラム）は、コンパイラが生成した複数のオブジェクトコードやライブラリを結合して、1つの実行可能ファイルを作成します。'},
+{q:'実行可能ファイルを主記憶装置に読み込むプログラムはどれか。',choices:['コンパイラ','インタプリタ','リンカ','ローダ'],answer:3,explanation:'<strong>ローダ</strong>は、リンカが作成した実行可能ファイルを主記憶装置に読み込み、実行できる状態にするプログラムです。コンパイラ→リンカ→ローダの順で処理されます。'},
+{q:'ソースコードが公開されていて、誰でも自由に利用・改良・再配布できるソフトウェアは何か。',choices:['フリーウェア','シェアウェア','OSS（オープンソースソフトウェア）','パッケージソフトウェア'],answer:2,explanation:'<strong>OSS（オープンソースソフトウェア）</strong>は、ソースコードが公開され、自由に利用・改良・再配布できるソフトウェアです。Linux、Apache、MySQL、Firefoxなどが代表例です。'}
+];
+let questions=[],answered=0;
+function shuffleArray(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
+function initQuiz(){questions=shuffleArray(allQuestions);answered=0;document.getElementById('submitBtn').style.display='none';document.getElementById('resultArea').style.display='none';document.getElementById('progressFill').style.width='0%';const c=document.getElementById('quizContainer');c.innerHTML='';questions.forEach((q,idx)=>{const sc=q.choices.map((c,i)=>({text:c,origIdx:i}));for(let i=sc.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[sc[i],sc[j]]=[sc[j],sc[i]]}q._shuffled=sc;q._selected=null;let h=`<div class="question-card"><div class="q-number">問題 ${idx+1} / ${questions.length}</div><div class="q-text">${q.q}</div><ul class="choices">`;sc.forEach((c,ci)=>{h+=`<li onclick="selectChoice(${idx},${ci})" id="q${idx}c${ci}">${c.text}</li>`});h+=`</ul><div class="explanation" id="exp${idx}"><div id="expText${idx}"></div></div></div>`;c.innerHTML+=h})}
+function selectChoice(qi,ci){const q=questions[qi];if(q._selected!==null)return;q._selected=ci;answered++;const corr=q.answer,sel=q._shuffled[ci].origIdx,ok=sel===corr;q._shuffled.forEach((c,i)=>{const li=document.getElementById(`q${qi}c${i}`);if(c.origIdx===corr)li.classList.add('correct');if(i===ci&&!ok)li.classList.add('wrong')});const e=document.getElementById(`exp${qi}`),t=document.getElementById(`expText${qi}`);t.innerHTML=(ok?'<span style="color:#4caf50;font-weight:bold">&#x2B55; 正解！</span>':'<span style="color:#f44336;font-weight:bold">&#x274C; 不正解</span>')+'<br>'+q.explanation;e.classList.add('show');document.getElementById('progressFill').style.width=(answered/questions.length*100)+'%';if(answered===questions.length)document.getElementById('submitBtn').style.display='inline-block'}
+function submitQuiz(){let c=0;questions.forEach(q=>{if(q._selected!==null&&q._shuffled[q._selected].origIdx===q.answer)c++});document.getElementById('resultArea').style.display='block';document.getElementById('resultScore').textContent=`${c} / ${questions.length}`;const p=c/questions.length*100;let m='';if(p===100)m='満点！完璧です！';else if(p>=80)m='よく理解できています！';else if(p>=60)m='合格ライン！もう少し復習しましょう。';else m='レッスンをもう一度確認しましょう。';document.getElementById('resultMsg').textContent=m;document.getElementById('resultArea').scrollIntoView({behavior:'smooth'})}
+function retryQuiz(){initQuiz();document.getElementById('quizContainer').scrollIntoView({behavior:'smooth'})}
+function showSection(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');const tabs=document.querySelectorAll('.nav-tab');const ids=['lesson1','lesson2','lesson3','quiz'];tabs[ids.indexOf(id)].classList.add('active');if(id==='quiz')initQuiz();window.scrollTo({top:0,behavior:'smooth'})}
+initQuiz();
+</script>
+</body>
+</html>

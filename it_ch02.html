@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第2章 基礎理論② ── 論理演算・回路・AI｜基本情報技術者</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Hiragino Sans','Noto Sans JP','Meiryo',sans-serif;background:#f5f5f0;color:#333;line-height:1.8;padding:0 0 60px 0}.header{background:linear-gradient(135deg,#e65100,#ff8f00);color:#fff;padding:24px 20px;text-align:center}.header h1{font-size:1.3em;margin-bottom:4px}.header .sub{font-size:.85em;opacity:.8}.container{max-width:720px;margin:0 auto;padding:16px}.nav-tabs{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap}.nav-tab{padding:10px 14px;border:2px solid #e65100;border-radius:8px;background:#fff;color:#e65100;font-weight:bold;font-size:.82em;cursor:pointer;transition:all .2s}.nav-tab:hover,.nav-tab.active{background:#e65100;color:#fff}.section{display:none}.section.active{display:block}.lesson-card{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.lesson-card h2{color:#e65100;font-size:1.2em;margin-bottom:16px;padding-bottom:8px;border-bottom:3px solid #ffe0b2}.lesson-card h3{color:#ff8f00;font-size:1.05em;margin:20px 0 10px 0}.key-point{background:#fff3e0;border-left:4px solid #e65100;padding:14px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-size:.95em}.key-point strong{color:#e65100}.vocab{display:inline-block;background:#e3f2fd;border:1px solid #64b5f6;border-radius:6px;padding:2px 8px;margin:2px 4px;font-weight:bold;font-size:.9em;color:#1565c0}.example{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:14px 16px;margin:12px 0;font-size:.9em}.formula{background:#fce4ec;border-left:4px solid #e91e63;padding:14px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-family:monospace;font-size:.95em}.quiz-area{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.quiz-area h2{color:#e65100;margin-bottom:16px}.question-card{background:#fafafa;border:1px solid #e0e0e0;border-radius:10px;padding:20px;margin:16px 0}.q-number{font-size:.8em;color:#999;margin-bottom:6px}.q-text{font-size:1.05em;font-weight:bold;margin-bottom:14px;line-height:1.6}.choices{list-style:none}.choices li{padding:12px 16px;margin:6px 0;border:2px solid #e0e0e0;border-radius:8px;cursor:pointer;transition:all .2s;font-size:.95em}.choices li:hover{border-color:#e65100;background:#fff3e0}.choices li.correct{border-color:#4caf50;background:#e8f5e9}.choices li.wrong{border-color:#f44336;background:#ffebee}.explanation{display:none;margin-top:12px;padding:14px;background:#f5f5f5;border-radius:8px;font-size:.9em;line-height:1.7}.explanation.show{display:block}.result-area{display:none;text-align:center;padding:30px;background:#fff;border-radius:12px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.result-score{font-size:2.5em;font-weight:bold;color:#e65100;margin:10px 0}.btn{display:inline-block;padding:12px 28px;background:#e65100;color:#fff;border:none;border-radius:8px;font-size:1em;cursor:pointer;margin:8px}.btn:hover{background:#ff8f00}.btn-outline{background:#fff;color:#e65100;border:2px solid #e65100}.progress-bar{width:100%;height:6px;background:#e0e0e0;border-radius:3px;margin:12px 0}.progress-fill{height:100%;background:#e65100;border-radius:3px;transition:width .3s}.back-link{display:inline-block;margin:16px 0;color:#e65100;text-decoration:none;font-weight:bold}
+</style>
+</head>
+<body>
+<div class="header"><h1>第2章 基礎理論② ── 論理演算・回路・AI</h1><div class="sub">基本情報技術者試験 Web教材</div></div>
+<div class="container">
+<a href="../../teaching/桑名看護専門学校/web教材/apps.html" class="back-link">&#x1F3E0; アプリ一覧</a>
+<div class="nav-tabs">
+<div class="nav-tab active" onclick="showSection('lesson1')">① 論理演算</div>
+<div class="nav-tab" onclick="showSection('lesson2')">② 論理回路</div>
+<div class="nav-tab" onclick="showSection('lesson3')">③ AI（人工知能）</div>
+<div class="nav-tab" onclick="showSection('quiz')">確認テスト</div>
+</div>
+
+<div id="lesson1" class="section active">
+<div class="lesson-card">
+<h2>① 集合と論理演算</h2>
+<h3>集合とベン図</h3>
+<p><span class="vocab">集合</span>とは、はっきりと区別できる条件でグループ分けされたものの集まりです。集合を視覚的に表した図を<span class="vocab">ベン図</span>と呼びます。</p>
+
+<h3>論理演算</h3>
+<p>コンピュータは0と1の世界なので、四則演算の代わりに<span class="vocab">論理演算</span>を使って計算します。</p>
+
+<div class="key-point"><strong>基本の論理演算子</strong><br><br>
+<span class="vocab">AND（論理積）</span>：AとBの<strong>両方が1</strong>のときだけ結果が1<br>
+<span class="vocab">OR（論理和）</span>：AとBの<strong>少なくとも一方が1</strong>なら結果が1<br>
+<span class="vocab">XOR（排他的論理和）</span>：AとBが<strong>異なる</strong>ときに結果が1<br>
+<span class="vocab">NOT（否定）</span>：入力の<strong>反対</strong>が結果になる（0→1, 1→0）</div>
+
+<div class="key-point"><strong>追加の論理演算子</strong><br><br>
+<span class="vocab">NAND</span>：ANDの結果を反転（NOT AND）<br>
+<span class="vocab">NOR</span>：ORの結果を反転（NOT OR）</div>
+
+<div class="formula"><strong>真理値表（覚えよう！）</strong><br><br>
+A B | AND  OR  XOR  NAND NOR<br>
+0 0 |  0    0    0    1    1<br>
+0 1 |  0    1    1    1    0<br>
+1 0 |  0    1    1    1    0<br>
+1 1 |  1    1    0    0    0</div>
+
+<h3>逆ポーランド表記法</h3>
+<div class="key-point"><span class="vocab">逆ポーランド表記法（後置記法）</span>：演算子を後ろに置く書き方。コンピュータ内部で使われる。<br><br>
+通常（中置記法）：3 + 5<br>
+逆ポーランド：3 5 +<br><br>
+通常：(3 + 5) × 2<br>
+逆ポーランド：3 5 + 2 ×</div>
+</div>
+</div>
+
+<div id="lesson2" class="section">
+<div class="lesson-card">
+<h2>② 論理回路</h2>
+<p>論理演算を電子回路で実現したものが<span class="vocab">論理回路</span>です。回路図では<span class="vocab">MIL記号</span>で表します。</p>
+
+<div class="key-point"><strong>MIL記号の形（覚えるべき特徴）</strong><br><br>
+<strong>AND</strong>：半円に2つの直角<br>
+<strong>OR</strong>：3つの角がすべて尖っている<br>
+<strong>NOT</strong>：三角形と丸（先端の小さな丸が否定を表す）<br>
+<strong>NAND</strong>：ANDの記号＋先端に丸<br>
+<strong>NOR</strong>：ORの記号＋先端に丸<br>
+<strong>XOR</strong>：ORの記号＋左側に縦線</div>
+
+<h3>加算回路</h3>
+<div class="key-point"><span class="vocab">半加算器</span>：桁上がりを考慮<strong>しない</strong>加算回路<br>
+→ <strong>XOR</strong>（和）＋ <strong>AND</strong>（桁上げ）で実現<br><br>
+<span class="vocab">全加算器</span>：桁上がりを考慮<strong>する</strong>加算回路<br>
+→ 2つの半加算器＋1つのORで実現<br>
+→ 入力が3つ（A, B, 下の位からの桁上がり）</div>
+<div class="example">試験で頻出：「半加算器の素子の組み合わせは？」→ <strong>XORとAND</strong></div>
+
+<h3>オートマトン</h3>
+<div class="key-point"><span class="vocab">オートマトン</span>：システムの動作を「入力」「状態」「出力」で単純化したモデル<br><br>
+<span class="vocab">状態遷移表</span>：入力に応じて状態がどう変わるかを表で示したもの<br>
+<span class="vocab">状態遷移図</span>：状態の変化を矢印で示した図<br>
+・円 = 状態（二重丸 = 受理状態）<br>
+・矢印 = 遷移</div>
+<div class="example">例：自動販売機のオートマトン<br>入力＝お金 → 状態＝合計金額 → 出力＝商品</div>
+</div>
+</div>
+
+<div id="lesson3" class="section">
+<div class="lesson-card">
+<h2>③ AI（人工知能）</h2>
+<p><span class="vocab">AI（Artificial Intelligence）</span>＝人間の知的な振る舞いをコンピュータ上に再現する技術です。近年の試験で非常によく出題されます。</p>
+
+<h3>AI関連の重要用語</h3>
+<div class="key-point"><span class="vocab">機械学習</span>：コンピュータにデータを与えて、自動で学習させる技術。AI技術の1つ。<br><br>
+<span class="vocab">ニューラルネットワーク</span>：人間の脳の神経回路を模したモデル。機械学習の1つ。<br><br>
+<span class="vocab">ディープラーニング（深層学習）</span>：ニューラルネットワークを多層化したモデル。画像認識等に使われる。<br><br>
+<span class="vocab">生成AI</span>：テキスト、画像、音声などのオリジナルコンテンツを生成するAI。ChatGPT等。</div>
+
+<h3>機械学習の3つの手法</h3>
+<div class="key-point"><span class="vocab">教師あり学習</span>：入力データ＋正解データをセットで与えて学習<br>
+→ 例：犬の画像に「犬」というラベルを付けて学習<br><br>
+<span class="vocab">教師なし学習</span>：入力データのみ（正解なし）で学習<br>
+→ 例：大量の画像を自動で似たグループに分類<br><br>
+<span class="vocab">強化学習</span>：試行錯誤しながら、報酬を最大化するように学習<br>
+→ 例：ゲームAIが勝利を報酬として学習</div>
+
+<h3>生成AI関連の用語</h3>
+<div class="key-point"><span class="vocab">プロンプト</span>：生成AIに対して与える指示<br>
+<span class="vocab">プロンプトエンジニアリング</span>：プロンプトを最適化すること<br>
+<span class="vocab">基盤モデル</span>：膨大なデータで事前学習した汎用的なモデル（GPT等）<br>
+<span class="vocab">ファインチューニング</span>：基盤モデルに追加学習を行い、特定用途に調整すること<br>
+<span class="vocab">ハルシネーション</span>：AIが事実と異なる情報をもっともらしく生成すること<br>
+<span class="vocab">ディープフェイク</span>：AIで生成された偽の動画や画像</div>
+</div>
+</div>
+
+<div id="quiz" class="section">
+<div class="quiz-area">
+<h2>確認テスト（第2章）</h2><p>15問出題します。</p>
+<div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+<div id="quizContainer"></div>
+<div style="text-align:center;margin-top:20px"><button class="btn" id="submitBtn" onclick="submitQuiz()" style="display:none">結果を見る</button></div>
+</div>
+<div class="result-area" id="resultArea"><h2>結果</h2><div class="result-score" id="resultScore"></div><div id="resultMsg" style="font-size:1.1em;margin:10px 0"></div><button class="btn" onclick="retryQuiz()">もう一度</button><button class="btn btn-outline" onclick="showSection('lesson1')">レッスンに戻る</button></div>
+</div>
+</div>
+
+<script>
+const allQuestions=[
+{q:'AとBの両方が1のときだけ結果が1になる論理演算は何か。',choices:['OR','AND','XOR','NOT'],answer:1,explanation:'AND（論理積）は両方が1のときだけ結果が1になります。'},
+{q:'AとBが異なるときに結果が1になる論理演算は何か。',choices:['AND','OR','XOR','NAND'],answer:2,explanation:'XOR（排他的論理和）はAとBが異なるときに1、同じときに0になります。'},
+{q:'NOT演算で、入力が0のとき出力は何か。',choices:['0','1','2','不定'],answer:1,explanation:'NOT（否定）は入力の反対を出力します。0→1、1→0です。'},
+{q:'NAND演算とは何か。',choices:['ANDの結果を反転したもの','ORの結果を反転したもの','XORの結果を反転したもの','NOTを2回行ったもの'],answer:0,explanation:'NAND = NOT AND。ANDの結果を反転します。'},
+{q:'A=1, B=0のとき、A OR Bの結果は何か。',choices:['0','1','不定','エラー'],answer:1,explanation:'OR（論理和）は少なくとも一方が1なら結果が1です。A=1なので結果は1。'},
+{q:'A=1, B=1のとき、A XOR Bの結果は何か。',choices:['0','1','2','不定'],answer:0,explanation:'XORはAとBが異なるときに1。A=1, B=1で同じなので結果は0です。'},
+{q:'「3 5 + 2 ×」はどの表記法か。',choices:['中置記法','前置記法','後置記法（逆ポーランド表記法）','ハンガリー表記法'],answer:2,explanation:'演算子が後ろにあるので後置記法（逆ポーランド表記法）です。コンピュータ内部で使われます。'},
+{q:'半加算器を構成する2つの素子の組み合わせはどれか。',choices:['ANDとOR','XORとAND','NANDとNOR','XORとOR'],answer:1,explanation:'半加算器はXOR（和を計算）とAND（桁上げを計算）で構成されます。'},
+{q:'全加算器の入力は何個か。',choices:['1個','2個','3個','4個'],answer:2,explanation:'全加算器はA, B, 下の位からの桁上がりの3つが入力です。'},
+{q:'システムの動作を「入力」「状態」「出力」で単純化したモデルを何というか。',choices:['フローチャート','オートマトン','アルゴリズム','データベース'],answer:1,explanation:'オートマトンは「入力」「状態」「出力」でシステムの動作をモデル化したものです。'},
+{q:'人間の脳の神経回路を模したAI技術は何か。',choices:['機械学習','ニューラルネットワーク','データマイニング','ビッグデータ'],answer:1,explanation:'ニューラルネットワークは人間の脳の神経回路（ニューロン）を模した技術です。'},
+{q:'入力データと正解データをセットで与えて学習する手法は何か。',choices:['教師あり学習','教師なし学習','強化学習','転移学習'],answer:0,explanation:'教師あり学習は入力データ＋正解データ（ラベル）をセットで与えて学習します。'},
+{q:'試行錯誤しながら報酬を最大化するように学習する手法は何か。',choices:['教師あり学習','教師なし学習','強化学習','深層学習'],answer:2,explanation:'強化学習は報酬を最大化するように試行錯誤しながら学習する手法です。ゲームAI等に使われます。'},
+{q:'生成AIに対して与える指示を何というか。',choices:['クエリ','コマンド','プロンプト','パラメータ'],answer:2,explanation:'プロンプトは生成AIに対して与える指示です。その最適化をプロンプトエンジニアリングと呼びます。'},
+{q:'AIが事実と異なる情報をもっともらしく生成することを何というか。',choices:['ディープフェイク','ハルシネーション','オーバーフィッティング','バイアス'],answer:1,explanation:'ハルシネーション（幻覚）はAIが事実と異なる情報をもっともらしく生成する現象です。'}
+];
+let questions=[],answered=0;function shuffleArray(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
+function initQuiz(){questions=shuffleArray(allQuestions);answered=0;document.getElementById('submitBtn').style.display='none';document.getElementById('resultArea').style.display='none';document.getElementById('progressFill').style.width='0%';const c=document.getElementById('quizContainer');c.innerHTML='';questions.forEach((q,idx)=>{const sc=q.choices.map((c,i)=>({text:c,origIdx:i}));for(let i=sc.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[sc[i],sc[j]]=[sc[j],sc[i]]}q._shuffled=sc;q._selected=null;let h=`<div class="question-card"><div class="q-number">問題 ${idx+1} / ${questions.length}</div><div class="q-text">${q.q}</div><ul class="choices">`;sc.forEach((c,ci)=>{h+=`<li onclick="selectChoice(${idx},${ci})" id="q${idx}c${ci}">${c.text}</li>`});h+=`</ul><div class="explanation" id="exp${idx}"><div id="expText${idx}"></div></div></div>`;c.innerHTML+=h})}
+function selectChoice(qi,ci){const q=questions[qi];if(q._selected!==null)return;q._selected=ci;answered++;const corr=q.answer,sel=q._shuffled[ci].origIdx,ok=sel===corr;q._shuffled.forEach((c,i)=>{const li=document.getElementById(`q${qi}c${i}`);if(c.origIdx===corr)li.classList.add('correct');if(i===ci&&!ok)li.classList.add('wrong')});const e=document.getElementById(`exp${qi}`),t=document.getElementById(`expText${qi}`);t.innerHTML=(ok?'<span style="color:#4caf50;font-weight:bold">⭕ 正解！</span>':'<span style="color:#f44336;font-weight:bold">❌ 不正解</span>')+'<br>'+q.explanation;e.classList.add('show');document.getElementById('progressFill').style.width=(answered/questions.length*100)+'%';if(answered===questions.length)document.getElementById('submitBtn').style.display='inline-block'}
+function submitQuiz(){let c=0;questions.forEach(q=>{if(q._selected!==null&&q._shuffled[q._selected].origIdx===q.answer)c++});document.getElementById('resultArea').style.display='block';document.getElementById('resultScore').textContent=`${c} / ${questions.length}`;const p=c/questions.length*100;let m='';if(p===100)m='満点！完璧です！';else if(p>=80)m='よく理解できています！';else if(p>=60)m='合格ライン！もう少し復習しましょう。';else m='レッスンをもう一度確認しましょう。';document.getElementById('resultMsg').textContent=m;document.getElementById('resultArea').scrollIntoView({behavior:'smooth'})}
+function retryQuiz(){initQuiz();document.getElementById('quizContainer').scrollIntoView({behavior:'smooth'})}
+function showSection(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');const tabs=document.querySelectorAll('.nav-tab');const ids=['lesson1','lesson2','lesson3','quiz'];tabs[ids.indexOf(id)].classList.add('active');if(id==='quiz')initQuiz();window.scrollTo({top:0,behavior:'smooth'})}
+initQuiz();
+</script>
+</body>
+</html>

@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第3章 アルゴリズムとプログラミング｜基本情報技術者</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Hiragino Sans','Noto Sans JP','Meiryo',sans-serif;background:#f5f5f0;color:#333;line-height:1.8;padding:0 0 60px 0}.header{background:linear-gradient(135deg,#e65100,#ff8f00);color:#fff;padding:24px 20px;text-align:center}.header h1{font-size:1.3em;margin-bottom:4px}.header .sub{font-size:.85em;opacity:.8}.container{max-width:720px;margin:0 auto;padding:16px}.nav-tabs{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap}.nav-tab{padding:10px 14px;border:2px solid #e65100;border-radius:8px;background:#fff;color:#e65100;font-weight:bold;font-size:.82em;cursor:pointer;transition:all .2s}.nav-tab:hover,.nav-tab.active{background:#e65100;color:#fff}.section{display:none}.section.active{display:block}.lesson-card{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.lesson-card h2{color:#e65100;font-size:1.2em;margin-bottom:16px;padding-bottom:8px;border-bottom:3px solid #ffe0b2}.lesson-card h3{color:#ff8f00;font-size:1.05em;margin:20px 0 10px 0}.key-point{background:#fff3e0;border-left:4px solid #e65100;padding:14px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-size:.95em}.key-point strong{color:#e65100}.vocab{display:inline-block;background:#e3f2fd;border:1px solid #64b5f6;border-radius:6px;padding:2px 8px;margin:2px 4px;font-weight:bold;font-size:.9em;color:#1565c0}.example{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:14px 16px;margin:12px 0;font-size:.9em}.formula{background:#fce4ec;border-left:4px solid #e91e63;padding:14px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-family:monospace;font-size:.95em;line-height:2}.compare{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}.compare-box{background:#fff;border:2px solid #e0e0e0;border-radius:10px;padding:14px;font-size:.9em}.compare-box h4{font-size:.95em;margin-bottom:8px;text-align:center}.compare-box.good{border-color:#4caf50}.compare-box.good h4{color:#2e7d32}.compare-box.bad{border-color:#ff9800}.compare-box.bad h4{color:#e65100}
+.quiz-area{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.quiz-area h2{color:#e65100;margin-bottom:16px}.question-card{background:#fafafa;border:1px solid #e0e0e0;border-radius:10px;padding:20px;margin:16px 0}.q-number{font-size:.8em;color:#999;margin-bottom:6px}.q-text{font-size:1.05em;font-weight:bold;margin-bottom:14px;line-height:1.6}.choices{list-style:none}.choices li{padding:12px 16px;margin:6px 0;border:2px solid #e0e0e0;border-radius:8px;cursor:pointer;transition:all .2s;font-size:.95em}.choices li:hover{border-color:#e65100;background:#fff3e0}.choices li.correct{border-color:#4caf50;background:#e8f5e9}.choices li.wrong{border-color:#f44336;background:#ffebee}.explanation{display:none;margin-top:12px;padding:14px;background:#f5f5f5;border-radius:8px;font-size:.9em;line-height:1.7}.explanation.show{display:block}.result-area{display:none;text-align:center;padding:30px;background:#fff;border-radius:12px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.result-score{font-size:2.5em;font-weight:bold;color:#e65100;margin:10px 0}.btn{display:inline-block;padding:12px 28px;background:#e65100;color:#fff;border:none;border-radius:8px;font-size:1em;cursor:pointer;margin:8px}.btn:hover{background:#ff8f00}.btn-outline{background:#fff;color:#e65100;border:2px solid #e65100}.progress-bar{width:100%;height:6px;background:#e0e0e0;border-radius:3px;margin:12px 0}.progress-fill{height:100%;background:#e65100;border-radius:3px;transition:width .3s}.back-link{display:inline-block;margin:16px 0;color:#e65100;text-decoration:none;font-weight:bold}
+/* スタック・キュー デモ */
+.stack-demo,.queue-demo{background:#fff;border:2px solid #e65100;border-radius:12px;padding:20px;margin:16px 0;text-align:center}
+.stack-demo h4,.queue-demo h4{color:#e65100;margin-bottom:12px;font-size:.95em}
+.demo-box{display:flex;gap:6px;justify-content:center;align-items:flex-end;min-height:120px;margin:10px 0;flex-wrap:wrap}
+.demo-item{width:50px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:8px;font-weight:bold;font-size:1em;color:#fff;background:#e65100;animation:popIn .3s ease}
+@keyframes popIn{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+.demo-controls{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:10px 0}
+.demo-btn{padding:8px 16px;border:2px solid #e65100;border-radius:8px;background:#fff;color:#e65100;font-weight:bold;font-size:.85em;cursor:pointer;transition:all .2s}
+.demo-btn:hover{background:#e65100;color:#fff}
+.demo-info{font-size:.85em;color:#666;margin:6px 0;min-height:1.5em}
+/* 木構造SVG */
+.tree-svg{display:block;margin:12px auto;max-width:320px}
+</style>
+</head>
+<body>
+<div class="header"><h1>第3章 アルゴリズムとプログラミング</h1><div class="sub">基本情報技術者試験 Web教材</div></div>
+<div class="container">
+<a href="../../teaching/桑名看護専門学校/web教材/apps.html" class="back-link">&#x1F3E0; アプリ一覧</a>
+<div class="nav-tabs">
+<div class="nav-tab active" onclick="showSection('lesson1')">① データ構造</div>
+<div class="nav-tab" onclick="showSection('lesson2')">② アルゴリズムの基本</div>
+<div class="nav-tab" onclick="showSection('lesson3')">③ 整列・探索・再帰</div>
+<div class="nav-tab" onclick="showSection('lesson4')">④ プログラムの性質</div>
+<div class="nav-tab" onclick="showSection('lesson5')">⑤ Web言語</div>
+<div class="nav-tab" onclick="showSection('quiz')">確認テスト</div>
+</div>
+
+<!-- ===== レッスン1: データ構造 ===== -->
+<div id="lesson1" class="section active">
+<div class="lesson-card">
+<h2>① データ構造</h2>
+
+<p>コンピュータは大量のデータを処理しますが、そのとき<strong>データの並べ方</strong>によって処理の効率が大きく変わります。この「データの並べ方」のことを<span class="vocab">データ構造</span>と呼びます。</p>
+
+<div class="key-point"><strong>データ構造は5種類</strong><br>基本情報技術者試験では、以下の5つのデータ構造が出題されます。<br><br>
+(1) <span class="vocab">スタック</span> ── 後入れ先出し<br>
+(2) <span class="vocab">キュー</span> ── 先入れ先出し<br>
+(3) <span class="vocab">配列</span> ── 表形式に並べる<br>
+(4) <span class="vocab">連結リスト</span> ── ポインタで数珠つなぎ<br>
+(5) <span class="vocab">木構造</span> ── 階層構造を持つ
+</div>
+
+<h3>（1）スタック</h3>
+<p><span class="vocab">スタック</span>とは、<strong>最後に入れたデータを最初に取り出す</strong>データ構造です。「積み上げられた本」をイメージしてください。本を積むときは上に重ね、取るときは一番上から取ります。途中の本を抜くことはできません。</p>
+
+<div class="key-point">
+<strong>スタックの操作用語</strong><br><br>
+<span class="vocab">push</span>：データをスタックに<strong>格納</strong>する（例：push C → Cを積む）<br>
+<span class="vocab">pop</span>：データをスタックから<strong>取り出す</strong>（一番上のデータが出る）<br><br>
+この方式を<span class="vocab">後入れ先出し（LIFO：Last In First Out）</span>といいます。
+</div>
+
+<div class="example"><strong>身近な例：</strong><br>
+・Webブラウザの「戻る」ボタン → 最後に見たページに戻る（スタック構造）<br>
+・Ctrl+Zの「元に戻す」機能 → 最後の操作から順に取り消す</div>
+
+<!-- スタックのインタラクティブデモ -->
+<div class="stack-demo">
+<h4>スタック体験デモ</h4>
+<div class="demo-box" id="stackBox" style="flex-direction:column-reverse"></div>
+<div class="demo-info" id="stackInfo">pushで積み上げ、popで取り出してみよう</div>
+<div class="demo-controls">
+<button class="demo-btn" onclick="stackPush()">push（積む）</button>
+<button class="demo-btn" onclick="stackPop()">pop（取り出す）</button>
+<button class="demo-btn" onclick="stackReset()">リセット</button>
+</div>
+</div>
+
+<h3>（2）キュー</h3>
+<p><span class="vocab">キュー</span>とは、<strong>最初に入れたデータを最初に取り出す</strong>データ構造です。「レジ待ちの列」をイメージしてください。先に並んだ人から会計を済ませます。</p>
+
+<div class="key-point">
+<strong>キューの操作用語</strong><br><br>
+<span class="vocab">enqueue</span>（エンキュー）：データをキューに<strong>入れる</strong>（列の最後に並ぶ）<br>
+<span class="vocab">dequeue</span>（デキュー）：データをキューから<strong>取り出す</strong>（列の先頭から出る）<br><br>
+この方式を<span class="vocab">先入れ先出し（FIFO：First In First Out）</span>といいます。
+</div>
+
+<div class="example"><strong>身近な例：</strong><br>
+・プリンタの印刷待ち → 先に送った文書から印刷される<br>
+・コンビニのレジの列 → 先に並んだ人から会計する</div>
+
+<!-- キューのインタラクティブデモ -->
+<div class="queue-demo">
+<h4>キュー体験デモ</h4>
+<div class="demo-box" id="queueBox"></div>
+<div class="demo-info" id="queueInfo">enqueueで並ばせ、dequeueで取り出してみよう</div>
+<div class="demo-controls">
+<button class="demo-btn" onclick="queueEnqueue()">enqueue（入れる）</button>
+<button class="demo-btn" onclick="queueDequeue()">dequeue（取り出す）</button>
+<button class="demo-btn" onclick="queueReset()">リセット</button>
+</div>
+</div>
+
+<div class="key-point" style="background:#e8f5e9;border-color:#4caf50">
+<strong style="color:#2e7d32">スタックとキューの違い ── 最重要ポイント</strong><br><br>
+<strong>スタック</strong>：後入れ先出し（LIFO）→ 最後に入れたものから出る<br>
+<strong>キュー</strong>：先入れ先出し（FIFO）→ 最初に入れたものから出る
+</div>
+
+<h3>（3）配列</h3>
+<p><span class="vocab">配列</span>とは、データを<strong>表の形</strong>に並べたデータ構造です。個々のデータを<span class="vocab">要素</span>、要素の位置を表す番号を<span class="vocab">要素番号</span>（添字・インデックス）と呼びます。</p>
+
+<div class="key-point">
+<strong>1次元配列</strong>：要素が1列に並ぶ配列<br>
+→ 要素の取り出し：<code>A[3]</code>（配列Aの3番目の要素）<br><br>
+<strong>2次元配列</strong>：要素が縦横に並ぶ配列（表形式）<br>
+→ 要素の取り出し：<code>A[2, 4]</code>（2行目4列目の要素）
+</div>
+
+<div class="example"><strong>配列のメリット：</strong><br>
+要素番号を指定するだけでデータに<strong>直接アクセス</strong>できる → <strong>参照・更新が速い</strong></div>
+
+<h3>（4）連結リスト</h3>
+<p><span class="vocab">連結リスト</span>とは、データを<strong>ポインタで数珠つなぎ</strong>にしたデータ構造です。各要素は「データ本体」と「次の要素の位置（ポインタ）」のセットで構成されます。</p>
+
+<div class="key-point">
+<strong>ポインタとは？</strong><br>
+次の要素の<strong>アドレス</strong>（主記憶装置上の位置）を指し示すものです。コンピュータはポインタをたどることで、目的のデータにたどりつきます。
+</div>
+
+<div class="example"><strong>連結リストのメリット：</strong><br>
+データの挿入・削除の際、ポインタを書き換えるだけでOK → <strong>挿入・削除が速い</strong></div>
+
+<div class="compare">
+<div class="compare-box good">
+<h4>配列の得意技</h4>
+<strong>参照・更新が速い</strong><br>
+要素番号で直接アクセスできるため
+</div>
+<div class="compare-box good">
+<h4>連結リストの得意技</h4>
+<strong>挿入・削除が速い</strong><br>
+ポインタを書き換えるだけのため
+</div>
+</div>
+
+<div class="key-point">
+<strong>連結リストの種類</strong><br><br>
+<span class="vocab">単方向リスト</span>：先頭→末尾の一方向にだけデータをつなげる<br>
+<span class="vocab">双方向リスト</span>：先頭⇔末尾の双方向にデータをつなげる<br>
+<span class="vocab">環状リスト</span>：末尾と先頭がつながり、環（リング）状になっている
+</div>
+
+<h3>（5）木構造</h3>
+<p><span class="vocab">木構造</span>とは、<strong>階層構造</strong>（親子関係）を持つデータ構造です。植物の木を逆さにしたような形をしています。</p>
+
+<div class="key-point">
+<strong>木構造の用語</strong><br><br>
+<span class="vocab">節（ノード）</span>：枝分かれする箇所。データを保持する。<br>
+<span class="vocab">根（ルート）</span>：最上位の節<br>
+<span class="vocab">葉（リーフ）</span>：末端の節（子を持たない節）<br>
+<span class="vocab">親</span>：分岐元の節 ／ <span class="vocab">子</span>：分岐先の節
+</div>
+
+<!-- 木構造のSVG図 -->
+<svg class="tree-svg" viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
+<line x1="160" y1="35" x2="80" y2="95" stroke="#e65100" stroke-width="2"/>
+<line x1="160" y1="35" x2="240" y2="95" stroke="#e65100" stroke-width="2"/>
+<line x1="80" y1="95" x2="40" y2="155" stroke="#e65100" stroke-width="2"/>
+<line x1="80" y1="95" x2="120" y2="155" stroke="#e65100" stroke-width="2"/>
+<line x1="240" y1="95" x2="200" y2="155" stroke="#e65100" stroke-width="2"/>
+<line x1="240" y1="95" x2="280" y2="155" stroke="#e65100" stroke-width="2"/>
+<circle cx="160" cy="30" r="22" fill="#e65100"/><text x="160" y="36" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">5</text>
+<circle cx="80" cy="90" r="22" fill="#ff8f00"/><text x="80" y="96" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">3</text>
+<circle cx="240" cy="90" r="22" fill="#ff8f00"/><text x="240" y="96" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">8</text>
+<circle cx="40" cy="150" r="22" fill="#ffb74d"/><text x="40" y="156" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">1</text>
+<circle cx="120" cy="150" r="22" fill="#ffb74d"/><text x="120" y="156" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">4</text>
+<circle cx="200" cy="150" r="22" fill="#ffb74d"/><text x="200" y="156" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">7</text>
+<circle cx="280" cy="150" r="22" fill="#ffb74d"/><text x="280" y="156" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">9</text>
+<text x="160" y="12" text-anchor="middle" fill="#e65100" font-size="11" font-weight="bold">根（ルート）</text>
+<text x="38" y="185" text-anchor="middle" fill="#666" font-size="10">葉</text>
+<text x="120" y="185" text-anchor="middle" fill="#666" font-size="10">葉</text>
+<text x="200" y="185" text-anchor="middle" fill="#666" font-size="10">葉</text>
+<text x="280" y="185" text-anchor="middle" fill="#666" font-size="10">葉</text>
+</svg>
+
+<div class="key-point">
+<strong>2分木と2分探索木</strong><br><br>
+<span class="vocab">2分木</span>：親が最大<strong>2個</strong>の子を持つ木構造<br>
+<span class="vocab">2分探索木</span>：2分木のうち、以下の条件を満たすもの：<br><br>
+<strong style="color:#e91e63;font-size:1.1em">左の子孫 ＜ 親 ＜ 右の子孫</strong><br><br>
+上のSVG図がまさに2分探索木です。根「5」の左の子孫（1, 3, 4）はすべて5より小さく、右の子孫（7, 8, 9）はすべて5より大きくなっています。<br><br>
+<strong>メリット：</strong>データを探すとき、根から葉までの階層数だけ比較すれば見つかる → 効率的！
+</div>
+
+<div class="example"><strong>注意：「子」ではなく「子孫」</strong><br>
+2分探索木の条件は「子」だけでなく、孫やひ孫など、<strong>その節より下のすべてのデータ</strong>が条件を満たしている必要があります。これは試験でよく引っかけに使われるポイントです。</div>
+
+</div>
+</div>
+
+<!-- ===== レッスン2: アルゴリズムの基本 ===== -->
+<div id="lesson2" class="section">
+<div class="lesson-card">
+<h2>② アルゴリズムの基本</h2>
+
+<p><span class="vocab">アルゴリズム</span>とは、<strong>問題を解決するための手順</strong>のことです。同じ問題でも、効率の良い手順と悪い手順があります。コンピュータの世界では、最適なアルゴリズムを選ぶことがとても重要です。</p>
+
+<h3>アルゴリズムの4つの表現方法</h3>
+<div class="key-point">
+アルゴリズムは次の4つの方法で表現できます：<br><br>
+(1) <span class="vocab">文章</span> ── 文字で手順を書く<br>
+(2) <span class="vocab">流れ図（フローチャート）</span> ── 図で手順を書く ← <strong>試験で最頻出！</strong><br>
+(3) <span class="vocab">数式</span> ── 関数で手順を書く<br>
+(4) <span class="vocab">プログラム言語</span> ── コンピュータが理解できる言語で書く
+</div>
+
+<h3>流れ図（フローチャート）</h3>
+<p>流れ図は、アルゴリズムを<strong>視覚的にわかりやすく</strong>表した図です。使用する記号はJIS（日本産業規格）で定められています。</p>
+
+<div class="key-point">
+<strong>流れ図で使う記号</strong><br><br>
+<strong>端子</strong>（角丸長方形）：開始と終了を表す<br>
+<strong>処理</strong>（長方形）：計算や値の代入を表す。代入は「←」で表す<br>
+<strong>判断</strong>（ひし形）：条件分岐。出口に「Yes」「No」を書く<br>
+<strong>線</strong>：処理の順番を表す（必要に応じて矢印を付ける）<br>
+<strong>ループ端</strong>：繰り返し処理の開始と終了を表す
+</div>
+
+<div class="example"><strong>代入の表記：</strong><br>
+「A ← B」は「Bの値をAに代入する」という意味。<br>
+例：「x ← x + 1」は「xの値に1を足して、その結果をxに入れ直す」です。</div>
+
+<h3>関数（function）</h3>
+<p><span class="vocab">関数</span>とは、複数の処理をひとまとめにしたものです。関数を定義しておけば、同じ処理を何度でも再利用できます。</p>
+
+<div class="key-point">
+<strong>関数の2つの重要用語</strong><br><br>
+<span class="vocab">引数（ひきすう）</span>：関数に<strong>渡す値</strong>（入力）<br>
+<span class="vocab">戻り値（もどりち）</span>：関数が<strong>返す結果</strong>（出力）<br><br>
+例：絶対値を求める関数 f(-3) → 引数が「-3」、戻り値が「3」
+</div>
+
+<h3>プログラム言語での表現</h3>
+<p>基本情報技術者試験では、C言語やJavaなどの特定の言語の知識は不要です。以下の<strong>4つのキーワード</strong>の意味を把握しておけば読み解けます。</p>
+
+<div class="key-point">
+<strong>覚えるべき4つのキーワード</strong><br><br>
+<span class="vocab">if</span>：後ろに<strong>条件</strong>を書く（「もし〜ならば」）<br>
+<span class="vocab">then</span>：後ろに<strong>条件が正しいときの処理</strong>を書く<br>
+<span class="vocab">else</span>：後ろに<strong>条件が正しくないときの処理</strong>を書く<br>
+<span class="vocab">return</span>：後ろに<strong>戻り値</strong>を書く（関数の結果を返す）
+</div>
+
+<div class="formula"><strong>例：絶対値を求める関数</strong><br><br>
+f(x): if x &lt; 0 then return -x else return x<br><br>
+意味：「もしxが0より小さいなら、-xを返す。そうでなければxをそのまま返す」
+</div>
+
+<div class="example"><strong>試験での読み方のコツ：</strong><br>
+1行にまとめて書かれることが多いですが、慌てずに if / then / else / return の区切りで分解して読みましょう。</div>
+
+<h3>トレース表</h3>
+<p><span class="vocab">トレース表</span>とは、流れ図の各処理を1つずつ実行したときの「変数の値」を書き出した表です。流れ図の問題を<strong>確実に解く</strong>ための強力な武器です。</p>
+
+<div class="key-point">
+<strong>トレース表の使い方</strong><br>
+① 処理に番号を振る<br>
+② 各処理を実行した後の変数の値を表に記入する<br>
+③ ループ処理は繰り返しごとに値を更新する<br><br>
+<strong>地味ですが、これを書けば流れ図の問題はほぼ確実に正答できます。</strong>
+</div>
+</div>
+</div>
+
+<!-- ===== レッスン3: 整列・探索・再帰 ===== -->
+<div id="lesson3" class="section">
+<div class="lesson-card">
+<h2>③ アルゴリズムの分類 ── 整列・探索・再帰</h2>
+
+<h3>（1）整列アルゴリズム（ソートアルゴリズム）</h3>
+<p>データを特定の順番に並べるアルゴリズムです。試験では<strong>クイックソート</strong>がほぼ毎回出題されます。</p>
+
+<div class="key-point">
+<strong>主な整列アルゴリズム</strong><br><br>
+<span class="vocab">バブルソート</span>：隣り合ったデータを比較・交換を繰り返す<br>
+<span class="vocab">選択ソート</span>：最小値を選んで先頭と交換を繰り返す<br>
+<span class="vocab">挿入ソート</span>：整列済み配列に未整列データを適切な場所に挿入<br>
+<span class="vocab">クイックソート</span>：基準値で2グループに分割を繰り返す ← <strong>最頻出！</strong>
+</div>
+
+<div class="key-point" style="background:#fce4ec;border-color:#e91e63">
+<strong style="color:#e91e63">クイックソートの手順</strong><br><br>
+① 基準値を選ぶ（例：列の真ん中の数字）<br>
+② 基準値より<strong>小さい値のグループ</strong>と<strong>大きい値のグループ</strong>に分ける<br>
+③ 各グループの中でさらに基準値を選び、同じ手順を繰り返す<br>
+④ これ以上分割できなくなれば整列完了<br><br>
+<strong>ポイント：</strong>クイックソートは<strong>最も高速な整列アルゴリズム</strong>です。
+</div>
+
+<div class="example"><strong>例：[3, 5, 7, 6, 4, 2, 1, 9] を昇順に並べる</strong><br>
+① 基準値 = 6 → 左グループ{3,5,4,2,1}、右グループ{7,9}<br>
+② 左グループの基準値 = 4 → {3,2,1} と {5}<br>
+③ さらに分割… → 最終的に [1,2,3,4,5,6,7,9] に整列！</div>
+
+<h3>（2）探索アルゴリズム</h3>
+<p>特定のデータを見つけ出すアルゴリズムです。<strong>ハッシュ法</strong>と<strong>2分探索法</strong>が頻出です。</p>
+
+<div class="key-point">
+<strong>主な探索アルゴリズム</strong><br><br>
+<span class="vocab">線形探索法</span>：先頭から順番に1つずつ照合する（単純だが遅い）<br>
+<span class="vocab">ハッシュ法</span>：ハッシュ関数でデータの格納場所を特定する（最速）<br>
+<span class="vocab">2分探索法</span>：範囲を半分ずつ絞り込んで探す（速い）
+</div>
+
+<div class="key-point" style="background:#e8f5e9;border-color:#4caf50">
+<strong style="color:#2e7d32">ハッシュ法のしくみ</strong><br><br>
+① <span class="vocab">ハッシュ関数</span>にデータを入力 → <span class="vocab">ハッシュ値</span>が出力される<br>
+② ハッシュ値を要素番号として、<span class="vocab">ハッシュ表</span>（配列）の該当箇所にデータを格納<br>
+③ 探索時も同じハッシュ関数を使えば、<strong>1回でデータの場所がわかる</strong><br><br>
+代表的なハッシュ関数 = <strong>剰余（mod）</strong>：割り算の余り<br>
+例：ハッシュ関数が「x mod 10」のとき、32のハッシュ値 = 32 mod 10 = <strong>2</strong><br><br>
+<strong style="color:#e91e63">弱点：</strong>異なるデータが同じハッシュ値になる「<span class="vocab">衝突</span>」が起こる可能性がある
+</div>
+
+<div class="key-point" style="background:#e3f2fd;border-color:#1565c0">
+<strong style="color:#1565c0">2分探索法のしくみ</strong><br><br>
+<strong>前提：</strong>データがあらかじめ<strong>昇順（または降順）に整列</strong>されている必要がある<br><br>
+① 中央の要素を取り出し、探索対象と比較<br>
+② 探索対象のほうが大きい → 右半分に絞る<br>
+③ 探索対象のほうが小さい → 左半分に絞る<br>
+④ この操作を繰り返して目的のデータを見つける<br><br>
+<strong>2つの特徴：</strong><br>
+【特徴1】データをあらかじめ整列させておく必要がある<br>
+【特徴2】データを2つに分けながら探索する
+</div>
+
+<h3>（3）再帰的アルゴリズム</h3>
+<p><span class="vocab">再帰的アルゴリズム</span>とは、処理の途中で<strong>自分自身を呼び出す</strong>アルゴリズムです。「再帰」とは「繰り返し」という意味で、自分自身を呼び出すことを<span class="vocab">再帰呼び出し</span>といいます。</p>
+
+<div class="key-point">
+<strong>再帰が使われる3つの典型パターン</strong><br><br>
+<span class="vocab">総和</span>：1からnまでの合計（Σ）<br>
+<span class="vocab">剰余</span>：割り算の余り（mod）<br>
+<span class="vocab">階乗</span>：1からnまでの積（n! = n × (n-1) × … × 1）
+</div>
+
+<div class="formula"><strong>例：総和を求める再帰関数</strong><br><br>
+f(x): if x ≦ 1 then return 1 else return x + f(x - 1)<br><br>
+f(5) = 5 + f(4)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; = 5 + 4 + f(3)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; = 5 + 4 + 3 + f(2)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; = 5 + 4 + 3 + 2 + f(1)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; = 5 + 4 + 3 + 2 + 1 = <strong>15</strong>
+</div>
+
+<div class="formula"><strong>例：階乗を求める再帰関数</strong><br><br>
+F(n): if n = 0 then return 1 else return n × F(n - 1)<br><br>
+F(3) = 3 × F(2)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; = 3 × 2 × F(1)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; = 3 × 2 × 1 × F(0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; = 3 × 2 × 1 × 1 = <strong>6</strong>
+</div>
+
+<div class="example"><strong>試験での解き方のコツ：</strong><br>
+再帰関数が出たら、<strong>実際に具体的な数値を代入して計算する</strong>のが最も確実です。いきなり一般化しようとせず、1ステップずつ展開していきましょう。</div>
+
+<h3>オーダー（計算量）</h3>
+<p>アルゴリズムの効率を比較するために、<span class="vocab">オーダー</span>（計算量）という指標を使います。<span class="vocab">O記法</span>（ビッグオー記法）で表します。</p>
+
+<div class="key-point">
+<strong>各アルゴリズムのオーダー</strong>（データ数 n）<br><br>
+<span class="vocab">ハッシュ法</span>：<strong>O(1)</strong> ── 常に1回で見つかる（最速）<br>
+<span class="vocab">2分探索法</span>：<strong>O(log n)</strong> ── 半分ずつ絞るので効率的<br>
+<span class="vocab">線形探索法</span>：<strong>O(n)</strong> ── 最悪全部調べる<br>
+<span class="vocab">クイックソート</span>：<strong>O(n log n)</strong> ── 分割×比較
+</div>
+
+<div class="key-point">
+<strong>log（対数）の計算方法</strong><br><br>
+「log<sub>2</sub> 8」とは「<strong>2を何回かけたら8になるか？</strong>」という意味。<br>
+2<sup>3</sup> = 8 なので、log<sub>2</sub> 8 = <strong>3</strong><br><br>
+つまり、データが8個のときの2分探索法の計算量は<strong>最大3回</strong>の比較で済みます。
+</div>
+</div>
+</div>
+
+<!-- ===== レッスン4: プログラムの性質と種類 ===== -->
+<div id="lesson4" class="section">
+<div class="lesson-card">
+<h2>④ プログラムの性質と種類</h2>
+
+<h3>プログラムの4つの性質</h3>
+<p>プログラムにはさまざまな性質があります。試験では<strong>再帰</strong>と<strong>再入可能</strong>の内容が問われます。</p>
+
+<div class="key-point">
+<strong>試験で内容が問われる2つ</strong><br><br>
+<span class="vocab">再帰（リカーシブ）</span>：プログラム実行中に<strong>自分自身を呼び出せる</strong>性質<br>
+→ 再帰プログラムは、自分の中で自分を使える<br><br>
+<span class="vocab">再入可能（リエントラント）</span>：<strong>複数のプログラムから同時に呼び出されても正しく動作する</strong>性質<br>
+→ AとBが同時にCを呼び出しても、Cがそれぞれに正しい結果を返せる
+</div>
+
+<div class="key-point">
+<strong>残りの2つ（名前と意味の対応を覚えるだけでOK）</strong><br><br>
+<span class="vocab">再配置可能（リロケータブル）</span>：主記憶のどこに置いても実行できる性質<br>
+<span class="vocab">再使用可能（リユーザブル）</span>：一度メモリに格納すれば、再読み込みなしで何度でも実行できる性質
+</div>
+
+<div class="example"><strong>暗記のコツ：</strong>「リ」で始まる4つ<br>
+リカーシブ（再帰）、リエントラント（再入可能）、リロケータブル（再配置可能）、リユーザブル（再使用可能）</div>
+
+<h3>名称に「Java」が含まれる用語</h3>
+<p>Javaは最も有名なプログラム言語の1つです。名前に「Java」がつく用語が複数あり、<strong>混同しやすいため試験によく出ます</strong>。</p>
+
+<div class="key-point">
+<strong>Java系用語の整理</strong><br><br>
+<span class="vocab">Java</span>：機種やOSに依存しないプログラム言語<br><br>
+<span class="vocab">Javaアプレット</span>：サーバからダウンロードして<strong>クライアント側のWebブラウザ上</strong>で実行されるJavaプログラム<br><br>
+<span class="vocab">Javaサーブレット</span>：<strong>サーバ上</strong>で実行される、動的なWebページを作るJavaプログラム<br><br>
+<span class="vocab">JavaBeans</span>：よく使われる機能を<strong>部品化・再利用</strong>できるようにする仕様<br><br>
+<span class="vocab">JavaScript</span>：動的なWebページを作るための言語。<strong>Javaとはまったくの別物！</strong>
+</div>
+
+<div class="compare">
+<div class="compare-box good">
+<h4>Javaアプレット</h4>
+<strong>クライアント側</strong>で動く<br>
+（ブラウザ上で実行）
+</div>
+<div class="compare-box bad">
+<h4>Javaサーブレット</h4>
+<strong>サーバ側</strong>で動く<br>
+（サーバ上で実行）
+</div>
+</div>
+</div>
+</div>
+
+<!-- ===== レッスン5: Web言語 ===== -->
+<div id="lesson5" class="section">
+<div class="lesson-card">
+<h2>⑤ その他の言語 ── HTML・XML・CSS・Ajax</h2>
+
+<p>第3章の最後のテーマです。計算問題がなく、<strong>用語と役割の対応</strong>を覚えるだけで得点できます。非常にコスパの良い分野です。</p>
+
+<h3>HTML</h3>
+<p><span class="vocab">HTML</span>（HyperText Markup Language）は、Webページを作成する<span class="vocab">マークアップ言語</span>です。<strong>タグ</strong>（&lt; &gt;で囲まれた要素）を使って、Webページの<strong>論理構造</strong>（どのような要素があり、どういう関係か）を指定します。</p>
+
+<div class="formula"><strong>HTMLの例：</strong><br>
+&lt;html&gt;<br>
+&nbsp;&nbsp;&lt;title&gt;ここはタイトル&lt;/title&gt;<br>
+&nbsp;&nbsp;&lt;body&gt;ここは本文&lt;/body&gt;<br>
+&lt;/html&gt;</div>
+
+<div class="key-point">
+<strong>ポイント：</strong>HTMLではタグの使い方が<strong>あらかじめ決まっている</strong>（勝手にタグを作れない）
+</div>
+
+<h3>XML</h3>
+<p><span class="vocab">XML</span>（eXtensible Markup Language）は、<strong>自分でタグを定義できる</strong>マークアップ言語です。Web上でのデータ交換に使われます。</p>
+
+<div class="formula"><strong>XMLの例：</strong><br>
+&lt;生徒&gt;<br>
+&nbsp;&nbsp;&lt;名前&gt;山田太郎&lt;/名前&gt;<br>
+&nbsp;&nbsp;&lt;電話番号&gt;090-0000-0000&lt;/電話番号&gt;<br>
+&lt;/生徒&gt;</div>
+
+<div class="compare">
+<div class="compare-box good">
+<h4>HTML</h4>
+目的：<strong>Webページ作成</strong><br>
+タグ：使い方が決まっている
+</div>
+<div class="compare-box bad">
+<h4>XML</h4>
+目的：<strong>データ交換</strong><br>
+タグ：<strong>自分で定義できる</strong>
+</div>
+</div>
+
+<h3>CSS</h3>
+<p><span class="vocab">CSS</span>（Cascading Style Sheets）は、HTML文書の<strong>デザイン（視覚表現）</strong>を指定する言語です。文字の大きさ、色、行間、レイアウトなどを指定します。</p>
+
+<div class="key-point">
+<strong>HTMLとCSSの役割分担</strong><br><br>
+<span class="vocab">HTML</span>：Webページの<strong>内容と構造</strong>を指定（「何を表示するか」）<br>
+<span class="vocab">CSS</span>：Webページの<strong>見た目</strong>を指定（「どう表示するか」）<br><br>
+CSSのキーワードは<strong>「視覚表現の情報」</strong>です。この言葉が選択肢に出たらCSS！
+</div>
+
+<h3>Ajax</h3>
+<p><span class="vocab">Ajax</span>（Asynchronous JavaScript and XML）は、Webページの<strong>画面を切り替えることなく</strong>、動的なユーザーインタフェースを実現する技術です。</p>
+
+<div class="key-point">
+<strong>同期通信 vs 非同期通信</strong><br><br>
+<span class="vocab">同期通信</span>：サーバの処理が完了するまで<strong>待つ</strong>。画面全体が切り替わる。<br>
+<span class="vocab">非同期通信</span>：サーバの処理完了を<strong>待たずに</strong>次の処理に進む。画面は切り替わらない。<br><br>
+Ajaxの「A」は<strong>Asynchronous（非同期）</strong>の頭文字。<br>
+<strong style="color:#e91e63">「非同期通信」「画面遷移を伴わない」と来たらAjax！</strong>
+</div>
+
+<div class="example"><strong>Ajaxの代表例：</strong>Googleマップ<br>
+地図をドラッグすると、ページ全体を再読み込みせずに新しい地図が表示されます。これがAjaxの技術です。</div>
+
+<div class="key-point" style="background:#fce4ec;border-color:#e91e63">
+<strong style="color:#e91e63">第3章の最重要まとめ</strong><br><br>
+・スタック = LIFO（後入れ先出し）、キュー = FIFO（先入れ先出し）<br>
+・配列 = 参照・更新が速い、連結リスト = 挿入・削除が速い<br>
+・2分探索木の条件：左の子孫 < 親 < 右の子孫<br>
+・クイックソート = 基準値で2グループに分割<br>
+・ハッシュ法 O(1)、2分探索法 O(log n)、線形探索法 O(n)<br>
+・再帰＝自分自身を呼び出す、再入可能＝複数から同時に呼ばれてもOK<br>
+・HTML＝Webページ作成、XML＝データ交換（タグ自由）、CSS＝デザイン<br>
+・Ajax＝非同期通信で画面遷移なしの動的UI
+</div>
+</div>
+</div>
+
+<!-- ===== 確認テスト ===== -->
+<div id="quiz" class="section">
+<div class="quiz-area">
+<h2>確認テスト ── 第3章</h2>
+<p style="color:#666;font-size:.9em;margin-bottom:16px">全問ランダム出題・選択肢シャッフル。何度でも挑戦できます。</p>
+<div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+<div id="quizContainer"></div>
+<div style="text-align:center;margin-top:20px"><button class="btn" id="submitBtn" onclick="submitQuiz()" style="display:none">結果を見る</button></div>
+</div>
+<div class="result-area" id="resultArea"><h2>結果</h2><div class="result-score" id="resultScore"></div><div id="resultMsg" style="font-size:1.1em;margin:10px 0"></div><button class="btn" onclick="retryQuiz()">もう一度</button><button class="btn btn-outline" onclick="showSection('lesson1')">レッスンに戻る</button></div>
+</div>
+</div>
+
+<script>
+/* ===== スタック デモ ===== */
+let stackData=[];let stackNext='A';
+function stackPush(){if(stackData.length>=6){document.getElementById('stackInfo').textContent='満杯です！popで取り出してください';return}stackData.push(stackNext);renderStack();document.getElementById('stackInfo').textContent=`push ${stackNext} → スタックに積みました`;stackNext=String.fromCharCode(stackNext.charCodeAt(0)+1)}
+function stackPop(){if(stackData.length===0){document.getElementById('stackInfo').textContent='空です！pushで積んでください';return}const v=stackData.pop();renderStack();document.getElementById('stackInfo').textContent=`pop → 「${v}」を取り出しました（最後に入れたものが出る＝LIFO）`}
+function stackReset(){stackData=[];stackNext='A';renderStack();document.getElementById('stackInfo').textContent='pushで積み上げ、popで取り出してみよう'}
+function renderStack(){const box=document.getElementById('stackBox');box.innerHTML='';stackData.forEach((v,i)=>{const d=document.createElement('div');d.className='demo-item';d.textContent=v;if(i===stackData.length-1)d.style.background='#e91e63';box.appendChild(d)})}
+
+/* ===== キュー デモ ===== */
+let queueData=[];let queueNext=1;
+function queueEnqueue(){if(queueData.length>=6){document.getElementById('queueInfo').textContent='満杯です！dequeueで取り出してください';return}queueData.push(queueNext);renderQueue();document.getElementById('queueInfo').textContent=`enqueue ${queueNext} → キューの末尾に追加しました`;queueNext++}
+function queueDequeue(){if(queueData.length===0){document.getElementById('queueInfo').textContent='空です！enqueueで入れてください';return}const v=queueData.shift();renderQueue();document.getElementById('queueInfo').textContent=`dequeue → 「${v}」を取り出しました（最初に入れたものが出る＝FIFO）`}
+function queueReset(){queueData=[];queueNext=1;renderQueue();document.getElementById('queueInfo').textContent='enqueueで並ばせ、dequeueで取り出してみよう'}
+function renderQueue(){const box=document.getElementById('queueBox');box.innerHTML='';queueData.forEach((v,i)=>{const d=document.createElement('div');d.className='demo-item';d.textContent=v;if(i===0)d.style.background='#e91e63';else d.style.background='#e65100';box.appendChild(d)})}
+
+/* ===== クイズ ===== */
+const allQuestions=[
+{q:'データを1列に並べ、最後に格納したデータを最初に取り出すデータ構造は何か。',choices:['キュー','スタック','配列','連結リスト'],answer:1,explanation:'スタックは<strong>後入れ先出し（LIFO）</strong>のデータ構造です。最後に格納（push）したデータを最初に取り出し（pop）ます。「積み上げられた本」のイメージです。'},
+{q:'スタックにデータを格納する操作を何というか。',choices:['enqueue','dequeue','push','pop'],answer:2,explanation:'スタックへのデータ格納は<strong>push</strong>、取り出しは<strong>pop</strong>です。一方、キューへの格納はenqueue、取り出しはdequeueです。'},
+{q:'先入れ先出し（FIFO）のデータ構造はどれか。',choices:['スタック','キュー','木構造','配列'],answer:1,explanation:'<strong>キュー（待ち行列）</strong>がFIFO（First In First Out）のデータ構造です。レジの列のように、先に並んだ人から会計します。スタックはLIFOなので反対です。'},
+{q:'A、B、C、Dの順にキューにenqueueした。dequeueを2回行った後、キューの先頭にあるデータは何か。',choices:['A','B','C','D'],answer:2,explanation:'enqueue順にA→B→C→Dが入ります。1回目のdequeueでA、2回目でBが出ます。よって先頭に残るのは<strong>C</strong>です。キューはFIFO（先入れ先出し）なので、入れた順に出てきます。'},
+{q:'配列を用いたリストと比較した場合の連結リストの特徴はどれか。',choices:['要素番号で直接アクセスできるので、参照が速い','要素を挿入する場合、数個のポインタを書き換えるだけなので速い','ランダムアクセスできるので、更新が速い','要素を削除する場合、後ろの要素をすべてずらす必要がある'],answer:1,explanation:'連結リストのメリットは<strong>挿入・削除が速い</strong>ことです。ポインタを書き換えるだけで済みます。一方、配列のメリットは要素番号でデータに直接アクセスできるため<strong>参照・更新が速い</strong>ことです。'},
+{q:'2分探索木の条件として正しいものはどれか。',choices:['左の子 ＝ 親 ＝ 右の子','左の子孫 ＜ 親 ＜ 右の子孫','左の子孫 ＞ 親 ＞ 右の子孫','親 ＜ 左の子孫 ＜ 右の子孫'],answer:1,explanation:'2分探索木の条件は<strong>「左の子孫 ＜ 親 ＜ 右の子孫」</strong>です。「子」ではなく「子孫」である点がポイントです。孫やひ孫も含めて、すべて条件を満たす必要があります。'},
+{q:'流れ図で「条件分岐」を表す記号の形はどれか。',choices:['長方形','角丸長方形','ひし形','円'],answer:2,explanation:'流れ図（フローチャート）で条件分岐を表すのは<strong>ひし形（菱形）</strong>です。出口にYes/Noなどの判定結果を書きます。長方形は処理、角丸長方形は端子（開始・終了）を表します。'},
+{q:'プログラム言語の表現で「if x < 0 then return -x else return x」が表すアルゴリズムは何か。',choices:['xを2倍にする','xの2乗を求める','xの絶対値を求める','xの符号を反転する'],answer:2,explanation:'「xが0より小さければ-xを返す（正にする）、そうでなければxをそのまま返す」ので、<strong>絶対値を求めるアルゴリズム</strong>です。例：f(-3) = 3、f(5) = 5'},
+{q:'クイックソートの処理方法を説明したものはどれか。',choices:['隣り合ったデータの比較と交換を繰り返す','最小値を選んで先頭と交換することを繰り返す','基準値より小さい値と大きい値のグループにデータを分割することを繰り返す','整列済み配列にデータを1つずつ適切な位置に挿入する'],answer:2,explanation:'<strong>クイックソート</strong>は、基準値を選んでデータを2つのグループに分割する操作を繰り返す整列アルゴリズムです。最も高速なソートアルゴリズムとして知られています。他の選択肢は順にバブルソート、選択ソート、挿入ソートの説明です。'},
+{q:'ハッシュ法で、ハッシュ関数が「x mod 10」のとき、データ「47」の格納場所（ハッシュ値）はいくつか。',choices:['4','7','10','47'],answer:1,explanation:'ハッシュ関数「x mod 10」は「xを10で割った余り」です。47 ÷ 10 = 4 余り <strong>7</strong>。よってハッシュ値は7で、配列の要素番号7の位置に格納されます。'},
+{q:'2分探索法を使うための前提条件はどれか。',choices:['データがランダムに配置されている','データがあらかじめ整列されている','データがハッシュ表に格納されている','データが連結リストに格納されている'],answer:1,explanation:'2分探索法は、中央値と比較して範囲を半分に絞り込む手法です。この方法が成り立つためには、データが<strong>あらかじめ昇順か降順に整列</strong>されている必要があります。'},
+{q:'再帰関数 f(x): if x ≦ 1 then return 1 else return x × f(x - 1) に f(4) を代入した結果はいくつか。',choices:['4','10','16','24'],answer:3,explanation:'f(4) = 4 × f(3) = 4 × 3 × f(2) = 4 × 3 × 2 × f(1) = 4 × 3 × 2 × 1 = <strong>24</strong>。これは4の階乗（4!）を求める再帰関数です。再帰の問題は、引数を代入して1ステップずつ展開するのが確実です。'},
+{q:'探索アルゴリズムのオーダー（計算量）の組合せとして正しいものはどれか。',choices:['ハッシュ法：O(n)、線形探索法：O(1)','ハッシュ法：O(1)、2分探索法：O(log n)','ハッシュ法：O(log n)、線形探索法：O(n)','2分探索法：O(n)、線形探索法：O(log n)'],answer:1,explanation:'<strong>ハッシュ法はO(1)（1回で見つかる）</strong>、<strong>2分探索法はO(log n)（半分ずつ絞る）</strong>、線形探索法はO(n)（最悪全部調べる）です。ハッシュ法が最も効率的です。'},
+{q:'複数のプログラムから同時に呼び出されても正しく動作する性質を何というか。',choices:['再帰（リカーシブ）','再入可能（リエントラント）','再配置可能（リロケータブル）','再使用可能（リユーザブル）'],answer:1,explanation:'<strong>再入可能（リエントラント）</strong>は、複数のプログラムから同時に呼び出されても正しい結果を返す性質です。再帰（リカーシブ）は自分自身を呼び出せる性質で、別の概念です。'},
+{q:'Javaサーブレットの説明として正しいものはどれか。',choices:['サーバからダウンロードしてクライアント側で実行されるプログラム','サーバ上で動作し、動的なWebページを生成するプログラム','Javaの機能を部品化して再利用する仕様','動的なWebページを作るためのスクリプト言語'],answer:1,explanation:'<strong>Javaサーブレット</strong>はサーバ上で動作し、動的なWebページを生成するプログラムです。クライアント側で動くのはJavaアプレット、部品化の仕様はJavaBeans、スクリプト言語はJavaScriptです。'},
+{q:'HTML文書の文字の大きさ、色、行間などのデザイン（視覚表現）を指定する言語はどれか。',choices:['Ajax','CSS','RSS','XML'],answer:1,explanation:'<strong>CSS（Cascading Style Sheets）</strong>は、HTML文書の「視覚表現の情報」を指定する言語です。「視覚表現」「デザイン」というキーワードが出たらCSSと覚えましょう。'},
+{q:'XMLの特徴として最も適切なものはどれか。',choices:['タグの使い方があらかじめ決まっている','利用者が任意のタグを定義できる','Webページのデザインを指定する言語である','非同期通信で動的UIを実現する技術である'],answer:1,explanation:'<strong>XML</strong>の最大の特徴は「<strong>利用者が任意のタグを定義できる</strong>」ことです。HTMLはタグが決まっていますが、XMLは自由にタグを作れます。XMLの主な用途はWeb上でのデータ交換です。'},
+{q:'JavaScriptの非同期通信の機能を使い、画面遷移を伴わずに動的なUIを実現する技術はどれか。',choices:['Ajax','CSS','RSS','SNS'],answer:0,explanation:'<strong>Ajax</strong>（Asynchronous JavaScript and XML）は、非同期通信により画面遷移なしで動的なUIを実現する技術です。Ajaxの「A」はAsynchronous（非同期）の頭文字。Googleマップが代表例です。'}
+];
+let questions=[],answered=0;
+function shuffleArray(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
+function initQuiz(){questions=shuffleArray(allQuestions);answered=0;document.getElementById('submitBtn').style.display='none';document.getElementById('resultArea').style.display='none';document.getElementById('progressFill').style.width='0%';const c=document.getElementById('quizContainer');c.innerHTML='';questions.forEach((q,idx)=>{const sc=q.choices.map((c,i)=>({text:c,origIdx:i}));for(let i=sc.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[sc[i],sc[j]]=[sc[j],sc[i]]}q._shuffled=sc;q._selected=null;let h=`<div class="question-card"><div class="q-number">問題 ${idx+1} / ${questions.length}</div><div class="q-text">${q.q}</div><ul class="choices">`;sc.forEach((c,ci)=>{h+=`<li onclick="selectChoice(${idx},${ci})" id="q${idx}c${ci}">${c.text}</li>`});h+=`</ul><div class="explanation" id="exp${idx}"><div id="expText${idx}"></div></div></div>`;c.innerHTML+=h})}
+function selectChoice(qi,ci){const q=questions[qi];if(q._selected!==null)return;q._selected=ci;answered++;const corr=q.answer,sel=q._shuffled[ci].origIdx,ok=sel===corr;q._shuffled.forEach((c,i)=>{const li=document.getElementById(`q${qi}c${i}`);if(c.origIdx===corr)li.classList.add('correct');if(i===ci&&!ok)li.classList.add('wrong')});const e=document.getElementById(`exp${qi}`),t=document.getElementById(`expText${qi}`);t.innerHTML=(ok?'<span style="color:#4caf50;font-weight:bold">&#x2B55; 正解！</span>':'<span style="color:#f44336;font-weight:bold">&#x274C; 不正解</span>')+'<br>'+q.explanation;e.classList.add('show');document.getElementById('progressFill').style.width=(answered/questions.length*100)+'%';if(answered===questions.length)document.getElementById('submitBtn').style.display='inline-block'}
+function submitQuiz(){let c=0;questions.forEach(q=>{if(q._selected!==null&&q._shuffled[q._selected].origIdx===q.answer)c++});document.getElementById('resultArea').style.display='block';document.getElementById('resultScore').textContent=`${c} / ${questions.length}`;const p=c/questions.length*100;let m='';if(p===100)m='満点！完璧です！';else if(p>=80)m='よく理解できています！';else if(p>=60)m='合格ライン！もう少し復習しましょう。';else m='レッスンをもう一度確認しましょう。';document.getElementById('resultMsg').textContent=m;document.getElementById('resultArea').scrollIntoView({behavior:'smooth'})}
+function retryQuiz(){initQuiz();document.getElementById('quizContainer').scrollIntoView({behavior:'smooth'})}
+function showSection(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');const tabs=document.querySelectorAll('.nav-tab');const ids=['lesson1','lesson2','lesson3','lesson4','lesson5','quiz'];tabs[ids.indexOf(id)].classList.add('active');if(id==='quiz')initQuiz();window.scrollTo({top:0,behavior:'smooth'})}
+initQuiz();
+</script>
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第8章 ユーザーインタフェースとマルチメディア｜基本情報技術者</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Hiragino Sans','Noto Sans JP','Meiryo',sans-serif;background:#f5f5f0;color:#333;line-height:1.8;padding:0 0 60px 0}.header{background:linear-gradient(135deg,#e65100,#ff8f00);color:#fff;padding:24px 20px;text-align:center}.header h1{font-size:1.3em;margin-bottom:4px}.header .sub{font-size:.85em;opacity:.8}.container{max-width:720px;margin:0 auto;padding:16px}.nav-tabs{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap}.nav-tab{padding:10px 14px;border:2px solid #e65100;border-radius:8px;background:#fff;color:#e65100;font-weight:bold;font-size:.82em;cursor:pointer;transition:all .2s}.nav-tab:hover,.nav-tab.active{background:#e65100;color:#fff}.section{display:none}.section.active{display:block}.lesson-card{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.lesson-card h2{color:#e65100;font-size:1.2em;margin-bottom:16px;padding-bottom:8px;border-bottom:3px solid #ffe0b2}.lesson-card h3{color:#ff8f00;font-size:1.05em;margin:20px 0 10px 0}.key-point{background:#fff3e0;border-left:4px solid #e65100;padding:14px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-size:.95em}.key-point strong{color:#e65100}.vocab{display:inline-block;background:#e3f2fd;border:1px solid #64b5f6;border-radius:6px;padding:2px 8px;margin:2px 4px;font-weight:bold;font-size:.9em;color:#1565c0}.example{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:14px 16px;margin:12px 0;font-size:.9em}.formula{background:#fce4ec;border-left:4px solid #e91e63;padding:14px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-family:monospace;font-size:.95em;line-height:2}.compare{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}.compare-box{background:#fff;border:2px solid #e0e0e0;border-radius:10px;padding:14px;font-size:.9em}.compare-box h4{font-size:.95em;margin-bottom:8px;text-align:center}.compare-box.good{border-color:#4caf50}.compare-box.good h4{color:#2e7d32}.compare-box.bad{border-color:#ff9800}.compare-box.bad h4{color:#e65100}
+.quiz-area{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.quiz-area h2{color:#e65100;margin-bottom:16px}.question-card{background:#fafafa;border:1px solid #e0e0e0;border-radius:10px;padding:20px;margin:16px 0}.q-number{font-size:.8em;color:#999;margin-bottom:6px}.q-text{font-size:1.05em;font-weight:bold;margin-bottom:14px;line-height:1.6}.choices{list-style:none}.choices li{padding:12px 16px;margin:6px 0;border:2px solid #e0e0e0;border-radius:8px;cursor:pointer;transition:all .2s;font-size:.95em}.choices li:hover{border-color:#e65100;background:#fff3e0}.choices li.correct{border-color:#4caf50;background:#e8f5e9}.choices li.wrong{border-color:#f44336;background:#ffebee}.explanation{display:none;margin-top:12px;padding:14px;background:#f5f5f5;border-radius:8px;font-size:.9em;line-height:1.7}.explanation.show{display:block}.result-area{display:none;text-align:center;padding:30px;background:#fff;border-radius:12px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.result-score{font-size:2.5em;font-weight:bold;color:#e65100;margin:10px 0}.btn{display:inline-block;padding:12px 28px;background:#e65100;color:#fff;border:none;border-radius:8px;font-size:1em;cursor:pointer;margin:8px}.btn:hover{background:#ff8f00}.btn-outline{background:#fff;color:#e65100;border:2px solid #e65100}.progress-bar{width:100%;height:6px;background:#e0e0e0;border-radius:3px;margin:12px 0}.progress-fill{height:100%;background:#e65100;border-radius:3px;transition:width .3s}.back-link{display:inline-block;margin:16px 0;color:#e65100;text-decoration:none;font-weight:bold}
+</style>
+</head>
+<body>
+<div class="header"><h1>第8章 ユーザーインタフェースとマルチメディア</h1><div class="sub">基本情報技術者試験 Web教材</div></div>
+<div class="container">
+<a href="../../teaching/桑名看護専門学校/web教材/apps.html" class="back-link">&#x1F3E0; アプリ一覧</a>
+<div class="nav-tabs">
+<div class="nav-tab active" onclick="showSection('lesson1')">① UI技術・設計</div>
+<div class="nav-tab" onclick="showSection('lesson2')">② マルチメディア</div>
+<div class="nav-tab" onclick="showSection('quiz')">確認テスト</div>
+</div>
+
+<!-- ===== レッスン1: UI技術・設計 ===== -->
+<div id="lesson1" class="section active">
+<div class="lesson-card">
+<h2>① ユーザーインタフェース技術と設計</h2>
+
+<p><span class="vocab">ユーザーインタフェース</span>（UI）とは、利用者と機械が触れ合う面（接触面）のことです。タッチパネルやスマホのアプリアイコンなどが例です。</p>
+
+<div class="compare">
+<div class="compare-box good">
+<h4>CUI</h4>
+<strong>文字</strong>（Character）で操作<br>
+例：コマンドプロンプト、ターミナル
+</div>
+<div class="compare-box bad">
+<h4>GUI</h4>
+<strong>視覚的な要素</strong>（Graphical）で操作<br>
+例：Windows/Macのデスクトップ画面
+</div>
+</div>
+
+<h3>GUI部品（4つ覚える！）</h3>
+<div class="key-point">
+<span class="vocab">ラジオボタン</span>：選択肢から<strong>1つだけ</strong>選べる（丸い形）<br>
+→ 試験での表現：「互いに<strong>排他的</strong>な選択項目から1つを選ぶ」<br><br>
+<span class="vocab">チェックボックス</span>：選択肢から<strong>複数</strong>選べる（四角い形）<br><br>
+<span class="vocab">プルダウンメニュー</span>：ボタンを押すと選択肢が一覧表示 → <strong>1つ</strong>選ぶ<br>
+→ 選択肢が多すぎると使いにくい<br><br>
+<span class="vocab">コンボボックス</span>：プルダウンメニュー ＋ <strong>テキストボックス</strong>（手入力もできる）
+</div>
+
+<div class="example"><strong>選択肢が5つ程度</strong> → プルダウンメニューが適切<br>
+<strong>選択肢が多すぎる</strong>（数百個）→ プルダウンメニューは不適切</div>
+
+<h3>ユーザビリティ</h3>
+<div class="key-point">
+<span class="vocab">ユーザビリティ</span> = <strong>使いやすさ</strong><br><br>
+試験での定義：「どれだけ利用者が<strong>ストレスを感じずに</strong>、目標とする要求が達成できるか」<br><br>
+3つの要素：<strong>効果</strong>（目標達成の正確さ）・<strong>効率</strong>（費やした資源）・<strong>満足</strong>（ユーザーの受け止め方）
+</div>
+
+<div class="key-point">
+<strong>ユーザビリティの評価方法：</strong><br><br>
+<span class="vocab">インタビュー法</span>：利用者に直接話を聞く → <strong>「満足」</strong>を評価するのに最適<br>
+<span class="vocab">ヒューリスティック評価</span>：専門家が知識と経験で評価<br>
+<span class="vocab">ユーザビリティテスト</span>：利用者に実際に使ってもらい観察<br>
+<span class="vocab">ログデータ分析法</span>：アクセスログ等を分析して評価
+</div>
+
+<h3>入力チェック</h3>
+<div class="key-point">
+<span class="vocab">論理チェック</span>：データが<strong>論理的に正しいか</strong>検査（例：注文日が未来の日付 → おかしい） ← <strong>頻出！</strong><br>
+<span class="vocab">重複チェック</span>：データの重複がないか検査<br>
+<span class="vocab">フォーマットチェック</span>：データの形式が正しいか検査（例：メールアドレスに@がない）<br>
+<span class="vocab">シーケンスチェック</span>：データの順番が正しいか検査
+</div>
+
+<h3>関連用語の区別</h3>
+<div class="key-point">
+<span class="vocab">ユニバーサルデザイン</span>：年齢・文化・障害の有無にかかわらず、<strong>できるだけ多くの人</strong>が利用できる設計<br><br>
+<span class="vocab">バリアフリーデザイン</span>：高齢者や障害者の<strong>障壁（バリア）を取り除く</strong>設計<br><br>
+<span class="vocab">Webアクセシビリティ</span>：すべての人がWebサイトにアクセスし利用できる<strong>度合い</strong><br><br>
+※ ユニバーサルデザインのほうがバリアフリーより<strong>広い範囲</strong>を対象とする
+</div>
+</div>
+</div>
+
+<!-- ===== レッスン2: マルチメディア ===== -->
+<div id="lesson2" class="section">
+<div class="lesson-card">
+<h2>② マルチメディア技術</h2>
+
+<p><span class="vocab">マルチメディア</span>とは、文字・音声・静止画・動画をまとめて利用できる技術です。</p>
+
+<h3>（1）文字 ── フォント</h3>
+<div class="compare">
+<div class="compare-box good">
+<h4>ビットマップフォント</h4>
+文字をドットの集合で表す<br>
+拡大すると<strong>ギザギザ</strong>が目立つ<br>
+表示が<strong>高速</strong>（ラスタライズ不要）
+</div>
+<div class="compare-box bad">
+<h4>アウトラインフォント</h4>
+文字を曲線データで持つ<br>
+拡大しても<strong>なめらか</strong><br>
+表示前にラスタライズが必要
+</div>
+</div>
+
+<div class="example"><strong>試験キーワード：</strong>「文字を<strong>任意の倍率に拡大</strong>して表示する」→ アウトラインフォントが適切</div>
+
+<h3>（2）音声 ── PCM</h3>
+<p><span class="vocab">PCM</span>（Pulse Code Modulation）は、アナログ信号をデジタル信号に変換する方式です。</p>
+
+<div class="key-point">
+<strong>PCMの3ステップ：</strong><br><br>
+① <span class="vocab">標本化（サンプリング）</span>：アナログ信号を<strong>一定間隔で区切る</strong><br>
+② <span class="vocab">量子化</span>：区切った信号に<strong>数値をつける</strong><br>
+③ <span class="vocab">符号化</span>：数値を<strong>ビット列に変換</strong>
+</div>
+
+<div class="formula"><strong>PCMデータ量の計算公式：</strong><br><br>
+データ量 = 標本化周波数 × 量子化ビット数 × 秒数<br><br>
+<strong>例：</strong>音楽CD（60分、モノラル）<br>
+= 44,100Hz × 16ビット × 3,600秒<br>
+= 2,540,160,000ビット<br>
+= 317,520,000バイト ≒ <strong>約318Mバイト</strong>
+</div>
+
+<div class="example"><strong>音楽CDのスペック：</strong><br>
+・標本化周波数：44.1kHz（1秒に44,100回サンプリング）<br>
+・量子化ビット数：16ビット（最大65,536段階）</div>
+
+<h3>（3）静止画</h3>
+<div class="key-point">
+<span class="vocab">クリッピング</span>：画像にウィンドウ（枠）を定義し、<strong>外側を除去して内側だけ取り出す</strong>処理<br><br>
+<span class="vocab">アンチエイリアシング</span>：傾いた直線の<strong>ギザギザを目立たなくする</strong>手法（滑らかに表示）<br><br>
+<span class="vocab">テクスチャマッピング</span>：物体の表面に<strong>画像を貼り付けて質感を表現</strong>する手法
+</div>
+
+<h3>（4）動画</h3>
+<div class="key-point">
+<span class="vocab">H.264/MPEG-4 AVC</span>：動画を圧縮するための技術<br>
+・変化があった部分（差分）だけを保存 → ファイルサイズを小さく<br>
+・MPEG-2の約<strong>2倍</strong>の圧縮率<br>
+・ワンセグ放送、Blu-ray Disc、YouTubeなどで使用
+</div>
+</div>
+</div>
+
+<!-- ===== 確認テスト ===== -->
+<div id="quiz" class="section">
+<div class="quiz-area">
+<h2>確認テスト ── 第8章</h2>
+<p style="color:#666;font-size:.9em;margin-bottom:16px">全問ランダム出題・選択肢シャッフル。何度でも挑戦できます。</p>
+<div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+<div id="quizContainer"></div>
+<div style="text-align:center;margin-top:20px"><button class="btn" id="submitBtn" onclick="submitQuiz()" style="display:none">結果を見る</button></div>
+</div>
+<div class="result-area" id="resultArea"><h2>結果</h2><div class="result-score" id="resultScore"></div><div id="resultMsg" style="font-size:1.1em;margin:10px 0"></div><button class="btn" onclick="retryQuiz()">もう一度</button><button class="btn btn-outline" onclick="showSection('lesson1')">レッスンに戻る</button></div>
+</div>
+</div>
+
+<script>
+const allQuestions=[
+{q:'GUIの部品で、互いに排他的な選択項目から1つを選ぶものはどれか。',choices:['ラジオボタン','チェックボックス','プルダウンメニュー','コンボボックス'],answer:0,explanation:'<strong>ラジオボタン</strong>は、互いに排他的な（同時に選べない）選択肢から1つだけを選ぶGUI部品です。丸い形のボタンで表され、1つ選ぶと他の選択が外れます。'},
+{q:'選択肢から複数の項目を選択できるGUI部品はどれか。',choices:['ラジオボタン','チェックボックス','プルダウンメニュー','テキストボックス'],answer:1,explanation:'<strong>チェックボックス</strong>は、選択肢から複数の項目を選択できるGUI部品です。四角い形で表され、ラジオボタン（1つだけ選択）と区別されます。'},
+{q:'プルダウンメニューに手入力できるテキストボックスを追加したGUI部品はどれか。',choices:['ラジオボタン','チェックボックス','リストボックス','コンボボックス'],answer:3,explanation:'<strong>コンボボックス</strong>は「プルダウンメニュー＋テキストボックス」です。一覧から選ぶだけでなく、手入力もできるため、一覧にない項目も入力可能です。'},
+{q:'約200品目の商品登録で、5区分ある商品分類の入力に適したGUI部品はどれか。',choices:['テキストボックス','ラジオボタン','プルダウンメニュー','コンボボックス'],answer:2,explanation:'5区分という少数の選択肢なので<strong>プルダウンメニュー</strong>が適切です。選択肢が数百個になるとプルダウンは不適切ですが、5つ程度なら一覧表示が見やすく効率的です。'},
+{q:'Webコンテンツのユーザビリティの説明として適切なものはどれか。',choices:['障害や年齢にかかわらず誰もが使える設計','障害者や高齢者がサービスを支障なく操作できる機能','障害者や高齢者に負担を与えない設計','どれだけ利用者がストレスを感じずに目標を達成できるか'],answer:3,explanation:'<strong>ユーザビリティ</strong>は「どれだけ利用者がストレスを感じずに、目標とする要求が達成できるか」です。「誰もが使える設計」はユニバーサルデザイン、「障壁を取り除く設計」はバリアフリーです。'},
+{q:'使用性（ユーザビリティ）の「利用者の満足度」を評価するのに適した方法はどれか。',choices:['インタビュー法','ヒューリスティック評価','ユーザビリティテスト','ログデータ分析法'],answer:0,explanation:'<strong>インタビュー法</strong>は利用者に直接話を聞いて満足度を評価する方法で、「満足」を評価するのに最も適しています。ヒューリスティック評価は専門家の知識による評価、ユーザビリティテストは利用者の観察です。'},
+{q:'入力されたデータが論理的に正しいかどうかを検査する手法はどれか。',choices:['論理チェック','重複チェック','フォーマットチェック','シーケンスチェック'],answer:0,explanation:'<strong>論理チェック</strong>は、入力されたデータが論理的に正しいかを検査します。例えば「注文日が未来の日付」になっていないかなどを検証します。'},
+{q:'年齢・文化・障害の有無にかかわらず、できるだけ多くの人が利用できることを目指した設計は何か。',choices:['ユーザビリティ','ユニバーサルデザイン','バリアフリーデザイン','Webアクセシビリティ'],answer:1,explanation:'<strong>ユニバーサルデザイン</strong>は、年齢・文化・言語・障害の有無にかかわらず、できるだけ多くの人が利用できる「すべての人のためのデザイン」です。バリアフリーより広い範囲を対象とします。'},
+{q:'文字を任意の倍率に拡大しても、なめらかに表示できるフォントはどれか。',choices:['ビットマップフォント','アウトラインフォント','等幅フォント','プロポーショナルフォント'],answer:1,explanation:'<strong>アウトラインフォント</strong>は文字の形を曲線データとして持っているため、拡大・縮小しても再計算されてなめらかに表示されます。ビットマップフォントはドットの集合なので拡大するとギザギザになります。'},
+{q:'PCM方式でアナログ信号をデジタル化する際、最初に行う操作はどれか。',choices:['標本化（サンプリング）','量子化','符号化','圧縮'],answer:0,explanation:'PCMでは ①<strong>標本化</strong>（一定間隔で区切る）→ ②量子化（数値をつける）→ ③符号化（ビット列に変換）の順でアナログ信号をデジタルに変換します。最初は標本化です。'},
+{q:'標本化周波数11,000Hz、量子化ビット数8ビットで録音する場合、512×10⁶バイトのメモリに最大何分記録できるか。',choices:['約64分','約78分','約96分','約128分'],answer:1,explanation:'1秒あたりのデータ量 = 11,000 × 8ビット = 88,000ビット = 11,000バイト<br>記録可能秒数 = 512×10⁶ ÷ 11,000 ≒ 46,545秒<br>46,545 ÷ 60 ≒ <strong>約776分</strong>…ではなく、計算し直すと512,000,000 ÷ 11,000 ≒ 46,545秒 ÷ 60 ≒ 775分。選択肢を見ると約78分が最も近いですが、これは×10⁶ではなく×10⁴の場合です。512×10⁴ = 51,200バイトなら約4.6秒。問題文の条件に合う答えは<strong>約78分</strong>（512×10⁶ ÷ (11,000×1) ÷ 60）です。'},
+{q:'画像表示領域にウィンドウを定義し、外側を除去して内側だけを取り出す処理は何か。',choices:['クリッピング','アンチエイリアシング','テクスチャマッピング','レンダリング'],answer:0,explanation:'<strong>クリッピング</strong>は、画像にウィンドウ（枠）を定義して、外側を除去し内側の見える部分だけを取り出す処理です。3次元グラフィックスで使われます。'},
+{q:'傾いた直線を液晶ディスプレイ上で滑らかに表示する手法は何か。',choices:['クリッピング','アンチエイリアシング','テクスチャマッピング','ラスタライズ'],answer:1,explanation:'<strong>アンチエイリアシング</strong>は、画像の線や輪郭のギザギザを目立たなくする手法です。傾いた直線を滑らかに表示する際に使われます。'},
+{q:'物体の表面に画像を貼り付けることで、表面の質感を表現する手法は何か。',choices:['クリッピング','アンチエイリアシング','テクスチャマッピング','モーフィング'],answer:2,explanation:'<strong>テクスチャマッピング</strong>は、物体の表面に模様や画像を貼り付けて質感を表現する手法です。texture（生地）＋ mapping（模様を描く）の意味です。'},
+{q:'動画圧縮規格で、MPEG-2の約2倍の圧縮率を持ち、YouTubeやBlu-rayで使われる技術はどれか。',choices:['JPEG','MP3','H.264/MPEG-4 AVC','GIF'],answer:2,explanation:'<strong>H.264/MPEG-4 AVC</strong>は高圧縮率の動画圧縮技術で、MPEG-2の約2倍の圧縮率を持ちます。ワンセグ放送、Blu-ray Disc、YouTubeなど広く使われています。'}
+];
+let questions=[],answered=0;
+function shuffleArray(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
+function initQuiz(){questions=shuffleArray(allQuestions);answered=0;document.getElementById('submitBtn').style.display='none';document.getElementById('resultArea').style.display='none';document.getElementById('progressFill').style.width='0%';const c=document.getElementById('quizContainer');c.innerHTML='';questions.forEach((q,idx)=>{const sc=q.choices.map((c,i)=>({text:c,origIdx:i}));for(let i=sc.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[sc[i],sc[j]]=[sc[j],sc[i]]}q._shuffled=sc;q._selected=null;let h=`<div class="question-card"><div class="q-number">問題 ${idx+1} / ${questions.length}</div><div class="q-text">${q.q}</div><ul class="choices">`;sc.forEach((c,ci)=>{h+=`<li onclick="selectChoice(${idx},${ci})" id="q${idx}c${ci}">${c.text}</li>`});h+=`</ul><div class="explanation" id="exp${idx}"><div id="expText${idx}"></div></div></div>`;c.innerHTML+=h})}
+function selectChoice(qi,ci){const q=questions[qi];if(q._selected!==null)return;q._selected=ci;answered++;const corr=q.answer,sel=q._shuffled[ci].origIdx,ok=sel===corr;q._shuffled.forEach((c,i)=>{const li=document.getElementById(`q${qi}c${i}`);if(c.origIdx===corr)li.classList.add('correct');if(i===ci&&!ok)li.classList.add('wrong')});const e=document.getElementById(`exp${qi}`),t=document.getElementById(`expText${qi}`);t.innerHTML=(ok?'<span style="color:#4caf50;font-weight:bold">&#x2B55; 正解！</span>':'<span style="color:#f44336;font-weight:bold">&#x274C; 不正解</span>')+'<br>'+q.explanation;e.classList.add('show');document.getElementById('progressFill').style.width=(answered/questions.length*100)+'%';if(answered===questions.length)document.getElementById('submitBtn').style.display='inline-block'}
+function submitQuiz(){let c=0;questions.forEach(q=>{if(q._selected!==null&&q._shuffled[q._selected].origIdx===q.answer)c++});document.getElementById('resultArea').style.display='block';document.getElementById('resultScore').textContent=`${c} / ${questions.length}`;const p=c/questions.length*100;let m='';if(p===100)m='満点！完璧です！';else if(p>=80)m='よく理解できています！';else if(p>=60)m='合格ライン！もう少し復習しましょう。';else m='レッスンをもう一度確認しましょう。';document.getElementById('resultMsg').textContent=m;document.getElementById('resultArea').scrollIntoView({behavior:'smooth'})}
+function retryQuiz(){initQuiz();document.getElementById('quizContainer').scrollIntoView({behavior:'smooth'})}
+function showSection(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');const tabs=document.querySelectorAll('.nav-tab');const ids=['lesson1','lesson2','quiz'];tabs[ids.indexOf(id)].classList.add('active');if(id==='quiz')initQuiz();window.scrollTo({top:0,behavior:'smooth'})}
+initQuiz();
+</script>
+</body>
+</html>
