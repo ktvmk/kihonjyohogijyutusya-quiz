@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第11章 情報セキュリティ｜基本情報技術者</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Hiragino Sans','Noto Sans JP','Meiryo',sans-serif;background:#f5f5f0;color:#333;line-height:1.8;padding:0 0 60px 0}.header{background:linear-gradient(135deg,#e65100,#ff8f00);color:#fff;padding:24px 20px;text-align:center}.header h1{font-size:1.3em;margin-bottom:4px}.header .sub{font-size:.85em;opacity:.8}.container{max-width:720px;margin:0 auto;padding:16px}.nav-tabs{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap}.nav-tab{padding:10px 14px;border:2px solid #e65100;border-radius:8px;background:#fff;color:#e65100;font-weight:bold;font-size:.82em;cursor:pointer;transition:all .2s}.nav-tab:hover,.nav-tab.active{background:#e65100;color:#fff}.section{display:none}.section.active{display:block}.lesson-card{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.lesson-card h2{color:#e65100;font-size:1.2em;margin-bottom:16px;padding-bottom:8px;border-bottom:3px solid #ffe0b2}.lesson-card h3{color:#ff8f00;font-size:1.05em;margin:20px 0 10px 0}.key-point{background:#fff3e0;border-left:4px solid #e65100;padding:14px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-size:.95em}.key-point strong{color:#e65100}.vocab{display:inline-block;background:#e3f2fd;border:1px solid #64b5f6;border-radius:6px;padding:2px 8px;margin:2px 4px;font-weight:bold;font-size:.9em;color:#1565c0}.example{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:14px 16px;margin:12px 0;font-size:.9em}.formula{background:#fce4ec;border-left:4px solid #e91e63;padding:14px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-family:monospace;font-size:.95em;line-height:2}.compare{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}.compare-box{background:#fff;border:2px solid #e0e0e0;border-radius:10px;padding:14px;font-size:.9em}.compare-box h4{font-size:.95em;margin-bottom:8px;text-align:center}.compare-box.good{border-color:#4caf50}.compare-box.good h4{color:#2e7d32}.compare-box.bad{border-color:#ff9800}.compare-box.bad h4{color:#e65100}
+.quiz-area{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.quiz-area h2{color:#e65100;margin-bottom:16px}.question-card{background:#fafafa;border:1px solid #e0e0e0;border-radius:10px;padding:20px;margin:16px 0}.q-number{font-size:.8em;color:#999;margin-bottom:6px}.q-text{font-size:1.05em;font-weight:bold;margin-bottom:14px;line-height:1.6}.choices{list-style:none}.choices li{padding:12px 16px;margin:6px 0;border:2px solid #e0e0e0;border-radius:8px;cursor:pointer;transition:all .2s;font-size:.95em}.choices li:hover{border-color:#e65100;background:#fff3e0}.choices li.correct{border-color:#4caf50;background:#e8f5e9}.choices li.wrong{border-color:#f44336;background:#ffebee}.explanation{display:none;margin-top:12px;padding:14px;background:#f5f5f5;border-radius:8px;font-size:.9em;line-height:1.7}.explanation.show{display:block}.result-area{display:none;text-align:center;padding:30px;background:#fff;border-radius:12px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.result-score{font-size:2.5em;font-weight:bold;color:#e65100;margin:10px 0}.btn{display:inline-block;padding:12px 28px;background:#e65100;color:#fff;border:none;border-radius:8px;font-size:1em;cursor:pointer;margin:8px}.btn:hover{background:#ff8f00}.btn-outline{background:#fff;color:#e65100;border:2px solid #e65100}.progress-bar{width:100%;height:6px;background:#e0e0e0;border-radius:3px;margin:12px 0}.progress-fill{height:100%;background:#e65100;border-radius:3px;transition:width .3s}.back-link{display:inline-block;margin:16px 0;color:#e65100;text-decoration:none;font-weight:bold}
+.sql-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.88em}
+.sql-table th{background:#e65100;color:#fff;padding:6px;border:1px solid #ccc}
+.sql-table td{padding:6px;border:1px solid #ccc;background:#fff}
+</style>
+</head>
+<body>
+<div class="header"><h1>第11章 情報セキュリティ</h1><div class="sub">基本情報技術者試験 Web教材</div></div>
+<div class="container">
+<a href="it_quiz.html" class="back-link">← 章の一覧にもどる</a>
+<div class="nav-tabs">
+<div class="nav-tab active" onclick="showSection('lesson1')">① 脅威と攻撃</div>
+<div class="nav-tab" onclick="showSection('lesson2')">② 暗号技術</div>
+<div class="nav-tab" onclick="showSection('lesson3')">③ デジタル署名・認証局</div>
+<div class="nav-tab" onclick="showSection('lesson4')">④ リスク管理・ISMS</div>
+<div class="nav-tab" onclick="showSection('lesson5')">⑤ 脅威への対策</div>
+<div class="nav-tab" onclick="showSection('quiz')">確認テスト</div>
+</div>
+
+<!-- ===== レッスン1 ===== -->
+<div id="lesson1" class="section active">
+<div class="lesson-card">
+<h2>① 情報セキュリティの脅威と攻撃手法</h2>
+
+<h3>情報セキュリティの3要素（CIA）</h3>
+<div class="key-point">
+情報セキュリティで守るべき代表的な3つの特性（頭文字でCIAと呼ばれる）：<br><br>
+<span class="vocab">機密性（Confidentiality）</span>：認められた人だけが情報にアクセスできること<br>
+<span class="vocab">完全性（Integrity）</span>：情報が正確で、改ざんや破壊が行われていないこと<br>
+<span class="vocab">可用性（Availability）</span>：必要なときに情報やサービスを利用できること
+</div>
+
+<h3>脅威の3分類</h3>
+<div class="key-point">
+情報セキュリティの脅威は次の3つに分類される：<br><br>
+<span class="vocab">人的脅威</span>：人が原因（誤操作、不正アクセス、盗み見など）<br>
+<span class="vocab">技術的脅威</span>：技術的手段が原因（マルウェア、各種攻撃）<br>
+<span class="vocab">物理的脅威</span>：災害・盗難など直接的な手段（水害・落雷・火災・侵入など）
+</div>
+
+<h3>人的脅威</h3>
+<div class="key-point">
+<span class="vocab">ソーシャルエンジニアリング</span>：特別なツールや技術を使わず、<strong>人間の心理的な隙</strong>を利用して機密情報を手に入れること。例：システム管理者を装ってパスワードを聞き出す、緊急事態を装って情報を入手する<br><br>
+<span class="vocab">不正のトライアングル</span>：人が不正を働くのは<strong>「機会」「動機」「正当化」</strong>の3条件が揃ったとき、という理論
+</div>
+<table class="sql-table">
+<tr><th>条件</th><th>意味</th></tr>
+<tr><td><strong>機会</strong></td><td>不正行為ができる環境（技術・物理・組織のルールなど）</td></tr>
+<tr><td><strong>動機</strong></td><td>不正行為をしたい理由（ノルマのプレッシャなど）</td></tr>
+<tr><td><strong>正当化</strong></td><td>不正も仕方ないと考える都合のよい理由付け・責任転嫁</td></tr>
+</table>
+
+<h3>攻撃の準備・パスワードを割り出す攻撃</h3>
+<div class="key-point">
+<span class="vocab">ポートスキャン</span>：サーバのポート番号に順番にアクセスし、攻撃できそうなサービスを<strong>事前調査</strong>する<br>
+<span class="vocab">セキュリティホール</span>：不正アクセスに利用されるシステムの欠陥（脆弱性）<br><br>
+<span class="vocab">ブルートフォース攻撃</span>：考えられる文字列の<strong>すべての組合せ</strong>を試す（総当たり攻撃）<br>
+<span class="vocab">辞書攻撃</span>：辞書や人名録の単語を使って割り出す<br>
+<span class="vocab">パスワードリスト攻撃</span>：他サービスから<strong>不正入手したIDとパスワードの一覧</strong>を使ってログインを試みる
+</div>
+
+<h3>マルウェア（悪意のあるソフトウェアの総称）</h3>
+<table class="sql-table">
+<tr><th>種類</th><th>内容</th></tr>
+<tr><td><strong>ボット</strong></td><td>攻撃者から遠隔で指令を受けて動作するプログラム</td></tr>
+<tr><td><strong>スパイウェア</strong></td><td>気づかれないよう個人情報などを収集する</td></tr>
+<tr><td><strong>ランサムウェア</strong></td><td>ファイルを暗号化し使用不能にして身代金を要求</td></tr>
+<tr><td><strong>キーロガー</strong></td><td>キーボード入力を記録する（悪用例：入力パスワード収集）</td></tr>
+<tr><td><strong>バックドア</strong></td><td>認証を経ずに不正アクセスできる「裏口」</td></tr>
+</table>
+
+<h3>Webサイトに仕掛けられる攻撃</h3>
+<div class="key-point">
+<span class="vocab">フィッシング</span>：利用者を偽サイトに誘導し、個人情報を入力させて不正取得<br>
+<span class="vocab">ドライブバイダウンロード</span>：悪意のあるWebサイトを<strong>閲覧するだけ</strong>でマルウェアがダウンロードされる<br>
+<span class="vocab">SEOポイズニング</span>：悪意のあるサイトを検索結果の<strong>上位に表示</strong>させる<br>
+<span class="vocab">DNSキャッシュポイズニング</span>：DNSサーバのドメイン名とIPアドレスの対応を<strong>書き換え</strong>、偽サイトへ誘導<br>
+<span class="vocab">SQLインジェクション</span>：不正なSQL文を実行し、データベースを改ざん・不正取得<br>
+<span class="vocab">クロスサイトスクリプティング</span>：入力フォームに悪意あるスクリプトを埋め込み、cookieなどを盗む
+</div>
+
+<h3>その他の攻撃</h3>
+<div class="key-point">
+<span class="vocab">スパム</span>：受信者の承諾なしに無差別に送られる迷惑メール<br>
+<span class="vocab">DoS攻撃</span>：大量の要求を送りつけてサービスを提供不能にする。複数のコンピュータから一斉に行うのが<span class="vocab">DDoS攻撃</span>（ボットネットを利用）<br>
+<span class="vocab">ディレクトリトラバーサル攻撃</span>：パス名を使って、管理者の意図しないファイルを不正に閲覧する
+</div>
+</div>
+</div>
+
+<!-- ===== レッスン2 ===== -->
+<div id="lesson2" class="section">
+<div class="lesson-card">
+<h2>② 暗号技術の基本</h2>
+
+<h3>暗号化と復号</h3>
+<div class="key-point">
+<span class="vocab">平文</span>：暗号化する前の、誰でも読める文章<br>
+<span class="vocab">暗号化</span>：平文を暗号文にすること／<span class="vocab">復号</span>：暗号文を平文に戻すこと<br>
+※試験では「復号化」ではなく単に<strong>「復号」</strong>という
+</div>
+
+<h3>共通鍵暗号方式</h3>
+<div class="key-point">
+<span class="vocab">共通鍵暗号方式</span>：暗号化と復号で<strong>同じ鍵（共通鍵）</strong>を使う方式（家の玄関の鍵と同じ）<br><br>
+<strong>欠点</strong>：相手に共通鍵を確実・安全に送る方法がない（鍵が奪われると暗号化の意味がなくなる）<br>
+<strong>長所</strong>：処理が高速なので、大きなデータの暗号化に向く
+</div>
+
+<h3>公開鍵暗号方式</h3>
+<div class="key-point">
+<span class="vocab">公開鍵暗号方式</span>：<strong>公開鍵</strong>と<strong>秘密鍵</strong>の2つの鍵を使う方式<br>
+・公開鍵…誰でも入手できる（いくつでも複製可）<br>
+・秘密鍵…本人以外の誰にも知られてはいけない（1つしかない）
+</div>
+<div class="key-point">
+<strong>大原則：</strong>公開鍵で暗号化した文章は、ペアとなる<strong>秘密鍵でしか復号できない</strong>。<br><br>
+→ 送信者は<strong>受信者の公開鍵</strong>で暗号化し、受信者は<strong>自分の秘密鍵</strong>で復号する。「暗号化は誰でもできるが、復号は特定の人だけ」なので、鍵を安全に配る問題を解決できる。<br><br>
+<strong>欠点</strong>：誰でも暗号化できるため「なりすまし」が可能。また処理が低速。
+</div>
+
+<h3>ハイブリッド暗号方式</h3>
+<div class="key-point">
+<span class="vocab">ハイブリッド暗号方式</span>：共通鍵暗号方式と公開鍵暗号方式を組み合わせた方式<br><br>
+① データ本体は<strong>高速な共通鍵</strong>で暗号化<br>
+② その<strong>共通鍵を受信者の公開鍵</strong>で暗号化して安全に送る<br>
+③ 受信者は自分の秘密鍵で共通鍵を復号し、④共通鍵でデータを復号<br>
+→ 「速さ」と「安全な鍵配送」を両立できる（SSL/TLSなどで利用）
+</div>
+
+<h3>代表的な暗号化アルゴリズム</h3>
+<div class="compare">
+<div class="compare-box good">
+<h4>AES（共通鍵）</h4>
+Advanced Encryption Standard<br><br>
+アメリカで規格化された<strong>現在主流の共通鍵</strong>暗号方式。旧規格DESの後継
+</div>
+<div class="compare-box bad">
+<h4>RSA（公開鍵）</h4>
+Rivest・Shamir・Adleman<br><br>
+<strong>巨大な数の素因数分解が困難</strong>なことを利用した公開鍵暗号方式
+</div>
+</div>
+<div class="key-point">
+・共通鍵暗号方式の例：<strong>AES、DES</strong><br>
+・公開鍵暗号方式の例：<strong>RSA、楕円曲線暗号</strong><br>
+※SHA-256は暗号化方式ではなく<strong>ハッシュ関数</strong>（レッスン③）なので混同しないこと
+</div>
+</div>
+</div>
+
+<!-- ===== レッスン3 ===== -->
+<div id="lesson3" class="section">
+<div class="lesson-card">
+<h2>③ デジタル署名と認証局</h2>
+
+<h3>ハッシュ関数とダイジェスト</h3>
+<div class="key-point">
+<span class="vocab">ハッシュ関数</span>：文字列を入力すると、一定の長さの値を出力する関数<br>
+<span class="vocab">ダイジェスト</span>（メッセージダイジェスト・ハッシュ値）：ハッシュ関数の出力値<br><br>
+<strong>特徴：</strong><br>
+・入力が<strong>1ビットでも異なると</strong>、ダイジェストは大きく異なる<br>
+・ダイジェストから<strong>元のメッセージには戻せない</strong>（一方向）<br>
+・入力の長さにかかわらず、ダイジェストは<strong>固定長</strong>
+</div>
+<div class="key-point">
+<span class="vocab">SHA-256</span>：<strong>256ビット</strong>の長さのダイジェストを出力するハッシュ関数のアルゴリズム（SHA-2の一種）。ファイルの改ざん検知などに使われる
+</div>
+
+<h3>デジタル署名</h3>
+<div class="key-point">
+<span class="vocab">デジタル署名</span>：公開鍵暗号方式を使って、データに電子的に署名を行うこと<br><br>
+<strong>大原則：</strong>秘密鍵で暗号化した文章は、ペアとなる<strong>公開鍵でしか復号できない</strong><br>
+→ 公開鍵暗号方式とは秘密鍵・公開鍵の役割が<strong>入れ替わる</strong>点に注意
+</div>
+<div class="key-point">
+<strong>署名〜検証の流れ：</strong><br>
+① 送信者がメッセージをハッシュ関数でダイジェスト化<br>
+② そのダイジェストを<strong>送信者の秘密鍵</strong>で暗号化 ＝「署名」<br>
+③ メッセージ＋署名を送信<br>
+④ 受信者は受け取ったメッセージをハッシュ関数でダイジェスト化<br>
+⑤ 署名を<strong>送信者の公開鍵</strong>で復号してダイジェストを得る<br>
+⑥ 2つのダイジェストが一致すれば「本人が送った・改ざんなし」と確認できる
+</div>
+<div class="key-point">
+・デジタル署名で検知できるのは<strong>なりすましと改ざん</strong>の2つ<br>
+・署名の際に使う秘密鍵を<strong>署名鍵</strong>、検証の際に使う公開鍵を<strong>検証鍵</strong>ともいう<br>
+・デジタル署名は<strong>メッセージ自体を暗号化しない</strong>（秘匿には公開鍵暗号方式と併用）
+</div>
+
+<h3>認証局とデジタル証明書・PKI</h3>
+<div class="key-point">
+<span class="vocab">認証局（CA）</span>：公開鍵の持ち主が本人であることを証明する<strong>第三者機関</strong>（現実の役所・印鑑登録にあたる）<br>
+<span class="vocab">デジタル証明書</span>（電子証明書）：公開鍵の所有者が本人であることを証明するデータ。認証局が発行し、<strong>本人の公開鍵＋認証局のデジタル署名</strong>を含む<br><br>
+<span class="vocab">PKI</span>（Public Key Infrastructure：公開鍵基盤）：公開鍵の正当性を認証局に保証してもらう仕組み（インフラ）
+</div>
+</div>
+</div>
+
+<!-- ===== レッスン4 ===== -->
+<div id="lesson4" class="section">
+<div class="lesson-card">
+<h2>④ リスクマネジメントと情報セキュリティマネジメント</h2>
+
+<h3>リスクマネジメントのプロセス</h3>
+<div class="key-point">
+<span class="vocab">リスクマネジメント</span>：あらゆるリスクを管理し、損失を最小の費用で食い止めるプロセス<br><br>
+実施の順番（前半3つを<span class="vocab">リスクアセスメント</span>と呼ぶ）：<br>
+<strong>①リスク特定</strong>（洗い出す）→<strong>②リスク分析</strong>（発生確率と損害の大きさを調べる）→<strong>③リスク評価</strong>（優先順位を付ける）→<strong>④リスク対応</strong>（対処内容と期限を決める）
+</div>
+
+<h3>4つのリスク対応策</h3>
+<table class="sql-table">
+<tr><th>対応策</th><th>内容</th></tr>
+<tr><td><strong>リスク回避</strong></td><td>リスクに関わる作業をしない（原因の除去）</td></tr>
+<tr><td><strong>リスク低減（軽減）</strong></td><td>発生確率を下げる（セキュリティ対策を講じる）</td></tr>
+<tr><td><strong>リスク共有（移転・転嫁）</strong></td><td>リスクを他社へ移す（外部委託・保険への加入）</td></tr>
+<tr><td><strong>リスク保有（受容）</strong></td><td>リスクをそのまま受け入れる（何もしない）</td></tr>
+</table>
+
+<h3>BCMとBCP</h3>
+<div class="compare">
+<div class="compare-box good">
+<h4>BCM（事業継続管理）</h4>
+災害などで重要システムに障害が出ても<strong>企業活動を継続する経営手法</strong>。事前の計画・準備がポイント
+</div>
+<div class="compare-box bad">
+<h4>BCP（事業継続計画）</h4>
+不測の事態を想定し、<strong>事業をいかに継続するか</strong>をまとめた計画・行動手順
+</div>
+</div>
+
+<h3>情報セキュリティマネジメントとISMS</h3>
+<div class="key-point">
+情報セキュリティマネジメントは、リスクマネジメントのうち「情報」を対象としたもの（リスクマネジメントが上位概念）。<br><br>
+<span class="vocab">ISMS</span>（情報セキュリティマネジメントシステム）：組織の情報資産について<strong>機密性・完全性・可用性</strong>の3つをバランスよく維持・改善する仕組み
+</div>
+<div class="key-point">
+<span class="vocab">JIS Q 27001</span>：ISMSを標準化した規格<br>
+<span class="vocab">ISMS適合性評価制度</span>：JIS Q 27001に基づき、組織のISMSが要求事項に適合しているかを<strong>第三者機関が審査・認証</strong>する制度<br><br>
+※JIS規格の使い分け：<strong>Q 9001＝品質</strong>／<strong>Q 14001＝環境</strong>／<strong>Q 27001＝情報セキュリティ</strong>
+</div>
+
+<h3>3要素が失われる例（試験頻出）</h3>
+<table class="sql-table">
+<tr><th>特性</th><th>失われる例</th></tr>
+<tr><td><strong>機密性</strong></td><td>情報の漏えい・盗聴、USBメモリの盗難、不正コピー</td></tr>
+<tr><td><strong>完全性</strong></td><td>Webページの改ざん、データが誤った内容のまま運用</td></tr>
+<tr><td><strong>可用性</strong></td><td>DoS攻撃で処理不能、空調故障によるサーバ停止</td></tr>
+</table>
+</div>
+</div>
+
+<!-- ===== レッスン5 ===== -->
+<div id="lesson5" class="section">
+<div class="lesson-card">
+<h2>⑤ 脅威への対策</h2>
+
+<h3>人的セキュリティ対策：アクセス権</h3>
+<div class="key-point">
+<span class="vocab">アクセス権</span>：ユーザーごとに与える、ファイルへの読み書き・実行の権限<br>
+・読取り／書込み／実行の3種類。有無を2進数で表し、通常<strong>8進数</strong>で設定する<br>
+・例：読取りのみ許可 ＝ 2進数「100」＝ 8進数「4」
+</div>
+
+<h3>技術的対策：攻撃者からサーバを守る「3つの壁」</h3>
+<table class="sql-table">
+<tr><th>壁</th><th>役割</th></tr>
+<tr><td><strong>ファイアウォール</strong></td><td>外部からの不正アクセスから社内ネットを守る。ヘッダー情報（IPアドレス・ポート番号）で判断するものを<strong>パケットフィルタリング型</strong>という</td></tr>
+<tr><td><strong>IDS</strong>（侵入検知）</td><td>不正アクセスを検知し、管理者へ<strong>通知</strong>する</td></tr>
+<tr><td><strong>IPS</strong>（侵入防止）</td><td>通知に加え、そのアクセスを<strong>遮断</strong>まで行う</td></tr>
+<tr><td><strong>WAF</strong></td><td>Webアプリケーションの脆弱性を狙った攻撃を検知・遮断する</td></tr>
+</table>
+
+<h3>ネットワークに関する対策</h3>
+<div class="key-point">
+<span class="vocab">DMZ</span>（非武装地帯）：外部・社内の両ネットワークから隔離した領域。<strong>社外公開サーバ（Web・メール）</strong>を置き、乗っ取られても社内に被害が及ばないようにする<br><br>
+<span class="vocab">SSL/TLS</span>：パソコンとサーバ間の通信を暗号化するプロトコル（SSLは脆弱性ありTLSが後継）<br>
+<span class="vocab">HTTPS</span>：SSL/TLSを用いてHTTP通信を暗号化。<strong>サーバ証明書</strong>で通信先が本物か確認できる（暗号化範囲＝WebブラウザとWebサーバ間）<br>
+<span class="vocab">WPA3</span>：無線LAN上の通信を暗号化する規格（暗号化範囲＝PCとアクセスポイント間）
+</div>
+
+<h3>マルウェアの検出方法</h3>
+<table class="sql-table">
+<tr><th>方法</th><th>内容</th></tr>
+<tr><td><strong>コンペア法</strong></td><td>原本ファイルと比較して変更を調べる</td></tr>
+<tr><td><strong>パターンマッチング法</strong></td><td>既知マルウェアの<strong>シグネチャ</strong>と一致するか検査（現在の主流）</td></tr>
+<tr><td><strong>ビヘイビア法</strong></td><td>実際に実行して振る舞い（挙動）を監視する</td></tr>
+</table>
+
+<h3>その他の技術的対策</h3>
+<div class="key-point">
+<span class="vocab">ペネトレーションテスト</span>：実際にシステムを攻撃して弱点を発見（主にネットワーク対象）<br>
+<span class="vocab">ファジング</span>：問題を起こしそうな多様なデータ（ファズ）を入力して脆弱性を発見（主にソフトウェア対象）<br>
+<span class="vocab">セキュアブート</span>：起動時にOSのデジタル署名を検証し、許可されないOSの実行を防ぐ<br>
+<span class="vocab">CAPTCHA</span>：歪んだ文字などで、人間が操作していることを確かめるテスト（ボット対策）
+</div>
+
+<h3>携帯端末に関する対策</h3>
+<div class="key-point">
+<span class="vocab">BYOD</span>：従業員が<strong>私物の情報端末</strong>を業務に使うこと（管理が届きにくくリスク増）<br>
+<span class="vocab">MDM</span>（Mobile Device Management）：業務用スマートフォンをセキュリティポリシーに従って<strong>一元管理</strong>する仕組み
+</div>
+
+<h3>物理的対策：バイオメトリクス認証と多要素認証</h3>
+<div class="key-point">
+<span class="vocab">バイオメトリクス認証</span>：身体的・行動的特徴による認証<br>
+・身体的特徴…指紋、虹彩、網膜、静脈、声紋、顔<br>
+・行動的特徴…筆跡（速度・筆圧）、歩き方<br><br>
+<span class="vocab">本人拒否率</span>（低いほど便利）と<span class="vocab">他人受入率</span>（低いほど安全）は<strong>トレードオフ</strong>の関係。双方を勘案して装置を調整する
+</div>
+<div class="key-point">
+<span class="vocab">認証の3要素</span>：<strong>記憶</strong>（パスワード）／<strong>所有物</strong>（カード・スマホ）／<strong>生体情報</strong>（指紋・虹彩）<br><br>
+<span class="vocab">2要素認証</span>：異なる2つの要素を組み合わせて本人確認（例：ATM＝カード＋暗証番号）。同じ要素を2つ使う<strong>2段階認証</strong>とは区別する
+</div>
+
+<div class="key-point" style="background:#fce4ec;border-color:#e91e63">
+<strong style="color:#e91e63">第11章の最重要まとめ</strong><br><br>
+・情報セキュリティの3要素＝機密性・完全性・可用性（CIA）<br>
+・ソーシャルエンジニアリング＝技術でなく心理的な隙をつく／不正のトライアングル＝機会・動機・正当化<br>
+・共通鍵＝同じ鍵・高速（AES）／公開鍵＝受信者の公開鍵で暗号化・秘密鍵で復号（RSA）<br>
+・ハイブリッド＝共通鍵を公開鍵暗号で送る<br>
+・デジタル署名＝送信者の秘密鍵で署名・公開鍵で検証／なりすましと改ざんを検知<br>
+・認証局（CA）＝公開鍵の本人性を証明するデジタル証明書を発行／PKI＝その仕組み<br>
+・リスクアセスメント＝特定→分析→評価／対応＝回避・低減・共有・保有<br>
+・ISMS＝機密性・完全性・可用性を維持／規格はJIS Q 27001<br>
+・3つの壁＝ファイアウォール・IDS/IPS・WAF／DMZ＝公開サーバ置き場<br>
+・HTTPS＝ブラウザ〜サーバ間、WPA3＝PC〜アクセスポイント間を暗号化<br>
+・2要素認証＝記憶・所有物・生体情報のうち異なる2つ
+</div>
+</div>
+</div>
+
+<!-- ===== 確認テスト ===== -->
+<div id="quiz" class="section">
+<div class="quiz-area">
+<h2>確認テスト ── 第11章</h2>
+<p style="color:#666;font-size:.9em;margin-bottom:16px">全問ランダム出題・選択肢シャッフル。何度でも挑戦できます。</p>
+<div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+<div id="quizContainer"></div>
+<div style="text-align:center;margin-top:20px"><button class="btn" id="submitBtn" onclick="submitQuiz()" style="display:none">結果を見る</button></div>
+</div>
+<div class="result-area" id="resultArea"><h2>結果</h2><div class="result-score" id="resultScore"></div><div id="resultMsg" style="font-size:1.1em;margin:10px 0"></div><button class="btn" onclick="retryQuiz()">もう一度</button><button class="btn btn-outline" onclick="showSection('lesson1')">レッスンに戻る</button></div>
+</div>
+</div>
+
+<script>
+const allQuestions=[
+{q:'ソーシャルエンジニアリングに分類される手口はどれか。（平成26年度）',choices:['ウイルス感染で自動作成されたバックドアからシステムに侵入する','システム管理者などを装い、利用者に問い合わせてパスワードを取得する','総当たり攻撃ツールを用いてパスワードを解析する','バッファオーバーフローなどの脆弱性を利用してシステムに侵入する'],answer:1,explanation:'<strong>ソーシャルエンジニアリング</strong>は、特別なツールや技術を使わず、人間の心理的な隙を利用して機密情報を手に入れる手口です。管理者を装ってパスワードを聞き出すのが典型例です。ほかは技術的な攻撃（バックドア・ブルートフォース・バッファオーバーフロー）です。'},
+{q:'“不正のトライアングル”の構成要素の説明として適切なものはどれか。（平成31年度）',choices:['“機会”とは、内部者による不正行為の実行を可能又は容易にする環境の存在である','“情報と伝達”とは、必要な情報が正しく伝えられるようにすることである','“正当化”とは、ノルマによるプレッシャなどのことである','“動機”とは、良心のかしゃくを乗り越える都合の良い理由付けなどである'],answer:0,explanation:'不正のトライアングルの3要素は<strong>機会・動機・正当化</strong>です。「機会」は不正行為ができる環境の存在を指します。ノルマのプレッシャは「動機」、都合の良い理由付けは「正当化」であり、選択肢ウ・エは説明が入れ替わっています。「情報と伝達」は3要素に含まれません。'},
+{q:'攻撃者がシステムに侵入するときにポートスキャンを行う目的はどれか。（平成30年度）',choices:['システムログに攻撃の痕跡が残っていないかを調査する','権限を奪取できそうなアカウントがあるかを調査する','事前調査の段階で、攻撃できそうなサービスがあるかを調査する','攻撃者にとって有益な利用者情報があるかを調査する'],answer:2,explanation:'<strong>ポートスキャン</strong>は、サーバのポート番号に順番にアクセスして、攻撃できそうなサービス（アプリケーション）があるかどうかを事前調査するための技術です。攻撃の準備段階で行われます。'},
+{q:'パスワードリスト攻撃の手口に該当するものはどれか。',choices:['攻撃対象の利用者IDを一つ定め、辞書にある単語やその組合せでログインを試行する','攻撃対象の利用者IDを一つ定め、文字を総当たりしてログインを試行する','不正に取得した他サイトの利用者IDとパスワードの一覧を用いてログインを試行する','よく用いられるパスワードを一つ定め、利用者IDを総当たりしてログインを試行する'],answer:2,explanation:'<strong>パスワードリスト攻撃</strong>は、他のサービスから不正に入手したIDとパスワードの一覧（リスト）を使ってログインを試みる攻撃です。複数サイトで同じIDとパスワードを使い回している利用者が狙われます。アは辞書攻撃、イはブルートフォース攻撃、エはリバースブルートフォース攻撃です。'},
+{q:'フィッシングの手口に該当するものはどれか。（平成18年度）',choices:['入力内容を表示する部分に悪意のスクリプトを埋め込み被害を与える','ウイルスに感染したコンピュータを外部から操る','IPアドレスやWeb閲覧履歴などの個人情報をひそかに収集し外部へ送信する','電子メールで受信者を誘導し、実在する会社を装った偽サイトで個人情報をだまし取る'],answer:3,explanation:'<strong>フィッシング</strong>は、電子メールなどで利用者を偽のWebサイトに誘導し、個人情報を入力させてだまし取る手口です。アはクロスサイトスクリプティング、イはボット、ウはスパイウェアの説明です。'},
+{q:'SQLインジェクション攻撃の説明はどれか。（平成29年度）',choices:['悪意のある命令文をWebサイトに入力し、データベースのデータを不正取得・改ざんする','悪意のあるスクリプトを埋め込んだWebページを閲覧させ、別サイトで意図しない操作を行わせる','DBMSの脆弱性を悪用し、感染を繰り返してトラフィックを急増させる','入力データをそのまま表示するWebサイトを悪用し、悪意のスクリプトを訪問者のブラウザで実行させる'],answer:0,explanation:'<strong>SQLインジェクション</strong>は、Webアプリケーションに不正なSQL文を入力・実行させ、データベースを改ざんしたりデータを不正取得したりする攻撃です。イはCSRF、ウはワーム、エはクロスサイトスクリプティングの説明です。'},
+{q:'DNSキャッシュポイズニングに分類される攻撃内容はどれか。（平成29年度）',choices:['DNSサーバのバージョン情報を入手してセキュリティホールを特定する','PCが参照するDNSサーバに偽のドメイン情報を注入し、利用者を偽装されたサーバに誘導する','DNSサーバを踏み台にして再帰的な問い合わせを大量に行う','DNSサーバが保存するゾーン情報をまとめて転送させる'],answer:1,explanation:'<strong>DNSキャッシュポイズニング</strong>は、DNSサーバにキャッシュされたドメイン名とIPアドレスの対応（ドメイン情報）を偽の内容に書き換え、利用者を偽サイトへ誘導する攻撃です。アはポートスキャン、ウはDNSリフレクター攻撃、エは意図しないゾーン転送要求です。'},
+{q:'共通鍵暗号方式の特徴はどれか。（平成30年度）',choices:['鍵を相手と共有する必要があり、事前に平文で送付することが推奨されている','通信相手が1人の場合、使用する鍵の個数は公開鍵暗号方式よりも多い','同じ暗号強度の鍵長では、公開鍵暗号方式に比べて暗号化・復号に必要な時間が短い','鍵のペアを生成し、一方の鍵で暗号化すると他方の鍵でだけ復号できる'],answer:2,explanation:'<strong>共通鍵暗号方式</strong>は、公開鍵暗号方式に比べて暗号化・復号の処理が高速なことが特徴です。共通鍵を平文で送るのは危険で推奨されません。相手1人あたりの鍵は共通鍵1個で公開鍵方式（2個）より少なく、エは公開鍵暗号方式の説明です。'},
+{q:'XさんがYさんに公開鍵暗号方式を使って電子メールを暗号化して送りたい。内容を暗号化するのに使用する鍵はどれか。（平成25年度）',choices:['Xさんの公開鍵','Xさんの秘密鍵','Yさんの公開鍵','Yさんの秘密鍵'],answer:2,explanation:'公開鍵暗号方式では、送信者は<strong>受信者（Yさん）の公開鍵</strong>で暗号化します。復号できるのはペアとなるYさんの秘密鍵を持つYさんだけなので、内容の秘匿が実現します。'},
+{q:'データベースで管理されるデータの暗号化に用いることができ、かつ暗号化と復号とで同じ鍵を使用する暗号化方式はどれか。（平成27年度）',choices:['AES','PKI','RSA','SHA-256'],answer:0,explanation:'暗号化と復号で同じ鍵を使うのは共通鍵暗号方式で、その代表が<strong>AES</strong>です。RSAは公開鍵暗号方式、SHA-256はハッシュ関数、PKIは公開鍵基盤（仕組み）で暗号化方式ではありません。'},
+{q:'非常に大きな数の素因数分解が困難なことを利用した公開鍵暗号方式はどれか。（平成29年度）',choices:['AES','DH（DH鍵交換）','DSA','RSA'],answer:3,explanation:'<strong>RSA</strong>は、巨大な数の素因数分解が難しいことを利用した公開鍵暗号方式の代表的アルゴリズムです。AESは共通鍵暗号方式、DHは鍵交換方式、DSAはデジタル署名のアルゴリズムです。'},
+{q:'ファイルAと、ファイルAにSHA-256を適用して算出した値Bとが送られてきた（値Bは事前に電話で伝えられた値と一致し改ざんされていない）。利用者が実現できることはどれか。（令和元年度）',choices:['値BからSHA-256でデジタル署名を算出し、ファイルAの作成者を確認できる','値BからSHA-256でデジタル署名を算出し、提供者が作成者かを確認できる','ファイルAにSHA-256を適用した値と値Bを比較し、改ざんされていないか検証できる','値との差分から、改ざんされた部分を修復できる'],answer:2,explanation:'ハッシュ関数<strong>SHA-256</strong>は、入力が少しでも異なると出力（ダイジェスト）が大きく変わります。受け取ったファイルAのダイジェストを計算し、正しい値Bと一致すれば改ざんされていないと検証できます。ハッシュ値から署名の作成や元データの修復はできません。'},
+{q:'デジタル署名における署名鍵の使い方と目的として適切なものはどれか。（平成29年度）',choices:['受信者が署名鍵で暗号文を元のメッセージに戻せるようにする','送信者が署名鍵でメッセージを暗号化し、受信者が改ざん部位を特定できるようにする','送信者が署名鍵で署名を作成し、受信者が送信者を確認できるようにする','送信者が署名鍵でメッセージを暗号化し、内容を関係者以外に分からないようにする'],answer:2,explanation:'デジタル署名では、送信者が<strong>署名鍵（送信者の秘密鍵）</strong>でダイジェストを暗号化して署名を作成し、受信者は送信者の公開鍵で検証して送信者本人を確認します。目的はなりすましと改ざんの検知で、メッセージ自体の暗号化（秘匿）や改ざん部位の特定はできません。'},
+{q:'PKIにおける認証局が、信頼できる第三者機関として果たす役割はどれか。（平成28年度）',choices:['利用者からの要求に対して正確な時刻を返答する','利用者から要求された電子メール本文にデジタル署名を付与する','利用者やサーバの公開鍵を証明するデジタル証明書を発行する','利用者やサーバの秘密鍵を証明するデジタル証明書を発行する'],answer:2,explanation:'<strong>認証局（CA）</strong>は、利用者やサーバの<strong>公開鍵</strong>が本人のものであることを証明するデジタル証明書を発行します。証明するのは秘密鍵ではなく公開鍵である点に注意します。アはNTP、イはS/MIMEなどの役割です。'},
+{q:'リスクアセスメントを構成するプロセスの組合せはどれか。（平成29年度）',choices:['リスク特定、リスク評価、リスク受容','リスク特定、リスク分析、リスク評価','リスク分析、リスク対応、リスク受容','リスク分析、リスク評価、リスク対応'],answer:1,explanation:'<strong>リスクアセスメント</strong>は、リスクマネジメントの前半3プロセス「リスク特定→リスク分析→リスク評価」で構成されます。最後の「リスク対応」はアセスメントには含まれません。'},
+{q:'リスク共有（リスク移転）に該当するものはどれか。（平成25年度）',choices:['損失の発生率を低下させること','保険への加入などで、他者との間でリスクを分散すること','リスクの原因を除去すること','リスクを扱いやすい単位に分解するか集約すること'],answer:1,explanation:'<strong>リスク共有（移転・転嫁）</strong>は、保険への加入や外部委託などでリスクを自社から他社へ移すことです。アはリスク低減、ウはリスク回避（原因の除去）に該当します。'},
+{q:'情報の“完全性”を脅かす攻撃はどれか。（平成28年度）',choices:['Webページの改ざん','システム内に保管されているデータの不正コピー','システムを過負荷状態にするDoS攻撃','通信内容の盗聴'],answer:0,explanation:'<strong>完全性</strong>は情報が正確で改ざんされていないことです。Webページの改ざんは完全性を脅かします。不正コピーや盗聴は機密性、DoS攻撃は可用性を脅かす攻撃です。'},
+{q:'ISMS適合性評価制度の説明はどれか。（平成27年度）',choices:['ISO/IEC 15408に基づき、IT製品のセキュリティ機能を評価する','JIS Q 15001に基づき、個人情報の保護体制を整備した事業者を認定する','JIS Q 27001に基づき、組織が構築した情報セキュリティマネジメントシステムの適合性を評価する','電子政府推奨暗号リストに基づき、暗号モジュールを認証する'],answer:2,explanation:'<strong>ISMS適合性評価制度</strong>は、<strong>JIS Q 27001</strong>に基づいて組織のISMSが要求事項に適合しているかを第三者機関が審査・認証する制度です。アはITセキュリティ評価及び認証制度、イはプライバシーマーク制度、エは暗号モジュール試験及び認証制度です。'},
+{q:'IDSの機能はどれか。（平成30年度）',choices:['ソフトウェア製品が最新バージョンかを確認する','テストデータを送り、応答や挙動から脆弱性を検出する','サーバやネットワークを監視し、侵入や侵害を検知した場合に管理者へ通知する','情報セキュリティ対策状況を入力し、取組み状況を自己診断する'],answer:2,explanation:'<strong>IDS（侵入検知システム）</strong>は、サーバやネットワークを監視し、不正アクセス（侵入）を検知した際にシステム管理者へ通知します。通知に加えてアクセスを遮断するのはIPSです。イはファジングの説明です。'},
+{q:'HTTPとHTTPSを比較した場合において、HTTPSだけがもつ特徴を示したものはどれか。（令和7年度）',choices:['cookieに保存された情報を用いたセッション管理が可能である','IDとパスワードによって利用者認証を行うことが可能である','Webブラウザでキャッシュさせて通信量を減らすことが可能である','通信相手先サーバをサーバ証明書によって確認することが可能である'],answer:3,explanation:'<strong>HTTPS</strong>はSSL/TLSを用いてHTTP通信を暗号化し、認証局が発行した<strong>サーバ証明書</strong>で通信相手が本物のサーバかを確認できます。これがHTTPにはない特徴です。ほかの選択肢はHTTPにも当てはまります。'},
+{q:'会社が従業員に貸与するスマートフォンに、セキュリティポリシーに従った設定や業務アプリの配信を行い、利用状況を一元管理する仕組みはどれか。（平成26年度）',choices:['BYOD','ECM','LTE','MDM'],answer:3,explanation:'業務用スマートフォンをセキュリティポリシーに従って一元管理する仕組みは<strong>MDM（Mobile Device Management）</strong>です。BYODは私物端末の業務利用、ECMは企業デジタルデータの一元管理、LTEは携帯電話の通信規格です。'},
+{q:'2要素認証に該当するものはどれか。（平成27年度）',choices:['2本の指の指紋で認証する','虹彩とパスワードで認証する','異なる2種類の特殊文字を混ぜたパスワードで認証する','異なる二つのパスワードで認証する'],answer:1,explanation:'<strong>2要素認証</strong>は「記憶・所有物・生体情報」の異なる2要素を組み合わせる方式です。虹彩（生体情報）とパスワード（記憶）は異なる要素の組合せなので該当します。ほかはいずれも同じ要素を2つ使うため2要素認証にはなりません。'}
+];
+let questions=[],answered=0;
+function shuffleArray(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
+function initQuiz(){questions=shuffleArray(allQuestions);answered=0;document.getElementById('submitBtn').style.display='none';document.getElementById('resultArea').style.display='none';document.getElementById('progressFill').style.width='0%';const c=document.getElementById('quizContainer');c.innerHTML='';questions.forEach((q,idx)=>{const sc=q.choices.map((c,i)=>({text:c,origIdx:i}));for(let i=sc.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[sc[i],sc[j]]=[sc[j],sc[i]]}q._shuffled=sc;q._selected=null;let h=`<div class="question-card"><div class="q-number">問題 ${idx+1} / ${questions.length}</div><div class="q-text">${q.q}</div><ul class="choices">`;sc.forEach((c,ci)=>{h+=`<li onclick="selectChoice(${idx},${ci})" id="q${idx}c${ci}">${c.text}</li>`});h+=`</ul><div class="explanation" id="exp${idx}"><div id="expText${idx}"></div></div></div>`;c.innerHTML+=h})}
+function selectChoice(qi,ci){const q=questions[qi];if(q._selected!==null)return;q._selected=ci;answered++;const corr=q.answer,sel=q._shuffled[ci].origIdx,ok=sel===corr;q._shuffled.forEach((c,i)=>{const li=document.getElementById(`q${qi}c${i}`);if(c.origIdx===corr)li.classList.add('correct');if(i===ci&&!ok)li.classList.add('wrong')});const e=document.getElementById(`exp${qi}`),t=document.getElementById(`expText${qi}`);t.innerHTML=(ok?'<span style="color:#4caf50;font-weight:bold">&#x2B55; 正解！</span>':'<span style="color:#f44336;font-weight:bold">&#x274C; 不正解</span>')+'<br>'+q.explanation;e.classList.add('show');document.getElementById('progressFill').style.width=(answered/questions.length*100)+'%';if(answered===questions.length)document.getElementById('submitBtn').style.display='inline-block'}
+function submitQuiz(){let c=0;questions.forEach(q=>{if(q._selected!==null&&q._shuffled[q._selected].origIdx===q.answer)c++});document.getElementById('resultArea').style.display='block';document.getElementById('resultScore').textContent=`${c} / ${questions.length}`;const p=c/questions.length*100;let m='';if(p===100)m='満点！完璧です！';else if(p>=80)m='よく理解できています！';else if(p>=60)m='合格ライン！もう少し復習しましょう。';else m='レッスンをもう一度確認しましょう。';document.getElementById('resultMsg').textContent=m;document.getElementById('resultArea').scrollIntoView({behavior:'smooth'})}
+function retryQuiz(){initQuiz();document.getElementById('quizContainer').scrollIntoView({behavior:'smooth'})}
+function showSection(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');const tabs=document.querySelectorAll('.nav-tab');const ids=['lesson1','lesson2','lesson3','lesson4','lesson5','quiz'];tabs[ids.indexOf(id)].classList.add('active');if(id==='quiz')initQuiz();window.scrollTo({top:0,behavior:'smooth'})}
+initQuiz();
+</script>
+</body>
+</html>

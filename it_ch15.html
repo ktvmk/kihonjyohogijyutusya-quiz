@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第15章 サービスマネジメントとシステム監査｜基本情報技術者</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Hiragino Sans','Noto Sans JP','Meiryo',sans-serif;background:#f5f5f0;color:#333;line-height:1.8;padding:0 0 60px 0}.header{background:linear-gradient(135deg,#e65100,#ff8f00);color:#fff;padding:24px 20px;text-align:center}.header h1{font-size:1.3em;margin-bottom:4px}.header .sub{font-size:.85em;opacity:.8}.container{max-width:720px;margin:0 auto;padding:16px}.nav-tabs{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap}.nav-tab{padding:10px 14px;border:2px solid #e65100;border-radius:8px;background:#fff;color:#e65100;font-weight:bold;font-size:.82em;cursor:pointer;transition:all .2s}.nav-tab:hover,.nav-tab.active{background:#e65100;color:#fff}.section{display:none}.section.active{display:block}.lesson-card{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.lesson-card h2{color:#e65100;font-size:1.2em;margin-bottom:16px;padding-bottom:8px;border-bottom:3px solid #ffe0b2}.lesson-card h3{color:#ff8f00;font-size:1.05em;margin:20px 0 10px 0}.key-point{background:#fff3e0;border-left:4px solid #e65100;padding:14px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-size:.95em}.key-point strong{color:#e65100}.vocab{display:inline-block;background:#e3f2fd;border:1px solid #64b5f6;border-radius:6px;padding:2px 8px;margin:2px 4px;font-weight:bold;font-size:.9em;color:#1565c0}.example{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:14px 16px;margin:12px 0;font-size:.9em}.formula{background:#fce4ec;border-left:4px solid #e91e63;padding:14px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-family:monospace;font-size:.95em;line-height:2}.compare{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}.compare-box{background:#fff;border:2px solid #e0e0e0;border-radius:10px;padding:14px;font-size:.9em}.compare-box h4{font-size:.95em;margin-bottom:8px;text-align:center}.compare-box.good{border-color:#4caf50}.compare-box.good h4{color:#2e7d32}.compare-box.bad{border-color:#ff9800}.compare-box.bad h4{color:#e65100}
+.quiz-area{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.quiz-area h2{color:#e65100;margin-bottom:16px}.question-card{background:#fafafa;border:1px solid #e0e0e0;border-radius:10px;padding:20px;margin:16px 0}.q-number{font-size:.8em;color:#999;margin-bottom:6px}.q-text{font-size:1.05em;font-weight:bold;margin-bottom:14px;line-height:1.6}.choices{list-style:none}.choices li{padding:12px 16px;margin:6px 0;border:2px solid #e0e0e0;border-radius:8px;cursor:pointer;transition:all .2s;font-size:.95em}.choices li:hover{border-color:#e65100;background:#fff3e0}.choices li.correct{border-color:#4caf50;background:#e8f5e9}.choices li.wrong{border-color:#f44336;background:#ffebee}.explanation{display:none;margin-top:12px;padding:14px;background:#f5f5f5;border-radius:8px;font-size:.9em;line-height:1.7}.explanation.show{display:block}.result-area{display:none;text-align:center;padding:30px;background:#fff;border-radius:12px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.result-score{font-size:2.5em;font-weight:bold;color:#e65100;margin:10px 0}.btn{display:inline-block;padding:12px 28px;background:#e65100;color:#fff;border:none;border-radius:8px;font-size:1em;cursor:pointer;margin:8px}.btn:hover{background:#ff8f00}.btn-outline{background:#fff;color:#e65100;border:2px solid #e65100}.progress-bar{width:100%;height:6px;background:#e0e0e0;border-radius:3px;margin:12px 0}.progress-fill{height:100%;background:#e65100;border-radius:3px;transition:width .3s}.back-link{display:inline-block;margin:16px 0;color:#e65100;text-decoration:none;font-weight:bold}
+.sql-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.88em}
+.sql-table th{background:#e65100;color:#fff;padding:6px;border:1px solid #ccc}
+.sql-table td{padding:6px;border:1px solid #ccc;background:#fff}
+</style>
+</head>
+<body>
+<div class="header"><h1>第15章 サービスマネジメントとシステム監査</h1><div class="sub">基本情報技術者試験 Web教材</div></div>
+<div class="container">
+<a href="it_quiz.html" class="back-link">← 章の一覧にもどる</a>
+<div class="nav-tabs">
+<div class="nav-tab active" onclick="showSection('lesson1')">① サービスマネジメント・移行</div>
+<div class="nav-tab" onclick="showSection('lesson2')">② サービスデスク</div>
+<div class="nav-tab" onclick="showSection('lesson3')">③ ファシリティ管理</div>
+<div class="nav-tab" onclick="showSection('lesson4')">④ システム監査</div>
+<div class="nav-tab" onclick="showSection('quiz')">確認テスト</div>
+</div>
+
+<!-- ===== レッスン1 ===== -->
+<div id="lesson1" class="section active">
+<div class="lesson-card">
+<h2>① サービスマネジメントとシステム移行</h2>
+
+<h3>ITサービスマネジメントとサービスレベル</h3>
+<div class="key-point">
+<span class="vocab">ITサービスマネジメント</span>：ITを用いたサービスの品質を維持・改善する管理活動<br><br>
+<span class="vocab">サービスレベル</span>：ユーザーに対するサービスの<strong>品質</strong>のこと<br>
+ユーザーが最終的に求めているのは「システム」そのものではなく、<strong>「そのシステムから得られるサービス」</strong>。だからシステムは作って終わりではなく、高いサービスレベルを提供し続けることが重要。
+</div>
+
+<h3>ITILと国際規格</h3>
+<div class="key-point">
+<span class="vocab">ITIL</span>（Information Technology Infrastructure Library）：ITサービスマネジメントの<strong>ベストプラクティス（最良の事例）</strong>をまとめた書籍<br><br>
+<span class="vocab">ISO/IEC 20000</span>：ITILの考え方を取り込んだ、ITサービスマネジメントに関する<strong>国際規格</strong><br>
+<span class="vocab">JIS Q 20000</span>：ISO/IEC 20000を日本語に翻訳した日本産業規格
+</div>
+
+<h3>サービスマネジメントとPDCA</h3>
+<div class="key-point">
+<span class="vocab">サービスマネジメントシステム（SMS）</span>では、<span class="vocab">PDCA</span>で継続的に業務を改善する。<br><br>
+<strong>P</strong>lan（計画）：SMSを確立し、文書化し、合意する<br>
+<strong>D</strong>o（実行）：SMSを導入し、運用する<br>
+<strong>C</strong>heck（点検／評価）：監視・測定・レビューし、結果を報告する<br>
+<strong>A</strong>ct（処置／改善）：継続的に改善するための処置を実施する
+</div>
+<div class="example"><strong>覚え方：</strong>Pが計画、Dが実行、Cが評価（点検）、Aが改善（処置）。「枠組みの作成」＝Plan、「処置を実施」＝Actがよく問われる。</div>
+
+<h3>SLM（サービスレベル管理）とSLA</h3>
+<div class="key-point">
+<span class="vocab">SLM（サービスレベル管理）</span>：提供者と利用者が合意したサービスレベルを<strong>維持・改善</strong>する活動<br><br>
+<span class="vocab">SLA（サービスレベル合意書）</span>：提供者と利用者の間で取り決めたサービスレベル（品質や範囲）を<strong>明文化した書類</strong>
+</div>
+<div class="key-point">
+利用者側のメリット：求めるサービスレベルを保証してもらえる（満たさなければ契約解除できる）<br>
+提供者側のメリット：サービスの範囲と品質が明確になり、価格を決められる
+</div>
+
+<h3>可用性管理</h3>
+<div class="key-point">
+<span class="vocab">可用性</span>：「使いたいときに、使えること」（＝使用することが可能）。稼働率や提供時間で表す。<br>
+<span class="vocab">可用性管理</span>：ユーザーが求める可用性を確保するための活動。
+</div>
+<div class="formula"><strong>SLA停止時間の計算例（平成30年度）：</strong><br><br>
+サービス時間帯 8:00〜22:00 ＝ 1日<strong>14時間</strong><br>
+1か月 ＝ 14時間 × 30日 ＝ <strong>420時間</strong><br>
+可用性99.5%以上 → 停止許容 ＝ 420 ×(1−0.995)<br>
+＝ 420 × 0.005 ＝ <strong>2.1時間</strong></div>
+
+<h3>インシデント管理と問題管理</h3>
+<div class="compare">
+<div class="compare-box good">
+<h4>インシデント管理</h4>
+<strong>迅速な復旧</strong>が目的<br><br>
+根本解決はしない。再起動などで回避してもサービスを継続させる（症状への対処）
+</div>
+<div class="compare-box bad">
+<h4>問題管理</h4>
+<strong>根本原因の究明</strong>が目的<br><br>
+インシデントを引き起こす原因を突き止め、再発を防止する（原因への対処）
+</div>
+</div>
+<div class="key-point">
+<span class="vocab">既知の誤り（既知のエラー）</span>：根本原因が特定されている、または<strong>回避策が存在している</strong>問題。<br>
+インシデント管理では、障害報告があったとき、その問題が「既知の誤り」に該当するかを確認する。
+</div>
+<div class="example"><strong>風邪でたとえると…</strong>インシデント＝発熱や咳などの「症状」／問題＝ウイルスや細菌などの「原因」。「PCが起動しない」＝インシデント、「電源プラグが抜けていた」＝問題。</div>
+
+<h3>システム移行方式</h3>
+<table class="sql-table">
+<tr><th>方式</th><th>特徴</th></tr>
+<tr><td><strong>一斉移行方式</strong></td><td>旧システムを止め、一気に新システムへ切り替える。2つ動かさず<strong>コストが安い</strong>が、トラブルの<strong>影響が大きい</strong></td></tr>
+<tr><td><strong>段階移行方式</strong></td><td>業務や地域などの単位で小分けにし、徐々に切り替える。新旧接続用アプリが必要</td></tr>
+<tr><td><strong>並行移行方式</strong></td><td>新旧を並行して運用し、ある時点で新へ移行。安全だが<strong>運用コストが発生</strong></td></tr>
+</table>
+<div class="key-point">試験では<strong>一斉移行方式</strong>が頻出。「一斉移行のデメリット＝トラブルの影響が大きい」を必ず覚える。</div>
+</div>
+</div>
+
+<!-- ===== レッスン2 ===== -->
+<div id="lesson2" class="section">
+<div class="lesson-card">
+<h2>② サービスデスクとサポート</h2>
+
+<h3>サービスデスクとは</h3>
+<div class="key-point">
+<span class="vocab">サービスデスク</span>：トラブルや問い合わせを受け付ける<strong>単一の窓口</strong>。<br>
+・「単一」＝ユーザーから見た問い合わせ先が1つ、という意味（人数や机が1つという意味ではない）<br>
+・窓口が複数あるとユーザーが混乱するため、一本化する
+</div>
+
+<h3>サービスデスクの目的</h3>
+<div class="key-point">
+サービスデスクの目的は<strong>サービスレベルを低下させないこと</strong>。<br>
+そのため、問題管理（根本原因の究明）より、<strong>インシデント管理（迅速な回答・復旧）</strong>を優先する。<br><br>
+具体的な作業：利用者のトラブル対応、問い合わせの記録・管理、適切な部署への引継ぎ（エスカレーション）、対応結果の記録
+</div>
+<div class="example"><strong>エスカレーション</strong>：サービスデスクで解決できない問い合わせを、より専門的な担当者や上位部署へ引き継ぐこと。一次対応（<span class="vocab">ヘルプデスク</span>）で解決できない案件を段階的に上げていく。</div>
+
+<h3>サービスデスクの4つの種類</h3>
+<table class="sql-table">
+<tr><th>種類</th><th>特徴</th></tr>
+<tr><td><strong>ローカルサービスデスク</strong></td><td>ユーザーが住んでいる<strong>地域ごと</strong>に設置。利用者の近くで、言語・文化の違いやVIP対応ができる</td></tr>
+<tr><td><strong>中央サービスデスク</strong></td><td>1拠点（少数）に<strong>集中</strong>して設置。要員を効率配置でき、大量のコールに対応でき、コストを減らせる</td></tr>
+<tr><td><strong>バーチャルサービスデスク</strong></td><td>要員は各地に分散しているが、通信技術で<strong>仮想的に1つ</strong>のデスクのように見せる</td></tr>
+<tr><td><strong>フォロー・ザ・サン</strong></td><td>地理的に分散した2つ以上のデスクを組み合わせ、<strong>24時間体制</strong>で提供</td></tr>
+</table>
+<div class="key-point">試験では<strong>ローカルサービスデスク</strong>が頻出。「地域ごと（利用者の近くに配置）」がキーワード。</div>
+
+<h3>問い合わせ対応の自動化</h3>
+<div class="key-point">
+<span class="vocab">チャットボット</span>：利用者の質問文に対し、プログラムが自動で回答する仕組み。よくある問い合わせ（FAQ）を24時間・無人で処理でき、サービスデスクの負荷を軽減する。<br>
+<span class="vocab">FAQ</span>：よくある質問と回答をまとめたもの。利用者の自己解決を促す。
+</div>
+</div>
+</div>
+
+<!-- ===== レッスン3 ===== -->
+<div id="lesson3" class="section">
+<div class="lesson-card">
+<h2>③ ファシリティマネジメント</h2>
+
+<h3>ファシリティマネジメントとは</h3>
+<div class="key-point">
+システムは「ハードウェア」「ソフトウェア」「その他の設備」の3つで構成される。その他の設備＝ネットワーク設備・電源設備・空調設備など。<br><br>
+<span class="vocab">ファシリティマネジメント</span>：建物や設備（ファシリティ＝設備）の保有・運用・維持を<strong>最適化</strong>する手法。設備を災害や盗難から守り、高いサービスレベルを支える。
+</div>
+<table class="sql-table">
+<tr><th>マネジメント</th><th>対象</th></tr>
+<tr><td>プロジェクトマネジメント</td><td>プロジェクト（主にシステム開発）</td></tr>
+<tr><td>サービスマネジメント</td><td>サービス（主にITサービス）</td></tr>
+<tr><td>ファシリティマネジメント</td><td>ファシリティ（施設・設備）</td></tr>
+</table>
+
+<h3>電源トラブルへの備え</h3>
+<div class="key-point">
+<span class="vocab">UPS（無停電電源装置）</span>：停電時にコンピュータへ<strong>一時的に</strong>電力を供給する装置。<br>
+・メリット：停電時にすぐ電力を供給できる<br>
+・デメリット：一時的にしか供給できない → 始動したら早急にシャットダウンし、作業中のデータを守る
+</div>
+<div class="key-point">
+<span class="vocab">自家発電装置</span>：燃料で発電し、<strong>長時間の停電</strong>に備える。UPSで時間を稼ぐ間に自家発電へ切り替えるのが定番の組み合わせ。<br>
+<span class="vocab">電源設備の冗長化</span>：電源系統を二重化し、片方が故障してもサービスを継続する。
+</div>
+
+<h3>雷サージへの備え</h3>
+<div class="key-point">
+<span class="vocab">サージ</span>：落雷などで瞬間的に発生する<strong>過電圧</strong>（雷サージ）。電源ケーブルやLANケーブルに大電圧がかかり機器を壊す。<br><br>
+<span class="vocab">サージ保護デバイス（SPD）</span>：瞬間的な過電圧からシステムを守る機器。通信ケーブルとコンピュータの間に入れて保護する。
+</div>
+<div class="key-point">試験では<strong>「サージ＝過電圧」</strong>「サージ保護デバイス＝落雷の過電圧被害から守る手段」が頻出。</div>
+
+<h3>空調・耐震・データセンター</h3>
+<div class="key-point">
+<span class="vocab">空調設備</span>：機器を適切な温度・湿度に保ち、熱暴走や故障を防ぐ<br>
+<span class="vocab">耐震・免震</span>：地震から機器を守る（免震床・ラック固定など）<br>
+<span class="vocab">データセンター</span>：これら電源・空調・耐震・防火・入退室管理などを高水準で備え、サーバを安全に運用する専用施設
+</div>
+</div>
+</div>
+
+<!-- ===== レッスン4 ===== -->
+<div id="lesson4" class="section">
+<div class="lesson-card">
+<h2>④ システム監査</h2>
+
+<h3>システム監査とは</h3>
+<div class="key-point">
+<span class="vocab">監査</span>：企業活動が正しく行われているかを調査すること（探偵のように証拠を集めて報告する仕事）。<br><br>
+<span class="vocab">システム監査</span>：企業が情報システムにまつわる<strong>リスクに適切に対処しているか</strong>を、<strong>独立した立場のシステム監査人</strong>が評価すること。
+</div>
+
+<h3>システム監査の2つの基準</h3>
+<div class="compare">
+<div class="compare-box good">
+<h4>システム管理基準</h4>
+<strong>企業</strong>が従うルール<br><br>
+情報システムのリスクをコントロールするために企業が守るべき実践規範
+</div>
+<div class="compare-box bad">
+<h4>システム監査基準</h4>
+<strong>監査人</strong>が従うルール<br><br>
+よりよい監査を行うために監査人が守るべき行為規範（監査ルール）
+</div>
+</div>
+
+<h3>システム監査の3つのポイント</h3>
+<div class="key-point">
+<strong>信頼性</strong>：品質、障害の発生・影響範囲・回復の度合い<br>
+<strong>安全性</strong>：自然災害・不正アクセス・破壊行為からの保護の度合い（＝<span class="vocab">アクセス管理</span>の検証が重要）<br>
+<strong>効率性</strong>：資源の活用、費用対効果の度合い
+</div>
+
+<h3>監査の流れ（登場人物3人）</h3>
+<div class="key-point">
+①<strong>依頼</strong>：依頼人（通常は<strong>経営者</strong>）が監査人に依頼<br>
+②<strong>調査</strong>：監査人が被監査部門を調査（ヒアリング・現地調査・レビュー）<br>
+③<strong>報告</strong>：監査人が依頼人に<strong>監査報告書</strong>を提出<br>
+④<strong>改善命令</strong>：依頼人が被監査部門に改善を命令<br>
+⑤<strong>改善</strong>：被監査部門が改善活動を行う
+</div>
+<div class="key-point">
+<span class="vocab">監査証拠</span>：ヒアリングで得た情報の裏付けとなる文書や記録。相手の話を鵜呑みにせず、事実を裏付ける監査証拠を入手する。<br><br>
+<strong>監査人は改善指導をするだけで、自ら改善活動は行わない</strong>（検証・評価だけを行う）。改善は被監査部門の仕事。
+</div>
+
+<h3>監査人の独立性</h3>
+<div class="key-point">
+システム監査人は<strong>独立した第三者</strong>でなければならない。より具体的には、被監査部門と<strong>利害関係がない</strong>者。<br>
+例：情報システム部が開発し経理部が運用する会計システムの監査人は、<strong>情報システム部にも経理部にも所属しない者</strong>とする。
+</div>
+
+<h3>情報セキュリティ監査</h3>
+<div class="key-point">
+<span class="vocab">情報セキュリティ監査</span>：システム監査のうち情報セキュリティに特化した監査。対象は<strong>情報資産</strong>（システム監査の対象は「システム」）。<br>
+着目点＝情報セキュリティの三大特性：<span class="vocab">機密性</span>（認められた人だけがアクセス）／<span class="vocab">完全性</span>（改ざん・破壊がない）／<span class="vocab">可用性</span>（必要なときにアクセスできる）
+</div>
+
+<h3>内部統制とコーポレートガバナンス</h3>
+<table class="sql-table">
+<tr><th>用語</th><th>意味</th></tr>
+<tr><td><strong>コーポレートガバナンス</strong></td><td>株主などステークホルダが企業活動を監視すること（企業統治）</td></tr>
+<tr><td><strong>内部統制</strong></td><td>社員全員で業務を健全化すること。整備・運用の最終責任者は<strong>経営者</strong></td></tr>
+<tr><td><strong>ITガバナンス</strong></td><td>ITを使ったコーポレートガバナンス</td></tr>
+<tr><td><strong>IT統制</strong></td><td>ITを使った内部統制</td></tr>
+</table>
+<div class="key-point">
+<span class="vocab">職務分掌</span>：担当者の役割や仕事の権限を明確にすること。<strong>申請者と承認者を分ける</strong>のが典型例で、同一人物だと不正・間違いを防げない。<br>
+<span class="vocab">可監査性</span>：システムが監査しやすいよう、操作記録（ログ）などの監査証跡を残しておく性質。
+</div>
+
+<div class="key-point" style="background:#fce4ec;border-color:#e91e63">
+<strong style="color:#e91e63">第15章の最重要まとめ</strong><br><br>
+・ITIL＝ITサービスマネジメントのベストプラクティス集／ISO/IEC 20000は国際規格<br>
+・PDCA：P計画＝枠組み作成、A処置＝改善の実施<br>
+・SLA＝サービスレベル合意書（明文化した書類）、SLM＝維持・改善する活動<br>
+・可用性＝使いたいときに使える。停止許容＝サービス時間×(1−可用性)<br>
+・インシデント管理＝迅速な復旧／問題管理＝根本原因の究明。既知の誤り＝原因特定or回避策あり<br>
+・サービスデスク＝単一窓口。ローカル＝地域ごと、中央＝集中、バーチャル＝仮想1つ、フォロー・ザ・サン＝24時間<br>
+・UPS＝一時的に電力供給／サージ保護デバイス＝落雷の過電圧から保護<br>
+・システム監査人＝独立した第三者（利害関係なし）、自ら改善はしない<br>
+・監査証拠＝裏付ける文書・記録／内部統制の責任者＝経営者、職務分掌＝申請と承認を分ける
+</div>
+</div>
+</div>
+
+<!-- ===== 確認テスト ===== -->
+<div id="quiz" class="section">
+<div class="quiz-area">
+<h2>確認テスト ── 第15章</h2>
+<p style="color:#666;font-size:.9em;margin-bottom:16px">全問ランダム出題・選択肢シャッフル。何度でも挑戦できます。</p>
+<div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+<div id="quizContainer"></div>
+<div style="text-align:center;margin-top:20px"><button class="btn" id="submitBtn" onclick="submitQuiz()" style="display:none">結果を見る</button></div>
+</div>
+<div class="result-area" id="resultArea"><h2>結果</h2><div class="result-score" id="resultScore"></div><div id="resultMsg" style="font-size:1.1em;margin:10px 0"></div><button class="btn" onclick="retryQuiz()">もう一度</button><button class="btn btn-outline" onclick="showSection('lesson1')">レッスンに戻る</button></div>
+</div>
+</div>
+
+<script>
+const allQuestions=[
+{q:'JIS Q 20000-1は、サービスマネジメントシステム（SMS）にPDCA方法論の適用を要求している。SMSの計画（Plan）に含まれる活動はどれか。（平成28年度）',choices:['あらかじめ定めた間隔でのマネジメントレビューの実施とその記録の維持','権限、責任及びプロセスにおける役割についての枠組みの作成','資金及び予算の割当てを通じた、SMSの導入及び運用','承認された改善についての計画の作成、改善の実施とその報告'],answer:1,explanation:'<strong>Plan（計画）</strong>は「SMSを確立し、文書化し、合意する」段階で、「役割についての枠組みの作成」が該当します。ほかはCheck（点検）、Do（実行）、Act（処置）の活動です。'},
+{q:'サービスマネジメントシステムにPDCA方法論を適用するとき、Act（処置）に該当するものはどれか。（令和元年度）',choices:['サービスの設計、移行、提供及び改善のためにSMSを導入し、運用する','SMS及びサービスのパフォーマンスを継続的に改善するための処置を実施する','SMSを確立し、文書化し、合意する','方針、目的、計画及び要求事項についてSMS及びサービスを監視、測定及びレビューし、結果を報告する'],answer:1,explanation:'<strong>Act（処置／改善）</strong>は「継続的に改善するための処置を実施する」ことです。「処置」というキーワードが目印。ほかはDo（実行）、Plan（計画）、Check（点検）です。'},
+{q:'システムの移行方式の一つである一斉移行方式の特徴として、最も適切なものはどれか。（平成26年度）',choices:['新旧システム間を接続するアプリケーションが必要となる','新旧システムを並行させて運用し、ある時点で新システムに移行する','新システムへの移行時のトラブルの影響が大きい','並行して稼働させるための運用コストが発生する'],answer:2,explanation:'<strong>一斉移行方式</strong>は一気に切り替えるため、トラブルが起きたときの影響が大きいのが特徴です。1番目は段階移行方式、2番目と4番目は並行移行方式の説明です。'},
+{q:'サービスマネジメントシステムにおけるサービスの可用性はどれか。（平成29年度）',choices:['あらかじめ合意された時点又は期間にわたって、要求された機能を実行するサービスの能力','計画した活動が実行され、計画した結果が達成された程度','合意したレベルでサービスを継続的に提供するために、深刻な影響を及ぼすリスク及び事象を管理する能力','サービス提供者の活動及び資源を、指揮し、管理する一連の能力及びプロセス'],answer:0,explanation:'<strong>可用性</strong>とは「サービスを使いたいときに使えること」、すなわち合意された時点や期間にわたって要求された機能を実行できる能力です。ほかは有効性、サービス継続、サービスマネジメントの説明です。'},
+{q:'サービス時間帯が営業日の午前8時から午後10時まで、可用性99.5%以上をSLAとする。1か月の営業日数を30日、計画停止なしとするとき、SLAを満たせる1か月の最大停止時間は何時間か。（平成30年度）',choices:['0.3','2.1','3.0','3.6'],answer:1,explanation:'1日のサービス時間は14時間（8時〜22時）。1か月は14×30＝420時間。停止許容は420×(1−0.995)＝420×0.005＝<strong>2.1時間</strong>です。'},
+{q:'ITサービスマネジメントにおける「既知の誤り（既知のエラー）」の説明はどれか。（平成26年度）',choices:['根本原因が特定されている又は回避策が存在している問題','サービスデスクに問い合わせがあった新たなインシデント','サービスマネジメント計画での矛盾や漏れ','静的検査で検出したプログラムの誤り'],answer:0,explanation:'<strong>既知の誤り</strong>とは、根本原因がすでに特定されている、または回避策が存在している問題です。障害報告があったとき、既知の誤りに該当するかを確認します。'},
+{q:'ITサービスマネジメントの活動のうち、インシデント及びサービス要求管理として行うものはどれか。（平成29年度）',choices:['顧客満足度がサービス目標を満たしているかを評価し、改善の機会を特定するためにレビューする','ディスクの空き容量がしきい値に近づいたので、対策を検討する','プログラムを変更した場合の影響度を調査する','利用者からの障害報告を受けて、既知の誤りに該当するかどうかを照合する'],answer:3,explanation:'<strong>インシデント管理</strong>では、障害報告を受けて既知の誤りに該当するか照合します。ほかはサービスレベル管理、キャパシティ管理、変更管理の活動です。'},
+{q:'インシデント管理と問題管理の説明として適切なものはどれか。',choices:['インシデント管理は根本原因の究明を、問題管理は迅速な復旧を目的とする','インシデント管理はサービスの迅速な復旧を、問題管理は根本原因の究明を目的とする','どちらも根本原因の究明を目的とする','どちらも迅速な復旧のみを目的とする'],answer:1,explanation:'<strong>インシデント管理</strong>は迅速な復旧（症状への対処）、<strong>問題管理</strong>は根本原因の究明と再発防止（原因への対処）を目的とします。役割が明確に区別されている点が頻出です。'},
+{q:'サービスデスク組織の構造とその特徴のうち、ローカルサービスデスクのものはどれか。（平成30年度）',choices:['サービスデスクを1拠点又は少数の場所に集中することで、要員を効率的に配置できる','サービスデスクを利用者の近くに配置することで、言語や文化が異なる利用者への対応やVIP対応ができる','要員が複数の地域や部門に分散していても、通信技術で単一のデスクのようにサービスを提供できる','分散拠点の要員を含めた全員を中央で統括して管理し、統制のとれたサービスを提供できる'],answer:1,explanation:'<strong>ローカルサービスデスク</strong>は利用者が住む地域ごとに設置し、利用者の近くで対応します。1番目は中央、3番目はバーチャル、4番目も中央（統括）系の特徴です。'},
+{q:'サービスデスクが優先して行うべき活動として、最も適切なものはどれか。',choices:['障害の根本原因を究明してから利用者に回答する','根本原因の究明より、迅速な回答や復旧を優先する','利用者からの問い合わせ窓口を部署ごとに複数設ける','改善活動を主体的に実施する'],answer:1,explanation:'サービスデスクの目的はサービスレベルを低下させないことなので、問題管理（根本原因の究明）より<strong>インシデント管理（迅速な回答・復旧）</strong>を優先します。窓口は単一に一本化します。'},
+{q:'落雷によって発生する過電圧の被害から情報システムを守るための手段として、有効なものはどれか。（平成29年度）',choices:['サージ保護デバイス（SPD）を介して通信ケーブルとコンピュータを接続する','自家発電装置を設置する','通信線を、経路が異なる2系統とする','電源設備の制御回路をデジタル化する'],answer:0,explanation:'落雷による過電圧（雷サージ）から守るには<strong>サージ保護デバイス（SPD）</strong>を通信ケーブルとコンピュータの間に入れます。自家発電は停電対策で、過電圧対策ではありません。'},
+{q:'UPS（無停電電源装置）の説明として、最も適切なものはどれか。',choices:['落雷による過電圧から機器を保護する装置である','停電時にコンピュータへ一時的に電力を供給する装置である','長時間の停電に備えて燃料で発電し続ける装置である','機器を適切な温度・湿度に保つ装置である'],answer:1,explanation:'<strong>UPS</strong>は停電時に一時的に電力を供給する装置です。始動したら早急にシャットダウンしてデータを守ります。長時間対応は自家発電装置、温湿度管理は空調設備の役割です。'},
+{q:'システム管理基準に基づき、システムが不正な使用から保護されているかという安全性の検証項目として、最も適切なものはどれか。（平成28年度）',choices:['アクセス管理機能の検証','フェールソフト機能の検証','フォールトトレラント機能の検証','リカバリ機能の検証'],answer:0,explanation:'安全性は「不正アクセスや破壊行為からの保護の度合い」なので、<strong>アクセス管理機能の検証</strong>が該当します。ほかのフェールソフト・フォールトトレラント・リカバリは信頼性の検証項目です。'},
+{q:'情報セキュリティ監査において、可用性を確認するチェック項目はどれか。（平成30年度）',choices:['外部記憶媒体の無断持出しが禁止されていること','中断時間を定めたSLAの水準が保たれるように管理されていること','データ入力時のエラーチェックが適切に行われていること','データベースが暗号化されていること'],answer:1,explanation:'<strong>可用性</strong>は「使いたいときに使えること」なので、「中断時間」を定めたSLA水準の維持が該当します。1番目と4番目は機密性、3番目は完全性のチェック項目です。'},
+{q:'システム監査人が実施するヒアリングに関する記述のうち、最も適切なものはどれか。（平成29年度）',choices:['監査業務を経験したことのある被監査部門の管理者だけをヒアリング対象に選ぶ','被監査部門から得た情報を裏付けるための文書や記録を入手するよう努める','ヒアリング中に気付いた不備事項について、その場で改善を指示する','記録内容に相違が出ないよう、必ず1人の監査人がヒアリングを行う'],answer:1,explanation:'ヒアリングでは得た情報を鵜呑みにせず、裏付けとなる文書や記録（<strong>監査証拠</strong>）を入手します。改善指示は調査終了後に行い、対象を管理者だけに限る必要も、1人で行う義務もありません。'},
+{q:'情報システム部が開発して経理部が運用している会計システムを、経営者の指示で監査する。システム監査人について最も適切なものはどれか。（令和元年度）',choices:['会計基準に準拠すべきなので、システム監査人を公認会計士とする','機密性が高い情報を扱うので、システム監査人を経理部長直属とする','効率的に行うため、システム監査人を情報システム部長直属とする','独立性を担保するため、システム監査人は情報システム部にも経理部にも所属しない者とする'],answer:3,explanation:'システム監査人は被監査部門と利害関係のない<strong>独立した第三者</strong>である必要があります。経理部長・情報システム部長の直属では利害関係が生じ、公認会計士資格も必須ではありません。'},
+{q:'アクセス制御を監査するシステム監査人の行為のうち、適切なものはどれか。（令和元年度）',choices:['ソフトウェアに関するアクセス制御の管理台帳を作成し、保管した','データに関するアクセス制御の管理規程を閲覧した','ネットワークに関するアクセス制御の管理方針を制定した','ハードウェアに関するアクセス制御の運用手続を実施した'],answer:1,explanation:'監査人は検証・評価だけを行い、自ら改善や運用は行いません。よって管理規程を<strong>閲覧した</strong>が適切です。台帳作成・方針制定・手続実施は監査人自身が業務を行っており不適切です。'},
+{q:'システム運用業務のオペレーション管理の監査で判明した状況のうち、指摘事項として監査報告書に記載すべきものはどれか。（平成29年度）',choices:['運用責任者が、オペレーターの作成したオペレーション記録を確認している','運用責任者が、期間を定めてオペレーション記録を保管している','オペレーターが、オペレーション中に起きた例外処理を記録している','オペレーターが、日次の運用計画を決定し、自ら承認している'],answer:3,explanation:'計画の決定者と承認者が同一人物では<strong>職務分掌</strong>が機能せず、不正や誤りを防げないため指摘事項になります。ほかは適切に管理・記録できている状態です。'},
+{q:'企業経営の透明性を確保するため、誰のために経営を行っているか、トップマネジメントの構造や自浄能力などの視点で企業活動を監督・監視する仕組みはどれか。（平成28年度）',choices:['コアコンピタンス','コーポレートアイデンティティ','コーポレートガバナンス','ステークホルダアナリシス'],answer:2,explanation:'ステークホルダが企業活動を監督・監視する仕組みを<strong>コーポレートガバナンス（企業統治）</strong>といいます。経営陣の構造や組織内部の自浄能力を監視します。'},
+{q:'我が国の証券取引所に上場している企業において、内部統制の整備及び運用に最終的な責任を負っている者は誰か。（平成30年度）',choices:['株主','監査役','業務担当者','経営者'],answer:3,explanation:'内部統制は社員全員に役割がありますが、整備と運用の最終的な責任を負うのは<strong>経営者</strong>です。'}
+];
+let questions=[],answered=0;
+function shuffleArray(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
+function initQuiz(){questions=shuffleArray(allQuestions);answered=0;document.getElementById('submitBtn').style.display='none';document.getElementById('resultArea').style.display='none';document.getElementById('progressFill').style.width='0%';const c=document.getElementById('quizContainer');c.innerHTML='';questions.forEach((q,idx)=>{const sc=q.choices.map((c,i)=>({text:c,origIdx:i}));for(let i=sc.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[sc[i],sc[j]]=[sc[j],sc[i]]}q._shuffled=sc;q._selected=null;let h=`<div class="question-card"><div class="q-number">問題 ${idx+1} / ${questions.length}</div><div class="q-text">${q.q}</div><ul class="choices">`;sc.forEach((c,ci)=>{h+=`<li onclick="selectChoice(${idx},${ci})" id="q${idx}c${ci}">${c.text}</li>`});h+=`</ul><div class="explanation" id="exp${idx}"><div id="expText${idx}"></div></div></div>`;c.innerHTML+=h})}
+function selectChoice(qi,ci){const q=questions[qi];if(q._selected!==null)return;q._selected=ci;answered++;const corr=q.answer,sel=q._shuffled[ci].origIdx,ok=sel===corr;q._shuffled.forEach((c,i)=>{const li=document.getElementById(`q${qi}c${i}`);if(c.origIdx===corr)li.classList.add('correct');if(i===ci&&!ok)li.classList.add('wrong')});const e=document.getElementById(`exp${qi}`),t=document.getElementById(`expText${qi}`);t.innerHTML=(ok?'<span style="color:#4caf50;font-weight:bold">&#x2B55; 正解！</span>':'<span style="color:#f44336;font-weight:bold">&#x274C; 不正解</span>')+'<br>'+q.explanation;e.classList.add('show');document.getElementById('progressFill').style.width=(answered/questions.length*100)+'%';if(answered===questions.length)document.getElementById('submitBtn').style.display='inline-block'}
+function submitQuiz(){let c=0;questions.forEach(q=>{if(q._selected!==null&&q._shuffled[q._selected].origIdx===q.answer)c++});document.getElementById('resultArea').style.display='block';document.getElementById('resultScore').textContent=`${c} / ${questions.length}`;const p=c/questions.length*100;let m='';if(p===100)m='満点！完璧です！';else if(p>=80)m='よく理解できています！';else if(p>=60)m='合格ライン！もう少し復習しましょう。';else m='レッスンをもう一度確認しましょう。';document.getElementById('resultMsg').textContent=m;document.getElementById('resultArea').scrollIntoView({behavior:'smooth'})}
+function retryQuiz(){initQuiz();document.getElementById('quizContainer').scrollIntoView({behavior:'smooth'})}
+function showSection(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');const tabs=document.querySelectorAll('.nav-tab');const ids=['lesson1','lesson2','lesson3','lesson4','quiz'];tabs[ids.indexOf(id)].classList.add('active');if(id==='quiz')initQuiz();window.scrollTo({top:0,behavior:'smooth'})}
+initQuiz();
+</script>
+</body>
+</html>

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第22章 ［科目B］の合格戦略｜基本情報技術者</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Hiragino Sans','Noto Sans JP','Meiryo',sans-serif;background:#f5f5f0;color:#333;line-height:1.8;padding:0 0 60px 0}.header{background:linear-gradient(135deg,#e65100,#ff8f00);color:#fff;padding:24px 20px;text-align:center}.header h1{font-size:1.3em;margin-bottom:4px}.header .sub{font-size:.85em;opacity:.8}.container{max-width:720px;margin:0 auto;padding:16px}.nav-tabs{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap}.nav-tab{padding:10px 14px;border:2px solid #e65100;border-radius:8px;background:#fff;color:#e65100;font-weight:bold;font-size:.82em;cursor:pointer;transition:all .2s}.nav-tab:hover,.nav-tab.active{background:#e65100;color:#fff}.section{display:none}.section.active{display:block}.lesson-card{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.lesson-card h2{color:#e65100;font-size:1.2em;margin-bottom:16px;padding-bottom:8px;border-bottom:3px solid #ffe0b2}.lesson-card h3{color:#ff8f00;font-size:1.05em;margin:20px 0 10px 0}.key-point{background:#fff3e0;border-left:4px solid #e65100;padding:14px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-size:.95em}.key-point strong{color:#e65100}.vocab{display:inline-block;background:#e3f2fd;border:1px solid #64b5f6;border-radius:6px;padding:2px 8px;margin:2px 4px;font-weight:bold;font-size:.9em;color:#1565c0}.example{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:14px 16px;margin:12px 0;font-size:.9em}.formula{background:#fce4ec;border-left:4px solid #e91e63;padding:14px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-family:monospace;font-size:.95em;line-height:2}.compare{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}.compare-box{background:#fff;border:2px solid #e0e0e0;border-radius:10px;padding:14px;font-size:.9em}.compare-box h4{font-size:.95em;margin-bottom:8px;text-align:center}.compare-box.good{border-color:#4caf50}.compare-box.good h4{color:#2e7d32}.compare-box.bad{border-color:#ff9800}.compare-box.bad h4{color:#e65100}
+.quiz-area{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.quiz-area h2{color:#e65100;margin-bottom:16px}.question-card{background:#fafafa;border:1px solid #e0e0e0;border-radius:10px;padding:20px;margin:16px 0}.q-number{font-size:.8em;color:#999;margin-bottom:6px}.q-text{font-size:1.05em;font-weight:bold;margin-bottom:14px;line-height:1.6}.choices{list-style:none}.choices li{padding:12px 16px;margin:6px 0;border:2px solid #e0e0e0;border-radius:8px;cursor:pointer;transition:all .2s;font-size:.95em}.choices li:hover{border-color:#e65100;background:#fff3e0}.choices li.correct{border-color:#4caf50;background:#e8f5e9}.choices li.wrong{border-color:#f44336;background:#ffebee}.explanation{display:none;margin-top:12px;padding:14px;background:#f5f5f5;border-radius:8px;font-size:.9em;line-height:1.7}.explanation.show{display:block}.result-area{display:none;text-align:center;padding:30px;background:#fff;border-radius:12px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.result-score{font-size:2.5em;font-weight:bold;color:#e65100;margin:10px 0}.btn{display:inline-block;padding:12px 28px;background:#e65100;color:#fff;border:none;border-radius:8px;font-size:1em;cursor:pointer;margin:8px}.btn:hover{background:#ff8f00}.btn-outline{background:#fff;color:#e65100;border:2px solid #e65100}.progress-bar{width:100%;height:6px;background:#e0e0e0;border-radius:3px;margin:12px 0}.progress-fill{height:100%;background:#e65100;border-radius:3px;transition:width .3s}.back-link{display:inline-block;margin:16px 0;color:#e65100;text-decoration:none;font-weight:bold}
+.sql-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.88em}
+.sql-table th{background:#e65100;color:#fff;padding:6px;border:1px solid #ccc}
+.sql-table td{padding:6px;border:1px solid #ccc;background:#fff}
+</style>
+</head>
+<body>
+<div class="header"><h1>第22章 ［科目B］の合格戦略</h1><div class="sub">基本情報技術者試験 Web教材</div></div>
+<div class="container">
+<a href="it_quiz.html" class="back-link">← 章の一覧にもどる</a>
+<div class="nav-tabs">
+<div class="nav-tab active" onclick="showSection('lesson1')">① 科目Bの全体戦略</div>
+<div class="nav-tab" onclick="showSection('lesson2')">② アルゴリズム対策</div>
+<div class="nav-tab" onclick="showSection('lesson3')">③ セキュリティ対策</div>
+<div class="nav-tab" onclick="showSection('quiz')">確認テスト</div>
+</div>
+
+<!-- ===== レッスン1 ===== -->
+<div id="lesson1" class="section active">
+<div class="lesson-card">
+<h2>① 科目Bの特徴と全体戦略</h2>
+
+<h3>科目Bとは</h3>
+<div class="key-point">
+基本情報技術者試験は<span class="vocab">科目A</span>（知識問題）と<span class="vocab">科目B</span>（思考・実践問題）の2つに分かれる。<br><br>
+科目Bは「知識を使って<strong>実際に考える力</strong>」を測る試験。とくに<strong>プログラムを読んで何をしているか理解する力</strong>が中心に問われる。
+</div>
+
+<h3>試験形式（ここが超重要）</h3>
+<table class="sql-table">
+<tr><th>項目</th><th>内容</th></tr>
+<tr><td>出題数</td><td><strong>20問</strong>（全問必須・選択問題なし）</td></tr>
+<tr><td>試験時間</td><td><strong>100分</strong></td></tr>
+<tr><td>方式</td><td><strong>CBT方式</strong>（パソコンで受験）</td></tr>
+<tr><td>配点</td><td><strong>1000点満点</strong></td></tr>
+<tr><td>合格ライン</td><td><strong>600点以上</strong>（＝おおむね6割）</td></tr>
+</table>
+<div class="key-point">
+<span class="vocab">CBT方式</span>：Computer Based Testing。全国のテストセンターの<strong>パソコン</strong>で受験する方式。通年で受験でき、試験終了直後にスコアがわかる。
+</div>
+
+<h3>出題の内訳（8割がアルゴリズム）</h3>
+<div class="compare">
+<div class="compare-box good">
+<h4>アルゴリズムとプログラミング</h4>
+<strong>約16問</strong>（全体の8割）<br><br>
+擬似言語で書かれたプログラムを読み解く問題が中心
+</div>
+<div class="compare-box bad">
+<h4>情報セキュリティ</h4>
+<strong>約4問</strong>（全体の2割）<br><br>
+セキュリティの事例（シナリオ）を読んで考える問題
+</div>
+</div>
+<div class="key-point">
+<strong>戦略の結論</strong>：合格の鍵は<strong>アルゴリズム（擬似言語）</strong>。8割を占めるので、ここを捨てると合格は不可能。まず擬似言語対策に最も時間を割く。
+</div>
+
+<h3>擬似言語の位置づけ</h3>
+<div class="key-point">
+<span class="vocab">擬似言語</span>：特定の言語（Java・Python・C言語など）に依存しない、試験専用の「架空のプログラム言語」。<br><br>
+・特定の言語を新しく習得する必要は<strong>ない</strong><br>
+・擬似言語の<strong>文法（書き方）は問題用紙にすべて記載される</strong>ので暗記不要<br>
+・問われるのは「<strong>そのプログラムで何が行われているか</strong>」を読み取る力
+</div>
+<div class="example"><strong>ポイント：</strong>擬似言語はJava・Pythonに似ている。プログラミングの基礎（変数・繰返し・関数など）を入門書で身につけておくと読みやすくなる。</div>
+
+<h3>時間配分の目安</h3>
+<div class="key-point">
+100分で20問 → <strong>1問あたり平均5分</strong>。<br><br>
+・セキュリティ（約4問）は<strong>長文</strong>だが内容は易しいことが多い → 落ち着いて読めば得点源<br>
+・アルゴリズムは<strong>トレース</strong>（後述）に時間がかかる問題もある<br>
+・わからない問題は<strong>後回し</strong>にして、解ける問題から確実に得点する
+</div>
+
+<h3>まず最初にやること</h3>
+<div class="key-point">
+<strong>一刻も早く過去問題を見る。</strong>IPA（情報処理推進機構）が公式サイトで科目Bのサンプル問題・過去問題を公開している。出題形式とレベル感を早めに確認しておくと、学習計画が立てやすい。
+</div>
+</div>
+</div>
+
+<!-- ===== レッスン2 ===== -->
+<div id="lesson2" class="section">
+<div class="lesson-card">
+<h2>② アルゴリズムとプログラミング対策</h2>
+
+<h3>擬似言語の基本要素</h3>
+<div class="key-point">
+<span class="vocab">変数</span>：値を入れておく「箱」。<span class="vocab">型</span>（整数型・文字列型など）で入る値の種類が決まる<br>
+<span class="vocab">代入</span>：変数に値を入れる操作。試験では <strong>←</strong> や <strong>で</strong>（矢印）で表す<br>
+<span class="vocab">配列</span>：同じ型の値を並べて番号で管理する箱。<strong>配列名[番号]</strong> で要素を指す
+</div>
+<div class="example"><strong>注意：</strong>配列の要素番号が「1から始まる」か「0から始まる」かは問題文に明記される。必ず確認すること。</div>
+
+<h3>選択構造（if）</h3>
+<div class="formula">
+if (条件式)<br>
+&nbsp;&nbsp;処理1　← 条件が真のとき実行<br>
+elseif (条件式2)<br>
+&nbsp;&nbsp;処理2<br>
+else<br>
+&nbsp;&nbsp;処理3　← どれも偽のとき実行<br>
+endif
+</div>
+<div class="key-point">
+条件式を<strong>上から順に</strong>評価し、<strong>最初に真になった</strong>枝の処理だけを実行する。以降の条件は評価しない。
+</div>
+
+<h3>繰返し構造（while・for）</h3>
+<div class="compare">
+<div class="compare-box good">
+<h4>while（前判定）</h4>
+条件が<strong>真の間</strong>、処理を繰り返す<br><br>
+条件を先に判定するので、最初から偽なら<strong>1回も実行されない</strong>
+</div>
+<div class="compare-box bad">
+<h4>for</h4>
+「変数を◯から◯まで1ずつ増やす」<br><br>
+繰り返す<strong>回数が決まっている</strong>ときに使う
+</div>
+</div>
+<div class="key-point">
+<strong>do～while（後判定）</strong>：処理を先に1回実行してから条件を判定する。条件が偽でも<strong>必ず1回は実行される</strong>点が while との違い。
+</div>
+
+<h3>関数（手続）</h3>
+<div class="key-point">
+<span class="vocab">関数</span>：まとまった処理に名前を付けたもの。<strong>引数</strong>（受け取る値）を渡すと処理を行い、<strong>戻り値</strong>（return）を返す。<br><br>
+例：<strong>maximum(x, y, z)</strong> … 3つの整数を受け取り、最大値を返す関数
+</div>
+
+<h3>トレース＝机上デバッグ</h3>
+<div class="key-point">
+<span class="vocab">トレース</span>：プログラムを1行ずつ手で追いかけ、<strong>変数の値の変化を紙に書き出す</strong>こと。擬似言語問題を解く最強の武器。
+</div>
+<div class="example"><strong>トレースの手順：</strong><br>
+① 変数の名前を横に並べた「トレース表」を書く<br>
+② 具体的な入力値（引数）を1つ決める<br>
+③ 1行ずつ実行し、変数が変わるたびに表に値を書く<br>
+④ 繰返しは1周ごとに1行ずつ書き足す<br>
+⑤ return される最終値を選択肢と照合する</div>
+<div class="example"><strong>例：convDecimal("10010") のトレース（2進数→10進数）</strong><br>
+result←0 から始めて、各桁で <strong>result ← result×2 ＋ (その桁)</strong> を繰り返すと…<br>
+0→1→2→4→9→18 となり、答え <strong>18</strong> が返る。表に書けば選択肢を確実に見分けられる。</div>
+
+<h3>典型アルゴリズム</h3>
+<table class="sql-table">
+<tr><th>種類</th><th>内容</th></tr>
+<tr><td><strong>探索</strong></td><td>線形探索（先頭から順に）／2分探索（整列済みを半分ずつ）</td></tr>
+<tr><td><strong>整列</strong></td><td>バブル・選択・挿入ソート／マージ（併合）で高速化</td></tr>
+<tr><td><strong>再帰</strong></td><td>関数が自分自身を呼び出す。階乗・フィボナッチなど</td></tr>
+</table>
+
+<h3>データ構造</h3>
+<div class="compare">
+<div class="compare-box good">
+<h4>スタック（Stack）</h4>
+<strong>LIFO</strong>（後入れ先出し）<br><br>
+最後に入れたものを最初に取り出す。<strong>push</strong>で積む／<strong>pop</strong>で取り出す
+</div>
+<div class="compare-box bad">
+<h4>キュー（Queue）</h4>
+<strong>FIFO</strong>（先入れ先出し）<br><br>
+最初に入れたものを最初に取り出す。<strong>enqueue</strong>で入れる／<strong>dequeue</strong>で出す
+</div>
+</div>
+<div class="key-point">
+<span class="vocab">リスト（連結リスト）</span>：各要素が「次の要素の場所」を指すことでつながるデータ構造。途中への挿入・削除が速い。<br><br>
+<span class="vocab">木構造</span>：親→子の枝分かれで階層を表す。根（ルート）・節（ノード）・葉（リーフ）からなる。<strong>2分木</strong>は各節の子が最大2つ。
+</div>
+
+<h3>擬似言語問題を解くコツ</h3>
+<div class="key-point">
+<strong>① 何をする関数かを冒頭説明で必ず確認</strong>（「最大値を返す」「昇順に整列する」など）<br>
+<strong>② 小さな具体例を1つ入れてトレースする</strong>（頭の中でなく紙に書く）<br>
+<strong>③ 空欄補充は、各選択肢を入れてトレースし、正しい結果になるものを選ぶ</strong><br>
+<strong>④ 配列の番号が1始まりか0始まりかを最初に確認</strong>
+</div>
+</div>
+</div>
+
+<!-- ===== レッスン3 ===== -->
+<div id="lesson3" class="section">
+<div class="lesson-card">
+<h2>③ 情報セキュリティ対策</h2>
+
+<h3>科目Bのセキュリティの特徴</h3>
+<div class="key-point">
+20問中<strong>約4問</strong>（2割）。問題文が<strong>長文</strong>（1000〜2000文字）で、企業のシステム環境を説明した<strong>事例（シナリオ）</strong>を読んで答える形式。<br><br>
+内容は科目Aの「テクノロジ分野」（とくに情報セキュリティの章）と重複が多い。<strong>科目Aの過去問を多く解く</strong>のが最も効率的な対策。
+</div>
+
+<h3>情報セキュリティの3要素（CIA）</h3>
+<table class="sql-table">
+<tr><th>要素</th><th>意味</th></tr>
+<tr><td><strong>機密性</strong>（Confidentiality）</td><td>許可された人だけが情報にアクセスできる</td></tr>
+<tr><td><strong>完全性</strong>（Integrity）</td><td>情報が正確で、改ざんされていない</td></tr>
+<tr><td><strong>可用性</strong>（Availability）</td><td>必要なときにいつでも使える</td></tr>
+</table>
+<div class="key-point">
+この3つ（頭文字で<strong>CIA</strong>）を維持することが情報セキュリティの目的。事例問題では「どの要素が損なわれるリスクか」を考えると整理しやすい。
+</div>
+
+<h3>アクセス制御</h3>
+<div class="key-point">
+<span class="vocab">アクセス制御</span>：誰が・どの情報に・何をできるか（読取り／書込みなど）を制限する仕組み。<br><br>
+・<strong>最小権限の原則</strong>：業務に必要な最小限の権限だけ与える<br>
+・アクセスできる場所（社内ネットワークからだけ許可など）も制限できる
+</div>
+
+<h3>認証</h3>
+<div class="key-point">
+<span class="vocab">認証</span>：通信・アクセスしてきた相手が「本人か」を確認すること。<br><br>
+<span class="vocab">二要素認証</span>（多要素認証）：<strong>知識</strong>（パスワード）・<strong>所持</strong>（スマホ・トークン）・<strong>生体</strong>（指紋・顔）のうち<strong>2種類以上</strong>を組み合わせる。<br>
+→ パスワードが漏れても、もう1要素がないと侵入できず<strong>不正アクセスに強い</strong>。
+</div>
+<div class="example"><strong>事例のポイント：</strong>「社外から接続する際に不正アクセスのリスクが増える」→ 対策は<strong>二要素認証の導入</strong>が定番の正解。パスワードだけの認証は弱い。</div>
+
+<h3>マルウェア対策</h3>
+<div class="key-point">
+<span class="vocab">マルウェア</span>：ウイルス・ワーム・トロイの木馬・ランサムウェアなど悪意のあるソフトの総称。<br><br>
+・ウイルス対策ソフトの導入と<strong>定義ファイルの最新化</strong><br>
+・OS・ソフトの<strong>更新（脆弱性の解消）</strong><br>
+・重要データの<strong>バックアップ</strong>（ランサムウェア対策）<br>
+・不審なメールの添付・リンクを開かない
+</div>
+
+<h3>暗号</h3>
+<div class="compare">
+<div class="compare-box good">
+<h4>共通鍵暗号</h4>
+暗号化と復号に<strong>同じ鍵</strong>を使う<br><br>
+処理が速いが、鍵の受け渡しが課題
+</div>
+<div class="compare-box bad">
+<h4>公開鍵暗号</h4>
+<strong>公開鍵で暗号化・秘密鍵で復号</strong><br><br>
+鍵配布が安全。処理は遅め
+</div>
+</div>
+<div class="key-point">
+通信を暗号化すれば、途中で<strong>盗聴されても内容を読まれない</strong>（機密性の確保）。Webでは <strong>HTTPS（TLS）</strong> が使われる。
+</div>
+
+<h3>事例問題（シナリオ）の読み解き方</h3>
+<div class="key-point">
+<strong>① 長文の大半は状況説明。答えに必要な情報は「数行」だけ</strong> → 全部暗記しようとしない<br>
+<strong>② 設問を先に読み、何が問われているかを把握してから本文に戻る</strong><br>
+<strong>③ 「どのリスクを、どの対策で減らすか」の対応を素直に選ぶ</strong><br>
+<strong>④ 常識で「セキュリティを弱める選択肢」（機能を無効化する等）は誤り</strong>のことが多い
+</div>
+<div class="example"><strong>実務シナリオ例（令和6年度）：</strong>クラウドサービスに社外から直接接続できるよう変更 → 不正アクセスのリスク増 → 対策として「社外から接続する際の認証に<strong>二要素認証を導入する</strong>」が正解。「保存禁止機能を無効にする」など、守りを弱める選択肢は不正解。</div>
+
+<div class="key-point" style="background:#fce4ec;border-color:#e91e63">
+<strong style="color:#e91e63">第22章の最重要まとめ</strong><br><br>
+・科目B＝20問・100分・CBT方式・1000点満点・<strong>合格ライン600点（6割）</strong><br>
+・内訳＝アルゴリズム約16問（8割）＋情報セキュリティ約4問（2割）<br>
+・擬似言語＝特定言語に依存しない架空の言語。<strong>文法は問題に記載・暗記不要</strong><br>
+・最強の武器は<strong>トレース</strong>（変数の値を紙に書き出す机上デバッグ）<br>
+・スタック＝LIFO（後入れ先出し）、キュー＝FIFO（先入れ先出し）<br>
+・セキュリティ3要素＝機密性・完全性・可用性（CIA）<br>
+・不正アクセス対策の定番＝<strong>二要素認証</strong>。守りを弱める選択肢は誤り<br>
+・セキュリティの効率的対策＝<strong>科目Aの過去問を多く解く</strong>
+</div>
+</div>
+</div>
+
+<!-- ===== 確認テスト ===== -->
+<div id="quiz" class="section">
+<div class="quiz-area">
+<h2>確認テスト ── 第22章</h2>
+<p style="color:#666;font-size:.9em;margin-bottom:16px">全問ランダム出題・選択肢シャッフル。何度でも挑戦できます。</p>
+<div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+<div id="quizContainer"></div>
+<div style="text-align:center;margin-top:20px"><button class="btn" id="submitBtn" onclick="submitQuiz()" style="display:none">結果を見る</button></div>
+</div>
+<div class="result-area" id="resultArea"><h2>結果</h2><div class="result-score" id="resultScore"></div><div id="resultMsg" style="font-size:1.1em;margin:10px 0"></div><button class="btn" onclick="retryQuiz()">もう一度</button><button class="btn btn-outline" onclick="showSection('lesson1')">レッスンに戻る</button></div>
+</div>
+</div>
+
+<script>
+const allQuestions=[
+{q:'基本情報技術者試験 科目Bの出題数と試験時間の組合せとして正しいものはどれか。',choices:['10問・60分','20問・100分','40問・150分','80問・120分'],answer:1,explanation:'科目Bは<strong>20問・100分</strong>のCBT方式です。全問必須で、選択問題はありません。1問あたり平均5分が目安です。'},
+{q:'科目Bの合格ライン（合格基準点）として正しいものはどれか。',choices:['1000点満点中400点以上','1000点満点中600点以上','1000点満点中800点以上','100点満点中60点以上'],answer:1,explanation:'科目Bは1000点満点で、<strong>600点以上</strong>（おおむね6割）で合格です。科目Aも同じく600点以上が基準です。'},
+{q:'科目Bの出題内訳として最も適切なものはどれか。',choices:['アルゴリズムとプログラミングが約4問、情報セキュリティが約16問','アルゴリズムとプログラミングが約16問、情報セキュリティが約4問','すべて情報セキュリティ','すべてネットワーク'],answer:1,explanation:'科目Bは20問中、<strong>アルゴリズムとプログラミングが約16問（8割）</strong>、<strong>情報セキュリティが約4問（2割）</strong>です。合格の鍵はアルゴリズム対策です。'},
+{q:'科目Bで出題されるプログラム言語に関する説明として正しいものはどれか。',choices:['Java言語の文法が出題される','C言語の文法が出題される','特定言語に依存しない擬似言語が出題され、文法は問題に記載される','受験者が好きな言語を選んで解答する'],answer:2,explanation:'科目Bでは特定言語に依存しない<strong>擬似言語</strong>が出題されます。文法（書き方）はすべて問題用紙に記載されるため、事前に暗記する必要はありません。'},
+{q:'基本情報技術者試験がパソコンを使って通年で受験できる方式を何というか。',choices:['CBT方式','マークシート方式','記述式','口述試験'],answer:0,explanation:'<strong>CBT方式</strong>（Computer Based Testing）は、テストセンターのパソコンで受験する方式です。通年で受験でき、試験終了直後にスコアがわかります。'},
+{q:'擬似言語のプログラムを1行ずつ手で追い、変数の値の変化を紙に書き出して確認する作業を何というか。',choices:['コンパイル','トレース（机上デバッグ）','リファクタリング','デプロイ'],answer:1,explanation:'<strong>トレース（机上デバッグ）</strong>は、プログラムを手で追って変数の値の変化を書き出す作業で、擬似言語問題を解く最強の武器です。'},
+{q:'関数maximum(x, y, z) は異なる3つの整数のうち最大値を返す。「return x」を実行すべきなのは、if の条件式が次のどれのときか。（令和6年度）',choices:['x > y または x > z','x > y かつ x > z','y > z','z > x'],answer:1,explanation:'xが最大値である条件は<strong>「x > y かつ x > z」</strong>です。「または」だと片方だけ大きくてもxを返してしまい、誤った最大値になります。'},
+{q:'result←0 から始め、2進数の各桁について「result ← result×2 ＋ その桁の値」を先頭から繰り返す。"10010"（5桁）を処理した最終値はどれか。（令和6年度）',choices:['2','9','18','25'],answer:2,explanation:'0→(×2+1)1→(×2+0)2→(×2+0)4→(×2+1)9→(×2+0)<strong>18</strong>。桁ごとに前の値を2倍して足すこの手順は、2進数を10進数に変換する処理そのものです。'},
+{q:'スタック（Stack）のデータの出し入れ方式として正しいものはどれか。',choices:['FIFO（先入れ先出し）','LIFO（後入れ先出し）','ランダムアクセス','優先度順'],answer:1,explanation:'スタックは<strong>LIFO（後入れ先出し）</strong>です。最後に積んだ（push）ものを最初に取り出し（pop）ます。積み重ねた本を上から取るイメージです。'},
+{q:'キュー（Queue）のデータの出し入れ方式として正しいものはどれか。',choices:['FIFO（先入れ先出し）','LIFO（後入れ先出し）','後ろから両方向に取り出す','鍵で暗号化して取り出す'],answer:0,explanation:'キューは<strong>FIFO（先入れ先出し）</strong>です。最初に入れた（enqueue）ものを最初に取り出し（dequeue）ます。行列に並ぶ順番のイメージです。'},
+{q:'空のスタックに 1, 2, 3 の順にpushした後、pop を1回行うと取り出される値はどれか。',choices:['1','2','3','取り出せない'],answer:2,explanation:'スタックはLIFO（後入れ先出し）なので、最後にpushした<strong>3</strong>が最初に取り出されます。キューであれば最初に入れた1が出ます。'},
+{q:'空のキューに A, B, C の順にenqueueした後、dequeue を1回行うと取り出される値はどれか。',choices:['A','B','C','空なので取り出せない'],answer:0,explanation:'キューはFIFO（先入れ先出し）なので、最初にenqueueした<strong>A</strong>が最初に取り出されます。スタックであれば最後のCが出ます。'},
+{q:'前判定繰返し「while(条件)」の性質として正しいものはどれか。',choices:['条件が偽でも必ず1回は処理を実行する','条件を先に判定し、最初から偽なら1回も実行しない','無限に繰り返して止まらない','配列専用の繰返しである'],answer:1,explanation:'while は<strong>前判定</strong>で、条件を先に評価します。最初から偽なら処理は<strong>1回も実行されません</strong>。必ず1回実行するのは後判定の do～while です。'},
+{q:'情報セキュリティの3要素（CIA）の組合せとして正しいものはどれか。',choices:['機密性・完全性・可用性','正確性・速度・容量','認証・暗号・監視','入力・処理・出力'],answer:0,explanation:'情報セキュリティの3要素は<strong>機密性・完全性・可用性</strong>（Confidentiality, Integrity, Availability＝CIA）です。事例問題では「どの要素が損なわれるか」で整理すると考えやすくなります。'},
+{q:'許可された人だけが情報にアクセスでき、他人には読めない状態を保つ性質はどれか。',choices:['完全性','可用性','機密性','冗長性'],answer:2,explanation:'許可された人だけがアクセスできる性質は<strong>機密性</strong>です。改ざんされていない性質は完全性、必要なときに使える性質は可用性です。'},
+{q:'クラウドサービスに社外から直接接続できるよう変更した結果、不正アクセスのリスクが増加した。リスク低減策として最も適切なものはどれか。（令和6年度）',choices:['社外から接続する際の認証に二要素認証を導入する','専用アプリの保存禁止機能を無効にする','通信速度を制限する','パスワードの桁数を減らして入力しやすくする'],answer:0,explanation:'社外からの不正アクセスに対しては<strong>二要素認証の導入</strong>が有効です。パスワードが漏れても第2の要素がないと侵入できません。守りを弱める（保存禁止を無効化・パスワードを短くする）選択肢は誤りです。'},
+{q:'科目Bの情報セキュリティ対策として、最も効率的とされる学習方法はどれか。',choices:['擬似言語の文法をすべて暗記する','科目A（テクノロジ分野）の過去問を数多く解く','ネットワーク機器を自作する','英単語を暗記する'],answer:1,explanation:'科目Bのセキュリティは科目Aのテクノロジ分野と内容が重複します。そのため<strong>科目Aの過去問を数多く解く</strong>ことが最も効率的な対策とされています。'}
+];
+let questions=[],answered=0;
+function shuffleArray(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
+function initQuiz(){questions=shuffleArray(allQuestions);answered=0;document.getElementById('submitBtn').style.display='none';document.getElementById('resultArea').style.display='none';document.getElementById('progressFill').style.width='0%';const c=document.getElementById('quizContainer');c.innerHTML='';questions.forEach((q,idx)=>{const sc=q.choices.map((c,i)=>({text:c,origIdx:i}));for(let i=sc.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[sc[i],sc[j]]=[sc[j],sc[i]]}q._shuffled=sc;q._selected=null;let h=`<div class="question-card"><div class="q-number">問題 ${idx+1} / ${questions.length}</div><div class="q-text">${q.q}</div><ul class="choices">`;sc.forEach((c,ci)=>{h+=`<li onclick="selectChoice(${idx},${ci})" id="q${idx}c${ci}">${c.text}</li>`});h+=`</ul><div class="explanation" id="exp${idx}"><div id="expText${idx}"></div></div></div>`;c.innerHTML+=h})}
+function selectChoice(qi,ci){const q=questions[qi];if(q._selected!==null)return;q._selected=ci;answered++;const corr=q.answer,sel=q._shuffled[ci].origIdx,ok=sel===corr;q._shuffled.forEach((c,i)=>{const li=document.getElementById(`q${qi}c${i}`);if(c.origIdx===corr)li.classList.add('correct');if(i===ci&&!ok)li.classList.add('wrong')});const e=document.getElementById(`exp${qi}`),t=document.getElementById(`expText${qi}`);t.innerHTML=(ok?'<span style="color:#4caf50;font-weight:bold">&#x2B55; 正解！</span>':'<span style="color:#f44336;font-weight:bold">&#x274C; 不正解</span>')+'<br>'+q.explanation;e.classList.add('show');document.getElementById('progressFill').style.width=(answered/questions.length*100)+'%';if(answered===questions.length)document.getElementById('submitBtn').style.display='inline-block'}
+function submitQuiz(){let c=0;questions.forEach(q=>{if(q._selected!==null&&q._shuffled[q._selected].origIdx===q.answer)c++});document.getElementById('resultArea').style.display='block';document.getElementById('resultScore').textContent=`${c} / ${questions.length}`;const p=c/questions.length*100;let m='';if(p===100)m='満点！完璧です！';else if(p>=80)m='よく理解できています！';else if(p>=60)m='合格ライン！もう少し復習しましょう。';else m='レッスンをもう一度確認しましょう。';document.getElementById('resultMsg').textContent=m;document.getElementById('resultArea').scrollIntoView({behavior:'smooth'})}
+function retryQuiz(){initQuiz();document.getElementById('quizContainer').scrollIntoView({behavior:'smooth'})}
+function showSection(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');const tabs=document.querySelectorAll('.nav-tab');const ids=['lesson1','lesson2','lesson3','quiz'];tabs[ids.indexOf(id)].classList.add('active');if(id==='quiz')initQuiz();window.scrollTo({top:0,behavior:'smooth'})}
+initQuiz();
+</script>
+</body>
+</html>

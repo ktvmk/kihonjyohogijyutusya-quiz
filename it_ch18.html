@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第18章 経営戦略マネジメント｜基本情報技術者</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Hiragino Sans','Noto Sans JP','Meiryo',sans-serif;background:#f5f5f0;color:#333;line-height:1.8;padding:0 0 60px 0}.header{background:linear-gradient(135deg,#e65100,#ff8f00);color:#fff;padding:24px 20px;text-align:center}.header h1{font-size:1.3em;margin-bottom:4px}.header .sub{font-size:.85em;opacity:.8}.container{max-width:720px;margin:0 auto;padding:16px}.nav-tabs{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap}.nav-tab{padding:10px 14px;border:2px solid #e65100;border-radius:8px;background:#fff;color:#e65100;font-weight:bold;font-size:.82em;cursor:pointer;transition:all .2s}.nav-tab:hover,.nav-tab.active{background:#e65100;color:#fff}.section{display:none}.section.active{display:block}.lesson-card{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.lesson-card h2{color:#e65100;font-size:1.2em;margin-bottom:16px;padding-bottom:8px;border-bottom:3px solid #ffe0b2}.lesson-card h3{color:#ff8f00;font-size:1.05em;margin:20px 0 10px 0}.key-point{background:#fff3e0;border-left:4px solid #e65100;padding:14px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-size:.95em}.key-point strong{color:#e65100}.vocab{display:inline-block;background:#e3f2fd;border:1px solid #64b5f6;border-radius:6px;padding:2px 8px;margin:2px 4px;font-weight:bold;font-size:.9em;color:#1565c0}.example{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:14px 16px;margin:12px 0;font-size:.9em}.formula{background:#fce4ec;border-left:4px solid #e91e63;padding:14px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-family:monospace;font-size:.95em;line-height:2}.compare{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}.compare-box{background:#fff;border:2px solid #e0e0e0;border-radius:10px;padding:14px;font-size:.9em}.compare-box h4{font-size:.95em;margin-bottom:8px;text-align:center}.compare-box.good{border-color:#4caf50}.compare-box.good h4{color:#2e7d32}.compare-box.bad{border-color:#ff9800}.compare-box.bad h4{color:#e65100}
+.quiz-area{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.quiz-area h2{color:#e65100;margin-bottom:16px}.question-card{background:#fafafa;border:1px solid #e0e0e0;border-radius:10px;padding:20px;margin:16px 0}.q-number{font-size:.8em;color:#999;margin-bottom:6px}.q-text{font-size:1.05em;font-weight:bold;margin-bottom:14px;line-height:1.6}.choices{list-style:none}.choices li{padding:12px 16px;margin:6px 0;border:2px solid #e0e0e0;border-radius:8px;cursor:pointer;transition:all .2s;font-size:.95em}.choices li:hover{border-color:#e65100;background:#fff3e0}.choices li.correct{border-color:#4caf50;background:#e8f5e9}.choices li.wrong{border-color:#f44336;background:#ffebee}.explanation{display:none;margin-top:12px;padding:14px;background:#f5f5f5;border-radius:8px;font-size:.9em;line-height:1.7}.explanation.show{display:block}.result-area{display:none;text-align:center;padding:30px;background:#fff;border-radius:12px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.result-score{font-size:2.5em;font-weight:bold;color:#e65100;margin:10px 0}.btn{display:inline-block;padding:12px 28px;background:#e65100;color:#fff;border:none;border-radius:8px;font-size:1em;cursor:pointer;margin:8px}.btn:hover{background:#ff8f00}.btn-outline{background:#fff;color:#e65100;border:2px solid #e65100}.progress-bar{width:100%;height:6px;background:#e0e0e0;border-radius:3px;margin:12px 0}.progress-fill{height:100%;background:#e65100;border-radius:3px;transition:width .3s}.back-link{display:inline-block;margin:16px 0;color:#e65100;text-decoration:none;font-weight:bold}
+.sql-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.88em}
+.sql-table th{background:#e65100;color:#fff;padding:6px;border:1px solid #ccc}
+.sql-table td{padding:6px;border:1px solid #ccc;background:#fff}
+</style>
+</head>
+<body>
+<div class="header"><h1>第18章 経営戦略マネジメント</h1><div class="sub">基本情報技術者試験 Web教材</div></div>
+<div class="container">
+<a href="it_quiz.html" class="back-link">← 章の一覧にもどる</a>
+<div class="nav-tabs">
+<div class="nav-tab active" onclick="showSection('lesson1')">① 経営戦略と全社戦略</div>
+<div class="nav-tab" onclick="showSection('lesson2')">② 競争戦略・分析手法</div>
+<div class="nav-tab" onclick="showSection('lesson3')">③ 目標と評価(BSC)</div>
+<div class="nav-tab" onclick="showSection('lesson4')">④ マーケティング</div>
+<div class="nav-tab" onclick="showSection('lesson5')">⑤ 経営管理システム</div>
+<div class="nav-tab" onclick="showSection('quiz')">確認テスト</div>
+</div>
+
+<!-- ===== レッスン1 ===== -->
+<div id="lesson1" class="section active">
+<div class="lesson-card">
+<h2>① 経営戦略の体系と全社戦略</h2>
+
+<h3>3つの経営戦略のレベル</h3>
+<div class="key-point">
+経営戦略は、対象範囲によって3つの階層に分かれる：<br><br>
+<span class="vocab">全社戦略（企業戦略）</span>：複数の事業をもつ会社が、<strong>会社全体として進む方向</strong>を決める<br>
+<span class="vocab">事業戦略（競争戦略）</span>：<strong>1つの事業部</strong>が、その市場でどう競争して勝つかを決める<br>
+<span class="vocab">機能別戦略</span>：職能（部門）ごとの戦略。例＝マーケティング戦略・技術開発戦略・情報システム戦略・知的財産戦略
+</div>
+
+<h3>コアコンピタンス</h3>
+<div class="key-point">
+<span class="vocab">コアコンピタンス</span>：会社の核となる強みで、<strong>競合他社が簡単に真似できない</strong>ノウハウや技術（例：特許）<br><br>
+<span class="vocab">コアコンピタンス経営</span>：他社に真似のできない企業独自の強みを核とした経営
+</div>
+<div class="example"><strong>間違えやすい用語</strong><br>
+・コンプライアンス＝法令遵守（コアコンピタンスとは別物）<br>
+・事業ドメイン＝市場・技術・商品の観点で設定した事業の展開領域</div>
+
+<h3>企業規模を広げる戦略（成長の手段）</h3>
+<div class="key-point">
+<span class="vocab">M&amp;A</span>：Mergers and Acquisitions＝企業の<strong>合併・買収</strong>。時間を買って一気に事業を拡大できる<br>
+<span class="vocab">アライアンス</span>：他社との<strong>提携（協業）</strong>。資本関係を持たず協力する形もある<br>
+<span class="vocab">アウトソーシング</span>：自社業務の一部を<strong>外部に委託</strong>する。コスト削減や専門性の活用が目的<br>
+<span class="vocab">TOB</span>：株式公開買付け。買収のため株式を市場外でまとめて買い付ける手法
+</div>
+
+<h3>多角化と垂直統合</h3>
+<div class="compare">
+<div class="compare-box good">
+<h4>多角化</h4>
+<strong>新しい事業分野</strong>へ進出する<br><br>
+リスク分散や範囲の経済（シナジー）を狙う
+</div>
+<div class="compare-box bad">
+<h4>垂直統合</h4>
+原材料の調達→製造→販売という<br>
+<strong>供給の流れ（上流・下流）</strong>を<br>自社に取り込む
+</div>
+</div>
+<div class="key-point">
+<span class="vocab">シナジー効果</span>：複数の事業や製品をまとめることで、コスト・生産設備・流通経路・ノウハウなど<strong>さまざまな面で相乗効果</strong>が生まれること（1＋1が2より大きくなる）
+</div>
+</div>
+</div>
+
+<!-- ===== レッスン2 ===== -->
+<div id="lesson2" class="section">
+<div class="lesson-card">
+<h2>② 競争戦略と分析手法</h2>
+
+<h3>SWOT分析【頻出】</h3>
+<div class="key-point">
+<span class="vocab">SWOT分析</span>：会社が置かれている経営環境を、<strong>内部環境</strong>と<strong>外部環境</strong>、<strong>良い影響／悪い影響</strong>の観点から4つに分類する手法。
+</div>
+<div class="compare">
+<div class="compare-box good">
+<h4>強み Strengths</h4>
+内部環境 × 良い影響<br>（例：多くの特許、良いブランド）
+</div>
+<div class="compare-box bad">
+<h4>弱み Weaknesses</h4>
+内部環境 × 悪い影響<br>（例：社員のモチベ低下、離職率増）
+</div>
+</div>
+<div class="compare">
+<div class="compare-box good">
+<h4>機会 Opportunities</h4>
+外部環境 × 良い影響<br>（例：需要の増加、円安〈輸出企業〉）
+</div>
+<div class="compare-box bad">
+<h4>脅威 Threats</h4>
+外部環境 × 悪い影響<br>（例：競合の増加、他社の値下げ）
+</div>
+</div>
+<div class="key-point">
+・<strong>内部環境</strong>＝自社の努力で変えられる項目／<strong>外部環境</strong>＝自社ではコントロールできない項目（円安・法改正など）
+</div>
+
+<h3>PPM（プロダクトポートフォリオマネジメント）【頻出】</h3>
+<div class="key-point">
+<span class="vocab">PPM</span>：<strong>縦軸＝市場成長率</strong>、<strong>横軸＝市場占有率（相対市場シェア）</strong>の2軸で、各事業（製品）への経営資源の最適配分を意思決定する手法。
+</div>
+<table class="sql-table">
+<tr><th>分類</th><th>成長率</th><th>占有率</th><th>特徴</th></tr>
+<tr><td><strong>問題児</strong></td><td>高</td><td>低</td><td>投資が必要だが収益は少ない（育成対象）</td></tr>
+<tr><td><strong>花形</strong></td><td>高</td><td>高</td><td>収益は大きいが投資も大きい</td></tr>
+<tr><td><strong>金のなる木</strong></td><td>低</td><td>高</td><td>投資少・収益大＝最も稼げる（資金源）</td></tr>
+<tr><td><strong>負け犬</strong></td><td>低</td><td>低</td><td>収益も将来性も低い＝撤退を検討</td></tr>
+</table>
+<div class="key-point">
+金のなる木で得た利益を<strong>問題児や花形へ投資</strong>し、問題児→花形→金のなる木と育てていくのが基本の流れ。
+</div>
+
+<h3>そのほかの分析手法</h3>
+<div class="key-point">
+<span class="vocab">3C分析</span>：<strong>Customer（顧客）・Competitor（競合）・Company（自社）</strong>の3つの視点で経営環境を整理<br><br>
+<span class="vocab">5フォース分析（ファイブフォース）</span>：業界の構造を5つの競争要因で分析（<strong>新規参入の脅威／代替品の脅威／買い手の交渉力／売り手の交渉力／既存競合との敵対</strong>）<br><br>
+<span class="vocab">バリューチェーン分析</span>：企業活動を<strong>主活動（購買物流・製造・出荷物流・販売・サービス）</strong>と<strong>支援活動</strong>に分け、付加価値がどこで生まれるかを分析<br><br>
+<span class="vocab">ベンチマーキング</span>：業界で最も成功している<strong>先進企業と自社を比較</strong>し、製品・サービスを定性的・定量的に把握する
+</div>
+
+<h3>コトラーの競争地位戦略</h3>
+<table class="sql-table">
+<tr><th>地位</th><th>基本戦略</th></tr>
+<tr><td><strong>リーダー</strong>（トップシェア）</td><td>全方位戦略（全市場をカバーし最大シェア確保）</td></tr>
+<tr><td><strong>チャレンジャー</strong>（2位以下）</td><td>差別化戦略（リーダーを攻撃）</td></tr>
+<tr><td><strong>フォロワー</strong>（2位以下）</td><td>模倣戦略（成功事例を真似しコスト抑制）</td></tr>
+<tr><td><strong>ニッチャー</strong>（すきま）</td><td>特定化戦略（専門特化・集中）</td></tr>
+</table>
+<div class="key-point">
+<span class="vocab">ブルーオーシャン戦略</span>：競争の激しい市場（レッドオーシャン）を避け、<strong>未開拓の新しい市場</strong>を創出する戦略
+</div>
+</div>
+</div>
+
+<!-- ===== レッスン3 ===== -->
+<div id="lesson3" class="section">
+<div class="lesson-card">
+<h2>③ 事業戦略の目標と評価</h2>
+
+<h3>バランススコアカード（BSC）【頻出】</h3>
+<div class="key-point">
+<span class="vocab">バランススコアカード</span>：企業のビジョンと戦略を実現するため、業績を<strong>4つの視点</strong>から評価してアクションプランまで具体化する手法。最大の特徴は<strong>財務以外の視点</strong>も取り入れている点。
+</div>
+<table class="sql-table">
+<tr><th>視点</th><th>評価の内容</th><th>指標の例</th></tr>
+<tr><td><strong>財務</strong></td><td>財務諸表などの視点</td><td>コスト削減率</td></tr>
+<tr><td><strong>顧客</strong></td><td>お客様の視点</td><td>顧客定着率・クレーム件数</td></tr>
+<tr><td><strong>内部ビジネスプロセス</strong></td><td>業務プロセスの視点</td><td>製造期間短縮日数・定刻到着率</td></tr>
+<tr><td><strong>学習と成長</strong></td><td>従業員と会社の能力</td><td>研修受講時間・育成人数</td></tr>
+</table>
+
+<h3>目標を測る指標：CSF・KGI・KPI</h3>
+<div class="key-point">
+<span class="vocab">KGI</span>（重要目標達成指標）：最終的に達成すべき<strong>ゴール</strong>を示す指標（例：売上高）<br><br>
+<span class="vocab">CSF</span>（重要成功要因）：戦略目標の達成に必要な<strong>要因</strong>。しばしば<strong>定性的</strong>（数字で表せない。例：社員のモチベーション）<br><br>
+<span class="vocab">KPI</span>（重要業績評価指標）：目標の達成状況を表す<strong>定量的</strong>な指標（数字で表せる。例：離職率）
+</div>
+<div class="example"><strong>関係のイメージ</strong><br>
+KGI（ゴール：売上増）を達成するため、CSF（成功要因：顧客満足）を定め、その進み具合をKPI（数値：満足度4.0以上）で測る。</div>
+
+<h3>成長戦略（アンゾフの成長マトリクス）</h3>
+<div class="key-point">
+「製品」と「市場」がそれぞれ既存か新規かで、成長の方向を4つに分ける：<br><br>
+<span class="vocab">市場浸透</span>（既存製品×既存市場）／<span class="vocab">新製品開発</span>（新製品×既存市場）／<span class="vocab">新市場開拓</span>（既存製品×新市場）／<span class="vocab">多角化</span>（新製品×新市場）
+</div>
+</div>
+</div>
+
+<!-- ===== レッスン4 ===== -->
+<div id="lesson4" class="section">
+<div class="lesson-card">
+<h2>④ マーケティング</h2>
+
+<h3>マーケティングミックス（4P）と4C</h3>
+<div class="key-point">
+<span class="vocab">マーケティングミックス</span>：マーケティング目標を達成するため、自社がコントロール可能な手段を組み合わせること。代表が<strong>4P</strong>。
+</div>
+<div class="compare">
+<div class="compare-box good">
+<h4>4P（売り手の視点）</h4>
+Product（製品）<br>Price（価格）<br>Place（場所・流通）<br>Promotion（販売促進）
+</div>
+<div class="compare-box bad">
+<h4>4C（買い手の視点）</h4>
+Customer Value（顧客価値）<br>Cost（顧客の負担）<br>Convenience（利便性）<br>Communication（対話）
+</div>
+</div>
+<div class="key-point">
+4Pと4Cは対応関係にある：<strong>Product↔Customer Value／Price↔Cost／Place↔Convenience／Promotion↔Communication</strong>。<br>
+※<strong>3C分析</strong>（顧客・競合・自社）とは別物なので混同しない。
+</div>
+
+<h3>ターゲット市場の決め方（STP）</h3>
+<div class="key-point">
+<span class="vocab">セグメンテーション</span>：市場を年齢・地域などの基準で<strong>細分化</strong>する<br>
+<span class="vocab">ターゲティング</span>：細分化した中から最も勝てる<strong>市場（標的）を選定</strong>する<br>
+<span class="vocab">ポジショニング</span>：ターゲット市場の中で自社製品の<strong>位置づけ（差別化点）</strong>を明確にする
+</div>
+
+<h3>プロダクトライフサイクル（PLC）</h3>
+<table class="sql-table">
+<tr><th>段階</th><th>特徴</th></tr>
+<tr><td><strong>導入期</strong></td><td>認知度が低く需要は部分的。認知度を高める投資が重要</td></tr>
+<tr><td><strong>成長期</strong></td><td>売上が急増。競合が増え競争が激化。投資も必要</td></tr>
+<tr><td><strong>成熟期</strong></td><td>需要の伸びが鈍化。差別化・コストダウンでシェア維持</td></tr>
+<tr><td><strong>衰退期</strong></td><td>需要が減り撤退する企業が出る。追加投資を控える</td></tr>
+</table>
+
+<h3>価格の決め方・ブランド戦略</h3>
+<div class="key-point">
+<span class="vocab">コストプラス価格決定法</span>：<strong>製造原価（仕入原価）＋マージン</strong>で販売価格を決める方法<br><br>
+<span class="vocab">ブランド戦略</span>：ブランドによって製品を差別化し、顧客の信頼・愛着を高めて価格競争を避ける戦略
+</div>
+
+<h3>イノベーター理論</h3>
+<div class="key-point">
+消費者を購入時期で5タイプに分類：<strong>イノベーター→アーリーアダプター→アーリーマジョリティ→レイトマジョリティ→ラガード</strong>。<br>
+特に<strong>アーリーアダプター</strong>＝流行に敏感で自ら情報収集し、<strong>他の消費者に大きな影響を与える層</strong>（オピニオンリーダー）。
+</div>
+</div>
+</div>
+
+<!-- ===== レッスン5 ===== -->
+<div id="lesson5" class="section">
+<div class="lesson-card">
+<h2>⑤ 経営管理システム</h2>
+
+<h3>一元管理の4兄弟（ERP・CRM・SFA・SCM）</h3>
+<table class="sql-table">
+<tr><th>用語</th><th>正式名（日本語）</th><th>何を一元管理するか</th></tr>
+<tr><td><strong>ERP</strong></td><td>企業資源計画</td><td>社内の経営資源（ヒト・モノ・カネ・情報）を総合管理</td></tr>
+<tr><td><strong>CRM</strong></td><td>顧客関係管理</td><td>顧客情報・購買履歴を一元管理</td></tr>
+<tr><td><strong>SFA</strong></td><td>営業支援システム</td><td>営業ノウハウ・商談情報を一元管理</td></tr>
+<tr><td><strong>SCM</strong></td><td>供給連鎖管理</td><td>社外も含めた調達・生産・販売プロセス全体を最適化</td></tr>
+</table>
+
+<h3>ERPとSCMの違い</h3>
+<div class="compare">
+<div class="compare-box good">
+<h4>ERP</h4>
+<strong>社内</strong>の経営資源を統合管理し、<br>社内の最適化を図る
+</div>
+<div class="compare-box bad">
+<h4>SCM</h4>
+下請け・物流など<strong>社外も含めた</strong><br>プロセス全体を最適化する
+</div>
+</div>
+
+<h3>CRMとSFAの目的</h3>
+<div class="key-point">
+<span class="vocab">CRM</span>の目的：<strong>顧客ロイヤリティの獲得と顧客生涯価値の最大化</strong>（既存顧客と長く良い関係を築く）<br><br>
+<span class="vocab">SFA</span>の目的：見込み客を顧客に変えること（<strong>商談・受注</strong>の効率化）。CRMは受注後の関係維持、SFAは受注までを支援するイメージ。
+</div>
+
+<h3>ナレッジマネジメント</h3>
+<div class="key-point">
+<span class="vocab">ナレッジマネジメント</span>：個人の知識・情報を組織全体で共有し、<strong>企業全体の問題解決力を高める</strong>経営。<br><br>
+<span class="vocab">暗黙知</span>：文書化されていない個人の経験・ノウハウ（共有しづらい）<br>
+<span class="vocab">形式知</span>：文書化され社内で共有できる知識<br>
+→ 暗黙知を<strong>形式知に変換</strong>して共有・効率化するのがねらい。
+</div>
+
+<h3>TQM（総合的品質管理）</h3>
+<div class="key-point">
+<span class="vocab">TQM</span>（Total Quality Management）：全社的に品質向上へ取り組む管理手法。<strong>PDCAサイクル</strong>を回し、継続的改善（カイゼン）を進める。
+</div>
+
+<div class="key-point" style="background:#fce4ec;border-color:#e91e63">
+<strong style="color:#e91e63">第18章の最重要まとめ</strong><br><br>
+・SWOT＝内部/外部 × 良い/悪い で 強み・弱み・機会・脅威<br>
+・PPM＝縦軸「市場成長率」×横軸「市場占有率」。金のなる木＝低成長・高シェアで最も稼げる<br>
+・バリューチェーン＝主活動＋支援活動／ベンチマーキング＝先進企業と比較<br>
+・BSC＝財務・顧客・内部ビジネスプロセス・学習と成長の4視点<br>
+・KGI＝ゴール、CSF＝定性的な成功要因、KPI＝定量的な評価指標<br>
+・4P＝Product/Price/Place/Promotion（売り手）↔4C（買い手）<br>
+・コストプラス法＝製造原価＋マージン<br>
+・ERP＝社内資源、CRM＝顧客、SFA＝営業、SCM＝社外も含めた供給全体<br>
+・ナレッジマネジメント＝暗黙知を形式知にして共有
+</div>
+</div>
+</div>
+
+<!-- ===== 確認テスト ===== -->
+<div id="quiz" class="section">
+<div class="quiz-area">
+<h2>確認テスト ── 第18章</h2>
+<p style="color:#666;font-size:.9em;margin-bottom:16px">全問ランダム出題・選択肢シャッフル。何度でも挑戦できます。</p>
+<div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+<div id="quizContainer"></div>
+<div style="text-align:center;margin-top:20px"><button class="btn" id="submitBtn" onclick="submitQuiz()" style="display:none">結果を見る</button></div>
+</div>
+<div class="result-area" id="resultArea"><h2>結果</h2><div class="result-score" id="resultScore"></div><div id="resultMsg" style="font-size:1.1em;margin:10px 0"></div><button class="btn" onclick="retryQuiz()">もう一度</button><button class="btn btn-outline" onclick="showSection('lesson1')">レッスンに戻る</button></div>
+</div>
+</div>
+
+<script>
+const allQuestions=[
+{q:'SWOT分析を説明したものはどれか。（平成28年度）',choices:['企業のビジョンと戦略を実現するために、財務、顧客、業務プロセス、学習と成長という四つの視点から検討し、アクションプランにまで具体化する。','企業を、内部環境と外部環境の観点から、強み、弱み、機会、脅威という四つの視点で評価し、企業を取り巻く環境を認識する。','事業を、分散型、特化型、手詰まり型、規模型という四つのタイプで評価し、自社の事業戦略策定に役立てる。','製品を、導入期、成長期、成熟期、衰退期という四つの段階に分類し、最適な戦略策定に活用する。'],answer:1,explanation:'<strong>SWOT分析</strong>は、内部環境と外部環境の観点から強み・弱み・機会・脅威の4つで経営環境を評価します。1はバランススコアカード、4はプロダクトライフサイクルの説明です。'},
+{q:'SWOT分析で「自社ではコントロールできず、かつ会社に悪い影響を及ぼすもの」が分類される項目はどれか。',choices:['強み（Strengths）','弱み（Weaknesses）','機会（Opportunities）','脅威（Threats）'],answer:3,explanation:'外部環境（コントロールできない）×悪い影響は<strong>脅威（Threats）</strong>です。内部環境×悪い影響は弱み、外部環境×良い影響は機会に分類されます。'},
+{q:'企業経営で用いられるベンチマーキングを説明したものはどれか。（平成28年度）',choices:['企業全体の経営資源の配分を計画・管理し、経営の効率向上を図ることである。','競合相手又は先進企業と比較して、自社の製品、サービス、オペレーションなどを定性的・定量的に把握することである。','顧客視点から業務プロセスを再設計し、情報技術を活用して企業の体質や構造を抜本的に変革することである。','他社より優越した自社独自のスキルや技術に経営資源を集中することである。'],answer:1,explanation:'<strong>ベンチマーキング</strong>は先進企業と比較して自社を定性的・定量的に把握する手法です。1はERP、3はBPR、4はコアコンピタンス経営の説明です。'},
+{q:'プロダクトポートフォリオマネジメント（PPM）を説明したものはどれか。（平成25年度）',choices:['自社の強みと弱み、市場の機会と脅威を列挙して環境分析を行う。','製品と市場の視点から、事業拡大の方向性を市場浸透・製品開発・市場開拓・多角化に分けて検討する。','製品の市場占有率と市場成長率から、企業がそれぞれの事業に対する経営資源の最適配分を意思決定する。','製品の導入期・成長期・成熟期・衰退期の各段階に応じて計画する。'],answer:2,explanation:'<strong>PPM</strong>は市場占有率（横軸）と市場成長率（縦軸）から経営資源の最適配分を意思決定する手法です。1はSWOT分析、2は成長マトリクス、4はプロダクトライフサイクルの説明です。'},
+{q:'PPMにおいて「市場成長率が低く、市場占有率が高い」ため投資が少なくて済み、会社の資金源となる事業はどれに分類されるか。',choices:['問題児','花形','金のなる木','負け犬'],answer:2,explanation:'低成長・高シェアの事業は<strong>金のなる木</strong>で、少ない投資で大きな収益を生む資金源です。花形は高成長・高シェア、問題児は高成長・低シェア、負け犬は低成長・低シェアです。'},
+{q:'PPMの2つの軸の組合せとして正しいものはどれか。',choices:['縦軸＝市場成長率、横軸＝市場占有率','縦軸＝市場占有率、横軸＝売上高','縦軸＝利益率、横軸＝市場成長率','縦軸＝投資額、横軸＝市場占有率'],answer:0,explanation:'PPMは<strong>縦軸が市場成長率、横軸が市場占有率（相対市場シェア）</strong>です。この2軸で事業を問題児・花形・金のなる木・負け犬に分類します。'},
+{q:'企業の事業活動を機能ごとに主活動と支援活動に分け、製品やサービスの利益がどの活動で生み出されているかを分析する手法はどれか。（平成26年度）',choices:['3C分析','SWOT分析','バリューチェーン分析','ファイブフォース分析'],answer:2,explanation:'主活動と支援活動に分けて付加価値の源泉を分析するのは<strong>バリューチェーン分析</strong>です。3Cは顧客・競合・自社、5フォースは業界の5つの競争要因を分析する手法です。'},
+{q:'コアコンピタンスの説明はどれか。（平成29年度）',choices:['企業の活動分野において、競合他社にはまねのできない卓越した能力','経営を行う上で法令や各種規制、社会的規範などを遵守する企業活動','市場・技術・商品の観点から設定した、事業の展開領域','業務とシステムの全体最適化手法'],answer:0,explanation:'<strong>コアコンピタンス</strong>は競合他社が真似できない卓越した能力（強み）です。2はコンプライアンス、3は事業ドメイン、4はエンタープライズアーキテクチャの説明です。'},
+{q:'コアコンピタンス経営を説明したものはどれか。（平成24年度）',choices:['企業内に散在する知識を共有化し、全体の問題解決力を高める経営を行う。','組織の階層をできるだけ少なくしたフラット型の組織構造によって経営を行う。','優れた業績を上げている企業との比較分析から、自社の経営革新を行う。','他社にはまねのできない、企業独自のノウハウや技術などの強みを核とした経営を行う。'],answer:3,explanation:'<strong>コアコンピタンス経営</strong>は他社に真似できない独自の強みを核とする経営です。1はナレッジマネジメント、2はフラット型組織、3はベンチマーキングの説明です。'},
+{q:'複数の製品をまとめて生産することで、コスト・生産設備・流通経路・ノウハウなど様々な面で相乗効果が生まれることを何というか。',choices:['規模の経済','シナジー効果','経験曲線','範囲の経済'],answer:1,explanation:'複数の事業・製品を組み合わせて生まれる相乗効果を<strong>シナジー効果</strong>といいます。規模の経済は生産量増によるコスト減、経験曲線は生産経験の蓄積によるコスト減です。'},
+{q:'企業の競争戦略におけるリーダー戦略はどれか。（平成29年度）',choices:['市場シェアを奪うことを目標に、あらゆる面での差別化戦略を取る。','他企業が参入してこない専門特化した市場に、限られた経営資源を集中する。','目標とする企業の戦略を観察し、迅速に模倣して市場での存続を図る。','利潤や好評判の維持・向上と最適市場シェアの確保を目標に、全ての顧客をターゲットにした全方位戦略を取る。'],answer:3,explanation:'業界トップの<strong>リーダー</strong>は全市場をカバーする全方位戦略を取ります。1はチャレンジャーの差別化戦略、2はニッチャーの特定化戦略、3はフォロワーの模倣戦略です。'},
+{q:'競争上のポジションで、ニッチャーの基本戦略はどれか。（平成29年度）',choices:['シェア追撃などのリーダー攻撃に必要な差別化戦略','市場チャンスに素早く対応する模倣戦略','製品、市場の専門特化を図る特定化戦略','全市場をカバーし、最大シェアを確保する全方位戦略'],answer:2,explanation:'<strong>ニッチャー</strong>はすきま市場に経営資源を集中する特定化戦略を取ります。1はチャレンジャー、2はフォロワー、4はリーダーの戦略です。'},
+{q:'イノベーター理論において、流行に敏感で自ら情報収集を行い、他の消費者に大きな影響を与える層はどれか。（令和5年度）',choices:['ラガード','イノベーター','アーリーアダプター','レイトマジョリティ'],answer:2,explanation:'早期に受け入れ、他の消費者へ大きな影響を与えるオピニオンリーダー的な層は<strong>アーリーアダプター</strong>です。イノベーターは最も早く受容する層、ラガードは最も保守的な層です。'},
+{q:'バランススコアカードの四つの視点とは、財務、学習と成長、内部ビジネスプロセスと、もう一つはどれか。（平成22年度）',choices:['ガバナンス','顧客','自社の強み','遵法'],answer:1,explanation:'バランススコアカードの4視点は「財務」「顧客」「内部ビジネスプロセス」「学習と成長」です。よって残りは<strong>顧客</strong>です。「自社の強み」はSWOT分析の分類の一つです。'},
+{q:'バランススコアカードの内部ビジネスプロセスの視点における戦略目標と業績評価指標の例はどれか。（令和元年度）',choices:['持続的成長が目標なので、受注残を指標とする。','主要顧客との継続的な関係構築が目標なので、クレーム件数を指標とする。','製品開発力の向上が目標なので、研修受講時間を指標とする。','製品製造の生産性向上が目標なので、製造期間短縮日数を指標とする。'],answer:3,explanation:'内部ビジネスプロセスは<strong>業務プロセス</strong>で評価します。生産性向上×製造期間短縮日数の4が該当します。1は財務、2は顧客、3は学習と成長の視点です。'},
+{q:'CSF（重要成功要因）とKPI（重要業績評価指標）の関係の説明として適切なものはどれか。',choices:['CSFは定量的な指標、KPIは定性的な要因である。','定性的なCSFの達成状況を評価するため、定量的なKPIを設定する。','KPIは最終的なゴールそのものを表す指標である。','CSFとKPIは同じ意味であり、区別されない。'],answer:1,explanation:'<strong>CSF</strong>は達成に必要な要因（しばしば定性的）で、その進み具合を測るため<strong>定量的なKPI</strong>を設定します。最終ゴールを表すのはKGIです。'},
+{q:'マーケティングミックスの説明はどれか。（平成23年度）',choices:['顧客市場をある基準で細分化し、最も競争優位に立てる市場を選定すること','市場成長率と相対的市場シェアの組合せから各事業の位置づけを明確にすること','製品戦略、価格戦略、チャネル戦略、プロモーション戦略などを適切に組み合わせて、自社製品を効果的に販売していくこと','導入期・成長期・成熟期・衰退期のそれぞれで適切な施策を採っていくこと'],answer:2,explanation:'<strong>マーケティングミックス（4P）</strong>は製品・価格・場所・販売促進を組み合わせる考え方です。1はセグメンテーション/ターゲティング、2はPPM、4はプロダクトライフサイクルの説明です。'},
+{q:'売り手の視点である4Pの「Product（製品）」に対応する、買い手の視点である4Cの要素はどれか。（平成28年度）',choices:['Communication（顧客との対話）','Convenience（顧客の利便性）','Cost（顧客の負担）','Customer Value（顧客にとっての価値）'],answer:3,explanation:'4Pと4Cの対応は Product↔<strong>Customer Value</strong>、Price↔Cost、Place↔Convenience、Promotion↔Communication です。'},
+{q:'コストプラス価格決定法を説明したものはどれか。（平成30年度）',choices:['買い手が認める品質や価格をリサーチし、訴求力のある価格を決定する。','業界の平均水準や競合企業の設定価格を参考に、価格を決定する。','製造原価又は仕入原価に一定のマージンを乗せて価格を決定する。','目標販売量を基に、総費用吸収後に一定の利益率が確保できる価格を決定する。'],answer:2,explanation:'<strong>コストプラス価格決定法</strong>は「製造原価（仕入原価）＋マージン」で価格を決めます。1は需要価格決定法、2は市場価格追随法、4は目標利益法の説明です。'},
+{q:'ERPを説明したものはどれか。（平成20年度）',choices:['営業活動にITを活用して営業の効率と品質を高める手法・概念である。','卸売業・メーカーが小売店の経営活動を支援する手法・概念である。','企業全体の経営資源を有効かつ総合的に計画・管理し、経営の効率向上を図る手法・概念である。','商取引を電子的なネットワークを活用して行う手法・概念である。'],answer:2,explanation:'<strong>ERP</strong>は企業全体の経営資源（ヒト・モノ・カネ・情報）を総合管理する手法です。1はSFA、2はリテールサポート、4はEC（電子商取引）の説明です。'},
+{q:'CRMの目的はどれか。（平成28年度）',choices:['顧客ロイヤリティの獲得と顧客生涯価値の最大化','在庫不足による販売機会損失の削減','製造に必要な資源の発注量と発注時期の決定','販売時点での商品ごとの販売情報の把握'],answer:0,explanation:'<strong>CRM</strong>の目的は顧客ロイヤリティの獲得と顧客生涯価値の最大化です。2はSCM、3はMRP、4はPOSシステムの目的です。'},
+{q:'SCMの目的はどれか。（平成26年度）',choices:['顧客情報や購買履歴を一元管理し、良好な顧客関係の構築を目的とする。','顧客情報や商談状況を一元管理し、営業活動の効率向上を目的とする。','生産・販売・在庫・会計など基幹業務の情報を統合管理し、経営効率の向上を目的とする。','調達から販売までの複数の企業や組織にまたがる情報を統合的に管理し、コスト低減や納期短縮を目的とする。'],answer:3,explanation:'<strong>SCM</strong>は社外も含めた供給プロセス全体を最適化します。「複数の企業や組織にまたがる」がキーワードです。1はCRM、2はSFA、3はERPの目的です。'},
+{q:'ナレッジマネジメントを説明したものはどれか。（平成30年度）',choices:['企業内に散在している知識を共有化し、全体の問題解決力を高める経営を行う。','組織の階層をできるだけ少なくしたフラット型の組織構造によって経営を行う。','優れた業績を上げている企業との比較分析から、自社の経営革新を行う。','他社にはまねのできない、企業独自のノウハウや技術などの強みを核とした経営を行う。'],answer:0,explanation:'<strong>ナレッジマネジメント</strong>は知識を共有化し企業全体の問題解決力を高めます。暗黙知を形式知に変えるのがポイント。2はフラット型組織、3はベンチマーキング、4はコアコンピタンス経営です。'}
+];
+let questions=[],answered=0;
+function shuffleArray(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
+function initQuiz(){questions=shuffleArray(allQuestions);answered=0;document.getElementById('submitBtn').style.display='none';document.getElementById('resultArea').style.display='none';document.getElementById('progressFill').style.width='0%';const c=document.getElementById('quizContainer');c.innerHTML='';questions.forEach((q,idx)=>{const sc=q.choices.map((c,i)=>({text:c,origIdx:i}));for(let i=sc.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[sc[i],sc[j]]=[sc[j],sc[i]]}q._shuffled=sc;q._selected=null;let h=`<div class="question-card"><div class="q-number">問題 ${idx+1} / ${questions.length}</div><div class="q-text">${q.q}</div><ul class="choices">`;sc.forEach((c,ci)=>{h+=`<li onclick="selectChoice(${idx},${ci})" id="q${idx}c${ci}">${c.text}</li>`});h+=`</ul><div class="explanation" id="exp${idx}"><div id="expText${idx}"></div></div></div>`;c.innerHTML+=h})}
+function selectChoice(qi,ci){const q=questions[qi];if(q._selected!==null)return;q._selected=ci;answered++;const corr=q.answer,sel=q._shuffled[ci].origIdx,ok=sel===corr;q._shuffled.forEach((c,i)=>{const li=document.getElementById(`q${qi}c${i}`);if(c.origIdx===corr)li.classList.add('correct');if(i===ci&&!ok)li.classList.add('wrong')});const e=document.getElementById(`exp${qi}`),t=document.getElementById(`expText${qi}`);t.innerHTML=(ok?'<span style="color:#4caf50;font-weight:bold">&#x2B55; 正解！</span>':'<span style="color:#f44336;font-weight:bold">&#x274C; 不正解</span>')+'<br>'+q.explanation;e.classList.add('show');document.getElementById('progressFill').style.width=(answered/questions.length*100)+'%';if(answered===questions.length)document.getElementById('submitBtn').style.display='inline-block'}
+function submitQuiz(){let c=0;questions.forEach(q=>{if(q._selected!==null&&q._shuffled[q._selected].origIdx===q.answer)c++});document.getElementById('resultArea').style.display='block';document.getElementById('resultScore').textContent=`${c} / ${questions.length}`;const p=c/questions.length*100;let m='';if(p===100)m='満点！完璧です！';else if(p>=80)m='よく理解できています！';else if(p>=60)m='合格ライン！もう少し復習しましょう。';else m='レッスンをもう一度確認しましょう。';document.getElementById('resultMsg').textContent=m;document.getElementById('resultArea').scrollIntoView({behavior:'smooth'})}
+function retryQuiz(){initQuiz();document.getElementById('quizContainer').scrollIntoView({behavior:'smooth'})}
+function showSection(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');const tabs=document.querySelectorAll('.nav-tab');const ids=['lesson1','lesson2','lesson3','lesson4','lesson5','quiz'];tabs[ids.indexOf(id)].classList.add('active');if(id==='quiz')initQuiz();window.scrollTo({top:0,behavior:'smooth'})}
+initQuiz();
+</script>
+</body>
+</html>

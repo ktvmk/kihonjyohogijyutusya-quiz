@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第21章 法務｜基本情報技術者</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Hiragino Sans','Noto Sans JP','Meiryo',sans-serif;background:#f5f5f0;color:#333;line-height:1.8;padding:0 0 60px 0}.header{background:linear-gradient(135deg,#e65100,#ff8f00);color:#fff;padding:24px 20px;text-align:center}.header h1{font-size:1.3em;margin-bottom:4px}.header .sub{font-size:.85em;opacity:.8}.container{max-width:720px;margin:0 auto;padding:16px}.nav-tabs{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap}.nav-tab{padding:10px 14px;border:2px solid #e65100;border-radius:8px;background:#fff;color:#e65100;font-weight:bold;font-size:.82em;cursor:pointer;transition:all .2s}.nav-tab:hover,.nav-tab.active{background:#e65100;color:#fff}.section{display:none}.section.active{display:block}.lesson-card{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.lesson-card h2{color:#e65100;font-size:1.2em;margin-bottom:16px;padding-bottom:8px;border-bottom:3px solid #ffe0b2}.lesson-card h3{color:#ff8f00;font-size:1.05em;margin:20px 0 10px 0}.key-point{background:#fff3e0;border-left:4px solid #e65100;padding:14px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-size:.95em}.key-point strong{color:#e65100}.vocab{display:inline-block;background:#e3f2fd;border:1px solid #64b5f6;border-radius:6px;padding:2px 8px;margin:2px 4px;font-weight:bold;font-size:.9em;color:#1565c0}.example{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:14px 16px;margin:12px 0;font-size:.9em}.formula{background:#fce4ec;border-left:4px solid #e91e63;padding:14px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-family:monospace;font-size:.95em;line-height:2}.compare{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}.compare-box{background:#fff;border:2px solid #e0e0e0;border-radius:10px;padding:14px;font-size:.9em}.compare-box h4{font-size:.95em;margin-bottom:8px;text-align:center}.compare-box.good{border-color:#4caf50}.compare-box.good h4{color:#2e7d32}.compare-box.bad{border-color:#ff9800}.compare-box.bad h4{color:#e65100}
+.quiz-area{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.quiz-area h2{color:#e65100;margin-bottom:16px}.question-card{background:#fafafa;border:1px solid #e0e0e0;border-radius:10px;padding:20px;margin:16px 0}.q-number{font-size:.8em;color:#999;margin-bottom:6px}.q-text{font-size:1.05em;font-weight:bold;margin-bottom:14px;line-height:1.6}.choices{list-style:none}.choices li{padding:12px 16px;margin:6px 0;border:2px solid #e0e0e0;border-radius:8px;cursor:pointer;transition:all .2s;font-size:.95em}.choices li:hover{border-color:#e65100;background:#fff3e0}.choices li.correct{border-color:#4caf50;background:#e8f5e9}.choices li.wrong{border-color:#f44336;background:#ffebee}.explanation{display:none;margin-top:12px;padding:14px;background:#f5f5f5;border-radius:8px;font-size:.9em;line-height:1.7}.explanation.show{display:block}.result-area{display:none;text-align:center;padding:30px;background:#fff;border-radius:12px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.result-score{font-size:2.5em;font-weight:bold;color:#e65100;margin:10px 0}.btn{display:inline-block;padding:12px 28px;background:#e65100;color:#fff;border:none;border-radius:8px;font-size:1em;cursor:pointer;margin:8px}.btn:hover{background:#ff8f00}.btn-outline{background:#fff;color:#e65100;border:2px solid #e65100}.progress-bar{width:100%;height:6px;background:#e0e0e0;border-radius:3px;margin:12px 0}.progress-fill{height:100%;background:#e65100;border-radius:3px;transition:width .3s}.back-link{display:inline-block;margin:16px 0;color:#e65100;text-decoration:none;font-weight:bold}
+.sql-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.88em}
+.sql-table th{background:#e65100;color:#fff;padding:6px;border:1px solid #ccc}
+.sql-table td{padding:6px;border:1px solid #ccc;background:#fff}
+</style>
+</head>
+<body>
+<div class="header"><h1>第21章 法務</h1><div class="sub">基本情報技術者試験 Web教材</div></div>
+<div class="container">
+<a href="it_quiz.html" class="back-link">← 章の一覧にもどる</a>
+<div class="nav-tabs">
+<div class="nav-tab active" onclick="showSection('lesson1')">① 知的財産権</div>
+<div class="nav-tab" onclick="showSection('lesson2')">② セキュリティ関連法規</div>
+<div class="nav-tab" onclick="showSection('lesson3')">③ 労働・取引関連法規</div>
+<div class="nav-tab" onclick="showSection('lesson4')">④ 標準化とその他</div>
+<div class="nav-tab" onclick="showSection('quiz')">確認テスト</div>
+</div>
+
+<!-- ===== レッスン1 ===== -->
+<div id="lesson1" class="section active">
+<div class="lesson-card">
+<h2>① 知的財産権（著作権・産業財産権・営業秘密）</h2>
+
+<h3>知的財産権の3分類</h3>
+<div class="key-point">
+知的財産権は大きく次の3つに分かれる：<br><br>
+<span class="vocab">著作権</span>：本・音楽・絵・プログラムなど<strong>創作物</strong>に対する権利<br>
+<span class="vocab">産業財産権</span>：発明やブランドなど<strong>産業分野の財産</strong>に対する権利（4種類）<br>
+<span class="vocab">その他の権利</span>：<strong>営業秘密</strong>など
+</div>
+
+<h3>著作権法</h3>
+<div class="key-point">
+著作権は、著作物を<strong>創作した時点で自動的に発生</strong>する。<br>
+役所への申請・登録は<strong>不要</strong>（描いた瞬間に権利者になる）。
+</div>
+<div class="compare">
+<div class="compare-box good">
+<h4>保護される</h4>
+本・音楽・写真・映像<br>
+取扱説明書・美術作品<br>
+<strong>プログラム</strong>（ソースコード・オブジェクトコードの両方）
+</div>
+<div class="compare-box bad">
+<h4>保護されない</h4>
+<strong>プログラム言語</strong>（命令の言葉）<br>
+<strong>アルゴリズム</strong>（解法・手順）<br>
+<strong>プロトコル</strong>（規約）
+</div>
+</div>
+<div class="key-point">
+プログラムを作るのに必要な「言語・アルゴリズム・プロトコル」を保護すると、<strong>誰もプログラムを作れなくなる</strong>ため保護対象外。試験では「プロトコル＝規約」と読み替えられるようにしておく。
+</div>
+
+<h3>職務著作（法人著作）</h3>
+<div class="key-point">
+会社の発意に基づき、従業員が職務で作り、<strong>法人名義</strong>で公表した著作物は、<br>
+就業規則などに特段の取決めがない限り、<strong>著作権は法人（会社）に帰属</strong>する。
+</div>
+
+<h3>産業財産権（4つ）</h3>
+<table class="sql-table">
+<tr><th>権利</th><th>保護対象</th></tr>
+<tr><td><strong>特許権</strong></td><td>自然法則を利用した技術的思想の創作のうち<strong>高度なもの</strong>（発明）。例：青色LEDの原理</td></tr>
+<tr><td><strong>実用新案権</strong></td><td>物品の形状・構造などの<strong>考案</strong>（高度性は不要）</td></tr>
+<tr><td><strong>意匠権</strong></td><td>物品の<strong>デザイン（意匠）</strong></td></tr>
+<tr><td><strong>商標権</strong></td><td>自社商品と他社商品を区別する<strong>マーク（トレードマーク）</strong></td></tr>
+</table>
+<div class="key-point">
+産業財産権は<strong>特許庁</strong>に出願し、審査を通過して初めて得られる（著作権と違い申請が必要）。<br>
+著作権は産業財産権には<strong>含まれない</strong>点に注意。
+</div>
+
+<h3>営業秘密と不正競争防止法</h3>
+<div class="key-point">
+<span class="vocab">営業秘密</span>は次の3条件すべてを満たす情報：<br><br>
+・<strong>秘密管理性</strong>：秘密として管理されていること<br>
+・<strong>有用性</strong>：事業活動に有用な技術上・営業上の情報であること<br>
+・<strong>非公知性</strong>：公然と知られていないこと<br><br>
+これを守る法律が<span class="vocab">不正競争防止法</span>（他社商品の不正コピーや中傷を防ぐ）。試験では特に<strong>非公知性</strong>が問われる。
+</div>
+</div>
+</div>
+
+<!-- ===== レッスン2 ===== -->
+<div id="lesson2" class="section">
+<div class="lesson-card">
+<h2>② セキュリティ関連法規</h2>
+
+<h3>不正アクセス禁止法</h3>
+<div class="key-point">
+<span class="vocab">不正アクセス禁止法</span>は、<strong>ネットワークを通じた</strong>不正なアクセスを取り締まる法律。<br>
+・他人のPCの前まで歩いて直接ログインする行為は<strong>対象外</strong>（ネットワーク経由でないため）。
+</div>
+<div class="key-point">
+処罰対象となる主な行為：<br>
+・<strong>なりすまし</strong>：他人のID・パスワードを無断で使ってアクセス<br>
+・<strong>セキュリティホール</strong>を悪用したアクセス<br>
+・不正アクセス目的で他人のID・パスワードを<strong>取得</strong>する行為<br>
+・他人のID・パスワードを無断で<strong>第三者に教える</strong>行為
+</div>
+
+<h3>刑法（コンピュータ犯罪）</h3>
+<div class="compare">
+<div class="compare-box bad">
+<h4>電子計算機損壊等業務妨害罪</h4>
+コンピュータや電磁的記録を<strong>破壊</strong>して業務を妨害する犯罪
+</div>
+<div class="compare-box bad">
+<h4>不正指令電磁的記録に関する罪</h4>
+<strong>コンピュータウイルスを作成・提供・供用・取得・保管</strong>する犯罪（＝ウイルス作成罪）
+</div>
+</div>
+<div class="key-point">
+ウイルスを作成する行為そのものを処罰するのは<strong>刑法</strong>（不正アクセス禁止法ではない）点に注意。
+</div>
+
+<h3>個人情報保護法</h3>
+<div class="key-point">
+氏名・住所・電話番号など<strong>個人を特定できる情報</strong>を正しく扱うための法律。<br>
+試験のキーワードは「<strong>氏名</strong>」と「<strong>身体的特徴</strong>」。<br>
+・氏名・住所、社員名・役職<br>
+・個人が識別できる<strong>映像・音声</strong>（顔が映った監視カメラ映像、指紋データなど）<br><br>
+※<strong>匿名加工情報</strong>（個人を識別できないよう加工）は個人情報に<strong>該当しない</strong>。
+</div>
+<div class="key-point">
+<span class="vocab">オプトイン</span>：初期状態は「利用しない」。本人が許可した場合だけ利用可（＝利用を許可すること）<br>
+<span class="vocab">オプトアウト</span>：初期状態は「利用する」。本人が拒否した場合だけ利用停止（＝利用を拒否すること）
+</div>
+
+<h3>サイバーセキュリティ基本法</h3>
+<div class="key-point">
+サイバー攻撃から<strong>国全体</strong>を守るための基本理念を定めた法律。<br>
+対象は<strong>国・地方公共団体・重要社会基盤事業者・企業・教育研究機関・国民のすべて</strong>。<br>
+国民にも「関心と理解を深め、必要な注意を払う」努力が求められる（国民だけが対象ではない点に注意）。
+</div>
+
+<h3>その他のセキュリティ関連法規</h3>
+<div class="key-point">
+<span class="vocab">マイナンバー法</span>：個人番号（12桁）の利用範囲を社会保障・税・災害対策に限定<br>
+<span class="vocab">電子署名法</span>：電子署名を手書き署名・押印と同等の効力があると認める<br>
+<span class="vocab">プロバイダ責任制限法</span>：ネット上の権利侵害で、プロバイダの<strong>損害賠償責任の範囲</strong>と<strong>発信者情報の開示</strong>を定める
+</div>
+</div>
+</div>
+
+<!-- ===== レッスン3 ===== -->
+<div id="lesson3" class="section">
+<div class="lesson-card">
+<h2>③ 労働関連法規・取引関連法規</h2>
+
+<h3>労働基準法とその周辺</h3>
+<div class="key-point">
+<span class="vocab">労働基準法</span>：労働時間・休日・賃金など労働条件の<strong>最低基準</strong>を定める法律<br><br>
+<span class="vocab">フレックスタイム制</span>：一定期間の総労働時間を決め、始業・終業時刻を<strong>労働者が自分で決める</strong>制度<br>
+<span class="vocab">裁量労働制</span>：実際の労働時間ではなく、<strong>あらかじめ決めた時間だけ働いたとみなす</strong>制度（研究開発など）
+</div>
+
+<h3>3種類の契約（最重要）</h3>
+<table class="sql-table">
+<tr><th>契約</th><th>雇用主</th><th>指示を出す人</th></tr>
+<tr><td><strong>雇用契約</strong></td><td>その会社</td><td>その会社</td></tr>
+<tr><td><strong>労働者派遣契約</strong></td><td>派遣元</td><td><strong>派遣先</strong></td></tr>
+<tr><td><strong>請負契約</strong></td><td>請負会社</td><td>請負会社（発注者は指示不可）</td></tr>
+</table>
+
+<h3>派遣と請負の違い</h3>
+<div class="compare">
+<div class="compare-box good">
+<h4>労働者派遣契約</h4>
+給与は<strong>派遣元</strong>から支払われる<br><br>
+仕事の指示は<strong>派遣先</strong>から直接受ける（指揮命令関係）
+</div>
+<div class="compare-box bad">
+<h4>請負契約</h4>
+発注者は労働者に<strong>指示を出せない</strong><br><br>
+・<strong>完成責任</strong>：仕事の完成をもって報酬<br>
+・<strong>契約不適合責任</strong>：不備の責任は請負会社が負う
+</div>
+</div>
+<div class="key-point">
+請負契約なのに発注者が労働者に休暇・勤務を直接指示すると、実態が<strong>労働者派遣とみなされる</strong>（偽装請負）。<br>
+著作権の帰属：雇用契約→<strong>雇用主</strong>／派遣契約→<strong>派遣先</strong>／請負契約→<strong>請負会社</strong>。
+</div>
+
+<h3>取引関連法規</h3>
+<div class="key-point">
+<span class="vocab">下請法</span>：親事業者が下請事業者に対して不当な減額・支払遅延などを行うのを防ぐ<br>
+<span class="vocab">PL法（製造物責任法）</span>：製品の<strong>欠陥</strong>で消費者が損害を受けたとき、<strong>過失がなくても</strong>製造業者が賠償責任を負う<br>
+<span class="vocab">独占禁止法</span>：公正で自由な競争を守る（カルテル・談合などを禁止）<br>
+<span class="vocab">民法</span>：契約など私人間の一般的なルールを定める
+</div>
+</div>
+</div>
+
+<!-- ===== レッスン4 ===== -->
+<div id="lesson4" class="section">
+<div class="lesson-card">
+<h2>④ 標準化とその他</h2>
+
+<h3>標準化の意義</h3>
+<div class="key-point">
+<span class="vocab">標準化</span>とは、製品・データ・手順の仕様を<strong>統一された規格</strong>にそろえること。<br>
+これにより<strong>互換性・生産性・品質・安全性</strong>が高まり、異なるメーカーの製品でも組み合わせて使える。
+</div>
+
+<h3>主な標準化団体</h3>
+<table class="sql-table">
+<tr><th>団体</th><th>役割</th></tr>
+<tr><td><strong>ISO</strong></td><td>国際標準化機構。工業製品など<strong>国際規格</strong>を策定</td></tr>
+<tr><td><strong>JIS</strong></td><td>日本産業規格（日本国内の規格）</td></tr>
+<tr><td><strong>IEC</strong></td><td>国際電気標準会議（<strong>電気・電子</strong>分野の国際規格）</td></tr>
+<tr><td><strong>IEEE</strong></td><td>米国電気電子学会（LAN規格などを策定）</td></tr>
+<tr><td><strong>W3C</strong></td><td>WWW（Web技術）の標準化団体（HTMLなど）</td></tr>
+<tr><td><strong>ITU</strong></td><td>国際電気通信連合（電気通信分野）</td></tr>
+</table>
+
+<h3>コード・バーコード</h3>
+<div class="key-point">
+<span class="vocab">JISコード</span>：日本語文字を表すための文字コード規格<br><br>
+<span class="vocab">JANコード</span>：商品につける<strong>バーコード</strong>（横方向のみで情報を表す一次元コード）<br>
+<span class="vocab">QRコード</span>：縦横の2方向で情報を表す<strong>二次元コード</strong>。JANより多くの情報を格納でき、誤り訂正機能をもつ
+</div>
+
+<h3>ISOマネジメントシステム規格</h3>
+<div class="key-point">
+番号で対象が決まっている（頻出）：<br><br>
+<span class="vocab">ISO 9000</span>：<strong>品質</strong>マネジメントシステム<br>
+<span class="vocab">ISO 14000</span>：<strong>環境</strong>マネジメントシステム<br>
+<span class="vocab">ISO/IEC 27000</span>：<strong>情報セキュリティ</strong>マネジメントシステム（ISMS）
+</div>
+
+<h3>コンプライアンスと情報倫理</h3>
+<div class="key-point">
+<span class="vocab">コンプライアンス</span>：法令だけでなく社会規範・社内ルールも守る「<strong>法令遵守</strong>」の考え方<br>
+<span class="vocab">情報倫理</span>：情報社会で他者の権利やプライバシーを尊重して行動する心構え
+</div>
+
+<div class="key-point" style="background:#fce4ec;border-color:#e91e63">
+<strong style="color:#e91e63">第21章の最重要まとめ</strong><br><br>
+・著作権は創作した時点で自動発生（申請不要）。プログラムは保護、言語・アルゴリズム・プロトコルは非保護<br>
+・産業財産権＝特許・実用新案・意匠・商標の4つ（著作権は含まない）<br>
+・営業秘密の3条件＝秘密管理性・有用性・非公知性（試験は非公知性）<br>
+・不正アクセス禁止法＝ネット経由のみ。ウイルス作成罪は刑法<br>
+・サイバーセキュリティ基本法は国民を含む全体が対象<br>
+・派遣＝派遣先が指示／請負＝発注者は指示不可（偽装請負に注意）<br>
+・ISO9000=品質、14000=環境、27000=情報セキュリティ<br>
+・JAN＝一次元バーコード、QR＝二次元コード
+</div>
+</div>
+</div>
+
+<!-- ===== 確認テスト ===== -->
+<div id="quiz" class="section">
+<div class="quiz-area">
+<h2>確認テスト ── 第21章</h2>
+<p style="color:#666;font-size:.9em;margin-bottom:16px">全問ランダム出題・選択肢シャッフル。何度でも挑戦できます。</p>
+<div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+<div id="quizContainer"></div>
+<div style="text-align:center;margin-top:20px"><button class="btn" id="submitBtn" onclick="submitQuiz()" style="display:none">結果を見る</button></div>
+</div>
+<div class="result-area" id="resultArea"><h2>結果</h2><div class="result-score" id="resultScore"></div><div id="resultMsg" style="font-size:1.1em;margin:10px 0"></div><button class="btn" onclick="retryQuiz()">もう一度</button><button class="btn btn-outline" onclick="showSection('lesson1')">レッスンに戻る</button></div>
+</div>
+</div>
+
+<script>
+const allQuestions=[
+{q:'著作権法によるソフトウェアの保護範囲に関する記述のうち、適切なものはどれか。（平成29年度）',choices:['アプリケーションプログラムは保護されるが、OSなどの基本プログラムは保護されない','アルゴリズムやプログラム言語は著作権法によって保護される','アルゴリズムを記述した文書は保護されるが、それを用いて作成したプログラムは保護されない','ソースプログラムとオブジェクトプログラムの両方とも著作権法によって保護される'],answer:3,explanation:'プログラムは<strong>ソースコードもオブジェクトコードも両方が著作権法で保護</strong>されます。OSもプログラムなので保護され、アルゴリズムやプログラム言語そのものは保護されません。'},
+{q:'著作権法において、保護の対象とならないものはどれか。（平成28年度）',choices:['インターネットで公開されたフリーソフトウェア','ソフトウェアの操作マニュアル','創作性のあるデータベース','プログラム言語やプロトコル（規約）'],answer:3,explanation:'<strong>プログラム言語・アルゴリズム・プロトコル（規約）</strong>は著作権法の保護対象外です。フリーソフトも操作マニュアルも創作性のあるデータベースも著作物として保護されます。'},
+{q:'日本において、産業財産権と総称される四つの権利はどれか。（令和6年度）',choices:['意匠権、実用新案権、商標権、特許権','意匠権、実用新案権、著作権、特許権','意匠権、商標権、著作権、特許権','実用新案権、商標権、著作権、特許権'],answer:0,explanation:'産業財産権は<strong>特許権・実用新案権・意匠権・商標権</strong>の4つです。著作権は創作物に対する権利であり、産業財産権には含まれません。'},
+{q:'不正競争防止法における営業秘密の要件は「秘密として管理されていること」「事業活動に有用な情報であること」と、もう一つはどれか。（平成29年度）',choices:['営業譲渡が可能なこと','期間が10年を超えないこと','公然と知られていないこと','特許出願をしていること'],answer:2,explanation:'営業秘密の3要件は<strong>秘密管理性・有用性・非公知性</strong>です。「公然と知られていないこと」が非公知性にあたります。'},
+{q:'特許権が与えられる対象として最も適切なものはどれか。',choices:['自然法則を利用した技術的思想の創作のうち高度なもの','自社の商品と他社の商品とを区別するためのマーク','物品の形状や模様などのデザイン','公然と知られていない有用な営業上の情報'],answer:0,explanation:'特許権は「<strong>自然法則を利用した技術的思想の創作のうち高度なもの</strong>」（発明）に与えられます。マークは商標権、デザインは意匠権、営業上の秘密情報は営業秘密です。'},
+{q:'自社の商品と他社の商品とを区別するためのトレードマークやサービスマークを保護する権利はどれか。',choices:['特許権','実用新案権','意匠権','商標権'],answer:3,explanation:'商品を区別するマークを保護するのは<strong>商標権</strong>です。特許権は高度な発明、意匠権はデザイン、実用新案権は物品の形状・構造の考案を保護します。'},
+{q:'コンピュータウイルスを作成する行為そのものを処罰の対象とする法律はどれか。',choices:['刑法（不正指令電磁的記録に関する罪）','不正アクセス禁止法','個人情報保護法','不正競争防止法'],answer:0,explanation:'ウイルスの作成・提供・供用・取得・保管を処罰するのは<strong>刑法</strong>の不正指令電磁的記録に関する罪（ウイルス作成罪）です。不正アクセス禁止法はネットワーク経由の不正アクセスを対象とします。'},
+{q:'不正アクセス禁止法において、不正アクセス行為に該当するものはどれか。（平成23年度）',choices:['会社の重要情報を知り、公表前に当該会社の株を売買した','コンピュータウイルスを作成し、他人のPCの画面表示をでたらめにした','自分のホームページに新聞の報道写真を無断で掲載した','他人のID・パスワードを許可なく利用してアクセス制御されたWebサイトに接続した'],answer:3,explanation:'他人のID・パスワードを無断で使ってアクセス制御されたサイトに接続する行為は<strong>なりすまし</strong>であり、不正アクセス禁止法違反です。株の売買はインサイダー取引、ウイルスは刑法、写真無断掲載は著作権法違反です。'},
+{q:'派遣元A社と派遣先B社が派遣契約を結び、A社が社員N氏を派遣した。労働者派遣法に照らして適切な行為はどれか。（平成24年度）',choices:['N氏の休暇変更をB社から直接N氏に指示する','N氏の作業環境の苦情対応はB社は関与せずA社だけで行う','N氏は仕事の指示を派遣先B社の担当者から直接受ける','B社は派遣取決め以外の作業をN氏に依頼する'],answer:2,explanation:'労働者派遣では、派遣労働者は<strong>派遣先（B社）から直接、仕事の指示</strong>を受けます。休暇変更の権利は派遣元A社にあり、取決め以外の作業指示は派遣法違反です。'},
+{q:'プログラム開発において、法人の発意に基づく法人名義の著作物（職務著作）について著作権法で規定されているものはどれか。（平成28年度）',choices:['就業規則などに特段の取決めがない限り、権利は法人に帰属する','担当した従業員に権利は帰属するが、法人に譲渡できる','担当した従業員に権利は帰属するが、法人は使用できる','法人が権利を取得する場合は従業員に相当の対価を支払う必要がある'],answer:0,explanation:'職務著作では、特段の取決めがない限り<strong>著作権は法人（会社）に帰属</strong>します。従業員に帰属するとする他の選択肢は誤りです。'},
+{q:'サイバーセキュリティ基本法の説明として適切なものはどれか。（平成27年度）',choices:['国民に対し、関心と理解を深め必要な注意を払うよう努めることを求める規定がある','国と情報通信事業者の責務を定めたもので、地方公共団体や教育研究機関への言及はない','国と地方公共団体の責務を定めたもので、民間事業者が努力すべき規定はない','地方公共団体を重要社会基盤事業者と位置づけている'],answer:0,explanation:'サイバーセキュリティ基本法は<strong>国民を含む国全体</strong>を対象とし、国民にも関心と理解を深め注意を払う努力を求めています。地方公共団体・教育研究機関・民間事業者もすべて対象です。'},
+{q:'個人情報保護法において、個人情報に該当しないものはどれか。（平成29年度）',choices:['監視カメラに録画された、本人が判別できる映像データ','指紋認証のための指紋データのバックアップ','匿名加工情報に加工された利用者アンケート情報','社員に交付する氏名入りの源泉徴収票'],answer:2,explanation:'<strong>匿名加工情報</strong>は個人を識別できないよう加工したものなので個人情報に該当しません。判別できる映像や指紋データは身体的特徴、氏名入り書類は個人情報にあたります。'},
+{q:'請負契約を締結していても、労働者派遣とみなされる受託者（労働者）の行為はどれか。（平成30年度）',choices:['休暇取得の承認を発注者側の指示に従って行う','業務の遂行に関する指導や評価を自ら実施する','勤務に関する規律や職場秩序の保持を自ら実施する','発注者の要請を受託者側の責任者が窓口となって受け付ける'],answer:0,explanation:'請負では発注者は労働者に直接指示できません。<strong>発注者の指示に従って休暇承認をする</strong>と、実態が労働者派遣（偽装請負）とみなされます。'},
+{q:'労働者派遣法に基づく、派遣先企業と派遣労働者との関係はどれか。（平成30年度）',choices:['請負契約関係','雇用契約関係','指揮命令関係','労働者派遣契約関係'],answer:2,explanation:'派遣先と派遣労働者の間は<strong>指揮命令関係</strong>です（仕事の指示を出す）。雇用契約関係は派遣元と労働者、労働者派遣契約関係は派遣元と派遣先の間の関係です。'},
+{q:'労働者派遣契約と請負契約の違いに関する記述として適切なものはどれか。',choices:['請負契約では発注者が労働者に直接指示を出せる','労働者派遣契約では派遣先が労働者に指示を出せる','請負契約でも給与は発注者から労働者に直接支払われる','労働者派遣契約では労働者は派遣先に雇用される'],answer:1,explanation:'労働者派遣契約では<strong>派遣先が労働者に指示</strong>を出せますが、請負契約では発注者は労働者に指示を出せません。派遣労働者は派遣元に雇用され、給与も派遣元から支払われます。'},
+{q:'製品の欠陥によって消費者が損害を受けた場合、製造業者に過失がなくても賠償責任を負わせる法律はどれか。',choices:['下請法','PL法（製造物責任法）','独占禁止法','特定商取引法'],answer:1,explanation:'<strong>PL法（製造物責任法）</strong>は、製品の欠陥による損害について、製造業者の過失の有無にかかわらず賠償責任を負わせる法律です。'},
+{q:'情報セキュリティマネジメントシステム（ISMS）に関する国際規格はどれか。',choices:['ISO 9000','ISO 14000','ISO/IEC 27000','ISO 26000'],answer:2,explanation:'情報セキュリティは<strong>ISO/IEC 27000</strong>シリーズです。ISO 9000は品質、ISO 14000は環境のマネジメントシステム規格です。番号と対象をセットで覚えます。'},
+{q:'工業製品などの国際規格を策定する標準化団体はどれか。',choices:['ISO','JIS','IEEE','W3C'],answer:0,explanation:'<strong>ISO</strong>（国際標準化機構）が工業分野の国際規格を策定します。JISは日本国内の規格、IEEEはLAN規格など、W3CはWeb技術の標準化団体です。'},
+{q:'縦横の2方向で情報を表し、JANコードより多くの情報を格納できる二次元コードはどれか。',choices:['JANコード','QRコード','JISコード','ASCIIコード'],answer:1,explanation:'<strong>QRコード</strong>は縦横2方向で情報を表す二次元コードで、誤り訂正機能をもち多くの情報を格納できます。JANコードは横方向のみの一次元バーコードです。'}
+];
+let questions=[],answered=0;
+function shuffleArray(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
+function initQuiz(){questions=shuffleArray(allQuestions);answered=0;document.getElementById('submitBtn').style.display='none';document.getElementById('resultArea').style.display='none';document.getElementById('progressFill').style.width='0%';const c=document.getElementById('quizContainer');c.innerHTML='';questions.forEach((q,idx)=>{const sc=q.choices.map((c,i)=>({text:c,origIdx:i}));for(let i=sc.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[sc[i],sc[j]]=[sc[j],sc[i]]}q._shuffled=sc;q._selected=null;let h=`<div class="question-card"><div class="q-number">問題 ${idx+1} / ${questions.length}</div><div class="q-text">${q.q}</div><ul class="choices">`;sc.forEach((c,ci)=>{h+=`<li onclick="selectChoice(${idx},${ci})" id="q${idx}c${ci}">${c.text}</li>`});h+=`</ul><div class="explanation" id="exp${idx}"><div id="expText${idx}"></div></div></div>`;c.innerHTML+=h})}
+function selectChoice(qi,ci){const q=questions[qi];if(q._selected!==null)return;q._selected=ci;answered++;const corr=q.answer,sel=q._shuffled[ci].origIdx,ok=sel===corr;q._shuffled.forEach((c,i)=>{const li=document.getElementById(`q${qi}c${i}`);if(c.origIdx===corr)li.classList.add('correct');if(i===ci&&!ok)li.classList.add('wrong')});const e=document.getElementById(`exp${qi}`),t=document.getElementById(`expText${qi}`);t.innerHTML=(ok?'<span style="color:#4caf50;font-weight:bold">&#x2B55; 正解！</span>':'<span style="color:#f44336;font-weight:bold">&#x274C; 不正解</span>')+'<br>'+q.explanation;e.classList.add('show');document.getElementById('progressFill').style.width=(answered/questions.length*100)+'%';if(answered===questions.length)document.getElementById('submitBtn').style.display='inline-block'}
+function submitQuiz(){let c=0;questions.forEach(q=>{if(q._selected!==null&&q._shuffled[q._selected].origIdx===q.answer)c++});document.getElementById('resultArea').style.display='block';document.getElementById('resultScore').textContent=`${c} / ${questions.length}`;const p=c/questions.length*100;let m='';if(p===100)m='満点！完璧です！';else if(p>=80)m='よく理解できています！';else if(p>=60)m='合格ライン！もう少し復習しましょう。';else m='レッスンをもう一度確認しましょう。';document.getElementById('resultMsg').textContent=m;document.getElementById('resultArea').scrollIntoView({behavior:'smooth'})}
+function retryQuiz(){initQuiz();document.getElementById('quizContainer').scrollIntoView({behavior:'smooth'})}
+function showSection(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');const tabs=document.querySelectorAll('.nav-tab');const ids=['lesson1','lesson2','lesson3','lesson4','quiz'];tabs[ids.indexOf(id)].classList.add('active');if(id==='quiz')initQuiz();window.scrollTo({top:0,behavior:'smooth'})}
+initQuiz();
+</script>
+</body>
+</html>

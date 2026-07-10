@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第17章 システム企画｜基本情報技術者</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Hiragino Sans','Noto Sans JP','Meiryo',sans-serif;background:#f5f5f0;color:#333;line-height:1.8;padding:0 0 60px 0}.header{background:linear-gradient(135deg,#e65100,#ff8f00);color:#fff;padding:24px 20px;text-align:center}.header h1{font-size:1.3em;margin-bottom:4px}.header .sub{font-size:.85em;opacity:.8}.container{max-width:720px;margin:0 auto;padding:16px}.nav-tabs{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap}.nav-tab{padding:10px 14px;border:2px solid #e65100;border-radius:8px;background:#fff;color:#e65100;font-weight:bold;font-size:.82em;cursor:pointer;transition:all .2s}.nav-tab:hover,.nav-tab.active{background:#e65100;color:#fff}.section{display:none}.section.active{display:block}.lesson-card{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.lesson-card h2{color:#e65100;font-size:1.2em;margin-bottom:16px;padding-bottom:8px;border-bottom:3px solid #ffe0b2}.lesson-card h3{color:#ff8f00;font-size:1.05em;margin:20px 0 10px 0}.key-point{background:#fff3e0;border-left:4px solid #e65100;padding:14px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-size:.95em}.key-point strong{color:#e65100}.vocab{display:inline-block;background:#e3f2fd;border:1px solid #64b5f6;border-radius:6px;padding:2px 8px;margin:2px 4px;font-weight:bold;font-size:.9em;color:#1565c0}.example{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:14px 16px;margin:12px 0;font-size:.9em}.formula{background:#fce4ec;border-left:4px solid #e91e63;padding:14px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-family:monospace;font-size:.95em;line-height:2}.compare{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}.compare-box{background:#fff;border:2px solid #e0e0e0;border-radius:10px;padding:14px;font-size:.9em}.compare-box h4{font-size:.95em;margin-bottom:8px;text-align:center}.compare-box.good{border-color:#4caf50}.compare-box.good h4{color:#2e7d32}.compare-box.bad{border-color:#ff9800}.compare-box.bad h4{color:#e65100}
+.quiz-area{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.quiz-area h2{color:#e65100;margin-bottom:16px}.question-card{background:#fafafa;border:1px solid #e0e0e0;border-radius:10px;padding:20px;margin:16px 0}.q-number{font-size:.8em;color:#999;margin-bottom:6px}.q-text{font-size:1.05em;font-weight:bold;margin-bottom:14px;line-height:1.6}.choices{list-style:none}.choices li{padding:12px 16px;margin:6px 0;border:2px solid #e0e0e0;border-radius:8px;cursor:pointer;transition:all .2s;font-size:.95em}.choices li:hover{border-color:#e65100;background:#fff3e0}.choices li.correct{border-color:#4caf50;background:#e8f5e9}.choices li.wrong{border-color:#f44336;background:#ffebee}.explanation{display:none;margin-top:12px;padding:14px;background:#f5f5f5;border-radius:8px;font-size:.9em;line-height:1.7}.explanation.show{display:block}.result-area{display:none;text-align:center;padding:30px;background:#fff;border-radius:12px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.result-score{font-size:2.5em;font-weight:bold;color:#e65100;margin:10px 0}.btn{display:inline-block;padding:12px 28px;background:#e65100;color:#fff;border:none;border-radius:8px;font-size:1em;cursor:pointer;margin:8px}.btn:hover{background:#ff8f00}.btn-outline{background:#fff;color:#e65100;border:2px solid #e65100}.progress-bar{width:100%;height:6px;background:#e0e0e0;border-radius:3px;margin:12px 0}.progress-fill{height:100%;background:#e65100;border-radius:3px;transition:width .3s}.back-link{display:inline-block;margin:16px 0;color:#e65100;text-decoration:none;font-weight:bold}
+.sql-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.88em}
+.sql-table th{background:#e65100;color:#fff;padding:6px;border:1px solid #ccc}
+.sql-table td{padding:6px;border:1px solid #ccc;background:#fff}
+</style>
+</head>
+<body>
+<div class="header"><h1>第17章 システム企画</h1><div class="sub">基本情報技術者試験 Web教材</div></div>
+<div class="container">
+<a href="it_quiz.html" class="back-link">← 章の一覧にもどる</a>
+<div class="nav-tabs">
+<div class="nav-tab active" onclick="showSection('lesson1')">① 企画と要件定義</div>
+<div class="nav-tab" onclick="showSection('lesson2')">② 調達計画・実施</div>
+<div class="nav-tab" onclick="showSection('lesson3')">③ 契約と取引の形態</div>
+<div class="nav-tab" onclick="showSection('quiz')">確認テスト</div>
+</div>
+
+<!-- ===== レッスン1 ===== -->
+<div id="lesson1" class="section active">
+<div class="lesson-card">
+<h2>① 企画プロセスと要件定義プロセス</h2>
+
+<h3>システム開発に関わる4人（4つの役割）</h3>
+<div class="key-point">
+<span class="vocab">経営者</span>：会社全体の方針を決め、システム開発を命令する<br>
+<span class="vocab">情報システム部</span>：開発業務の中心となる部署<br>
+<span class="vocab">ユーザー</span>：完成したシステムを実際に使う部署・人<br>
+<span class="vocab">ベンダー</span>：開発を委託される外部のシステム開発会社（<strong>SI</strong>：システムインテグレーター）
+</div>
+<div class="key-point">
+共通フレームは「企画」「要件定義」「開発」「運用」「保守」の5プロセスで構成される。<br>
+本章では最初の<strong>企画プロセス</strong>と<strong>要件定義プロセス</strong>を学ぶ。
+</div>
+
+<h3>企画プロセス ＝ 経営上のニーズを聞く</h3>
+<div class="key-point">
+<span class="vocab">企画プロセス</span>：経営目標を達成するために、システムに必要な要件を集め計画を立てる。<br>
+目的は<strong>「経営上のニーズを聞くこと」</strong>。さらに2つに分かれる。
+</div>
+<div class="compare">
+<div class="compare-box good">
+<h4>システム化構想の立案</h4>
+経営課題を解決する新しい業務とシステムの<strong>構想</strong>を立てる。<br><br>
+主なタスク＝<strong>経営上のニーズ・課題の確認</strong>、事業環境の調査分析
+</div>
+<div class="compare-box bad">
+<h4>システム化計画の立案</h4>
+構想を具現化する<strong>計画</strong>を立て、利害関係者の合意を得る。<br><br>
+主なタスク＝<strong>費用とシステム投資効果の予測</strong>
+</div>
+</div>
+<div class="key-point">
+「構想」と「計画」は名前が似ているが試験では区別して出る。<br>
+経営戦略を無視して現場のニーズだけで企画すると<strong>部分最適化</strong>に陥る危険がある。全体最適化のため、まず経営上のニーズを確認する。
+</div>
+
+<h3>ROIとITポートフォリオ</h3>
+<div class="formula"><strong>ROI（投資利益率）＝ 利益額 ÷ 投資額</strong><br><br>
+Return On Investment。値が高いほど費用対効果（コストパフォーマンス）がよい</div>
+<div class="key-point">
+<span class="vocab">ROI</span>：情報システムの費用対効果を評価する指標。利益額を投資額で割る。<br><br>
+<span class="vocab">ITポートフォリオ</span>：情報化投資の対象を<strong>「リスク」と「投資価値」</strong>で分類し、投資額の配分を最適化する手法。
+</div>
+
+<h3>プライバシーバイデザイン</h3>
+<div class="key-point">
+<span class="vocab">プライバシーバイデザイン</span>（Privacy by Design）：企画・上流工程の段階から、システムに<strong>個人情報漏えい対策を予防的に組み込んでおく</strong>考え方。<br>
+問題が起きてから対処するより、被害と対策費用を減らせる。
+</div>
+
+<h3>要件定義プロセス ＝ ユーザーのニーズを知る</h3>
+<div class="key-point">
+<span class="vocab">要件定義プロセス</span>：システム化する範囲（持つべき機能や性能）を決める。<br>
+目的は<strong>「ユーザーのニーズを知ること」</strong>。企画プロセスの「経営上のニーズ」とは対象が異なるので注意。
+</div>
+<div class="key-point">
+<span class="vocab">利害関係者（ステークホルダ）</span>：ベンダー・社員・他社・地域社会など、システムを作ることで利害を受けるすべての人。<br>
+要件定義プロセスでは<strong>利害関係者の種類を識別し、そのニーズ・要望・制約条件を識別する</strong>（共通フレームの定義文がそのまま出題される）。
+</div>
+
+<h3>業務要件と機能要件・非機能要件</h3>
+<div class="key-point">
+<span class="vocab">業務要件</span>：日々の仕事を行うために必要な条件（注文を受ける・会計をする等）。次の3つに分類できる。
+</div>
+<table class="sql-table">
+<tr><th>種類</th><th>内容</th></tr>
+<tr><td><strong>組織及び環境要件</strong></td><td>業務遂行に必要な組織構成・従業員数・設備などの条件</td></tr>
+<tr><td><strong>機能要件</strong></td><td>ヒアリングで明らかになった、システムに必要な機能（「寿司がお客のところへ届く」等）</td></tr>
+<tr><td><strong>非機能要件</strong></td><td>ヒアリングでは出てこないが必要な性能。使いやすさ・セキュリティ・応答時間・稼働率など</td></tr>
+</table>
+<div class="key-point">
+非機能要件は共通フレームに33項目あるが、試験で頻出なのは技術要件の<strong>「開発基準、標準」</strong>。<br>
+＝プログラム言語に合わせた開発手法・コーディング規則などをまとめた文書を作成すること。
+</div>
+</div>
+</div>
+
+<!-- ===== レッスン2 ===== -->
+<div id="lesson2" class="section">
+<div class="lesson-card">
+<h2>② 調達の流れ・RFI・RFP</h2>
+
+<h3>調達とは</h3>
+<div class="key-point">
+<span class="vocab">調達</span>：企業がお金を払って、ベンダー（外部のシステム開発会社）にシステムを開発してもらうこと。<br>
+発注企業と受注企業の間で取り交わす<strong>契約</strong>も調達に含まれる。
+</div>
+
+<h3>調達の流れ（順序が頻出！）</h3>
+<div class="formula">
+<strong>RFIの発行 → RFPの発行 → 調達先（供給者）の選定 → 契約締結</strong>
+</div>
+<div class="key-point">
+「RFIとRFPを発行する順序」が試験でよく問われる。<strong>先にRFI、後からRFP</strong>と必ず覚える。
+</div>
+
+<h3>RFI（情報提供依頼書）</h3>
+<div class="key-point">
+<span class="vocab">RFI</span>（Request For Information：情報提供依頼書）：ベンダーに対して、<strong>実績・技術・経験などの情報</strong>を送るよう要求する文書。<br><br>
+目的①：そのベンダーに発注してよいか判断するため（技術力・信用度を測る）<br>
+目的②：自社が知らない技術情報を得るため
+</div>
+<div class="example"><strong>RFIを受け取ったベンダーの動き：</strong>会社紹介パンフレット・製品カタログ・技術動向をまとめた資料などを発注者へ返送する。</div>
+
+<h3>RFP（提案依頼書）と提案書</h3>
+<div class="key-point">
+<span class="vocab">RFP</span>（Request For Proposal：提案依頼書）：発注候補のベンダーに対して、<strong>具体的なシステム設計・機器構成・受注条件などを記載した提案書の提出を依頼する</strong>文書。
+</div>
+<div class="compare">
+<div class="compare-box good">
+<h4>提案依頼書（RFP）</h4>
+<strong>発注側の企業</strong>が作成してベンダーに渡す文書
+</div>
+<div class="compare-box bad">
+<h4>提案書</h4>
+<strong>ベンダー</strong>がRFPに応える形で作成し返送する文書
+</div>
+</div>
+<div class="key-point">
+流れ：①RFIで得た情報から発注候補を数社に絞る → ②RFPを発注候補へ送る → ③ベンダーが「提案書」を返送。<br>
+要件をRFPに明記することで「言った・言わない」のトラブルを防ぐ。
+</div>
+
+<h3>CSR調達とグリーン調達</h3>
+<div class="key-point">
+<span class="vocab">CSR</span>（Corporate Social Responsibility）：企業の社会的責任。<br>
+<span class="vocab">CSR調達</span>：調達先に対して、<strong>法令遵守・人権尊重・環境保護</strong>など社会的責任の取り組みを求めること。グリーン調達より対象が広い。
+</div>
+<div class="key-point">
+<span class="vocab">グリーン調達</span>：安さや品質だけでなく、<strong>環境にやさしい製品を優先して購入する</strong>こと（グリーン購入法がきっかけ）。<br>
+環境マネジメントシステムの規格<strong>ISO14001</strong>を取得すると、グリーン調達に適した会社であることを外部に示せる。<br><br>
+<span class="vocab">グリーン購入</span>：国や地方公共団体がグリーン調達を行う場合の呼び方。
+</div>
+<div class="key-point">
+<span class="vocab">カーボンフットプリント</span>：原材料調達から廃棄・リサイクルまでの<strong>ライフサイクル全体</strong>で排出される温室効果ガスを、<strong>CO₂量に換算して商品・サービスに表示</strong>する仕組み。
+</div>
+</div>
+</div>
+
+<!-- ===== レッスン3 ===== -->
+<div id="lesson3" class="section">
+<div class="lesson-card">
+<h2>③ 契約と取引の形態</h2>
+
+<h3>ソフトウェア開発委託の2つの契約</h3>
+<div class="key-point">
+システム開発をベンダーに委託するとき、契約形態は主に<strong>請負契約</strong>と<strong>準委任契約</strong>の2つ。両者の違いは頻出。
+</div>
+<div class="compare">
+<div class="compare-box good">
+<h4>請負契約</h4>
+<strong>仕事の完成</strong>を約束する契約<br><br>
+・成果物（完成したシステム）の納品義務あり<br>
+・<strong>完成責任・瑕疵担保（契約不適合）責任</strong>を負う<br>
+・指揮命令は<strong>受注者（ベンダー）</strong>が行う
+</div>
+<div class="compare-box bad">
+<h4>準委任契約</h4>
+<strong>作業（労務）の提供</strong>を約束する契約<br><br>
+・完成責任は負わない（善管注意義務）<br>
+・要件定義や運用・保守支援などに用いる<br>
+・指揮命令は<strong>受注者</strong>が行う
+</div>
+</div>
+<div class="key-point">
+どちらの契約でも、開発要員への<strong>指揮命令権は受注者（ベンダー）側</strong>にある。発注者が受注者の要員に直接指示を出すと<strong>偽装請負</strong>となり違法。
+</div>
+
+<h3>派遣契約との違い</h3>
+<div class="key-point">
+<span class="vocab">労働者派遣契約</span>：派遣された要員に対して<strong>指揮命令するのは派遣先（発注者）</strong>。<br>
+請負・準委任は受注者が指揮命令する点が異なる。ここが混同しやすいポイント。
+</div>
+
+<h3>SLA（サービスレベル合意）</h3>
+<div class="key-point">
+<span class="vocab">SLA</span>（Service Level Agreement：サービスレベル合意書）：サービス提供者と利用者の間で、<strong>提供するサービスの品質・水準を数値で定めて合意する</strong>文書。<br>
+例：稼働率99.9％以上、障害復旧まで4時間以内 など。<br><br>
+SLAを管理・維持・改善する活動を<span class="vocab">SLM</span>（サービスレベル管理）という。
+</div>
+
+<h3>内外作の選定（内製か外注か）</h3>
+<div class="key-point">
+<span class="vocab">内外作の選定</span>：システム開発を<strong>自社で内製するか、外部ベンダーに外注するか</strong>を決めること。<br>
+コスト・技術力・開発期間・自社にノウハウを残すか、などを比較して判断する。
+</div>
+
+<h3>知的財産権の帰属</h3>
+<div class="key-point">
+開発を委託して作られたプログラムの<strong>著作権</strong>は、契約で特に定めがなければ<strong>実際に作成したベンダー（受注者）側に帰属する</strong>のが原則。<br>
+発注者が著作権を持ちたい場合は、<strong>契約で著作権の譲渡・帰属を明記</strong>しておく必要がある。
+</div>
+
+<div class="key-point" style="background:#fce4ec;border-color:#e91e63">
+<strong style="color:#e91e63">第17章の最重要まとめ</strong><br><br>
+・企画プロセス＝経営上のニーズ／要件定義プロセス＝ユーザーのニーズ<br>
+・システム化構想＝経営課題の確認／システム化計画＝投資効果の予測<br>
+・ROI＝利益額÷投資額／ITポートフォリオ＝リスクと投資価値で分類<br>
+・プライバシーバイデザイン＝個人情報漏えい対策を予防的に組み込む<br>
+・要件定義では利害関係者（ステークホルダ）のニーズを識別する<br>
+・非機能要件の代表＝技術要件の「開発基準、標準」<br>
+・調達の順序＝RFI → RFP → 調達先選定 → 契約締結<br>
+・RFI＝情報提供依頼（発注者→ベンダー）／RFP＝提案依頼（発注者→ベンダー）／提案書＝ベンダーが返す<br>
+・請負＝完成責任あり／準委任＝作業提供（完成責任なし）、指揮命令はどちらも受注者<br>
+・CSR調達＝法令・人権・環境／グリーン調達＝環境にやさしい製品を優先購入
+</div>
+</div>
+</div>
+
+<!-- ===== 確認テスト ===== -->
+<div id="quiz" class="section">
+<div class="quiz-area">
+<h2>確認テスト ── 第17章</h2>
+<p style="color:#666;font-size:.9em;margin-bottom:16px">全問ランダム出題・選択肢シャッフル。何度でも挑戦できます。</p>
+<div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+<div id="quizContainer"></div>
+<div style="text-align:center;margin-top:20px"><button class="btn" id="submitBtn" onclick="submitQuiz()" style="display:none">結果を見る</button></div>
+</div>
+<div class="result-area" id="resultArea"><h2>結果</h2><div class="result-score" id="resultScore"></div><div id="resultMsg" style="font-size:1.1em;margin:10px 0"></div><button class="btn" onclick="retryQuiz()">もう一度</button><button class="btn btn-outline" onclick="showSection('lesson1')">レッスンに戻る</button></div>
+</div>
+</div>
+
+<script>
+const allQuestions=[
+{q:'共通フレームによれば、企画プロセスにおいて定義するものはどれか。（平成27年度）',choices:['新しい業務の在り方や業務手順、入出力情報、業務上のルールや制約などの要求事項','業務要件を実現するために必要なシステムの機能や開発方式、運用手順、障害復旧時間などの要求事項','経営・事業の目的及び目標を達成するために必要なシステムに関係する経営上のニーズ、業務上の課題などの要求事項','システムを構成するソフトウェアの機能及び能力、動作環境、外部インタフェースなどの要求事項'],answer:2,explanation:'企画プロセス（システム化構想の立案）のキーワードは<strong>「経営上のニーズ」</strong>です。経営・事業の目的達成に必要な経営上のニーズや業務上の課題を定義します。他は要件定義や開発プロセスの内容です。'},
+{q:'システム化計画を立案するときに考慮すべき事項はどれか。（平成23年度）',choices:['運用を考えて、自社の社員が開発する前提で検討を進める。','開発、保守、運用に関する費用と投資効果を明確にする。','失敗を避けるため、同業他社を調査し、同じシステムにする。','テスト計画、運用マニュアル及び障害対策を具体的に示す。'],answer:1,explanation:'システム化計画の立案プロセスのキーワードは<strong>「投資効果」</strong>です。開発・保守・運用の費用とそれによって得られる効果を比較し明確にします。'},
+{q:'情報化投資計画において、投資価値の評価指標であるROIを説明したものはどれか。（平成25年度）',choices:['売上増やコスト削減などによって創出された利益額を投資額で割ったもの','売上高投資金額比、従業員当たりの投資金額などを他社と比較したもの','現金流入の現在価値から、現金流出の現在価値を差し引いたもの','プロジェクトを実施しない場合の、市場での競争力を表したもの'],answer:0,explanation:'<strong>ROI（投資利益率）</strong>は利益額を投資額で割ったものです。他社比較はベンチマーク、現在価値の差はNPV、実施しない場合の競争力は機会損失の説明です。'},
+{q:'情報化投資において、リスクや投資価値の類似性でカテゴリー分けし、最適な資源配分を行う際に用いる手法はどれか。（令和元年度）',choices:['3C分析','ITポートフォリオ','プロビジョニング','エンタープライズアーキテクチャ'],answer:1,explanation:'投資対象を<strong>「リスク」と「投資価値」</strong>によって分類し投資配分を最適化するのは<strong>ITポートフォリオ</strong>です。3C分析は経営環境整理、EAは組織全体の全体最適化の手法です。'},
+{q:'システム開発の上流工程において、システム稼働後に発生し得る個人情報の漏えいなどのリスクに対する予防的な機能を検討し、システムに組み込むものはどれか。（令和元年度）',choices:['情報セキュリティ方針','セキュリティレベル','プライバシーバイデザイン','プライバシーマーク'],answer:2,explanation:'個人情報漏えい対策を予防的にシステムへ組み込むのは<strong>プライバシーバイデザイン</strong>です。プライバシーマークは個人情報を適切に扱う事業者に与えられる認証です。'},
+{q:'企画、要件定義、システム開発などから成る一連のシステム開発プロセスにおいて、要件定義プロセスで実施すべきものはどれか。（平成29年度）',choices:['事業の目的・目標を達成するためのシステム化の方針や実現するための実施計画を立案する。','システムに関わり合いをもつ利害関係者の種類を識別し、利害関係者のニーズ・要望・制約条件を識別する。','システムの機能及び能力を定義し、システム方式設計によって実現方式を確立する。','利害関係者の要件を満足するソフトウェア製品を得るための方式設計と適格性の確認を実施する。'],answer:1,explanation:'要件定義プロセスのキーワードは<strong>「利害関係者のニーズを識別」</strong>です。利害関係者の種類を識別し、そのニーズ・要望・制約条件を識別します。1は企画、3はシステム開発の内容です。'},
+{q:'非機能要件の定義で行う作業はどれか。（令和元年度）',choices:['業務を構成する機能間の情報（データ）の流れを明確にする。','システム開発で用いるプログラム言語に合わせた開発基準、標準の技術要件を作成する。','システム機能として実現する範囲を定義する。','他システムとの情報授受などのインタフェースを明確にする。'],answer:1,explanation:'非機能要件の代表例は<strong>技術要件</strong>で、共通フレームでは「開発基準、標準」が具体例として挙げられます。他の3つはいずれも機能要件の定義で行う作業です。'},
+{q:'調達の手順として、正しい順序はどれか。',choices:['RFPの発行 → RFIの発行 → 調達先の選定 → 契約締結','RFIの発行 → RFPの発行 → 調達先の選定 → 契約締結','調達先の選定 → RFIの発行 → RFPの発行 → 契約締結','RFIの発行 → 調達先の選定 → RFPの発行 → 契約締結'],answer:1,explanation:'調達は<strong>RFI（情報提供依頼）→ RFP（提案依頼）→ 調達先の選定 → 契約締結</strong>の順です。まず広く情報を集め、候補を絞ってから具体的な提案を依頼します。'},
+{q:'図の手順で情報システムを調達するとき、「発注元は調達対象システムや調達条件などを示し、提案書の提出を依頼する」の段階に当たる文書はどれか。（平成24年度）',choices:['RFI','RFP','供給者の選定','契約の締結'],answer:1,explanation:'具体的なシステム内容・条件を示して<strong>提案書の提出を依頼</strong>する文書は<strong>RFP（提案依頼書）</strong>です。その前段でベンダーの情報提供を求めるのがRFIです。'},
+{q:'RFI（情報提供依頼書）の説明として最も適切なものはどれか。',choices:['ベンダーに対して、具体的なシステム設計や受注条件を記載した提案書の提出を依頼する文書','ベンダーに対して、実績・技術・経験などの情報を提供するよう要求する文書','ベンダーが発注者に対して提出するシステム設計案を記載した文書','発注者と受注者の役割・責任分担を相互に確認する文書'],answer:1,explanation:'<strong>RFI</strong>はベンダーの実績・技術・経験などの<strong>情報提供を要求する</strong>文書です。1は提案依頼書（RFP）、3は提案書、4は契約書の説明です。'},
+{q:'発注者側の企業が作成し、ベンダーに具体的な提案を求めるために渡す文書はどれか。',choices:['提案書','RFP（提案依頼書）','RFI（情報提供依頼書）','SLA'],answer:1,explanation:'発注者が作成してベンダーに渡し、提案書の提出を依頼する文書が<strong>RFP（提案依頼書）</strong>です。提案書はこれに応えてベンダーが返送する文書なので、作成者が逆になります。'},
+{q:'CSR調達に該当するものはどれか。（平成28年度）',choices:['コストを最小化するために、最も安価な製品を選ぶ。','災害時に調達が不可能となる事態を避けるために、調達先を複数化する。','自然環境、人権などへの配慮を調達基準として示し、調達先に遵守を求める。','物品の購買に当たってEDIを利用し、迅速かつ正確な調達を行う。'],answer:2,explanation:'<strong>CSR調達</strong>は法令・環境・人権などへの配慮を調達基準として示し、調達先に遵守を求める調達です。グリーン調達よりも対象範囲が広い点が特徴です。'},
+{q:'グリーン調達の説明はどれか。（平成28年度）',choices:['環境保全活動をアピールし、投資家から資金を募ることである。','第三者が基準に基づいて環境保全に資する製品を認定する、エコマークなどの環境表示に関する規格のことである。','自然エネルギーで発電されたグリーン電力を市場で取引可能にする証書のことである。','品質や価格の要件を満たすだけでなく、環境負荷が小さい製品やサービスを、環境負荷の低減に努める事業者から優先して購入することである。'],answer:3,explanation:'<strong>グリーン調達</strong>は環境に配慮した製品・サービスを、環境負荷低減に努める事業者から優先して購入することです。他はグリーン投資・ISO14024（エコマーク）・グリーン電力証書の説明です。'},
+{q:'カーボンフットプリントの説明として、適切なものはどれか。（令和7年度）',choices:['温室効果ガスの排出量から吸収量と除去量を差し引いた合計をゼロにする取組み','原材料調達から廃棄・リサイクルに至るまでのライフサイクル全体で排出される温室効果ガスの量を、CO₂量に換算して商品やサービスに表示すること','自動車のエンジンから排出される大気汚染物質の排出量の定め','商品がどこで作られ、流通・販売されているかを把握するための仕組み'],answer:1,explanation:'<strong>カーボンフットプリント</strong>はライフサイクル全体で排出される温室効果ガスをCO₂量に換算して表示する仕組みです。1はカーボンニュートラル、3は排出ガス規制、4はトレーサビリティの説明です。'},
+{q:'ソフトウェア開発を外部に委託する際の請負契約と準委任契約に関する記述として、適切なものはどれか。',choices:['請負契約では仕事の完成が目的で、受注者は完成責任を負う。','準委任契約では受注者が必ず成果物の完成責任を負う。','請負契約では発注者が受注者の開発要員に直接指揮命令する。','準委任契約では発注者が完成責任を負う。'],answer:0,explanation:'<strong>請負契約</strong>は仕事の完成を目的とし、受注者が完成責任・契約不適合責任を負います。準委任契約は作業（労務）の提供が目的で完成責任は負いません。指揮命令はどちらも受注者側が行います。'},
+{q:'労働者派遣契約と請負契約の違いに関する記述として、適切なものはどれか。',choices:['派遣契約では派遣元が派遣先の要員に指揮命令する。','請負契約では発注者が受注者の要員に指揮命令する。','労働者派遣契約では派遣先（発注者）が派遣された要員に指揮命令する。','請負契約でも派遣契約でも指揮命令権は発注者にある。'],answer:2,explanation:'<strong>労働者派遣契約</strong>では派遣先（発注者）が派遣要員に指揮命令します。一方、請負・準委任契約では受注者が自社要員に指揮命令します。発注者が請負要員に直接指示すると偽装請負になります。'},
+{q:'SLA（Service Level Agreement）の説明として、最も適切なものはどれか。',choices:['ベンダーの実績や技術情報の提供を要求する文書である。','サービス提供者と利用者が、提供するサービスの品質・水準を数値で定めて合意する文書である。','システム開発の成果物の著作権の帰属を定めた契約書である。','環境にやさしい製品を優先的に調達することを定めた規格である。'],answer:1,explanation:'<strong>SLA（サービスレベル合意書）</strong>は、稼働率や障害復旧時間などサービスの品質・水準を数値で定め、提供者と利用者が合意する文書です。これを管理・改善する活動をSLM（サービスレベル管理）といいます。'}
+];
+let questions=[],answered=0;
+function shuffleArray(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
+function initQuiz(){questions=shuffleArray(allQuestions);answered=0;document.getElementById('submitBtn').style.display='none';document.getElementById('resultArea').style.display='none';document.getElementById('progressFill').style.width='0%';const c=document.getElementById('quizContainer');c.innerHTML='';questions.forEach((q,idx)=>{const sc=q.choices.map((c,i)=>({text:c,origIdx:i}));for(let i=sc.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[sc[i],sc[j]]=[sc[j],sc[i]]}q._shuffled=sc;q._selected=null;let h=`<div class="question-card"><div class="q-number">問題 ${idx+1} / ${questions.length}</div><div class="q-text">${q.q}</div><ul class="choices">`;sc.forEach((c,ci)=>{h+=`<li onclick="selectChoice(${idx},${ci})" id="q${idx}c${ci}">${c.text}</li>`});h+=`</ul><div class="explanation" id="exp${idx}"><div id="expText${idx}"></div></div></div>`;c.innerHTML+=h})}
+function selectChoice(qi,ci){const q=questions[qi];if(q._selected!==null)return;q._selected=ci;answered++;const corr=q.answer,sel=q._shuffled[ci].origIdx,ok=sel===corr;q._shuffled.forEach((c,i)=>{const li=document.getElementById(`q${qi}c${i}`);if(c.origIdx===corr)li.classList.add('correct');if(i===ci&&!ok)li.classList.add('wrong')});const e=document.getElementById(`exp${qi}`),t=document.getElementById(`expText${qi}`);t.innerHTML=(ok?'<span style="color:#4caf50;font-weight:bold">&#x2B55; 正解！</span>':'<span style="color:#f44336;font-weight:bold">&#x274C; 不正解</span>')+'<br>'+q.explanation;e.classList.add('show');document.getElementById('progressFill').style.width=(answered/questions.length*100)+'%';if(answered===questions.length)document.getElementById('submitBtn').style.display='inline-block'}
+function submitQuiz(){let c=0;questions.forEach(q=>{if(q._selected!==null&&q._shuffled[q._selected].origIdx===q.answer)c++});document.getElementById('resultArea').style.display='block';document.getElementById('resultScore').textContent=`${c} / ${questions.length}`;const p=c/questions.length*100;let m='';if(p===100)m='満点！完璧です！';else if(p>=80)m='よく理解できています！';else if(p>=60)m='合格ライン！もう少し復習しましょう。';else m='レッスンをもう一度確認しましょう。';document.getElementById('resultMsg').textContent=m;document.getElementById('resultArea').scrollIntoView({behavior:'smooth'})}
+function retryQuiz(){initQuiz();document.getElementById('quizContainer').scrollIntoView({behavior:'smooth'})}
+function showSection(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');const tabs=document.querySelectorAll('.nav-tab');const ids=['lesson1','lesson2','lesson3','quiz'];tabs[ids.indexOf(id)].classList.add('active');if(id==='quiz')initQuiz();window.scrollTo({top:0,behavior:'smooth'})}
+initQuiz();
+</script>
+</body>
+</html>

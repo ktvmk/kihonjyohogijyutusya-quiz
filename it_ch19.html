@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第19章 ビジネスインダストリ｜基本情報技術者</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Hiragino Sans','Noto Sans JP','Meiryo',sans-serif;background:#f5f5f0;color:#333;line-height:1.8;padding:0 0 60px 0}.header{background:linear-gradient(135deg,#e65100,#ff8f00);color:#fff;padding:24px 20px;text-align:center}.header h1{font-size:1.3em;margin-bottom:4px}.header .sub{font-size:.85em;opacity:.8}.container{max-width:720px;margin:0 auto;padding:16px}.nav-tabs{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap}.nav-tab{padding:10px 14px;border:2px solid #e65100;border-radius:8px;background:#fff;color:#e65100;font-weight:bold;font-size:.82em;cursor:pointer;transition:all .2s}.nav-tab:hover,.nav-tab.active{background:#e65100;color:#fff}.section{display:none}.section.active{display:block}.lesson-card{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.lesson-card h2{color:#e65100;font-size:1.2em;margin-bottom:16px;padding-bottom:8px;border-bottom:3px solid #ffe0b2}.lesson-card h3{color:#ff8f00;font-size:1.05em;margin:20px 0 10px 0}.key-point{background:#fff3e0;border-left:4px solid #e65100;padding:14px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-size:.95em}.key-point strong{color:#e65100}.vocab{display:inline-block;background:#e3f2fd;border:1px solid #64b5f6;border-radius:6px;padding:2px 8px;margin:2px 4px;font-weight:bold;font-size:.9em;color:#1565c0}.example{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:14px 16px;margin:12px 0;font-size:.9em}.formula{background:#fce4ec;border-left:4px solid #e91e63;padding:14px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-family:monospace;font-size:.95em;line-height:2}.compare{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}.compare-box{background:#fff;border:2px solid #e0e0e0;border-radius:10px;padding:14px;font-size:.9em}.compare-box h4{font-size:.95em;margin-bottom:8px;text-align:center}.compare-box.good{border-color:#4caf50}.compare-box.good h4{color:#2e7d32}.compare-box.bad{border-color:#ff9800}.compare-box.bad h4{color:#e65100}
+.quiz-area{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.quiz-area h2{color:#e65100;margin-bottom:16px}.question-card{background:#fafafa;border:1px solid #e0e0e0;border-radius:10px;padding:20px;margin:16px 0}.q-number{font-size:.8em;color:#999;margin-bottom:6px}.q-text{font-size:1.05em;font-weight:bold;margin-bottom:14px;line-height:1.6}.choices{list-style:none}.choices li{padding:12px 16px;margin:6px 0;border:2px solid #e0e0e0;border-radius:8px;cursor:pointer;transition:all .2s;font-size:.95em}.choices li:hover{border-color:#e65100;background:#fff3e0}.choices li.correct{border-color:#4caf50;background:#e8f5e9}.choices li.wrong{border-color:#f44336;background:#ffebee}.explanation{display:none;margin-top:12px;padding:14px;background:#f5f5f5;border-radius:8px;font-size:.9em;line-height:1.7}.explanation.show{display:block}.result-area{display:none;text-align:center;padding:30px;background:#fff;border-radius:12px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.result-score{font-size:2.5em;font-weight:bold;color:#e65100;margin:10px 0}.btn{display:inline-block;padding:12px 28px;background:#e65100;color:#fff;border:none;border-radius:8px;font-size:1em;cursor:pointer;margin:8px}.btn:hover{background:#ff8f00}.btn-outline{background:#fff;color:#e65100;border:2px solid #e65100}.progress-bar{width:100%;height:6px;background:#e0e0e0;border-radius:3px;margin:12px 0}.progress-fill{height:100%;background:#e65100;border-radius:3px;transition:width .3s}.back-link{display:inline-block;margin:16px 0;color:#e65100;text-decoration:none;font-weight:bold}
+.sql-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.88em}
+.sql-table th{background:#e65100;color:#fff;padding:6px;border:1px solid #ccc}
+.sql-table td{padding:6px;border:1px solid #ccc;background:#fff}
+</style>
+</head>
+<body>
+<div class="header"><h1>第19章 ビジネスインダストリ</h1><div class="sub">基本情報技術者試験 Web教材</div></div>
+<div class="container">
+<a href="it_quiz.html" class="back-link">← 章の一覧にもどる</a>
+<div class="nav-tabs">
+<div class="nav-tab active" onclick="showSection('lesson1')">① ビジネス・産業システム</div>
+<div class="nav-tab" onclick="showSection('lesson2')">② e-ビジネス</div>
+<div class="nav-tab" onclick="showSection('lesson3')">③ 組込み・IoT</div>
+<div class="nav-tab" onclick="showSection('quiz')">確認テスト</div>
+</div>
+
+<!-- ===== レッスン1 ===== -->
+<div id="lesson1" class="section active">
+<div class="lesson-card">
+<h2>① ビジネスシステムと産業システム</h2>
+
+<h3>身近なビジネスシステム</h3>
+<div class="key-point">
+<span class="vocab">POSシステム</span>（販売時点情報管理システム）：商品が売れた時点で、バーコードを読み取り「いつ・どこで・何を・いくつ・いくらで」買ったかを管理する仕組み。得られる情報を<strong>POSデータ</strong>という<br><br>
+<span class="vocab">ID-POSデータ</span>：POSデータに<strong>個人（ID）</strong>を結び付けたもの。ポイントカード提示で「誰が」買ったかまで把握でき、<strong>最終購買日・購買頻度・累計購買総額</strong>などの購入履歴を確認できる
+</div>
+<div class="key-point">
+<span class="vocab">GPS</span>：人工衛星を使って現在位置を測定する仕組み（カーナビ等）<br>
+<span class="vocab">ETC</span>：料金所で停止せず自動料金収受を行うシステム<br>
+<span class="vocab">電子マネー</span>：現金の代わりにICカード等で支払う仕組み（Suica・ICOCA等）<br>
+<span class="vocab">GIS</span>：地理情報システム。地図上に各種情報を重ねて表示・分析する
+</div>
+
+<h3>社会インフラのシステム</h3>
+<div class="key-point">
+<span class="vocab">スマートグリッド</span>：ITで発電と電力消費を総合制御し、<strong>電力の需給量の最適化</strong>を図る次世代電力網。再生可能エネルギーの活用と安定供給を両立する<br><br>
+<span class="vocab">スマートメーター</span>：通信機能をもつ高機能な電力メーター。目的は①<strong>自動検針</strong>②<strong>電力需要制御</strong>③<strong>電力消費量の可視化</strong>の3つ（※補助電源で停電時に給電する機能は目的ではない）<br><br>
+<span class="vocab">HEMS</span>（家庭用エネルギー管理システム）：複数の家電をネットワークでつなぎ、電力の<strong>可視化（見える化）</strong>と<strong>制御（コントロール）</strong>を行うシステム
+</div>
+<div class="example"><strong>その他の社会システム</strong><br>
+金融システム（勘定系・情報系）、行政システム（住民基本台帳ネットワーク・電子申請）、流通情報システム（受発注・在庫管理）など。「発電と電力消費を総合制御」＝スマートグリッド、と結び付けて覚える。</div>
+
+<h3>エンジニアリングシステムと生産方式</h3>
+<div class="key-point">
+<span class="vocab">エンジニアリングシステム</span>：生産プロセスを自動化・支援するシステム。試験では<strong>かんばん方式・セル生産方式・MRP</strong>の3つが頻出
+</div>
+<div class="compare">
+<div class="compare-box good">
+<h4>受注生産方式</h4>
+注文を<strong>受けてから</strong>生産を開始<br><br>
+在庫リスクは小さいが、納期は長め
+</div>
+<div class="compare-box bad">
+<h4>見込生産方式</h4>
+注文を待たず<strong>計画に基づき</strong>先に生産<br><br>
+すぐ出荷できるが、売れ残りリスクあり
+</div>
+</div>
+<div class="key-point">
+<span class="vocab">かんばん方式（JIT／ジャストインタイム）</span>：<strong>必要な物を、必要なときに、必要な量だけ</strong>生産するトヨタ発の方式。「かんばん」を使い、後工程が必要とする部品だけを前工程から調達して中間在庫を減らす
+</div>
+<div class="compare">
+<div class="compare-box good">
+<h4>ライン生産方式</h4>
+ベルトコンベアの流れ作業<br><br>
+単能工・専能工／<strong>少品種・多量生産</strong>向き
+</div>
+<div class="compare-box bad">
+<h4>セル生産方式</h4>
+1人〜数人が全工程を担当<br><br>
+多能工／<strong>多品種・少量生産</strong>（多種類でフレキシブル）向き
+</div>
+</div>
+
+<h3>MRP・CAD・CAM・コンカレント</h3>
+<table class="sql-table">
+<tr><th>用語</th><th>意味</th></tr>
+<tr><td><strong>MRP</strong><br>（資材所要量計画）</td><td>製品の生産計画（基準生産計画）を基に、必要な資材の量と時期を求め、資材の手配数量を算出する手法</td></tr>
+<tr><td><strong>CAD</strong><br>（コンピュータ支援設計）</td><td>製品の形状・構造などのデータから、製品の設計図面をコンピュータで作成する</td></tr>
+<tr><td><strong>CAM</strong><br>（コンピュータ支援製造）</td><td>CADの設計データを工程設計情報に変換し、工作機械を操作するプログラムを作る</td></tr>
+<tr><td><strong>コンカレント<br>エンジニアリング</strong></td><td>設計・生産計画などの工程を<strong>同時並行</strong>で行い、開発期間を短縮する（concurrent＝同時）</td></tr>
+</table>
+</div>
+</div>
+
+<!-- ===== レッスン2 ===== -->
+<div id="lesson2" class="section">
+<div class="lesson-card">
+<h2>② e-ビジネス（電子商取引）</h2>
+
+<h3>EC（電子商取引）とその分類</h3>
+<div class="key-point">
+<span class="vocab">EC</span>（Electronic Commerce＝電子商取引）：インターネット上で商品を売買すること。取引の当事者の組み合わせで「◯to◯」に分類する
+</div>
+<table class="sql-table">
+<tr><th>分類</th><th>意味</th><th>具体例</th></tr>
+<tr><td><strong>BtoC</strong></td><td>企業⇔消費者</td><td>オンラインショップ</td></tr>
+<tr><td><strong>BtoB</strong></td><td>企業⇔企業</td><td>eマーケットプレイス</td></tr>
+<tr><td><strong>CtoC</strong></td><td>消費者⇔消費者</td><td>電子オークション</td></tr>
+<tr><td><strong>GtoB</strong></td><td>行政⇔企業</td><td>電子調達・<strong>電子入札</strong></td></tr>
+<tr><td><strong>O2O</strong></td><td>仮想店舗⇔実店舗の連携</td><td>電子クーポン・価格比較</td></tr>
+</table>
+<div class="key-point">
+<span class="vocab">O2O</span>（Online to Offline）：モバイル端末などを使い、<strong>仮想店舗から実店舗へ、または実店舗から仮想店舗へ</strong>顧客を誘導し購入につなげる仕組み<br><br>
+<span class="vocab">電子オークション</span>：ネット上の競売。売り手が希望価格を出し、最高値の買い手が落札（CtoCの代表）<br>
+<span class="vocab">逆オークション</span>：<strong>買う人が希望価格を提示</strong>し、最も安い価格を出した売り手が売れる取引（売り手と買い手が逆）
+</div>
+
+<h3>決済・物流の仕組み</h3>
+<div class="key-point">
+<span class="vocab">エスクローサービス</span>：ネット取引を安全にするため、売り手と買い手の間に仲介会社が入って決済を仲介するサービス（第三者預託）。「代金を払ったのに商品が届かない」等のトラブルを防ぐ<br><br>
+<span class="vocab">RFID</span>：電波・電磁波で<strong>非接触</strong>で情報をやり取りする技術。代表例が<span class="vocab">ICタグ</span>（RFIDタグ）で、①<strong>汚れに強い</strong>②<strong>梱包の外から読める</strong>のが特徴<br><br>
+<span class="vocab">EDI</span>（電子データ交換）：商取引のためのデータを、標準的な<strong>規約</strong>に基づいてコンピュータ間で交換すること。発注書・納品書・請求書などを電子化する
+</div>
+
+<h3>EC特有の考え方・ソーシャルメディア</h3>
+<div class="key-point">
+<span class="vocab">ロングテール</span>：あまり売れない商品でも、その種類が膨大になると売上合計が無視できない割合になる法則。実店舗の陳列面積の制約がないECならではの特徴<br><br>
+<span class="vocab">フィンテック</span>：金融（Finance）とIT（Technology）の融合サービス<br>
+<span class="vocab">暗号資産</span>（仮想通貨）：ブロックチェーン等で管理される電子的な資産<br>
+<span class="vocab">SEO</span>：検索結果で自サイトを上位表示させる工夫<br>
+<span class="vocab">レコメンデーション</span>：購入履歴などからおすすめ商品を提示する<br>
+<span class="vocab">アフィリエイト</span>：自サイトのリンク経由で商品が売れると紹介料が入る成功報酬型広告
+</div>
+<div class="key-point">
+<span class="vocab">CGM</span>（消費者生成メディア）：一般消費者がネットを通じて自ら情報を発信するメディアの総称（ブログ・SNS・口コミサイトなど）<br><br>
+<span class="vocab">シェアリングエコノミー</span>：個人が保有する<strong>遊休資産</strong>を、主に個人同士で共有・貸し借りする仕組み（民泊・ライドシェア・クラウドソーシングなど）
+</div>
+</div>
+</div>
+
+<!-- ===== レッスン3 ===== -->
+<div id="lesson3" class="section">
+<div class="lesson-card">
+<h2>③ 組込みシステムとIoTシステム</h2>
+
+<h3>組込みシステム</h3>
+<div class="key-point">
+<span class="vocab">組込みシステム</span>：<strong>特定の機能のみ</strong>を実行するように作られたシステム。通常はマイクロコンピュータを指す。「汎用（いろいろな用途）」と対比される<br><br>
+・<strong>民生機器</strong>：家庭用の電化製品（電子レンジ・炊飯器・エアコンなど）<br>
+・<strong>産業機器</strong>：産業用の機器（産業用ロボット・自動倉庫・自動販売機など）
+</div>
+<div class="key-point">
+<span class="vocab">組込みソフトウェア（ファームウェア）</span>：組込みシステム内の読み出し専用の記憶装置（<strong>ROM</strong>）に書き込まれたソフトウェア。ユーザーが誤って上書きするのを防ぐためROMに書き込んで出荷する<br><br>
+<span class="vocab">リアルタイムOS</span>：決められた時間内に確実に処理を終えることを重視した、組込み機器向けのOS
+</div>
+
+<h3>IoT（モノのインターネット）</h3>
+<div class="key-point">
+<span class="vocab">IoT</span>（Internet of Things）：自動車や家電などの「モノ」が直接インターネットにつながり、互いに情報をやり取りする仕組み<br>
+・構成要素は<strong>IoTデバイス（モノ）</strong>と<strong>IoTサーバ（デバイスを管理する機器）</strong><br>
+・対象は<strong>インターネット又は閉域網に接続できるすべてのもの</strong>（アナログ機器・人・生物なども含む）<br><br>
+<span class="vocab">M2M</span>（Machine to Machine）：人を介さず、機器同士が自律的に通信し合う仕組み<br>
+<span class="vocab">閉域網</span>：インターネットに接続していない閉じたネットワーク。許可された人しか使えずセキュリティが高い
+</div>
+
+<h3>IoTを支える通信・技術</h3>
+<table class="sql-table">
+<tr><th>用語</th><th>特徴</th></tr>
+<tr><td><strong>BLE</strong><br>（Bluetooth Low Energy）</td><td>省電力の近距離通信。通信速度は遅いが、ボタン電池で数年稼働。IoT機器向き</td></tr>
+<tr><td><strong>LPWA</strong><br>（Low Power Wide Area）</td><td>省電力かつ広範囲（数十km）。BLEより遠く、LTEより省電力。速度は遅い</td></tr>
+<tr><td><strong>エッジ<br>コンピューティング</strong></td><td>センサなどデータ発生源の<strong>近くにサーバ</strong>を置いて一次処理し、<strong>リアルタイム性</strong>を高める。必要なデータだけをクラウドへ送る</td></tr>
+</table>
+<div class="key-point">
+<span class="vocab">センサ</span>：温度・光・圧力などをデータとして取り込む（入力）／<span class="vocab">アクチュエータ</span>：電気信号を動き（モータ回転など）に変える（出力）<br><br>
+<span class="vocab">AI</span>（人工知能）：人間の知的な処理をコンピュータで実現する技術<br>
+<span class="vocab">ディープラーニング（深層学習）</span>：多層のニューラルネットワークを使い、大量データから特徴を自動で学習する機械学習の手法
+</div>
+
+<div class="key-point" style="background:#fce4ec;border-color:#e91e63">
+<strong style="color:#e91e63">第19章の最重要まとめ</strong><br><br>
+・スマートグリッド＝電力の需給量最適化を図る次世代電力網／HEMS＝家庭の電力を可視化＋制御<br>
+・ID-POSデータで購入履歴（最終購買日・購買頻度・累計購買総額）がわかる<br>
+・かんばん方式（JIT）＝必要な物を必要なときに必要な量だけ／セル生産＝多品種少量<br>
+・MRP＝生産計画から資材の手配数量を算出／コンカレント＝工程を同時並行<br>
+・BtoB／BtoC／CtoC／GtoB（電子入札）／O2O（仮想⇔実店舗の誘導）<br>
+・逆オークション＝買い手が価格提示・最安の売り手が落札／エスクロー＝決済を第三者が仲介<br>
+・ICタグ（RFID）＝汚れに強く梱包の外から読める／EDI＝規約に基づくデータ交換<br>
+・ロングテール＝売れない商品群の売上合計が無視できない／CGM・シェアリングエコノミー（遊休資産）<br>
+・IoT＝モノがネットにつながる。対象はネット又は閉域網に接続できる全て／エッジ＝発生源近くで一次処理しリアルタイム性向上
+</div>
+</div>
+</div>
+
+<!-- ===== 確認テスト ===== -->
+<div id="quiz" class="section">
+<div class="quiz-area">
+<h2>確認テスト ── 第19章</h2>
+<p style="color:#666;font-size:.9em;margin-bottom:16px">全問ランダム出題・選択肢シャッフル。何度でも挑戦できます。</p>
+<div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+<div id="quizContainer"></div>
+<div style="text-align:center;margin-top:20px"><button class="btn" id="submitBtn" onclick="submitQuiz()" style="display:none">結果を見る</button></div>
+</div>
+<div class="result-area" id="resultArea"><h2>結果</h2><div class="result-score" id="resultScore"></div><div id="resultMsg" style="font-size:1.1em;margin:10px 0"></div><button class="btn" onclick="retryQuiz()">もう一度</button><button class="btn btn-outline" onclick="showSection('lesson1')">レッスンに戻る</button></div>
+</div>
+</div>
+
+<script>
+const allQuestions=[
+{q:'スマートグリッドの説明はどれか。（平成26年度）',choices:['健康診断結果や投薬情報など、類似した症例に基づく分析を行い、個人ごとに最適な健康アドバイスを提供できるシステム','在宅社員やシニアワーカーなど、様々な勤務形態で働く労働者のコミュニケーションを可能にし、多様なワークスタイルを支援するシステム','自動車に設置された情報機器で飲食店・娯楽情報の検索や交通情報の受発信などを行えるシステム','通信と情報処理技術によって発電と電力消費を総合的に制御し、再生可能エネルギーの活用や安定的な電力供給、最適な需給調整を図るシステム'],answer:3,explanation:'<strong>スマートグリッド</strong>はITを使って電力の需給量の最適化を図る次世代電力網です。1は医療診断エキスパートシステム、2はテレワーク支援、3はカーナビゲーションシステムの説明です。'},
+{q:'スマートメーターを導入する目的として、適切でないものはどれか。（平成27年度）',choices:['自動検針によって、検針作業の効率を向上させる。','停電時に補助電源によって、一定時間電力を供給し続ける。','電力需要制御によって、ピーク電力を抑制する。','電力消費量の可視化によって、節電の意識を高める。'],answer:1,explanation:'スマートメーターの主な目的は<strong>自動検針・電力需要制御・電力消費量の可視化</strong>の3つです。停電時に電力を供給し続けるのは自家発電装置（補助電源）の目的であり、スマートメーターの目的ではありません。'},
+{q:'HEMSの説明として、適切なものはどれか。（平成29年度）',choices:['太陽光発電システムなどが発電した電気を、家庭などで利用できるように変換するシステム','一般家庭などから排出された家電製品の有用な部分をリサイクルするシステム','ヒートポンプを利用して、少ないエネルギーで大きな熱量を発生させる給湯システム','複数の家電製品をネットワークでつなぎ、電力の可視化及び電力消費の最適制御を行うシステム'],answer:3,explanation:'<strong>HEMS</strong>のキーワードは「可視化」と「制御」の2つです。1はパワーコンディショナ、2は家電リサイクルシステム、3は自然冷媒ヒートポンプ給湯器の説明です。'},
+{q:'コンビニで、ポイントカードなどの個人情報と結び付けられた顧客ID付きPOSデータ（ID-POSデータ）を収集・分析することで確認できるものはどれか。（平成30年度）',choices:['商品の最終的な使用者','商品の店舗までの流通経路','商品を購入する動機','同一商品の購入頻度'],answer:3,explanation:'ID-POSデータでは従来わからなかった「誰が」買ったかが把握でき、<strong>購入履歴（最終購買日・購買頻度・累計購買総額）</strong>を確認できます。よって購買頻度にあたる「同一商品の購入頻度」が正解です。'},
+{q:'"かんばん方式"を説明したものはどれか。（令和元年度）',choices:['各作業の効率を向上させるために、仕様が統一された部品や半製品を調達する。','効率よく部品調達を行うために、関連会社から部品を調達する。','中間在庫を極力減らすために、生産ラインにおいて後工程の生産に必要な部品だけを前工程から調達する。','品質が高い部品を調達するために、複数の指定業者を定め競争入札で部品を調達する。'],answer:2,explanation:'<strong>かんばん方式（JIT）</strong>は必要な物を必要なときに必要な量だけ生産する方式です。「必要な部品だけを前工程から調達し中間在庫を減らす」というキーワードがある選択肢が正解です。'},
+{q:'セル生産方式の利点が生かせる対象はどれか。（平成30年度）',choices:['生産性を上げるために、大量生産が必要なもの','製品の仕様が長期間変わらないもの','多種類かつフレキシブルな生産が求められるもの','標準化・単純化・専門化による分業が必要なもの'],answer:2,explanation:'<strong>セル生産方式</strong>の特徴は多品種・少量生産で、多種類かつフレキシブルな生産に向きます。他の選択肢はいずれもライン生産方式の特徴です。'},
+{q:'CADを説明したものはどれか。（平成26年度）',choices:['現物を利用した試作や実験を行わずに、製品の性能・機能をコンピュータで評価する。','生産計画・部品構成表・在庫量などから、資材の必要量と時期を求める。','製品の形状や構造などの属性データから、製品の設計図面を作成する。','製品設計図面を工程設計情報に変換し、機械加工などの自動化を支援する。'],answer:2,explanation:'<strong>CAD</strong>は製品の設計をコンピュータで行い設計図面を作成するシステムです。1はシミュレーター、2はMRP、4はCAMの説明です。'},
+{q:'MRPの特徴はどれか。（平成29年度）',choices:['顧客の注文を受けてから製品の生産を行う。','作業指示票（かんばん）を利用して作業指示・運搬指示をする。','製品の開発・設計・生産準備を同時並行で行う。','製品の基準生産計画を基に、部品の手配数量を算出する。'],answer:3,explanation:'<strong>MRP（資材所要量計画）</strong>は生産計画に合わせて必要な資材の量を求め手配する手法です。1は受注生産方式、2はかんばん方式（JIT）、3はコンカレントエンジニアリングの特徴です。'},
+{q:'コンカレントエンジニアリングの説明として、適切なものはどれか。（平成26年度）',choices:['機能とコストの最適な組合せを把握し、システム化された手順で価値の向上を図る手法','製品開発において、設計・生産計画などの工程を同時並行的に行う手法','設計・製造・販売などのプロセスを順に行っていく製品開発の手法','対象のシステムを解析し、その仕様を明らかにする手法'],answer:1,explanation:'コンカレント（concurrent）は「同時の」という意味で、<strong>工程を同時並行的に行う</strong>選択肢が正解です。1はバリューエンジニアリング、3はシーケンシャルな開発、4はリバースエンジニアリングの説明です。'},
+{q:'電子自治体において、GtoB（Government to Business）に該当するものはどれか。（平成27年度）',choices:['自治体内で電子決裁や電子公文書管理を行う。','自治体が利用する物品や資材の電子調達・電子入札を行う。','住民基本台帳ネットワークによって、自治体間で住民票データを送受信する。','住民票・戸籍謄本・婚姻届などを住民が電子申請する。'],answer:1,explanation:'<strong>GtoB</strong>は行政と企業の取引です。物品・資材の電子調達や電子入札がこれにあたります。1は取引ではなく、3は自治体間（GtoG）、4は行政対消費者（GtoC）に該当します。'},
+{q:'ネットビジネスでのO2O（Online to Offline）の説明はどれか。（平成30年度）',choices:['基本サービスを無料で提供し、高度な機能には課金するビジネスモデルである。','顧客仕様に応じたカスタマイズのため、注文後に最終製品の生産を始める方式である。','代金を払ったのに商品が届かないなどのトラブルを防止できる仕組みである。','モバイル端末などを利用する顧客を、仮想店舗から実店舗へ、又は実店舗から仮想店舗へ誘導し購入につなげる仕組みである。'],answer:3,explanation:'<strong>O2O</strong>は仮想店舗（Online）と実店舗（Offline）を連携させ顧客を誘導する仕組みです。1はフリーミアム、2はBTO（受注生産）、3はエスクローサービスの説明です。'},
+{q:'インターネット上で、一般消費者が買いたい品物とその購入条件を提示し、単数又は複数の売り手がそれに応じる取引形態はどれか。（平成28年度）',choices:['BtoB','CtoC','逆オークション','バーチャルモール'],answer:2,explanation:'買い手が希望価格（購入条件）を提示し、最も安い売り手が売れる取引を<strong>逆オークション</strong>といいます。通常のオークションと売り手・買い手が逆になる点がポイントです。'},
+{q:'ICタグ（RFID）の特徴はどれか。（平成27年度）',choices:['GPSを利用し、現在地の位置情報や属性情報を表示する。','専用の磁気読取り装置に挿入して使用する。','大量の情報を扱うので、情報の記憶には外部記憶装置を使用する。','汚れに強く、記録された情報を梱包の外から読み取ることができる。'],answer:3,explanation:'<strong>ICタグ（RFID）</strong>は電波で非接触通信を行うため、①汚れに強い②梱包の外から読める、という特徴があります。バーコードと違い、光学的な読み取りではない点が要点です。'},
+{q:'エスクローサービスの取引モデルにおいて、商品が売り手から買い手に届いた次に行われる行為はどれか。（平成26年度）',choices:['商品受領の通知','商品の発送','代金の支払','代金の入金通知'],answer:0,explanation:'エスクローでは、買い手が仲介会社に代金を払込み→仲介会社が売り手へ入金通知→売り手が商品発送→買い手が商品を受領→<strong>買い手が商品受領を通知</strong>→仲介会社が売り手へ代金支払、という順です。商品受領後は「商品受領の通知」が入ります。'},
+{q:'ロングテールの説明はどれか。（平成30年度）',choices:['デジタルコンテンツに統合的・体系的な管理や配信などの処理を行うこと','インターネットショッピングで、あまり売れない商品群の売上合計が無視できない割合になっていること','自分のサイトに掲載したリンク経由で商品が売れたとき、企業が紹介料を支払うこと','メーカーや卸売業者から商品を直接発送させ、在庫リスクを負わずに販売できること'],answer:1,explanation:'<strong>ロングテール</strong>は、陳列面積の制約がないECで、あまり売れない多数の商品の売上合計が無視できない割合になる法則です。1はCMS、3はアフィリエイト、4はドロップシッピングの説明です。'},
+{q:'EDIを説明したものはどれか。（平成25年度）',choices:['OSI基本参照モデルに基づく電子メールサービスの国際規格である。','ネットワーク内でデータを蓄積・変換するなど付加価値を加えた通信サービスである。','ネットワークを介して、商取引のためのデータをコンピュータ間で標準的な規約に基づいて交換することである。','発注情報を端末から入力し、本部又は仕入先に送信して発注を行うシステムである。'],answer:2,explanation:'<strong>EDI（電子データ交換）</strong>のキーワードは「規約」です。1はMHS、2はVAN、4はEOSの説明です。標準的な規約に基づくデータ交換という点が要点です。'},
+{q:'CGM（Consumer Generated Media）の例はどれか。（平成31年度）',choices:['企業が経営状況や業績動向を個人投資家向けに公開する自社のWebサイト','企業が自社商品の特徴や使用方法を一般消費者向けに発信する自社のWebサイト','行政機関が政策や行政サービスを一般市民向けに公開する自組織のWebサイト','個人が自ら使用した商品などの評価を、不特定多数に向けて発信するブログやSNSなどのWebサイト'],answer:3,explanation:'<strong>CGM</strong>は一般の消費者がインターネットを通じて自ら情報を発信するメディアの総称です。個人が商品評価を発信するブログやSNSがこれにあたります。他は企業・行政が発信する公式サイトです。'},
+{q:'IoTの構成要素に関する記述として、適切なものはどれか。（平成30年度）',choices:['アナログ式の機器を除く、デジタル式の機器が対象となる。','インターネット又は閉域網に接続できる全てのものが対象となる。','自律的にデータを収集して分析を行う機器だけが対象となる。','人や生物を除く、形のある全てのものが対象となる。'],answer:1,explanation:'<strong>IoT</strong>はモノがインターネットにつながる仕組みで、対象は<strong>インターネット又は閉域網に接続できる全てのもの</strong>です。アナログ機器も、データを送信するだけの機器も、人や生物（ペットや植物）も対象になります。'}
+];
+let questions=[],answered=0;
+function shuffleArray(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
+function initQuiz(){questions=shuffleArray(allQuestions);answered=0;document.getElementById('submitBtn').style.display='none';document.getElementById('resultArea').style.display='none';document.getElementById('progressFill').style.width='0%';const c=document.getElementById('quizContainer');c.innerHTML='';questions.forEach((q,idx)=>{const sc=q.choices.map((c,i)=>({text:c,origIdx:i}));for(let i=sc.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[sc[i],sc[j]]=[sc[j],sc[i]]}q._shuffled=sc;q._selected=null;let h=`<div class="question-card"><div class="q-number">問題 ${idx+1} / ${questions.length}</div><div class="q-text">${q.q}</div><ul class="choices">`;sc.forEach((c,ci)=>{h+=`<li onclick="selectChoice(${idx},${ci})" id="q${idx}c${ci}">${c.text}</li>`});h+=`</ul><div class="explanation" id="exp${idx}"><div id="expText${idx}"></div></div></div>`;c.innerHTML+=h})}
+function selectChoice(qi,ci){const q=questions[qi];if(q._selected!==null)return;q._selected=ci;answered++;const corr=q.answer,sel=q._shuffled[ci].origIdx,ok=sel===corr;q._shuffled.forEach((c,i)=>{const li=document.getElementById(`q${qi}c${i}`);if(c.origIdx===corr)li.classList.add('correct');if(i===ci&&!ok)li.classList.add('wrong')});const e=document.getElementById(`exp${qi}`),t=document.getElementById(`expText${qi}`);t.innerHTML=(ok?'<span style="color:#4caf50;font-weight:bold">&#x2B55; 正解！</span>':'<span style="color:#f44336;font-weight:bold">&#x274C; 不正解</span>')+'<br>'+q.explanation;e.classList.add('show');document.getElementById('progressFill').style.width=(answered/questions.length*100)+'%';if(answered===questions.length)document.getElementById('submitBtn').style.display='inline-block'}
+function submitQuiz(){let c=0;questions.forEach(q=>{if(q._selected!==null&&q._shuffled[q._selected].origIdx===q.answer)c++});document.getElementById('resultArea').style.display='block';document.getElementById('resultScore').textContent=`${c} / ${questions.length}`;const p=c/questions.length*100;let m='';if(p===100)m='満点！完璧です！';else if(p>=80)m='よく理解できています！';else if(p>=60)m='合格ライン！もう少し復習しましょう。';else m='レッスンをもう一度確認しましょう。';document.getElementById('resultMsg').textContent=m;document.getElementById('resultArea').scrollIntoView({behavior:'smooth'})}
+function retryQuiz(){initQuiz();document.getElementById('quizContainer').scrollIntoView({behavior:'smooth'})}
+function showSection(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');const tabs=document.querySelectorAll('.nav-tab');const ids=['lesson1','lesson2','lesson3','quiz'];tabs[ids.indexOf(id)].classList.add('active');if(id==='quiz')initQuiz();window.scrollTo({top:0,behavior:'smooth'})}
+initQuiz();
+</script>
+</body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第16章 システム戦略｜基本情報技術者</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Hiragino Sans','Noto Sans JP','Meiryo',sans-serif;background:#f5f5f0;color:#333;line-height:1.8;padding:0 0 60px 0}.header{background:linear-gradient(135deg,#e65100,#ff8f00);color:#fff;padding:24px 20px;text-align:center}.header h1{font-size:1.3em;margin-bottom:4px}.header .sub{font-size:.85em;opacity:.8}.container{max-width:720px;margin:0 auto;padding:16px}.nav-tabs{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap}.nav-tab{padding:10px 14px;border:2px solid #e65100;border-radius:8px;background:#fff;color:#e65100;font-weight:bold;font-size:.82em;cursor:pointer;transition:all .2s}.nav-tab:hover,.nav-tab.active{background:#e65100;color:#fff}.section{display:none}.section.active{display:block}.lesson-card{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.lesson-card h2{color:#e65100;font-size:1.2em;margin-bottom:16px;padding-bottom:8px;border-bottom:3px solid #ffe0b2}.lesson-card h3{color:#ff8f00;font-size:1.05em;margin:20px 0 10px 0}.key-point{background:#fff3e0;border-left:4px solid #e65100;padding:14px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-size:.95em}.key-point strong{color:#e65100}.vocab{display:inline-block;background:#e3f2fd;border:1px solid #64b5f6;border-radius:6px;padding:2px 8px;margin:2px 4px;font-weight:bold;font-size:.9em;color:#1565c0}.example{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:14px 16px;margin:12px 0;font-size:.9em}.formula{background:#fce4ec;border-left:4px solid #e91e63;padding:14px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-family:monospace;font-size:.95em;line-height:2}.compare{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}.compare-box{background:#fff;border:2px solid #e0e0e0;border-radius:10px;padding:14px;font-size:.9em}.compare-box h4{font-size:.95em;margin-bottom:8px;text-align:center}.compare-box.good{border-color:#4caf50}.compare-box.good h4{color:#2e7d32}.compare-box.bad{border-color:#ff9800}.compare-box.bad h4{color:#e65100}
+.quiz-area{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.quiz-area h2{color:#e65100;margin-bottom:16px}.question-card{background:#fafafa;border:1px solid #e0e0e0;border-radius:10px;padding:20px;margin:16px 0}.q-number{font-size:.8em;color:#999;margin-bottom:6px}.q-text{font-size:1.05em;font-weight:bold;margin-bottom:14px;line-height:1.6}.choices{list-style:none}.choices li{padding:12px 16px;margin:6px 0;border:2px solid #e0e0e0;border-radius:8px;cursor:pointer;transition:all .2s;font-size:.95em}.choices li:hover{border-color:#e65100;background:#fff3e0}.choices li.correct{border-color:#4caf50;background:#e8f5e9}.choices li.wrong{border-color:#f44336;background:#ffebee}.explanation{display:none;margin-top:12px;padding:14px;background:#f5f5f5;border-radius:8px;font-size:.9em;line-height:1.7}.explanation.show{display:block}.result-area{display:none;text-align:center;padding:30px;background:#fff;border-radius:12px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.result-score{font-size:2.5em;font-weight:bold;color:#e65100;margin:10px 0}.btn{display:inline-block;padding:12px 28px;background:#e65100;color:#fff;border:none;border-radius:8px;font-size:1em;cursor:pointer;margin:8px}.btn:hover{background:#ff8f00}.btn-outline{background:#fff;color:#e65100;border:2px solid #e65100}.progress-bar{width:100%;height:6px;background:#e0e0e0;border-radius:3px;margin:12px 0}.progress-fill{height:100%;background:#e65100;border-radius:3px;transition:width .3s}.back-link{display:inline-block;margin:16px 0;color:#e65100;text-decoration:none;font-weight:bold}
+.sql-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.88em}
+.sql-table th{background:#e65100;color:#fff;padding:6px;border:1px solid #ccc}
+.sql-table td{padding:6px;border:1px solid #ccc;background:#fff}
+</style>
+</head>
+<body>
+<div class="header"><h1>第16章 システム戦略</h1><div class="sub">基本情報技術者試験 Web教材</div></div>
+<div class="container">
+<a href="it_quiz.html" class="back-link">← 章の一覧にもどる</a>
+<div class="nav-tabs">
+<div class="nav-tab active" onclick="showSection('lesson1')">① 情報システム戦略</div>
+<div class="nav-tab" onclick="showSection('lesson2')">② 業務プロセス</div>
+<div class="nav-tab" onclick="showSection('lesson3')">③ ソリューションビジネス</div>
+<div class="nav-tab" onclick="showSection('lesson4')">④ 活用促進と評価</div>
+<div class="nav-tab" onclick="showSection('quiz')">確認テスト</div>
+</div>
+
+<!-- ===== レッスン1 ===== -->
+<div id="lesson1" class="section active">
+<div class="lesson-card">
+<h2>① 情報システム戦略とエンタープライズアーキテクチャ</h2>
+
+<h3>情報システム戦略とは</h3>
+<div class="key-point">
+企業をピラミッド型の組織で考えると、最上位に<strong>経営理念</strong>があり、その下に<strong>ビジョン→企業戦略→事業戦略→機能別戦略</strong>と続く。<br><br>
+<span class="vocab">情報システム戦略</span>：情報システム部門の<strong>機能別戦略</strong>。経営戦略を実現するために、情報システムをどう構築・活用するかを定める（「情報戦略」と表記されることもある）。<br><br>
+策定の全体像は<span class="vocab">情報システム化基本計画</span>としてまとめ、<span class="vocab">CIO</span>（最高情報責任者）が統括する。
+</div>
+
+<h3>全体最適化と部分最適化</h3>
+<div class="compare">
+<div class="compare-box good">
+<h4>全体最適化</h4>
+<strong>組織全体</strong>の効率化を図る考え方<br><br>
+情報システム戦略で<strong>常に目指すべき</strong>方向
+</div>
+<div class="compare-box bad">
+<h4>部分最適化</h4>
+現場の不満を吸い上げ<strong>部門ごと</strong>にシステムを導入<br><br>
+その部門は改善しても<strong>企業全体では非効率</strong>になりがち
+</div>
+</div>
+<div class="key-point">
+ある部門に都合のよいシステムが、別の部署にも都合がよいとは限らない。だから情報システム戦略の立案では、部分最適化ではなく<strong>全体最適化</strong>を考えることが重要。
+</div>
+
+<h3>エンタープライズアーキテクチャ（EA）</h3>
+<div class="key-point">
+<span class="vocab">エンタープライズアーキテクチャ（EA）</span>：大企業や政府など比較的大きな組織のシステムを<strong>全体最適化するための手法（技法）</strong>。<br><br>
+部分最適化で縦割り・個別になったシステムを、<strong>4つの体系</strong>で<strong>横断的に</strong>分析し直して全体最適化する。覚えることは「①定義」と「②4つの分類」の2つだけ。
+</div>
+<table class="sql-table">
+<tr><th>4つのアーキテクチャ</th><th>対応キーワード</th><th>内容</th></tr>
+<tr><td><strong>ビジネスアーキテクチャ</strong></td><td>業務</td><td>ビジネス戦略に必要な業務プロセスや情報の流れを体系化</td></tr>
+<tr><td><strong>データアーキテクチャ</strong></td><td>データ</td><td>業務に必要なデータの内容・関連・構造を体系化</td></tr>
+<tr><td><strong>アプリケーションアーキテクチャ</strong></td><td>機能</td><td>業務プロセスを支援するシステムの機能や構成を体系化</td></tr>
+<tr><td><strong>テクノロジアーキテクチャ</strong></td><td>技術</td><td>システムの構築・運用に必要な技術的構成要素を体系化</td></tr>
+</table>
+<div class="example"><strong>覚え方：</strong>ビジネス＝業務、データ＝データ、アプリケーション＝機能、テクノロジ＝技術。この対応さえ覚えれば、EAの分類問題はほぼ解けます。</div>
+</div>
+</div>
+
+<!-- ===== レッスン2 ===== -->
+<div id="lesson2" class="section">
+<div class="lesson-card">
+<h2>② 業務プロセスの分析と改善</h2>
+
+<h3>業務プロセスとは</h3>
+<div class="key-point">
+<span class="vocab">業務プロセス</span>：一言でいえば「仕事の手順」。業務は<strong>手作業</strong>と<strong>システム</strong>（ハードウェア＋ソフトウェア）から構成される。<br>
+業務プロセスの改善こそが、情報システム戦略のメインテーマ。
+</div>
+
+<h3>BPRとBPM（頻出の対比）</h3>
+<div class="compare">
+<div class="compare-box good">
+<h4>BPR</h4>
+Business Process Re-engineering<br><br>
+業務プロセスを<strong>「抜本的」に再設計</strong>する手法（＝大掃除）<br>
+分業による部分最適への反省から生まれ、<strong>全体最適</strong>を目指す
+</div>
+<div class="compare-box bad">
+<h4>BPM</h4>
+Business Process Management<br><br>
+業務プロセスを見直して<strong>「継続的」に改善</strong>する手法（＝毎日の掃除）<br>
+BPR後の効率を保つために回し続ける
+</div>
+</div>
+<div class="key-point">
+見抜くポイントは<strong>キーワード</strong>。BPR＝<strong>「抜本的」</strong>、BPM＝<strong>「継続的」</strong>。BPMの説明文には必ず「継続的に」が入る。
+</div>
+
+<h3>RPA</h3>
+<div class="key-point">
+<span class="vocab">RPA</span>（Robotic Process Automation）：<strong>ソフトウェアロボット</strong>を用いて事務作業を自動化すること。人手不足や人件費高騰の対策になる。<br><br>
+覚える2つの特徴：<br>
+・RPAは<strong>工場のロボットではない</strong>（実体のある機械ではなくソフトウェア）<br>
+・RPAは<strong>「定型的」な作業</strong>（同じ作業の繰返し）しか実行できない
+</div>
+
+<h3>BPO・ワークフローシステム</h3>
+<div class="key-point">
+<span class="vocab">BPO</span>（Business Process Outsourcing）：業務プロセス自体を<strong>他社に外部委託</strong>すること。経理・人事・総務など<strong>管理部門</strong>で使われることが多く、経営資源を核となる業務に集中できる。<br><br>
+<span class="vocab">ワークフローシステム</span>：紙の書類を電子化して、社内の<strong>決裁・申請手続き</strong>を効率化する仕組み（例：交通費精算の電子化）。
+</div>
+
+<h3>業務のモデリング（図で表す手法）</h3>
+<table class="sql-table">
+<tr><th>手法</th><th>表すもの</th></tr>
+<tr><td><strong>E-R図</strong></td><td>データ構造。エンティティ（実体）とリレーションシップ（関連）でデータ項目間の関係を表す</td></tr>
+<tr><td><strong>DFD</strong></td><td>データの流れ。プロセス・データフロー・ファイル・データ源泉／吸収の4要素で表す</td></tr>
+<tr><td><strong>BPMN</strong></td><td>業務プロセスの流れを図式化する国際標準の表記法</td></tr>
+<tr><td><strong>UML</strong></td><td>オブジェクト指向設計の統一表記。クラス図などで分析・設計する</td></tr>
+</table>
+</div>
+</div>
+
+<!-- ===== レッスン3 ===== -->
+<div id="lesson3" class="section">
+<div class="lesson-card">
+<h2>③ ソリューションビジネスとクラウド</h2>
+
+<h3>ソリューションビジネス・SOA</h3>
+<div class="key-point">
+<span class="vocab">ソリューションビジネス</span>：顧客の業務上の問題を解決するサービスや情報システム。提供する会社を<span class="vocab">システムインテグレーター（SI）</span>という。<br><br>
+<span class="vocab">SOA</span>（Service Oriented Architecture：サービス指向アーキテクチャ）：ソフトウェアの機能を<strong>サービスという部品</strong>とみなし、<strong>組み合わせて</strong>システムを構築する手法。必要な機能だけを選んで購入でき、余計なコストがかからない。クラウドの元になった考え方。
+</div>
+
+<h3>ソリューションの4形態（サーバの置き場所で分類）</h3>
+<table class="sql-table">
+<tr><th>形態</th><th>敷地</th><th>サーバの所有・管理</th></tr>
+<tr><td><strong>オンプレミス</strong></td><td>自社</td><td>自社（機密性が高い／費用がかかる）</td></tr>
+<tr><td><strong>ハウジングサービス</strong></td><td>他社</td><td>自社（自社サーバを持ち込む）</td></tr>
+<tr><td><strong>ホスティングサービス</strong></td><td>他社</td><td>他社（他社サーバを借りる／所在が明確）</td></tr>
+<tr><td><strong>クラウド</strong></td><td>他社</td><td>他社（他社サーバを借りる／所在が不明確）</td></tr>
+</table>
+<div class="key-point">
+区別のカギは<strong>「敷地」</strong>と<strong>「サーバの所有者」</strong>の2つ。ホスティングとクラウドの違いは、契約サーバの<strong>所在が明確か不明確か</strong>だけ。
+</div>
+
+<h3>クラウドサービスの種類（○aaS）</h3>
+<div class="key-point">
+「aaS」＝<strong>as a Service</strong>（サービスとしての）。商品ではなくサービスとして提供する。<br><br>
+<span class="vocab">IaaS</span>：<strong>ハードウェア（インフラ）</strong>をネット上で提供<br>
+<span class="vocab">PaaS</span>：<strong>プラットフォーム</strong>（IaaSにOSを加えたもの）を提供<br>
+<span class="vocab">SaaS</span>：<strong>ソフトウェア</strong>（PaaSにアプリを加えたもの）を提供
+</div>
+<div class="example"><strong>階層イメージ：</strong>IaaS（土台）＜ PaaS（＋OS）＜ SaaS（＋アプリ）。上ほど利用者が用意する範囲が少なくて済みます。<br>参考：誰でも使える<strong>パブリッククラウド</strong>、限られた関係者だけの<strong>プライベートクラウド</strong>、両者を組み合わせた<strong>ハイブリッドクラウド</strong>。<br>関連用語<span class="vocab">ASP</span>：ネット経由でアプリ機能を提供する事業者（SaaSの先行概念）。</div>
+</div>
+</div>
+
+<!-- ===== レッスン4 ===== -->
+<div id="lesson4" class="section">
+<div class="lesson-card">
+<h2>④ システムの活用促進と評価</h2>
+
+<h3>BIとデータ活用</h3>
+<div class="key-point">
+<span class="vocab">BI</span>（Business Intelligence）：社内外に蓄積したデータを<strong>分析</strong>して、経営の<strong>意思決定</strong>に役立てる手法・技術。専門家でなくても使える「BIツール」が普及。<br><br>
+<span class="vocab">データウェアハウス</span>：意思決定に役立てるためのデータベース（＝データの倉庫）。時系列であらゆるデータを保持し、基本的に更新・削除しない。<br><br>
+<span class="vocab">データマイニング</span>：膨大なデータから<strong>有益な情報・関係を見つけ出す</strong>手法の総称（「掘り出す」の意）。
+</div>
+
+<h3>ビッグデータ</h3>
+<div class="key-point">
+<span class="vocab">ビッグデータ</span>：大量・多種多様・更新頻度が高いデータの集まり。特徴は<strong>3V</strong>。<br>
+・<strong>Volume</strong>（量が多い）<br>
+・<strong>Variety</strong>（多種多様）<br>
+・<strong>Velocity</strong>（更新が速い）<br><br>
+<span class="vocab">データレイク</span>：非構造化データを含むあらゆるデータを<strong>そのままの形式</strong>で格納するデータベース。
+</div>
+
+<h3>情報リテラシーとディジタルディバイド</h3>
+<div class="key-point">
+<span class="vocab">ディジタルリテラシー（情報リテラシー）</span>：情報を集め・発信し、ITを使いこなす能力。<br><br>
+<span class="vocab">ディジタルディバイド</span>：リテラシーの有無やIT利用環境の違いによって生じる<strong>経済的・社会的な格差</strong>（divide＝格差）。解消には情報リテラシーの向上や普及啓発が必要。
+</div>
+
+<h3>システム投資の評価（TCO・費用対効果）</h3>
+<div class="key-point">
+<span class="vocab">TCO</span>（Total Cost of Ownership：総所有コスト）：システムの<strong>導入費用（初期コスト）</strong>だけでなく、<strong>運用・保守などの維持費用（ランニングコスト）</strong>まで含めた総額。<br><br>
+システム活用の評価では、投資に見合う効果があるか（<strong>費用対効果</strong>）を、このTCOで判断する。導入時だけ安くても運用費が高ければ総額では損になる。
+</div>
+
+<div class="key-point" style="background:#fce4ec;border-color:#e91e63">
+<strong style="color:#e91e63">第16章の最重要まとめ</strong><br><br>
+・情報システム戦略＝情報部門の機能別戦略。常に<strong>全体最適化</strong>を目指す<br>
+・EA＝ビジネス／データ／アプリケーション／テクノロジの4体系で横断分析＝業務／データ／機能／技術<br>
+・BPR＝<strong>抜本的</strong>に再設計、BPM＝<strong>継続的</strong>に改善<br>
+・RPA＝<strong>ソフトウェア</strong>で<strong>定型</strong>事務作業を自動化、BPO＝業務プロセスを外部委託<br>
+・SOA＝サービスを組み合わせてシステム構築<br>
+・4形態＝敷地とサーバ所有者で区別／IaaS＜PaaS＜SaaS<br>
+・BI＝分析して意思決定、ビッグデータ＝3V（量・多様・速度）<br>
+・ディジタルディバイド＝IT格差、TCO＝導入＋運用の総所有コスト
+</div>
+</div>
+</div>
+
+<!-- ===== 確認テスト ===== -->
+<div id="quiz" class="section">
+<div class="quiz-area">
+<h2>確認テスト ── 第16章</h2>
+<p style="color:#666;font-size:.9em;margin-bottom:16px">全問ランダム出題・選択肢シャッフル。何度でも挑戦できます。</p>
+<div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+<div id="quizContainer"></div>
+<div style="text-align:center;margin-top:20px"><button class="btn" id="submitBtn" onclick="submitQuiz()" style="display:none">結果を見る</button></div>
+</div>
+<div class="result-area" id="resultArea"><h2>結果</h2><div class="result-score" id="resultScore"></div><div id="resultMsg" style="font-size:1.1em;margin:10px 0"></div><button class="btn" onclick="retryQuiz()">もう一度</button><button class="btn btn-outline" onclick="showSection('lesson1')">レッスンに戻る</button></div>
+</div>
+</div>
+
+<script>
+const allQuestions=[
+{q:'エンタープライズアーキテクチャ（EA）を説明したものはどれか。（平成28年度）',choices:['オブジェクト指向設計を支援する手法を統一・標準化し、クラス図などで分析・設計を行う技法である','概念データモデルをエンティティとリレーションシップで表現し、データ構造や項目間の関係を明らかにする技法である','各業務と情報システムを、ビジネス・データ・アプリケーション・テクノロジの四つの体系で分析し、全体最適化の観点から見直す技法である','ビジネスプロセスを、データフロー・プロセス・ファイル・データ源泉／吸収の四つの基本要素で抽象化して表現する技法である'],answer:2,explanation:'<strong>EA</strong>は各業務と情報システムを4つの体系で分析し、全体最適化の観点で見直す技法です。アはUML、イはE-R図、エはDFDの説明で、いずれもEAではありません。'},
+{q:'エンタープライズアーキテクチャの「四つの分類体系」に含まれるアーキテクチャは、ビジネスアーキテクチャ、テクノロジアーキテクチャ、アプリケーションアーキテクチャと、もう一つはどれか。（平成28年度）',choices:['システムアーキテクチャ','ネットワークアーキテクチャ','データアーキテクチャ','バスアーキテクチャ'],answer:2,explanation:'EAの4分類は、ビジネス・データ・アプリケーション・テクノロジの各アーキテクチャです。よって残る一つは<strong>データアーキテクチャ</strong>です。'},
+{q:'エンタープライズアーキテクチャを構成するアプリケーションアーキテクチャについて説明したものはどれか。（平成31年度）',choices:['業務に必要なデータの内容、データ間の関連や構造などを体系的に示したもの','業務プロセスを支援するシステムの機能や構成などを体系的に示したもの','情報システムの構築・運用に必要な技術的構成要素を体系的に示したもの','ビジネス戦略に必要な業務プロセスや情報の流れを体系的に示したもの'],answer:1,explanation:'アプリケーションアーキテクチャのキーワードは<strong>「機能」</strong>です。アはデータ、ウはテクノロジ、エはビジネスの各アーキテクチャの説明にあたります。'},
+{q:'企業活動におけるBPM（Business Process Management）の目的はどれか。（平成28年度）',choices:['業務プロセスの継続的な改善','経営資源の有効活用','顧客情報の管理・分析','情報資源の分析・有効活用'],answer:0,explanation:'BPMのキーワードは<strong>「継続的」</strong>。目的は業務プロセスの継続的な改善です。イはERP、ウはCRM、エはBIの目的にあたります。'},
+{q:'BPRを説明したものはどれか。（平成21年度）',choices:['企業全体の経営資源の配分を計画・管理し、経営の効率向上を図ることである','顧客視点から業務プロセスを再設計し、情報技術を活用して企業の体質や構造を抜本的に変革することである','最強の競合相手や先進企業と比較して、製品・サービス・オペレーションなどを定性的・定量的に把握することである','他社より優越した自社独自のスキルや技術に経営資源を集中することである'],answer:1,explanation:'<strong>BPR</strong>のキーワードは「抜本的」。業務プロセスを抜本的に再設計・変革する手法です。アはERP、ウはベンチマーキング、エはコアコンピタンス経営の説明です。'},
+{q:'人手不足の解消などを目標とした業務革新に活用する、RPAの事例はどれか。（令和元年度）',choices:['業務システムのデータ入力・照合のような標準化された定型作業を、事務職員の代わりにソフトウェアで自動処理する','製造ラインで部品の組立てに従事していた作業員の代わりに組立作業用ロボットを配置する','人が接客していた店舗を、ICタグやカメラ、電子決済による無人店舗に置き換える','人が操作していた保管商品の搬入・搬出を、コンピュータ制御の自動倉庫システムに置き換える'],answer:0,explanation:'<strong>RPA</strong>は「定型作業」を「ソフトウェア」ロボットで自動化する技術です。アが該当します。イとエは工場作業をロボット・機械で、ウはハードウェアで自動化しており、いずれもソフトウェアロボットではありません。'},
+{q:'BPOを説明したものはどれか。（平成30年度）',choices:['自社ではサーバを所有せず、通信事業者などのサーバの処理能力や記憶容量の一部を借りてシステムを運用することである','自社ではソフトウェアを所有せず、外部業者が提供するソフトウェアの機能をネットワーク経由で活用することである','自社の管理部門やコールセンターなど特定部門の業務プロセス全般を、システム運用などと一体として外部の専門業者に委託することである','自社より人件費が安い派遣会社の社員を活用して、ソフトウェア開発費用を低減させることである'],answer:2,explanation:'<strong>BPO</strong>のキーワードは「業務プロセスの外部委託」です。アはホスティングサービス、イはSaaS、エは労働者派遣の説明で、業務プロセスの外部委託ではありません。'},
+{q:'ワークフローシステムを用いて業務改善を行ったとき、期待できる効果として適切なものはどれか。（平成27年度）',choices:['顧客の購入金額に応じて、割引などのサービスを提供できる','自社と取引先とのデータ交換の標準規約を提供できる','書類の申請から決裁に至る事務手続の処理速度が上がる','保管する商品の倉庫内での搬入搬出作業の自動化が可能となる'],answer:2,explanation:'<strong>ワークフローシステム</strong>は紙の書類を電子化し、決裁・申請手続きを効率化する仕組みです。アはCRM、イはEDI、エはFA（工場の自動化）の効果です。'},
+{q:'ホスティングサービスの特徴はどれか。（平成29年度）',choices:['運用管理面では、サーバの稼働監視やインシデント対応などをすべて利用者が担う','サービス事業者が用意したサーバの利用権を利用者に貸し出す','高性能なサーバを利用者が専有するような使い方には対応しない','事業者の施設に利用者が独自のサーバを持ち込み、選定や組合せは自由に行う'],answer:1,explanation:'<strong>ホスティングサービス</strong>は他社（事業者）が所有するサーバの利用権を借りるサービスです。稼働監視やインシデント対応は事業者が行い、エのように自社サーバを持ち込むのはハウジングサービスです。'},
+{q:'SaaSを説明したものはどれか。（平成24年度）',choices:['インターネット経由でアプリケーションソフトウェアの機能を、利用者が必要なときだけ利用するサービスのこと','経営資源を有効活用するために、基幹業務を統合的に管理するためのソフトウェアパッケージのこと','既存のビジネスプロセスを抜本的に見直し、職務・業務フロー・情報システムを再設計すること','発注者とサービス提供者との間で、サービス品質の内容について合意した文書のこと'],answer:0,explanation:'<strong>SaaS</strong>はソフトウェアの機能をネット経由でサービスとして提供します。イはERP、ウはBPR、エはSLAの説明です。'},
+{q:'SOAの説明はどれか。（平成27年度）',choices:['営業活動にITを活用して営業の効率と品質を高める概念のこと','コアビジネス以外の社内業務を外部に委託すること','ビジネスプロセスをデザインし直し、コスト・品質・サービス・スピードを革新的に改善する概念のこと','ソフトウェアの機能をサービスという部品とみなし、それを組み合わせてシステムを構築する概念のこと'],answer:3,explanation:'<strong>SOA</strong>はサービスという部品を組み合わせてシステムを構築する考え方です。アはSFA、イはBPO、ウはBPRの説明です。'},
+{q:'BI（Business Intelligence）を説明したものはどれか。（平成29年度）',choices:['企業内外のデータを蓄積し、分類・加工・分析して活用することで、意思決定の迅速化を支援する手法','企業内の慣行にとらわれず業務プロセスを抜本的に再構築し、コスト・品質などを改善する手法','企業内の業務の流れを可視化し、業務改善サイクルを適用して継続的な業務改善を図る手法','企業内の異なるシステムを連結し、データやプロセスの統合を図る手法'],answer:0,explanation:'<strong>BI</strong>のキーワードは「データの分析」と「意思決定に役立てる」です。イはBPR、ウはBPM、エはEAI（システム統合）の説明です。'},
+{q:'企業がマーケティングに活用するビッグデータの特徴に沿った取扱いとして、適切なものはどれか。（令和元年度）',choices:['ソーシャルメディアで個人が発信するクレーム情報などは処理の対象にすべきではない','蓄積した静的なデータだけでなく、Webのアクセス履歴などリアルタイム性の高いデータも含めて処理の対象とする','データ全体から無作為にサンプリングして分析し、全体の傾向を推し量る','正規化が難しい非構造化データである音声・画像データは処理の対象にすべきではない'],answer:1,explanation:'ビッグデータの3Vのうち<strong>Velocity（更新が速い）</strong>から、リアルタイム性の高いデータも対象とするイが適切です。アとエは「多種多様」、ウは「量が多い」という特徴に反します。'},
+{q:'企業が保有する顧客や市場などの膨大なデータから、有用な情報や関係を見つけ出す手法はどれか。（平成27年度）',choices:['データウェアハウス','データディクショナリ','データフローダイアグラム','データマイニング'],answer:3,explanation:'膨大なデータから有用な情報・関係を掘り出すのは<strong>データマイニング</strong>です。データウェアハウスは意思決定用のデータベース、データディクショナリはデータの辞書、DFDはデータの流れを表す図です。'},
+{q:'ディジタルディバイドを説明したものはどれか。（令和元年度）',choices:['情報通信機器の利用方法が分からなかったり所有していなかったりして、情報の入手が困難な人々のこと','高齢者や障害者の情報通信の困難が格差につながらないよう整備された環境のこと','情報通信機器やサービスを、高齢者・障害者を含むすべての人が利用しやすいかの度合いのこと','ディジタルリテラシーの有無やIT利用環境の相違などによって生じる、社会的・経済的な格差のこと'],answer:3,explanation:'<strong>ディジタルディバイド</strong>は「格差（divide）」です。エが正解。アは情報弱者（人々）、イは情報バリアフリー（環境）、ウはアクセシビリティ（度合い）の説明です。'},
+{q:'情報システム戦略の説明として最も適切なものはどれか。',choices:['個々の部門の要望に応じて部門ごとにシステムを最適化する現場主導の計画である','経営戦略に基づき、全体最適化の観点から情報システムをどう構築・活用するかを定める機能別戦略である','完成したシステムの障害対応やインシデント処理の手順を定めた運用計画である','製品の製造原価を最小化するための生産管理計画である'],answer:1,explanation:'<strong>情報システム戦略</strong>は経営戦略を実現するための情報部門の機能別戦略で、常に<strong>全体最適化</strong>を目指します。部門ごとの最適化（部分最適化）はむしろ避けるべき考え方です。'},
+{q:'システムのTCO（総所有コスト）の考え方として適切なものはどれか。',choices:['システムの導入時にかかる初期費用だけを合計したもの','システムの運用・保守にかかる維持費用だけを合計したもの','導入時の初期費用と、運用・保守などの維持費用を合わせた総額','システムが生み出す売上と利益の合計'],answer:2,explanation:'<strong>TCO</strong>は導入費用（初期コスト）と運用・保守費用（ランニングコスト）を合わせた総所有コストです。導入時が安くても運用費が高ければ総額では損になるため、費用対効果はTCOで評価します。'},
+{q:'クラウドコンピューティングにおいて、ハードウェアなどの基盤（インフラ）をインターネット上で提供するサービスはどれか。',choices:['IaaS','PaaS','SaaS','BPO'],answer:0,explanation:'ハードウェア（インフラ）を提供するのは<strong>IaaS</strong>です。IaaSにOSを加えたものがPaaS、さらにアプリを加えたものがSaaSです。BPOは業務の外部委託でクラウドの種類ではありません。'}
+];
+let questions=[],answered=0;
+function shuffleArray(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
+function initQuiz(){questions=shuffleArray(allQuestions);answered=0;document.getElementById('submitBtn').style.display='none';document.getElementById('resultArea').style.display='none';document.getElementById('progressFill').style.width='0%';const c=document.getElementById('quizContainer');c.innerHTML='';questions.forEach((q,idx)=>{const sc=q.choices.map((c,i)=>({text:c,origIdx:i}));for(let i=sc.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[sc[i],sc[j]]=[sc[j],sc[i]]}q._shuffled=sc;q._selected=null;let h=`<div class="question-card"><div class="q-number">問題 ${idx+1} / ${questions.length}</div><div class="q-text">${q.q}</div><ul class="choices">`;sc.forEach((c,ci)=>{h+=`<li onclick="selectChoice(${idx},${ci})" id="q${idx}c${ci}">${c.text}</li>`});h+=`</ul><div class="explanation" id="exp${idx}"><div id="expText${idx}"></div></div></div>`;c.innerHTML+=h})}
+function selectChoice(qi,ci){const q=questions[qi];if(q._selected!==null)return;q._selected=ci;answered++;const corr=q.answer,sel=q._shuffled[ci].origIdx,ok=sel===corr;q._shuffled.forEach((c,i)=>{const li=document.getElementById(`q${qi}c${i}`);if(c.origIdx===corr)li.classList.add('correct');if(i===ci&&!ok)li.classList.add('wrong')});const e=document.getElementById(`exp${qi}`),t=document.getElementById(`expText${qi}`);t.innerHTML=(ok?'<span style="color:#4caf50;font-weight:bold">&#x2B55; 正解！</span>':'<span style="color:#f44336;font-weight:bold">&#x274C; 不正解</span>')+'<br>'+q.explanation;e.classList.add('show');document.getElementById('progressFill').style.width=(answered/questions.length*100)+'%';if(answered===questions.length)document.getElementById('submitBtn').style.display='inline-block'}
+function submitQuiz(){let c=0;questions.forEach(q=>{if(q._selected!==null&&q._shuffled[q._selected].origIdx===q.answer)c++});document.getElementById('resultArea').style.display='block';document.getElementById('resultScore').textContent=`${c} / ${questions.length}`;const p=c/questions.length*100;let m='';if(p===100)m='満点！完璧です！';else if(p>=80)m='よく理解できています！';else if(p>=60)m='合格ライン！もう少し復習しましょう。';else m='レッスンをもう一度確認しましょう。';document.getElementById('resultMsg').textContent=m;document.getElementById('resultArea').scrollIntoView({behavior:'smooth'})}
+function retryQuiz(){initQuiz();document.getElementById('quizContainer').scrollIntoView({behavior:'smooth'})}
+function showSection(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');const tabs=document.querySelectorAll('.nav-tab');const ids=['lesson1','lesson2','lesson3','lesson4','quiz'];tabs[ids.indexOf(id)].classList.add('active');if(id==='quiz')initQuiz();window.scrollTo({top:0,behavior:'smooth'})}
+initQuiz();
+</script>
+</body>
+</html>

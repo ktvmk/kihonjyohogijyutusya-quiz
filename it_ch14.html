@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第14章 プロジェクトマネジメント｜基本情報技術者</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Hiragino Sans','Noto Sans JP','Meiryo',sans-serif;background:#f5f5f0;color:#333;line-height:1.8;padding:0 0 60px 0}.header{background:linear-gradient(135deg,#e65100,#ff8f00);color:#fff;padding:24px 20px;text-align:center}.header h1{font-size:1.3em;margin-bottom:4px}.header .sub{font-size:.85em;opacity:.8}.container{max-width:720px;margin:0 auto;padding:16px}.nav-tabs{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap}.nav-tab{padding:10px 14px;border:2px solid #e65100;border-radius:8px;background:#fff;color:#e65100;font-weight:bold;font-size:.82em;cursor:pointer;transition:all .2s}.nav-tab:hover,.nav-tab.active{background:#e65100;color:#fff}.section{display:none}.section.active{display:block}.lesson-card{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.lesson-card h2{color:#e65100;font-size:1.2em;margin-bottom:16px;padding-bottom:8px;border-bottom:3px solid #ffe0b2}.lesson-card h3{color:#ff8f00;font-size:1.05em;margin:20px 0 10px 0}.key-point{background:#fff3e0;border-left:4px solid #e65100;padding:14px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-size:.95em}.key-point strong{color:#e65100}.vocab{display:inline-block;background:#e3f2fd;border:1px solid #64b5f6;border-radius:6px;padding:2px 8px;margin:2px 4px;font-weight:bold;font-size:.9em;color:#1565c0}.example{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:14px 16px;margin:12px 0;font-size:.9em}.formula{background:#fce4ec;border-left:4px solid #e91e63;padding:14px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-family:monospace;font-size:.95em;line-height:2}.compare{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}.compare-box{background:#fff;border:2px solid #e0e0e0;border-radius:10px;padding:14px;font-size:.9em}.compare-box h4{font-size:.95em;margin-bottom:8px;text-align:center}.compare-box.good{border-color:#4caf50}.compare-box.good h4{color:#2e7d32}.compare-box.bad{border-color:#ff9800}.compare-box.bad h4{color:#e65100}
+.quiz-area{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.quiz-area h2{color:#e65100;margin-bottom:16px}.question-card{background:#fafafa;border:1px solid #e0e0e0;border-radius:10px;padding:20px;margin:16px 0}.q-number{font-size:.8em;color:#999;margin-bottom:6px}.q-text{font-size:1.05em;font-weight:bold;margin-bottom:14px;line-height:1.6}.choices{list-style:none}.choices li{padding:12px 16px;margin:6px 0;border:2px solid #e0e0e0;border-radius:8px;cursor:pointer;transition:all .2s;font-size:.95em}.choices li:hover{border-color:#e65100;background:#fff3e0}.choices li.correct{border-color:#4caf50;background:#e8f5e9}.choices li.wrong{border-color:#f44336;background:#ffebee}.explanation{display:none;margin-top:12px;padding:14px;background:#f5f5f5;border-radius:8px;font-size:.9em;line-height:1.7}.explanation.show{display:block}.result-area{display:none;text-align:center;padding:30px;background:#fff;border-radius:12px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.result-score{font-size:2.5em;font-weight:bold;color:#e65100;margin:10px 0}.btn{display:inline-block;padding:12px 28px;background:#e65100;color:#fff;border:none;border-radius:8px;font-size:1em;cursor:pointer;margin:8px}.btn:hover{background:#ff8f00}.btn-outline{background:#fff;color:#e65100;border:2px solid #e65100}.progress-bar{width:100%;height:6px;background:#e0e0e0;border-radius:3px;margin:12px 0}.progress-fill{height:100%;background:#e65100;border-radius:3px;transition:width .3s}.back-link{display:inline-block;margin:16px 0;color:#e65100;text-decoration:none;font-weight:bold}
+.sql-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.88em}
+.sql-table th{background:#e65100;color:#fff;padding:6px;border:1px solid #ccc}
+.sql-table td{padding:6px;border:1px solid #ccc;background:#fff}
+</style>
+</head>
+<body>
+<div class="header"><h1>第14章 プロジェクトマネジメント</h1><div class="sub">基本情報技術者試験 Web教材</div></div>
+<div class="container">
+<a href="it_quiz.html" class="back-link">← 章の一覧にもどる</a>
+<div class="nav-tabs">
+<div class="nav-tab active" onclick="showSection('lesson1')">① 基本とPMBOK</div>
+<div class="nav-tab" onclick="showSection('lesson2')">② スコープ・資源</div>
+<div class="nav-tab" onclick="showSection('lesson3')">③ スケジュール</div>
+<div class="nav-tab" onclick="showSection('lesson4')">④ コスト・リスク</div>
+<div class="nav-tab" onclick="showSection('quiz')">確認テスト</div>
+</div>
+
+<!-- ===== レッスン1 ===== -->
+<div id="lesson1" class="section active">
+<div class="lesson-card">
+<h2>① プロジェクトマネジメントの基本・PMBOK</h2>
+
+<h3>プロジェクトとは</h3>
+<div class="key-point">
+<span class="vocab">プロジェクト</span>：<strong>有期性</strong>と<strong>独自性</strong>の2つの特徴をもつ業務<br><br>
+・<strong>有期性</strong>：開始と終了の期限が決められている<br>
+・<strong>独自性</strong>：毎回異なる、唯一無二の成果物を作る<br><br>
+基本情報技術者試験で「プロジェクト」といえば、主に<strong>システム開発</strong>を指す。
+</div>
+<div class="compare">
+<div class="compare-box good">
+<h4>プロジェクト</h4>
+期限を決め（有期性）、<strong>毎回異なる成果物</strong>（独自性）を作る<br><br>
+例：システム開発、リニア建設
+</div>
+<div class="compare-box bad">
+<h4>定常業務（オペレーション）</h4>
+期限を決めず、同じやり方で<strong>毎回同じ成果物</strong>を生む<br><br>
+例：車の生産部門
+</div>
+</div>
+
+<h3>プロジェクトに関わる人々</h3>
+<div class="key-point">
+<span class="vocab">プロジェクトマネージャ</span>：プロジェクトを管理する人（略して「プロマネ」）<br>
+<span class="vocab">要員（メンバー）</span>：専門知識をもって集められた人員。プロマネと要員を併せて<strong>プロジェクトチーム</strong><br>
+<span class="vocab">ステークホルダ</span>：プロジェクトと<strong>利害関係</strong>にある人。従業員・株主・取引先・消費者・行政機関・地域社会など
+</div>
+<div class="example"><strong>地域社会もステークホルダ：</strong>工場ができて渋滞・公害が起きれば「害」、商業施設で利便性が高まれば「利」。組織外部や間接的な関与でも、利害関係があればステークホルダに含まれる。</div>
+
+<h3>PMBOK（ピンボック）</h3>
+<div class="key-point">
+<span class="vocab">PMBOK</span>（Project Management Body of Knowledge）：プロジェクトマネジメントの体系化された知識。いわば<strong>プロマネのための教科書</strong>。<br>
+・アメリカのプロジェクトマネジメント協会（PMI）が制作
+</div>
+
+<h3>10の知識エリア</h3>
+<div class="key-point">
+PMBOKの内容は<strong>10種類</strong>の「知識エリア」に分類される。特に頻出の5つが下表の★印。
+</div>
+<table class="sql-table">
+<tr><th>知識エリア</th><th>内容</th></tr>
+<tr><td>プロジェクト統合マネジメント</td><td>プロジェクト全体を総合的に管理する</td></tr>
+<tr><td>ステークホルダマネジメント</td><td>利害関係者を特定し、参加を調整する</td></tr>
+<tr><td>★スコープマネジメント</td><td>作業範囲（スコープ）を明確にする</td></tr>
+<tr><td>★資源マネジメント</td><td>必要な資源を決め、機能するよう管理する</td></tr>
+<tr><td>★スケジュールマネジメント</td><td>期限内に完了するよう管理する</td></tr>
+<tr><td>★コストマネジメント</td><td>費用が予算内に収まるよう管理する</td></tr>
+<tr><td>★リスクマネジメント</td><td>リスク対策を管理し、問題発生時に対応する</td></tr>
+<tr><td>品質マネジメント</td><td>成果物が期待される品質を満たすか確認する</td></tr>
+<tr><td>調達マネジメント</td><td>必要なヒト・モノ・サービスを取得する</td></tr>
+<tr><td>コミュニケーションマネジメント</td><td>誰が誰にいつ何をどう伝えるかを管理する</td></tr>
+</table>
+</div>
+</div>
+
+<!-- ===== レッスン2 ===== -->
+<div id="lesson2" class="section">
+<div class="lesson-card">
+<h2>② スコープマネジメント・資源マネジメント</h2>
+
+<h3>スコープマネジメントとWBS</h3>
+<div class="key-point">
+<span class="vocab">スコープマネジメント</span>：プロジェクトに必要な作業を洗い出すこと。スコープ（Scope）＝「範囲」<br><br>
+作業範囲を洗い出すには<span class="vocab">WBS</span>を使う。
+</div>
+<div class="key-point">
+<span class="vocab">WBS</span>（Work Breakdown Structure＝作業分解構成図）：プロジェクトという1つの大きな作業（Work）を、細かい作業単位に分割（Breakdown）した図。<br>
+・目的は<strong>作業を管理可能な大きさに階層的に細分化</strong>すること<br>
+・通常は3〜4階層程度まで分割する
+</div>
+<div class="key-point">
+<span class="vocab">ワークパッケージ</span>：WBSの<strong>最も小さい作業単位</strong>。一般に<strong>80時間程度</strong>で完了する大きさにする。<br>
+・大きすぎると見積りが曖昧に、小さすぎると管理に時間がかかる
+</div>
+
+<h3>資源マネジメントと開発工数の計算</h3>
+<div class="key-point">
+<span class="vocab">資源マネジメント</span>：プロジェクトに必要な資源を決定し、効果的に機能するよう管理する。適材適所の要員配置がポイント。<br><br>
+試験では「開発工数・開発期間を求める計算式」が頻出。
+</div>
+<div class="key-point">
+<span class="vocab">開発規模</span>：開発の大きさ（例：ソースコードの行数）<br>
+<span class="vocab">生産性</span>：開発の効率性（例：100行/人日）<br>
+<span class="vocab">開発工数</span>：必要な作業の量（単位：人時・人日・人月）。「3人日」＝3人が1日で終える作業量
+</div>
+<div class="formula"><strong>開発工数 ＝ 開発規模 ÷ 生産性</strong><br><br>
+例：1000行を生産性100行/人日で開発<br>
+＝ 1000 ÷ 100 ＝ <strong>10人日</strong></div>
+<div class="formula"><strong>開発期間 ＝ 開発工数 ÷ 要員数</strong><br><br>
+例：10人日のプロジェクトを要員2人で開発<br>
+＝ 10 ÷ 2 ＝ <strong>5日</strong></div>
+
+<h3>工数配分比率</h3>
+<div class="key-point">
+<span class="vocab">工数配分比率</span>：各開発工程を完了するのに必要な工数の割合。全工程を足すと1（100%）になる。<br>
+・進捗度＝完了工程の配分比率＋進行中工程の（配分比率×進捗割合）
+</div>
+<div class="example"><strong>例（平成30年度）：</strong>基本設計〜プログラム設計が完了（配分44%）、プログラミング（配分25%）が3,000本中1,200本完了。<br>
+プログラミングの完了分＝25%×(1,200÷3,000)＝10%。全体進捗度＝44%＋10%＝<strong>54%</strong></div>
+</div>
+</div>
+
+<!-- ===== レッスン3 ===== -->
+<div id="lesson3" class="section">
+<div class="lesson-card">
+<h2>③ スケジュールマネジメント・クリティカルパス</h2>
+
+<h3>スケジュールで使う3つの図</h3>
+<div class="key-point">
+<span class="vocab">トレンドチャート</span>：作業の進捗状況と予算の消費状況を関連付けた<strong>折れ線グラフ</strong>（予定と実績を比較）<br>
+<span class="vocab">アローダイアグラム</span>：作業の流れを<strong>矢印</strong>で表した図（＝PERT図）<br>
+<span class="vocab">プレシデンスダイアグラム法</span>：アクティビティ間の依存関係を<strong>四角形</strong>で図示する手法
+</div>
+<div class="key-point">
+<span class="vocab">ガントチャート</span>：作業日程を<strong>横棒（バー）</strong>で表し、開始・終了・現時点の進捗を明確にした図。
+</div>
+
+<h3>アローダイアグラム（PERT図）</h3>
+<div class="key-point">
+<span class="vocab">アローダイアグラム</span>：矢印の上に作業名、下に所要日数を書く。作業の順序・依存関係を表せる。<br>
+・○＝結合点（作業の開始・終了）、実線矢印＝作業<br>
+<span class="vocab">ダミー作業</span>：所要日数が<strong>0日</strong>の作業。作業は何もしないが、依存関係を表すために破線矢印で記す<br>
+<span class="vocab">PERT</span>：アローダイアグラムを使ったプロジェクトの分析手法。日程計画の作成に適する
+</div>
+
+<h3>プレシデンスダイアグラムの4つの依存関係</h3>
+<table class="sql-table">
+<tr><th>関係</th><th>意味</th></tr>
+<tr><td><strong>FS関係</strong>（終了-開始）</td><td>Aが終了すればBが開始できる（アローダイアグラムはこれのみ）</td></tr>
+<tr><td><strong>FF関係</strong>（終了-終了）</td><td>Aが終了すればBが終了できる</td></tr>
+<tr><td><strong>SS関係</strong>（開始-開始）</td><td>Aが開始すればBが開始できる</td></tr>
+<tr><td><strong>SF関係</strong>（開始-終了）</td><td>Aが開始すればBが終了できる</td></tr>
+</table>
+
+<h3>最短日数とクリティカルパス</h3>
+<div class="key-point">
+<span class="vocab">最短日数</span>：すべての作業が遅延なく完了した場合の日数（全経路のうち最も長い経路の日数）<br><br>
+<span class="vocab">クリティカルパス</span>：作業経路のうち<strong>最も時間のかかる経路</strong>。この経路の日数＝最短日数。この経路上の作業が遅れると<strong>プロジェクト全体が遅れる</strong>
+</div>
+<div class="example"><strong>求め方（すべての経路を計算する）：</strong>下記のようにA〜Fの各経路の日数を足し、最大を選ぶ。<br>
+①A→D→G：1+3+4＝8　②A→C→E→G：1+3+4+4＝12<br>
+③A→C→E→F：1+3+4+5＝13　④B→E→G：5+4+4＝13<br>
+⑤B→E→F：5+4+5＝<strong>14</strong> ← 最大なのでクリティカルパス</div>
+
+<h3>スケジュールを短縮する技法</h3>
+<div class="compare">
+<div class="compare-box good">
+<h4>クラッシング</h4>
+投入する<strong>資源を増やして</strong>短縮<br><br>
+要員の増員・時間外作業の追加。<strong>クリティカルパス上</strong>のアクティビティに投入する
+</div>
+<div class="compare-box bad">
+<h4>ファストトラッキング</h4>
+アクティビティを<strong>並列に実行</strong>して短縮<br><br>
+大きな作業を並列可能な小作業に分割する
+</div>
+</div>
+<div class="key-point">
+不正解選択肢として登場：<span class="vocab">クリティカルチェーン法</span>（資源不足も想定して所要時間最長経路を管理）／<span class="vocab">モンテカルロ法</span>（乱数を使い近似値を求める）
+</div>
+</div>
+</div>
+
+<!-- ===== レッスン4 ===== -->
+<div id="lesson4" class="section">
+<div class="lesson-card">
+<h2>④ コストマネジメント・見積り・リスク・品質</h2>
+
+<h3>コストマネジメントと見積り手法</h3>
+<div class="key-point">
+<span class="vocab">コストマネジメント</span>：コスト（費用）が予算内に収まるよう管理すること。<br>
+ソフトウェアは目に見えないため見積りが難しく、さまざまな見積り手法が考案された。
+</div>
+<table class="sql-table">
+<tr><th>見積り手法</th><th>内容</th></tr>
+<tr><td><strong>ファンクションポイント法</strong></td><td>機能に点数を付けて見積る（利用者視点・最頻出）</td></tr>
+<tr><td>プログラムステップ法</td><td>プログラムのステップ数（行数）を合計して見積る</td></tr>
+<tr><td>標準タスク法</td><td>WBSで作業を分解し、各作業量を合計して見積る</td></tr>
+<tr><td>類似見積り法</td><td>過去の似たシステムの実績値を元に見積る</td></tr>
+<tr><td>COCOMO</td><td>開発規模に基づき工数と期間を見積る</td></tr>
+</table>
+
+<h3>ファンクションポイント法</h3>
+<div class="key-point">
+<span class="vocab">ファンクションポイント法</span>：システムが提供する機能（ファンクション）に点数（ポイント）を付けて見積る、<strong>利用者視点</strong>の方法。ISOでも規格化。<br><br>
+機能を<strong>5種類</strong>に分類：①外部入力 ②外部出力 ③外部照会 ④内部論理ファイル ⑤外部インタフェースファイル
+</div>
+<div class="formula"><strong>FP値の計算手順：</strong><br><br>
+(1) 各機能の個数×重み付け係数 → 仮の合計点<br>
+(2) 合計点 × 複雑さの補正係数 ＝ FP値<br><br>
+例：合計点24、補正係数0.75<br>
+＝ 24 × 0.75 ＝ <strong>18</strong></div>
+
+<h3>リスクマネジメントの4つの対応策</h3>
+<table class="sql-table">
+<tr><th>対応策</th><th>内容</th></tr>
+<tr><td><strong>リスク回避</strong></td><td>リスクに関わる作業をしない（スコープから外す）</td></tr>
+<tr><td><strong>リスク移転（転嫁）</strong></td><td>他社へ移す。外部委託・<strong>保険加入</strong>など</td></tr>
+<tr><td><strong>リスク低減（軽減）</strong></td><td>発生確率や被害額を下げる。多くのテスト実施など</td></tr>
+<tr><td><strong>リスク保有（受容）</strong></td><td>そのまま受け入れる（何もしない）。対策費用の方が高い場合</td></tr>
+</table>
+
+<h3>品質・コミュニケーションマネジメント</h3>
+<div class="key-point">
+<span class="vocab">品質マネジメント</span>：成果物が期待される品質を満たすことを、レビューなどで確認する<br>
+<span class="vocab">コミュニケーションマネジメント</span>：誰が、誰に、いつ、どうやって、何を伝達するかを管理する
+</div>
+
+<div class="key-point" style="background:#fce4ec;border-color:#e91e63">
+<strong style="color:#e91e63">第14章の最重要まとめ</strong><br><br>
+・プロジェクト＝有期性＋独自性（対義語は定常業務）<br>
+・ステークホルダ＝利害関係にある人（外部・地域社会も含む）<br>
+・WBS＝作業を管理可能な大きさに階層的に細分化する図<br>
+・開発工数＝開発規模÷生産性／開発期間＝開発工数÷要員数<br>
+・クリティカルパス＝最も時間のかかる経路＝最短日数（全経路を計算して求める）<br>
+・クラッシング＝資源増で短縮／ファストトラッキング＝並列実行で短縮<br>
+・ファンクションポイント法＝機能に点数、合計点×補正係数<br>
+・リスク対応＝回避・移転（保険）・低減・保有（受容）
+</div>
+</div>
+</div>
+
+<!-- ===== 確認テスト ===== -->
+<div id="quiz" class="section">
+<div class="quiz-area">
+<h2>確認テスト ── 第14章</h2>
+<p style="color:#666;font-size:.9em;margin-bottom:16px">全問ランダム出題・選択肢シャッフル。何度でも挑戦できます。</p>
+<div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+<div id="quizContainer"></div>
+<div style="text-align:center;margin-top:20px"><button class="btn" id="submitBtn" onclick="submitQuiz()" style="display:none">結果を見る</button></div>
+</div>
+<div class="result-area" id="resultArea"><h2>結果</h2><div class="result-score" id="resultScore"></div><div id="resultMsg" style="font-size:1.1em;margin:10px 0"></div><button class="btn" onclick="retryQuiz()">もう一度</button><button class="btn btn-outline" onclick="showSection('lesson1')">レッスンに戻る</button></div>
+</div>
+</div>
+
+<script>
+const allQuestions=[
+{q:'プロジェクトの特性はどれか。（平成25年度）',choices:['独自性はあるが、有期性がない。','独自性はないが、有期性がある。','独自性も有期性もある。','独自性も有期性もない。'],answer:2,explanation:'プロジェクトは、期限が決められている<strong>有期性</strong>と、成果物が唯一無二である<strong>独自性</strong>の2つの特徴をもちます。よって「独自性も有期性もある」が正解です。'},
+{q:'プロジェクトに関わるステークホルダの説明のうち、適切なものはどれか。（平成27年度）',choices:['組織の内部に属しており、組織の外部にいることはない。','プロジェクトに直接参加し、間接的な関与にとどまることはない。','プロジェクトの成果が、自らの利益になる者と不利益になる者がいる。','個人として特定できることが必要である。'],answer:2,explanation:'ステークホルダとは<strong>利害関係にある人</strong>であり、利益になる者も不利益になる者もいます。取引先など組織外部の人、地域社会のように間接的・個人特定不可の相手も、利害関係があれば含まれます。'},
+{q:'ソフトウェア開発プロジェクトにおいてWBS（Work Breakdown Structure）を使用する目的として、適切なものはどれか。（平成30年度）',choices:['開発の期間と費用がトレードオフの関係にある場合に、総費用の最適化を図る。','作業の順序関係を明確にして、重点管理すべきクリティカルパスを把握する。','作業の日程を横棒（バー）で表して、開始・終了・現時点の進捗を明確にする。','作業を階層的に詳細化して、管理可能な大きさに細分化する。'],answer:3,explanation:'WBSのキーワードは「作業を階層的に要素分解」です。よって<strong>管理可能な大きさに細分化する</strong>が正解。イはクリティカルパス法、ウはガントチャートの目的です。'},
+{q:'WBSの最も小さい作業単位を何と呼ぶか。また、その大きさの目安として適切なものはどれか。',choices:['マイルストーン／進捗の節目ごと','ワークパッケージ／80時間程度で完了する大きさ','アクティビティ／1日で完了する大きさ','クリティカルパス／プロジェクト全体'],answer:1,explanation:'WBSの最も小さい作業単位は<strong>ワークパッケージ</strong>で、一般に<strong>80時間程度</strong>で完了する大きさにします。大きすぎると見積りが曖昧に、小さすぎると管理に手間がかかります。'},
+{q:'開発規模が1,000行のソースコードで構成されるシステムを、生産性が100行/人日の要員で開発する。開発工数は何人日か。',choices:['5人日','10人日','100人日','1,000人日'],answer:1,explanation:'開発工数＝開発規模÷生産性＝1,000行÷100行/人日＝<strong>10人日</strong>です。人日は「1人が1日で行う作業量」を表します。'},
+{q:'システムを構成するプログラムの本数とコーディング所要工数から、コーディング全体で95人日を要する。設計・テストにその8倍の工数が掛かるとき、95日間で開発するには少なくとも何人の要員が必要か。（平成31年度）',choices:['8人','9人','16人','18人'],answer:1,explanation:'総工数＝コーディング95人日＋その8倍（760人日）＝855人日。要員数をXとすると X×95日＝855人日、X＝<strong>9人</strong>です。「工数÷期間＝要員数」の関係を使います。'},
+{q:'システム開発の進捗管理などに用いられるトレンドチャートの説明はどれか。（平成29年度）',choices:['作業に関与する人と責任をマトリックス状に示したもの','作業日程の計画と実績を対比できるように帯状に示したもの','作業の進捗状況と、予算の消費状況を関連付けて折れ線で示したもの','作業の順序や相互関係をネットワーク状に示したもの'],answer:2,explanation:'<strong>トレンドチャート</strong>は、作業の進捗状況と予算の消費状況を関連付けて折れ線グラフで示します。アは責任分担表、イはガントチャート、エはアローダイアグラム（PERT図）の説明です。'},
+{q:'"システム要件定義プロセス"が完了すれば、"システム方式設計プロセス"が開始できる。この論理的な依存関係はどれか。（令和元年度）',choices:['FF関係（Finish-to-Finish）','FS関係（Finish-to-Start）','SF関係（Start-to-Finish）','SS関係（Start-to-Start）'],answer:1,explanation:'一方が完了（Finish）すれば他方が開始（Start）できる関係なので<strong>FS関係（終了-開始関係）</strong>です。アローダイアグラムはこのFS関係のみを表せます。'},
+{q:'各経路の所要日数がA→D→G＝8日、A→C→E→G＝12日、A→C→E→F＝13日、B→E→G＝13日、B→E→F＝14日であるアローダイアグラムのクリティカルパスはどれか。（令和元年度）',choices:['A→D→G','A→C→E→F','B→E→F','B→E→G'],answer:2,explanation:'クリティカルパスは最も所要日数が大きい経路です。各経路を計算すると<strong>B→E→F＝14日</strong>が最大なので、これがクリティカルパスになります。すべての経路を計算して最大を選ぶのが確実です。'},
+{q:'アローダイアグラムにおいて、破線の矢印で示され、所要日数が0日で作業を何も行わないが、作業間の依存関係を表すために使うものはどれか。',choices:['クリティカルパス','マイルストーン','ダミー作業','ワークパッケージ'],answer:2,explanation:'<strong>ダミー作業</strong>は所要日数0日の作業で、実際の作業は行いませんが、「作業Eは作業AとBの両方が完了しないと開始できない」といった依存関係を表すために記載します。'},
+{q:'アローダイアグラムで各作業がA→B→E→H＝105日、A→C→F→I＝115日、A→C→G→H＝120日、A→D→G→I＝110日と計算された。このプロジェクトの完了までに最少で要する日数はどれか。（令和6年度）',choices:['105','110','120','125'],answer:2,explanation:'「完了までの最少日数」とは、すべての作業が遅延なく完了した場合の日数、すなわち最も長い経路（クリティカルパス）の日数です。最大の<strong>120日</strong>が正解です。'},
+{q:'プロジェクトのスケジュールを短縮するために、アクティビティに割り当てる資源を増やして所要期間を短縮する技法はどれか。（平成28年度）',choices:['クラッシング','クリティカルチェーン法','ファストトラッキング','モンテカルロ法'],answer:0,explanation:'資源（要員・時間外作業）を増やして所要期間を短縮する技法は<strong>クラッシング</strong>です。ファストトラッキングは作業を並列実行する技法で、資源を増やす点が異なります。'},
+{q:'クラッシングを行う際に、優先的に資源を投入すべきスケジュールアクティビティはどれか。（平成28年度）',choices:['業務の難易度が最も高いアクティビティ','クリティカルパス上のアクティビティ','資源が確保できる時期に開始するアクティビティ','所要期間を最も長く必要とするアクティビティ'],answer:1,explanation:'資源を投入すべきは<strong>クリティカルパス上のアクティビティ</strong>です。クリティカルパスが最も時間のかかる経路であり、ここを短縮しないとプロジェクト全体の期間は短縮できません。'},
+{q:'ファストトラッキングでスケジュールを短縮する技法の説明として適切なものはどれか。',choices:['要員を増員して各作業の所要時間を短くする','これまで順に実行していた作業を並列に実行する','乱数を使って所要日数の近似値を求める','資源不足を想定して最長経路を管理する'],answer:1,explanation:'<strong>ファストトラッキング</strong>は、大きな作業を並列に実行できる小作業に分割し、順次実行していた作業を並列化して短縮します。アはクラッシング、ウはモンテカルロ法、エはクリティカルチェーン法です。'},
+{q:'ファンクションポイント法の説明はどれか。（平成25年度）',choices:['開発するプログラムごとのステップ数を積算し、開発規模を見積もる。','開発プロジェクトで必要な作業のWBSを作成し、各作業の工数を見積もる。','外部入出力や内部論理ファイル、照会、インタフェースなどの個数や特性などから開発規模を見積もる。','過去の類似例を探し、その実績と差異などを分析評価して開発規模を見積もる。'],answer:2,explanation:'<strong>ファンクションポイント法</strong>は、外部入力・外部出力・外部照会・内部論理ファイル・外部インタフェースファイルの個数や特性から見積る、利用者視点の手法です。アはプログラムステップ法、イは標準タスク法、エは類似見積り法です。'},
+{q:'各機能の個数と重み付け係数を掛けた仮の合計点が24、複雑さの補正係数が0.75のとき、このソフトウェアのファンクションポイント値はいくらか。（平成30年度）',choices:['18','24','32','0.75'],answer:0,explanation:'FP値＝仮の合計点×複雑さの補正係数＝24×0.75＝<strong>18</strong>です。まず個数×重み付け係数で仮の合計点を出し、最後に補正係数で調整します。'},
+{q:'プロジェクトの日程計画を作成するのに適した技法はどれか。（平成25年度）',choices:['PERT','回帰分析','時系列分析','線形計画法'],answer:0,explanation:'アローダイアグラムを使って作業の順序・依存関係を分析し日程計画を作る手法が<strong>PERT</strong>です。回帰分析・時系列分析は将来予測、線形計画法は最適解を求める手法で、日程計画には適しません。'},
+{q:'リスクが顕在化しても影響が小さいと想定されるので、損害の負担を受容するリスク対応はどれか。（平成21年度）',choices:['リスク移転','リスク回避','リスク低減','リスク保有'],answer:3,explanation:'損害の負担を受け入れる（何もしない）対応は<strong>リスク保有（受容）</strong>です。リスク移転は他社へ移す（保険など）、リスク回避は作業自体をしない、リスク低減は発生確率や被害額を下げる対応です。'},
+{q:'プロジェクトのリスクに対応する戦略として、損害発生に備えて損害賠償保険に加入した。PMBOKによれば該当する戦略はどれか。（平成27年度）',choices:['回避','受容','転嫁','低減'],answer:2,explanation:'保険に加入してリスクを他者に移すのは<strong>転嫁（リスク移転）</strong>の代表例です。受容（保有）は損害を受け入れること、回避は作業をしないこと、低減は発生確率・被害を減らすことです。'}
+];
+let questions=[],answered=0;
+function shuffleArray(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
+function initQuiz(){questions=shuffleArray(allQuestions);answered=0;document.getElementById('submitBtn').style.display='none';document.getElementById('resultArea').style.display='none';document.getElementById('progressFill').style.width='0%';const c=document.getElementById('quizContainer');c.innerHTML='';questions.forEach((q,idx)=>{const sc=q.choices.map((c,i)=>({text:c,origIdx:i}));for(let i=sc.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[sc[i],sc[j]]=[sc[j],sc[i]]}q._shuffled=sc;q._selected=null;let h=`<div class="question-card"><div class="q-number">問題 ${idx+1} / ${questions.length}</div><div class="q-text">${q.q}</div><ul class="choices">`;sc.forEach((c,ci)=>{h+=`<li onclick="selectChoice(${idx},${ci})" id="q${idx}c${ci}">${c.text}</li>`});h+=`</ul><div class="explanation" id="exp${idx}"><div id="expText${idx}"></div></div></div>`;c.innerHTML+=h})}
+function selectChoice(qi,ci){const q=questions[qi];if(q._selected!==null)return;q._selected=ci;answered++;const corr=q.answer,sel=q._shuffled[ci].origIdx,ok=sel===corr;q._shuffled.forEach((c,i)=>{const li=document.getElementById(`q${qi}c${i}`);if(c.origIdx===corr)li.classList.add('correct');if(i===ci&&!ok)li.classList.add('wrong')});const e=document.getElementById(`exp${qi}`),t=document.getElementById(`expText${qi}`);t.innerHTML=(ok?'<span style="color:#4caf50;font-weight:bold">&#x2B55; 正解！</span>':'<span style="color:#f44336;font-weight:bold">&#x274C; 不正解</span>')+'<br>'+q.explanation;e.classList.add('show');document.getElementById('progressFill').style.width=(answered/questions.length*100)+'%';if(answered===questions.length)document.getElementById('submitBtn').style.display='inline-block'}
+function submitQuiz(){let c=0;questions.forEach(q=>{if(q._selected!==null&&q._shuffled[q._selected].origIdx===q.answer)c++});document.getElementById('resultArea').style.display='block';document.getElementById('resultScore').textContent=`${c} / ${questions.length}`;const p=c/questions.length*100;let m='';if(p===100)m='満点！完璧です！';else if(p>=80)m='よく理解できています！';else if(p>=60)m='合格ライン！もう少し復習しましょう。';else m='レッスンをもう一度確認しましょう。';document.getElementById('resultMsg').textContent=m;document.getElementById('resultArea').scrollIntoView({behavior:'smooth'})}
+function retryQuiz(){initQuiz();document.getElementById('quizContainer').scrollIntoView({behavior:'smooth'})}
+function showSection(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');const tabs=document.querySelectorAll('.nav-tab');const ids=['lesson1','lesson2','lesson3','lesson4','quiz'];tabs[ids.indexOf(id)].classList.add('active');if(id==='quiz')initQuiz();window.scrollTo({top:0,behavior:'smooth'})}
+initQuiz();
+</script>
+</body>
+</html>

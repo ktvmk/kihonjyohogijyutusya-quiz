@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第13章 ソフトウェア開発モデルと開発手法｜基本情報技術者</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Hiragino Sans','Noto Sans JP','Meiryo',sans-serif;background:#f5f5f0;color:#333;line-height:1.8;padding:0 0 60px 0}.header{background:linear-gradient(135deg,#e65100,#ff8f00);color:#fff;padding:24px 20px;text-align:center}.header h1{font-size:1.3em;margin-bottom:4px}.header .sub{font-size:.85em;opacity:.8}.container{max-width:720px;margin:0 auto;padding:16px}.nav-tabs{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap}.nav-tab{padding:10px 14px;border:2px solid #e65100;border-radius:8px;background:#fff;color:#e65100;font-weight:bold;font-size:.82em;cursor:pointer;transition:all .2s}.nav-tab:hover,.nav-tab.active{background:#e65100;color:#fff}.section{display:none}.section.active{display:block}.lesson-card{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.lesson-card h2{color:#e65100;font-size:1.2em;margin-bottom:16px;padding-bottom:8px;border-bottom:3px solid #ffe0b2}.lesson-card h3{color:#ff8f00;font-size:1.05em;margin:20px 0 10px 0}.key-point{background:#fff3e0;border-left:4px solid #e65100;padding:14px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-size:.95em}.key-point strong{color:#e65100}.vocab{display:inline-block;background:#e3f2fd;border:1px solid #64b5f6;border-radius:6px;padding:2px 8px;margin:2px 4px;font-weight:bold;font-size:.9em;color:#1565c0}.example{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:14px 16px;margin:12px 0;font-size:.9em}.formula{background:#fce4ec;border-left:4px solid #e91e63;padding:14px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-family:monospace;font-size:.95em;line-height:2}.compare{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}.compare-box{background:#fff;border:2px solid #e0e0e0;border-radius:10px;padding:14px;font-size:.9em}.compare-box h4{font-size:.95em;margin-bottom:8px;text-align:center}.compare-box.good{border-color:#4caf50}.compare-box.good h4{color:#2e7d32}.compare-box.bad{border-color:#ff9800}.compare-box.bad h4{color:#e65100}
+.quiz-area{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.quiz-area h2{color:#e65100;margin-bottom:16px}.question-card{background:#fafafa;border:1px solid #e0e0e0;border-radius:10px;padding:20px;margin:16px 0}.q-number{font-size:.8em;color:#999;margin-bottom:6px}.q-text{font-size:1.05em;font-weight:bold;margin-bottom:14px;line-height:1.6}.choices{list-style:none}.choices li{padding:12px 16px;margin:6px 0;border:2px solid #e0e0e0;border-radius:8px;cursor:pointer;transition:all .2s;font-size:.95em}.choices li:hover{border-color:#e65100;background:#fff3e0}.choices li.correct{border-color:#4caf50;background:#e8f5e9}.choices li.wrong{border-color:#f44336;background:#ffebee}.explanation{display:none;margin-top:12px;padding:14px;background:#f5f5f5;border-radius:8px;font-size:.9em;line-height:1.7}.explanation.show{display:block}.result-area{display:none;text-align:center;padding:30px;background:#fff;border-radius:12px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.result-score{font-size:2.5em;font-weight:bold;color:#e65100;margin:10px 0}.btn{display:inline-block;padding:12px 28px;background:#e65100;color:#fff;border:none;border-radius:8px;font-size:1em;cursor:pointer;margin:8px}.btn:hover{background:#ff8f00}.btn-outline{background:#fff;color:#e65100;border:2px solid #e65100}.progress-bar{width:100%;height:6px;background:#e0e0e0;border-radius:3px;margin:12px 0}.progress-fill{height:100%;background:#e65100;border-radius:3px;transition:width .3s}.back-link{display:inline-block;margin:16px 0;color:#e65100;text-decoration:none;font-weight:bold}
+.sql-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.88em}
+.sql-table th{background:#e65100;color:#fff;padding:6px;border:1px solid #ccc}
+.sql-table td{padding:6px;border:1px solid #ccc;background:#fff}
+</style>
+</head>
+<body>
+<div class="header"><h1>第13章 ソフトウェア開発モデルと開発手法</h1><div class="sub">基本情報技術者試験 Web教材</div></div>
+<div class="container">
+<a href="it_quiz.html" class="back-link">← 章の一覧にもどる</a>
+<div class="nav-tabs">
+<div class="nav-tab active" onclick="showSection('lesson1')">① 開発モデル</div>
+<div class="nav-tab" onclick="showSection('lesson2')">② アジャイル開発</div>
+<div class="nav-tab" onclick="showSection('lesson3')">③ リバース・開発技術</div>
+<div class="nav-tab" onclick="showSection('quiz')">確認テスト</div>
+</div>
+
+<!-- ===== レッスン1 ===== -->
+<div id="lesson1" class="section active">
+<div class="lesson-card">
+<h2>① ソフトウェア開発モデル</h2>
+
+<div class="key-point">
+<span class="vocab">ソフトウェア開発モデル</span>：ソフトウェアの開発手順や開発方法をモデル化（単純化してまとめたもの）。開発の進め方にはいくつかの型があります。
+</div>
+
+<h3>ウォータフォールモデル</h3>
+<div class="key-point">
+<span class="vocab">ウォータフォールモデル</span>：開発工程を<strong>上流工程から下流工程へ一直線</strong>に順番に進める手法。滝（waterfall）のように上から下へ流れることが由来。<br><br>
+工程の流れ：要件定義 → 設計 → プログラミング → テスト → 運用
+</div>
+<div class="compare">
+<div class="compare-box good">
+<h4>メリット</h4>
+各工程が明確に分かれ、前工程の完了後に次へ進むため、<strong>計画・スケジュールが立てやすい</strong>。進捗管理がしやすい。
+</div>
+<div class="compare-box bad">
+<h4>デメリット</h4>
+原則として<strong>前工程に戻らない</strong>前提。手直しが生じると不具合工程まで戻り、下流をやり直すため<strong>修正が大変</strong>。
+</div>
+</div>
+<div class="key-point">
+ウォータフォールモデルの「後戻りしにくい」欠点を解決するために生まれたのが<strong>アジャイル開発</strong>です（→レッスン②）。
+</div>
+
+<h3>プロトタイピングモデル</h3>
+<div class="key-point">
+<span class="vocab">プロトタイピングモデル</span>：開発の早い段階で<strong>試作品（プロトタイプ）</strong>を作り、利用者に見せて評価・フィードバックをもらいながら進める手法。<br><br>
+・利用者の要求とのズレを<strong>早期に発見</strong>できる<br>
+・完成後の「思っていたものと違う」という認識の食い違いを防げる
+</div>
+
+<h3>スパイラルモデル</h3>
+<div class="key-point">
+<span class="vocab">スパイラルモデル</span>：システムを<strong>独立性の高い部分（サブシステム）</strong>に分割し、それぞれについて「設計→開発→評価」を繰り返しながら、らせん（spiral）状に完成度を高めていく手法。<br><br>
+ウォータフォールとプロトタイピングの利点を組み合わせた反復型のモデル。
+</div>
+
+<h3>RAD（高速アプリケーション開発）</h3>
+<div class="key-point">
+<span class="vocab">RAD</span>（Rapid Application Development）：<strong>少人数のチーム</strong>と開発支援ツール（CASEツール等）を活用し、<strong>短期間</strong>でシステムを開発する手法。<br><br>
+プロトタイプの作成・評価を繰り返し、利用者も開発に参加してスピードを重視します。
+</div>
+</div>
+</div>
+
+<!-- ===== レッスン2 ===== -->
+<div id="lesson2" class="section">
+<div class="lesson-card">
+<h2>② アジャイル開発（XP・スクラム）</h2>
+
+<h3>アジャイル開発の考え方</h3>
+<div class="key-point">
+<span class="vocab">アジャイル開発</span>：短期間でソフトウェアの<strong>開発とリリースを繰り返す</strong>ことで、ビジネス環境の変化や利用者のニーズに<strong>柔軟に対応</strong>する開発モデル。アジャイル（Agile）＝「素早い」。<br><br>
+・完璧でなくても素早く市場にリリース → 反応を取り入れて改善 → 再リリース<br>
+・仕様変更を柔軟に行いながら小刻みに開発する（<span class="vocab">反復型開発</span>）
+</div>
+<div class="compare">
+<div class="compare-box bad">
+<h4>ウォータフォール</h4>
+最後まで進まないと<strong>製品が完成しない</strong>。仕様変更に弱くスピード感に欠ける。
+</div>
+<div class="compare-box good">
+<h4>アジャイル</h4>
+短いサイクルで<strong>動くものを繰り返しリリース</strong>。仕様変更に強く変化に柔軟。
+</div>
+</div>
+
+<h3>XP（エクストリームプログラミング）</h3>
+<div class="key-point">
+<span class="vocab">XP</span>（eXtreme Programming）：アジャイル開発を実践するための<strong>プラクティス（実践項目）</strong>を定義した開発手法。試験で問われるのは主に次の3つ。
+</div>
+<div class="key-point">
+<span class="vocab">ペアプログラミング</span>：<strong>2人</strong>のプログラマが<strong>1台のPC</strong>で開発。1人が書き、もう1人がその場でチェックする。品質向上・知識共有につながる。<br><br>
+<span class="vocab">テスト駆動開発</span>：プログラムを書く<strong>前にテストケースを先に作成</strong>し、それに合格するようにコーディングする手法。<br><br>
+<span class="vocab">リファクタリング</span>：プログラムの<strong>外部仕様（動作）は変えずに、内部構造（ソースコード）を改善</strong>すること。保守性が高まり不具合が減る。
+</div>
+<div class="example"><strong>紛らわしい用語に注意：</strong>ペアプログラミング＝2人で1台／テスト駆動開発＝テストを先に書く／リファクタリング＝動作は変えず中身を整理。混同しやすいので区別を。</div>
+
+<h3>スクラム</h3>
+<div class="key-point">
+<span class="vocab">スクラム</span>：アジャイル開発手法の1つ。開発を一定期間（<span class="vocab">スプリント</span>）に区切り、その期間に実現する機能を明確にしてチーム全体で取り組む。スプリントを繰り返して改善・機能追加する。
+</div>
+<div class="key-point">
+<strong>スクラムチームの3つの役割</strong><br>
+・<span class="vocab">プロダクトオーナー</span>：製品に必要な機能（プロダクトバックログ）の内容と優先順位を決める<br>
+・<span class="vocab">開発者</span>：実際にソフトウェアを設計・開発・テストする<br>
+・<span class="vocab">スクラムマスター</span>：話し合いや作業の進行を助け、プロセスが円滑に進むよう支援する
+</div>
+<div class="key-point">
+<strong>バックログ（開発すべき機能のリスト）</strong><br>
+・<span class="vocab">プロダクトバックログ</span>：製品に必要な機能・要件のリスト（優先順位付き）<br>
+・<span class="vocab">スプリントバックログ</span>：1回のスプリントで取り組む作業のリスト
+</div>
+<h3>スクラムの4つのイベント</h3>
+<table class="sql-table">
+<tr><th>イベント</th><th>タイミング・内容</th></tr>
+<tr><td><strong>スプリントプランニング</strong></td><td>スプリント開始時。今回の目的（スプリントゴール）を決める</td></tr>
+<tr><td><strong>デイリースクラム</strong></td><td>期間中<strong>毎日15分</strong>。「昨日やったこと・今日やること・課題」を共有</td></tr>
+<tr><td><strong>スプリントレビュー</strong></td><td>スプリント終了時。完成した成果物を評価する</td></tr>
+<tr><td><strong>レトロスペクティブ</strong></td><td>レビューの後。今回のスプリントを振り返る（改善点を探す）</td></tr>
+</table>
+</div>
+</div>
+
+<!-- ===== レッスン3 ===== -->
+<div id="lesson3" class="section">
+<div class="lesson-card">
+<h2>③ リバースエンジニアリングと開発技術</h2>
+
+<h3>リバースエンジニアリング</h3>
+<div class="key-point">
+<span class="vocab">リバースエンジニアリング</span>：<strong>すでに存在するソフトウェアを解析して、その仕様や設計・構造を取り出す</strong>技術。リバース＝「逆にする」。<br><br>
+設計書がない・更新されていない場合に、古いプログラムから新しい設計書（UMLクラス図やE-R図など）を作成するのに使う。
+</div>
+
+<h3>フォワード・リエンジニアリング</h3>
+<div class="compare">
+<div class="compare-box good">
+<h4>フォワードエンジニアリング</h4>
+通常の工程。<strong>設計書からプログラムを作る</strong>（設計情報からソースコードを生成する）。
+</div>
+<div class="compare-box bad">
+<h4>リバースエンジニアリング</h4>
+逆の工程。<strong>プログラムから設計書を取り出す</strong>（仕様・構造を明らかにする）。
+</div>
+</div>
+<div class="key-point">
+<span class="vocab">リエンジニアリング</span>：既存プログラムを解析して<strong>新たにプログラムを作り直す</strong>技術。<strong>リバース→フォワード</strong>の順に組み合わせて、システム全体を再構築する。
+</div>
+
+<h3>ローコード開発・ノーコード開発</h3>
+<div class="compare">
+<div class="compare-box good">
+<h4>ローコード開発</h4>
+専用ツールでGUI操作により部品を組み合わせ、<strong>ソースコードをほとんど書かず</strong>（一部だけ記述）に開発する。
+</div>
+<div class="compare-box bad">
+<h4>ノーコード開発</h4>
+専用ツールのGUI操作だけで、<strong>ソースコードを一切書かず</strong>に開発する。
+</div>
+</div>
+
+<h3>マッシュアップ</h3>
+<div class="key-point">
+<span class="vocab">マッシュアップ</span>：<strong>複数のWebサービスを組み合わせて新しいサービスを作る</strong>手法（例：自社サイトに他社の地図サービスを組み込んで経路表示）。
+</div>
+
+<h3>CASEツール・構成管理</h3>
+<div class="key-point">
+<span class="vocab">CASEツール</span>（Computer Aided Software Engineering）：設計・開発・テストなどソフトウェア開発の各工程を<strong>コンピュータで支援</strong>するツール。<br><br>
+<span class="vocab">ソフトウェア構成管理</span>（SCM）：文書やプログラムの<strong>変更履歴（バージョン／版数）を管理</strong>し、トラブルを防ぐ手法。不具合時に古いバージョンへ戻せる。管理対象を<strong>構成品目</strong>という。
+</div>
+
+<div class="key-point" style="background:#fce4ec;border-color:#e91e63">
+<strong style="color:#e91e63">第13章の最重要まとめ</strong><br><br>
+・ウォータフォール＝上流→下流の一直線。計画は立てやすいが後戻りが大変<br>
+・プロトタイピング＝試作品で早期に要求確認／スパイラル＝分割して反復<br>
+・アジャイル＝短期間で開発とリリースを繰り返す（変化に柔軟）<br>
+・XP：ペアプログラミング（2人で1台）・テスト駆動開発（テスト先行）・リファクタリング（動作は変えず内部改善）<br>
+・スクラム：スプリント／デイリースクラム（毎日15分共有）<br>
+・リバースエンジニアリング＝プログラム→設計書、フォワード＝設計書→プログラム、リエンジニアリング＝両方を組み合わせ再構築<br>
+・ソフトウェア構成管理＝文書・プログラムのバージョンを管理
+</div>
+</div>
+</div>
+
+<!-- ===== 確認テスト ===== -->
+<div id="quiz" class="section">
+<div class="quiz-area">
+<h2>確認テスト ── 第13章</h2>
+<p style="color:#666;font-size:.9em;margin-bottom:16px">全問ランダム出題・選択肢シャッフル。何度でも挑戦できます。</p>
+<div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+<div id="quizContainer"></div>
+<div style="text-align:center;margin-top:20px"><button class="btn" id="submitBtn" onclick="submitQuiz()" style="display:none">結果を見る</button></div>
+</div>
+<div class="result-area" id="resultArea"><h2>結果</h2><div class="result-score" id="resultScore"></div><div id="resultMsg" style="font-size:1.1em;margin:10px 0"></div><button class="btn" onclick="retryQuiz()">もう一度</button><button class="btn btn-outline" onclick="showSection('lesson1')">レッスンに戻る</button></div>
+</div>
+</div>
+
+<script>
+const allQuestions=[
+{q:'ソフトウェアのリバースエンジニアリングの説明はどれか。（平成29年度）',choices:['開発支援ツールなどを用いて、設計情報からソースコードを自動生成する','外部から見たときの振る舞いを変えずに、ソフトウェアの内部構造を変える','既存のソフトウェアを解析し、その仕様や構造を明らかにする','既存のソフトウェアを分析し理解した上で、ソフトウェア全体を新しく構築し直す'],answer:2,explanation:'<strong>リバースエンジニアリング</strong>は既存ソフトウェアを解析して仕様や構造を明らかにする技術です。1番目はフォワードエンジニアリング、2番目はリファクタリング、4番目はリエンジニアリングの説明で、いずれも紛らわしい不正解選択肢として頻出します。'},
+{q:'アジャイル開発においても重視されているリファクタリングはどれか。（平成29年度）',choices:['2人のプログラマが協力して一つのプログラムをコーディングする','外部仕様を変更することなく、プログラムの内部構造を変更する','テストケースを先に設定してからプログラムをコーディングする','提供予定のソフトウェアの試作品を早期に作成する'],answer:1,explanation:'<strong>リファクタリング</strong>は外部仕様（動作）を変えずに内部構造を改善することです。1番目はペアプログラミング、3番目はテスト駆動開発、4番目はプロトタイピングの説明です。'},
+{q:'スクラムにおいて、開発チームの全員が「昨日やったこと」「今日やること」「障害になっていること」を話し、全員でプロジェクトの状況を共有するイベントはどれか。（令和5年度）',choices:['スプリントプランニング','スプリントレビュー','デイリースクラム','レトロスペクティブ'],answer:2,explanation:'全員で状況を共有するイベントは<strong>デイリースクラム</strong>で、スプリント期間中に毎日15分程度行います。プランニングは開始時、レビューは終了時に成果物を評価、レトロスペクティブはレビュー後の振り返りです。'},
+{q:'ローコード開発ツールを用いたソフトウェア開発の説明はどれか。（令和7年度）',choices:['用意された部品やテンプレートをGUIで組み合わせ、必要に応じて一部の処理のソースコードを記述して作成する','用意された部品やテンプレートをGUIで組み合わせるだけで、ソースコードを記述せずに作成する','定型的な枠組みを参照して、独自の処理のソースコードを記述して作成する','利用者の操作手順をツールに登録し、作業を自動化ツールに代行させる'],answer:0,explanation:'<strong>ローコード開発</strong>はGUI操作を中心に、必要なところだけソースコードを少し書いて開発します。2番目はノーコード開発、3番目はフレームワーク、4番目はRPAの説明です。'},
+{q:'XP（eXtreme Programming）において、プラクティスとして提唱されているものはどれか。（令和元年度）',choices:['インスペクション','構造化設計','ペアプログラミング','ユースケースの活用'],answer:2,explanation:'XPで覚えるべきプラクティスは<strong>ペアプログラミング</strong>とリファクタリングです。インスペクションは成果物の目視検証、構造化設計はモジュール分割の設計、ユースケースはシステムの振る舞いの記述で、いずれもXP固有のプラクティスではありません。'},
+{q:'ソフトウェア開発において、構成管理に起因しない問題はどれか。（平成28年度）',choices:['改版手続に従わずに修正したので、正しく動作していたプログラムが不正動作するようになった','システムテストで単体テストレベルのバグが多発して開発が予定どおり進まない','版数が対応付けられておらず、修正時にソースを解析しないと修正箇所が特定できない','派生元プログラムの修正が全ての派生プログラムに反映されない'],answer:1,explanation:'<strong>構成管理に起因しない</strong>のは、単体テストレベルのバグ多発です（これはソフトウェア構築＝作り込みの問題）。ほかの3つは版数管理や改版手続といった構成管理に起因する問題です。'},
+{q:'ソフトウェア開発プロジェクトで行う構成管理の対象項目として、適切なものはどれか。（平成24年度）',choices:['開発作業の進捗状況','成果物に対するレビューの実施結果','プログラムのバージョン','プロジェクト組織の編成'],answer:2,explanation:'ソフトウェア構成管理では、主に文書と<strong>プログラムのバージョン</strong>（版数）を管理します。進捗状況・レビュー結果・組織編成はプロジェクト管理の対象で、構成管理の対象ではありません。'},
+{q:'ウォータフォールモデルの説明として最も適切なものはどれか。',choices:['試作品を作り利用者の評価を得ながら進める','開発工程を上流から下流へ一直線に順番に進める','システムを分割し設計・開発・評価を繰り返す','短期間で開発とリリースを繰り返す'],answer:1,explanation:'<strong>ウォータフォールモデル</strong>は工程を上流から下流へ一直線に進める手法です。計画は立てやすい反面、後戻り（手直し）が大変という欠点があります。1番目はプロトタイピング、3番目はスパイラル、4番目はアジャイルです。'},
+{q:'ウォータフォールモデルのデメリットとして最も適切なものはどれか。',choices:['開発スケジュールが立てにくい','各工程の区切りが不明確になりやすい','手直しが生じると前工程まで戻ってやり直す必要がある','試作品の作成に手間がかかる'],answer:2,explanation:'ウォータフォールは前工程に戻らない前提のため、<strong>手直しが生じると不具合工程まで戻って下流をやり直す</strong>のが大変です。工程が明確で計画は立てやすいのが利点なので1・2は誤りです。'},
+{q:'開発の早い段階で試作品を作成し、利用者の評価を反映しながら進める開発モデルはどれか。',choices:['ウォータフォールモデル','プロトタイピングモデル','スパイラルモデル','RAD'],answer:1,explanation:'試作品（プロトタイプ）を作って利用者の評価・要求を早期に確認する手法が<strong>プロトタイピングモデル</strong>です。完成後の「イメージと違う」という食い違いを防げます。'},
+{q:'アジャイル開発の考え方として最も適切なものはどれか。',choices:['最初に全仕様を確定し最後にまとめてリリースする','短期間で開発とリリースを繰り返し変化に柔軟に対応する','設計書を完璧に作ってからプログラミングに入る','一度完成したら仕様変更は原則行わない'],answer:1,explanation:'<strong>アジャイル開発</strong>は短いサイクルで開発とリリースを繰り返し、市場の反応やニーズの変化に柔軟に対応する考え方です。仕様変更を前提に小刻みに動くものを作ります。'},
+{q:'2人のプログラマが1台のコンピュータを使い、1人がコーディングし、もう1人がその場でチェックしながら開発する手法はどれか。',choices:['ペアプログラミング','テスト駆動開発','リファクタリング','リエンジニアリング'],answer:0,explanation:'2人で1台のPCを使って開発するXPの手法が<strong>ペアプログラミング</strong>です。相互チェックで品質が上がり、知識が共有されるため1人が休んでも作業を続けられます。'},
+{q:'プログラムを書く前にテストケースを先に作成し、それに合格するようにコーディングする手法はどれか。',choices:['ペアプログラミング','テスト駆動開発','リファクタリング','スプリント'],answer:1,explanation:'テストを先に書いてからコーディングする手法が<strong>テスト駆動開発</strong>です。XPのプラクティスの一つで、動作するソフトウェアを迅速かつ確実に開発するのに役立ちます。'},
+{q:'スクラムにおいて、開発作業を区切る一定の期間を何というか。',choices:['スプリント','バックログ','プラクティス','イテレーション計画'],answer:0,explanation:'スクラムで開発を区切る一定期間を<strong>スプリント</strong>といいます。スプリントを繰り返しながら、その都度、製品の改善や機能追加を行います。'},
+{q:'スクラムチームにおいて、製品に必要な機能（プロダクトバックログ）の内容や優先順位を決定する役割はどれか。',choices:['プロダクトオーナー','スクラムマスター','開発者','ステークホルダ'],answer:0,explanation:'機能の内容や優先順位を決めるのは<strong>プロダクトオーナー</strong>です。スクラムマスターはプロセスが円滑に進むよう支援し、開発者は実際に設計・開発・テストを行います。'},
+{q:'設計情報（設計書）から開発支援ツールを用いてソースコードを生成する技術はどれか。',choices:['リバースエンジニアリング','フォワードエンジニアリング','リファクタリング','マッシュアップ'],answer:1,explanation:'設計書からプログラムを作る通常の工程が<strong>フォワードエンジニアリング</strong>です。逆にプログラムから設計書を取り出すのがリバースエンジニアリング、両者を組み合わせて作り直すのがリエンジニアリングです。'},
+{q:'複数のWebサービスを組み合わせて新しいサービスを作り出す手法はどれか。',choices:['マッシュアップ','リファクタリング','スパイラルモデル','CASEツール'],answer:0,explanation:'複数のWebサービスを組み合わせて新しいサービスを作る手法が<strong>マッシュアップ</strong>です。例として、自社サイトに他社が提供する地図サービスを組み込んで経路を表示するものがあります。'}
+];
+let questions=[],answered=0;
+function shuffleArray(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
+function initQuiz(){questions=shuffleArray(allQuestions);answered=0;document.getElementById('submitBtn').style.display='none';document.getElementById('resultArea').style.display='none';document.getElementById('progressFill').style.width='0%';const c=document.getElementById('quizContainer');c.innerHTML='';questions.forEach((q,idx)=>{const sc=q.choices.map((c,i)=>({text:c,origIdx:i}));for(let i=sc.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[sc[i],sc[j]]=[sc[j],sc[i]]}q._shuffled=sc;q._selected=null;let h=`<div class="question-card"><div class="q-number">問題 ${idx+1} / ${questions.length}</div><div class="q-text">${q.q}</div><ul class="choices">`;sc.forEach((c,ci)=>{h+=`<li onclick="selectChoice(${idx},${ci})" id="q${idx}c${ci}">${c.text}</li>`});h+=`</ul><div class="explanation" id="exp${idx}"><div id="expText${idx}"></div></div></div>`;c.innerHTML+=h})}
+function selectChoice(qi,ci){const q=questions[qi];if(q._selected!==null)return;q._selected=ci;answered++;const corr=q.answer,sel=q._shuffled[ci].origIdx,ok=sel===corr;q._shuffled.forEach((c,i)=>{const li=document.getElementById(`q${qi}c${i}`);if(c.origIdx===corr)li.classList.add('correct');if(i===ci&&!ok)li.classList.add('wrong')});const e=document.getElementById(`exp${qi}`),t=document.getElementById(`expText${qi}`);t.innerHTML=(ok?'<span style="color:#4caf50;font-weight:bold">&#x2B55; 正解！</span>':'<span style="color:#f44336;font-weight:bold">&#x274C; 不正解</span>')+'<br>'+q.explanation;e.classList.add('show');document.getElementById('progressFill').style.width=(answered/questions.length*100)+'%';if(answered===questions.length)document.getElementById('submitBtn').style.display='inline-block'}
+function submitQuiz(){let c=0;questions.forEach(q=>{if(q._selected!==null&&q._shuffled[q._selected].origIdx===q.answer)c++});document.getElementById('resultArea').style.display='block';document.getElementById('resultScore').textContent=`${c} / ${questions.length}`;const p=c/questions.length*100;let m='';if(p===100)m='満点！完璧です！';else if(p>=80)m='よく理解できています！';else if(p>=60)m='合格ライン！もう少し復習しましょう。';else m='レッスンをもう一度確認しましょう。';document.getElementById('resultMsg').textContent=m;document.getElementById('resultArea').scrollIntoView({behavior:'smooth'})}
+function retryQuiz(){initQuiz();document.getElementById('quizContainer').scrollIntoView({behavior:'smooth'})}
+function showSection(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');const tabs=document.querySelectorAll('.nav-tab');const ids=['lesson1','lesson2','lesson3','quiz'];tabs[ids.indexOf(id)].classList.add('active');if(id==='quiz')initQuiz();window.scrollTo({top:0,behavior:'smooth'})}
+initQuiz();
+</script>
+</body>
+</html>

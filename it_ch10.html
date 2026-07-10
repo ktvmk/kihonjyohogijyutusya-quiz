@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第10章 ネットワーク｜基本情報技術者</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Hiragino Sans','Noto Sans JP','Meiryo',sans-serif;background:#f5f5f0;color:#333;line-height:1.8;padding:0 0 60px 0}.header{background:linear-gradient(135deg,#e65100,#ff8f00);color:#fff;padding:24px 20px;text-align:center}.header h1{font-size:1.3em;margin-bottom:4px}.header .sub{font-size:.85em;opacity:.8}.container{max-width:720px;margin:0 auto;padding:16px}.nav-tabs{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap}.nav-tab{padding:10px 14px;border:2px solid #e65100;border-radius:8px;background:#fff;color:#e65100;font-weight:bold;font-size:.82em;cursor:pointer;transition:all .2s}.nav-tab:hover,.nav-tab.active{background:#e65100;color:#fff}.section{display:none}.section.active{display:block}.lesson-card{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.lesson-card h2{color:#e65100;font-size:1.2em;margin-bottom:16px;padding-bottom:8px;border-bottom:3px solid #ffe0b2}.lesson-card h3{color:#ff8f00;font-size:1.05em;margin:20px 0 10px 0}.key-point{background:#fff3e0;border-left:4px solid #e65100;padding:14px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-size:.95em}.key-point strong{color:#e65100}.vocab{display:inline-block;background:#e3f2fd;border:1px solid #64b5f6;border-radius:6px;padding:2px 8px;margin:2px 4px;font-weight:bold;font-size:.9em;color:#1565c0}.example{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:14px 16px;margin:12px 0;font-size:.9em}.formula{background:#fce4ec;border-left:4px solid #e91e63;padding:14px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-family:monospace;font-size:.95em;line-height:2}.compare{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}.compare-box{background:#fff;border:2px solid #e0e0e0;border-radius:10px;padding:14px;font-size:.9em}.compare-box h4{font-size:.95em;margin-bottom:8px;text-align:center}.compare-box.good{border-color:#4caf50}.compare-box.good h4{color:#2e7d32}.compare-box.bad{border-color:#ff9800}.compare-box.bad h4{color:#e65100}
+.quiz-area{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.quiz-area h2{color:#e65100;margin-bottom:16px}.question-card{background:#fafafa;border:1px solid #e0e0e0;border-radius:10px;padding:20px;margin:16px 0}.q-number{font-size:.8em;color:#999;margin-bottom:6px}.q-text{font-size:1.05em;font-weight:bold;margin-bottom:14px;line-height:1.6}.choices{list-style:none}.choices li{padding:12px 16px;margin:6px 0;border:2px solid #e0e0e0;border-radius:8px;cursor:pointer;transition:all .2s;font-size:.95em}.choices li:hover{border-color:#e65100;background:#fff3e0}.choices li.correct{border-color:#4caf50;background:#e8f5e9}.choices li.wrong{border-color:#f44336;background:#ffebee}.explanation{display:none;margin-top:12px;padding:14px;background:#f5f5f5;border-radius:8px;font-size:.9em;line-height:1.7}.explanation.show{display:block}.result-area{display:none;text-align:center;padding:30px;background:#fff;border-radius:12px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.result-score{font-size:2.5em;font-weight:bold;color:#e65100;margin:10px 0}.btn{display:inline-block;padding:12px 28px;background:#e65100;color:#fff;border:none;border-radius:8px;font-size:1em;cursor:pointer;margin:8px}.btn:hover{background:#ff8f00}.btn-outline{background:#fff;color:#e65100;border:2px solid #e65100}.progress-bar{width:100%;height:6px;background:#e0e0e0;border-radius:3px;margin:12px 0}.progress-fill{height:100%;background:#e65100;border-radius:3px;transition:width .3s}.back-link{display:inline-block;margin:16px 0;color:#e65100;text-decoration:none;font-weight:bold}
+.sql-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.88em}
+.sql-table th{background:#e65100;color:#fff;padding:6px;border:1px solid #ccc}
+.sql-table td{padding:6px;border:1px solid #ccc;background:#fff}
+</style>
+</head>
+<body>
+<div class="header"><h1>第10章 ネットワーク</h1><div class="sub">基本情報技術者試験 Web教材</div></div>
+<div class="container">
+<a href="it_quiz.html" class="back-link">← 章の一覧にもどる</a>
+<div class="nav-tabs">
+<div class="nav-tab active" onclick="showSection('lesson1')">① 回線・LAN/WAN</div>
+<div class="nav-tab" onclick="showSection('lesson2')">② IPアドレス</div>
+<div class="nav-tab" onclick="showSection('lesson3')">③ サブネットマスク</div>
+<div class="nav-tab" onclick="showSection('lesson4')">④ IPv6・NAT・DNS</div>
+<div class="nav-tab" onclick="showSection('lesson5')">⑤ プロトコル・機器</div>
+<div class="nav-tab" onclick="showSection('quiz')">確認テスト</div>
+</div>
+
+<!-- ===== レッスン1 ===== -->
+<div id="lesson1" class="section active">
+<div class="lesson-card">
+<h2>① 通信回線・LANとWAN・無線LAN</h2>
+
+<h3>通信速度と伝送時間</h3>
+<div class="key-point">
+<span class="vocab">通信速度</span>：1秒間に送れるデータ量。単位は<strong>bps</strong>（bit per second＝ビット／秒）<br><br>
+<span class="vocab">伝送効率</span>：回線の実際の利用率（理論値どおりには出ないため掛ける）
+</div>
+<div class="formula"><strong>伝送時間の計算：</strong><br><br>
+伝送時間 ＝ データ量(ビット) ÷ (通信速度 × 伝送効率)<br><br>
+※ データ量がバイトのときは <strong>×8</strong> でビットに直す<br>
+　（1バイト ＝ 8ビット）
+</div>
+<div class="example"><strong>例：</strong>10Mバイトのデータを、通信速度100Mbps・伝送効率50%の回線で送る時間<br>
+＝ (10×8) Mビット ÷ (100Mbps × 0.5)<br>
+＝ 80 ÷ 50 ＝ <strong>1.6秒</strong></div>
+
+<h3>LANとWAN</h3>
+<div class="compare">
+<div class="compare-box good">
+<h4>LAN</h4>
+Local Area Network<br><br>
+建物内・敷地内など<strong>狭い範囲</strong>のネットワーク<br>
+（自社の設備でつくる）
+</div>
+<div class="compare-box bad">
+<h4>WAN</h4>
+Wide Area Network<br><br>
+<strong>電気通信事業者の回線</strong>を使った広域ネットワーク<br>
+（東京〜大阪の拠点間など）
+</div>
+</div>
+<div class="key-point">
+LANとWANの違いは「規模」ではなく、<strong>電気通信事業者が設置した通信回線を使うか否か</strong>。<br>
+プロバイダ（ISP）や携帯電話会社などの回線を使えばWANに分類される。
+</div>
+
+<h3>無線LAN</h3>
+<div class="key-point">
+<span class="vocab">無線LAN</span>：ケーブルではなく電波でつなぐLAN。<span class="vocab">Wi-Fi</span>は無線LANの規格の1つ<br><br>
+<span class="vocab">アクセスポイント</span>：コンピュータを無線LANに接続するための機器（家庭ではルーターが兼ねることが多い）<br><br>
+<span class="vocab">アドホック</span>：アクセスポイントを経由せず、コンピュータ同士が<strong>直接</strong>通信する方法
+</div>
+<p><span class="vocab">インターネット</span>とは、世界中の無数のLAN・WANをつないだ巨大なネットワークです。</p>
+</div>
+</div>
+
+<!-- ===== レッスン2 ===== -->
+<div id="lesson2" class="section">
+<div class="lesson-card">
+<h2>② IPアドレス・ポート番号・MACアドレス</h2>
+
+<h3>IPアドレス</h3>
+<div class="key-point">
+<span class="vocab">IPアドレス</span>：ネットワークに接続しているコンピュータを識別する番号（＝ネット上の「住所」）<br>
+・全世界で<strong>重複しない</strong>唯一の値である必要がある<br>
+・管理団体は<span class="vocab">ICANN</span>（アメリカ）<br>
+・例：13.112.248.159 のように数値とピリオドで表す
+</div>
+
+<h3>通信に必要な3つの値</h3>
+<div class="key-point">
+IPアドレスだけでは通信できず、次の3つがセットで必要：<br><br>
+<span class="vocab">IPアドレス</span>：<strong>最終的な通信相手のコンピュータ</strong>を特定<br>
+<span class="vocab">ポート番号</span>：相手コンピュータ上の<strong>アプリケーション</strong>を特定<br>
+<span class="vocab">MACアドレス</span>：<strong>次の中継相手（隣の機器）</strong>を特定
+</div>
+<div class="example"><strong>電車でたとえると…</strong><br>
+IPアドレス＝最終目的地の駅名／MACアドレス＝乗り換え駅の名前<br>
+ポート番号＝駅の中の「◯番出口」（どのアプリと通信するか）</div>
+
+<h3>MACアドレスの構成</h3>
+<div class="key-point">
+<span class="vocab">MACアドレス</span>：ネットワーク機器ごとに割り当てられた固有の番号（<strong>48ビット</strong>）<br><br>
+・前半24ビット ＝ <strong>ベンダーID（OUI）</strong>：機器メーカーに割り当てられたコード<br>
+・後半24ビット ＝ <strong>固有製造番号</strong>：各メーカーが製品に割り当てた一意のコード<br>
+・通常は16進数で表記される
+</div>
+</div>
+</div>
+
+<!-- ===== レッスン3 ===== -->
+<div id="lesson3" class="section">
+<div class="lesson-card">
+<h2>③ サブネットマスク・特別なアドレス</h2>
+
+<h3>ネットワーク部とホスト部</h3>
+<div class="key-point">
+IPアドレス（IPv4）は32ビットで、2つのパートに分かれる：<br><br>
+<span class="vocab">ネットワーク部</span>：所属する<strong>ネットワーク（LAN）</strong>を示す<br>
+<span class="vocab">ホスト部</span>：そのネットワーク内の<strong>コンピュータ</strong>を示す
+</div>
+
+<h3>サブネットマスク</h3>
+<div class="key-point">
+<span class="vocab">サブネットマスク</span>：どこまでがネットワーク部で、どこからがホスト部かを示す番号<br>
+・ネットワーク部を<strong>「1」</strong>、ホスト部を<strong>「0」</strong>で表す<br>
+・例：255.255.255.240 ＝ 上位28ビットが「1」＝ネットワーク部28ビット、ホスト部4ビット
+</div>
+<div class="key-point">
+<span class="vocab">アドレスプレフィックス表記法</span>：ネットワーク部の桁数を「/28」のように末尾に書く方法<br>
+・10.170.70.19<strong>/28</strong> ＝ サブネットマスク 255.255.255.240 と同じ意味
+</div>
+
+<h3>接続できるコンピュータ数</h3>
+<div class="formula">
+ホスト部が n ビット → 使えるアドレスは <strong>2ⁿ − 2</strong> 台<br><br>
+（−2 する理由 ↓）
+</div>
+<div class="compare">
+<div class="compare-box good">
+<h4>ネットワークアドレス</h4>
+ホスト部がすべて<strong>「0」</strong><br><br>
+そのLAN自体を識別する番号（ホストに割り当て不可）
+</div>
+<div class="compare-box bad">
+<h4>ブロードキャストアドレス</h4>
+ホスト部がすべて<strong>「1」</strong><br><br>
+同一ネットワーク内の全ホストへ<strong>一斉送信</strong>する番号（割り当て不可）
+</div>
+</div>
+<div class="example"><strong>計算のコツ：</strong>ホスト部4ビット → 2⁴−2 ＝ <strong>14台</strong>／ホスト部9ビット → 2⁹−2 ＝ <strong>510台</strong></div>
+</div>
+</div>
+
+<!-- ===== レッスン4 ===== -->
+<div id="lesson4" class="section">
+<div class="lesson-card">
+<h2>④ IPv6・NAT・ドメイン名・DNS</h2>
+
+<h3>IPv4とIPv6</h3>
+<div class="compare">
+<div class="compare-box good">
+<h4>IPv4</h4>
+<strong>32ビット</strong>（約43億個）<br><br>
+8ビットごとに「.」で区切り<strong>10進数</strong>表記<br>
+例：13.112.248.159
+</div>
+<div class="compare-box bad">
+<h4>IPv6</h4>
+<strong>128ビット</strong>（ほぼ無限）<br><br>
+16ビットごとに「:」で区切り<strong>16進数</strong>表記<br>
+IPアドレス枯渇問題を解決
+</div>
+</div>
+
+<h3>プライベート／グローバルIPと変換技術</h3>
+<div class="key-point">
+<span class="vocab">グローバルIPアドレス</span>：インターネット接続用、世界で唯一<br>
+<span class="vocab">プライベートIPアドレス</span>：LAN内だけで使う（他のLANと重複OK）<br><br>
+<span class="vocab">NAT</span>：プライベートIP ↔ グローバルIP を<strong>1対1</strong>で変換<br>
+<span class="vocab">NAPT（IPマスカレード）</span>：<strong>複数</strong>のプライベートIPを1つのグローバルIPに変換（ポート番号で区別）<br>
+<span class="vocab">DHCP</span>：IPアドレスを各コンピュータに<strong>自動で割り当てる</strong>プロトコル
+</div>
+
+<h3>ドメイン名・DNS・URL</h3>
+<div class="key-point">
+<span class="vocab">ドメイン名</span>：IPアドレスに対応付けられた、人間が読みやすい名前（例：example.co.jp）<br><br>
+<span class="vocab">DNS</span>：ドメイン名 ⇔ IPアドレスを<strong>相互変換</strong>する仕組み（現実の「電話帳」にあたる）<br><br>
+<span class="vocab">URL</span>：ドメイン名に加え、内部のフォルダ・ファイルまで指定する記法<br>
+例：https://www.example.co.jp/abc.html
+</div>
+</div>
+</div>
+
+<!-- ===== レッスン5 ===== -->
+<div id="lesson5" class="section">
+<div class="lesson-card">
+<h2>⑤ 通信プロトコル・OSI・ネットワーク機器</h2>
+
+<h3>OSI基本参照モデルとTCP/IP</h3>
+<div class="key-point">
+<span class="vocab">通信プロトコル</span>：コンピュータ同士が通信するときに守る「約束事（ルール）」<br><br>
+<span class="vocab">OSI基本参照モデル</span>：通信機能を<strong>7階層</strong>に分けたモデル（ISOが策定）<br>
+<span class="vocab">TCP/IP</span>：実際のインターネットで使う、機能を<strong>4階層</strong>にまとめたモデル
+</div>
+
+<h3>4つのネットワーク機器（対応する層が頻出）</h3>
+<table class="sql-table">
+<tr><th>機器</th><th>OSIの層</th><th>役割</th></tr>
+<tr><td><strong>リピータ</strong></td><td>物理層(1)</td><td>弱った信号を増幅・整形（全データ中継）</td></tr>
+<tr><td><strong>ブリッジ</strong></td><td>データリンク層(2)</td><td>MACアドレスを見て中継の可否を判断</td></tr>
+<tr><td><strong>ルーター</strong></td><td>ネットワーク層(3)</td><td>IPアドレスを見てルーティング（経路選択）</td></tr>
+<tr><td><strong>ゲートウェイ</strong></td><td>トランスポート層以上(4〜7)</td><td>異なるプロトコルのネットワークを接続</td></tr>
+</table>
+<div class="key-point">
+・<span class="vocab">スイッチングハブ（レイヤー2スイッチ）</span>＝ブリッジを複数LAN対応にしたもの<br>
+・<span class="vocab">レイヤー3スイッチ</span>＝レイヤー2スイッチにルーティング機能を追加
+</div>
+
+<h3>主な通信プロトコル</h3>
+<div class="key-point">
+<span class="vocab">SMTP</span>：メール<strong>送信</strong>／<span class="vocab">POP</span>・<span class="vocab">IMAP</span>：メール<strong>受信</strong><br>
+<span class="vocab">HTTP</span>：Webページ閲覧／<span class="vocab">FTP</span>：ファイル転送<br>
+<span class="vocab">ARP</span>：IPアドレスからMACアドレスを求める<br>
+<span class="vocab">DHCP</span>：IP自動割当／<span class="vocab">NTP</span>：時刻合わせ<br>
+<span class="vocab">RIP</span>：ルーターの経路選択
+</div>
+
+<h3>電子メールの宛先欄</h3>
+<div class="key-point">
+<span class="vocab">To</span>：主たる宛先（返信・対応してほしい人）<br>
+<span class="vocab">CC</span>：念のため共有する人（アドレスは全員に見える）<br>
+<span class="vocab">BCC</span>：他の受信者に<strong>アドレスが見えない</strong>宛先<br><br>
+<span class="vocab">MIME</span>：メールで日本語や画像・添付ファイルを扱えるようにする規格
+</div>
+
+<div class="key-point" style="background:#fce4ec;border-color:#e91e63">
+<strong style="color:#e91e63">第10章の最重要まとめ</strong><br><br>
+・伝送時間 ＝ データ量 ÷ (速度×効率)、バイト→ビットは×8<br>
+・IP＝コンピュータ、ポート番号＝アプリ、MAC＝次の中継先<br>
+・MACアドレス48ビット＝ベンダーID＋固有製造番号<br>
+・使えるIP数 ＝ 2ⁿ−2（ネットワーク／ブロードキャストを除く）<br>
+・IPv4＝32ビット、IPv6＝128ビット<br>
+・NAT＝1対1、NAPT＝複数対1、DHCP＝IP自動割当、DNS＝名前⇔IP<br>
+・リピータ=物理、ブリッジ=データリンク、ルーター=ネットワーク、ゲートウェイ=4層以上
+</div>
+</div>
+</div>
+
+<!-- ===== 確認テスト ===== -->
+<div id="quiz" class="section">
+<div class="quiz-area">
+<h2>確認テスト ── 第10章</h2>
+<p style="color:#666;font-size:.9em;margin-bottom:16px">全問ランダム出題・選択肢シャッフル。何度でも挑戦できます。</p>
+<div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+<div id="quizContainer"></div>
+<div style="text-align:center;margin-top:20px"><button class="btn" id="submitBtn" onclick="submitQuiz()" style="display:none">結果を見る</button></div>
+</div>
+<div class="result-area" id="resultArea"><h2>結果</h2><div class="result-score" id="resultScore"></div><div id="resultMsg" style="font-size:1.1em;margin:10px 0"></div><button class="btn" onclick="retryQuiz()">もう一度</button><button class="btn btn-outline" onclick="showSection('lesson1')">レッスンに戻る</button></div>
+</div>
+</div>
+
+<script>
+const allQuestions=[
+{q:'LAN（Local Area Network）とWAN（Wide Area Network）を区別する基準として最も適切なものはどれか。',choices:['ネットワークの通信速度','接続するコンピュータの台数','電気通信事業者が設置した通信回線を使うか否か','有線か無線か'],answer:2,explanation:'LANとWANの違いは規模ではなく、<strong>電気通信事業者が設置した通信回線を使うか否か</strong>です。プロバイダや携帯電話会社の回線を使ったネットワークはWANに分類されます。'},
+{q:'10Mバイトのデータを、通信速度100Mbps・伝送効率50%の回線で送るのにかかる時間はおよそ何秒か。',choices:['0.8秒','1.6秒','3.2秒','8秒'],answer:1,explanation:'データ量をビットに直すと10×8＝80Mビット。実効速度は100×0.5＝50Mbps。伝送時間＝80÷50＝<strong>1.6秒</strong>です。バイトをビットに直す「×8」を忘れないことがポイントです。'},
+{q:'アクセスポイントを経由せず、コンピュータ同士が直接通信する無線LANの方式を何というか。',choices:['インフラストラクチャ','アドホック','ブロードキャスト','ルーティング'],answer:1,explanation:'コンピュータ同士が直接通信する方式を<strong>アドホック</strong>といいます。アクセスポイントを経由する方式（インフラストラクチャ）と対になる概念です。'},
+{q:'TCP及びUDPのプロトコル処理において、通信相手のアプリケーションを識別するために使用されるものはどれか。（平成23年度）',choices:['MACアドレス','シーケンス番号','プロトコル番号','ポート番号'],answer:3,explanation:'相手コンピュータ上のどのアプリケーションと通信するかを識別するのは<strong>ポート番号</strong>です。IPアドレスはコンピュータ自体を、MACアドレスは次の中継先を識別します。'},
+{q:'MACアドレスを構成するコードの組み合わせとして適切なものはどれか。（平成24年度）',choices:['IPアドレスと固有製造番号','ベンダーID（OUI）とIPアドレス','ベンダーID（OUI）と固有製造番号','ポート番号と固有製造番号'],answer:2,explanation:'MACアドレス（48ビット）は、前半24ビットの<strong>ベンダーID（OUI）</strong>と、後半24ビットの<strong>固有製造番号</strong>で構成されます。'},
+{q:'IPアドレス「10.170.70.19」、サブネットマスク「255.255.255.240」をもつPCのネットワークアドレスはどれか。（平成29年度）',choices:['10.170.70.0','10.170.70.16','10.170.70.31','10.170.70.255'],answer:1,explanation:'サブネットマスク255.255.255.240は下位4ビットがホスト部。ホスト部をすべて0にした値がネットワークアドレスです。19（2進数…0001<u>0011</u>）の下4桁を0にすると<strong>10.170.70.16</strong>になります。'},
+{q:'ホスト部が全ビット「1」であるIPアドレスの用途はどれか。',choices:['ネットワーク自体を識別する','同一ネットワーク内の全ホストへ一斉送信する','ルーターに固定で割り当てる','DNSサーバを指定する'],answer:1,explanation:'ホスト部がすべて「1」のアドレスは<strong>ブロードキャストアドレス</strong>で、同一ネットワーク内の全ホストへ一斉送信するときに使われます。ホスト部がすべて「0」はネットワークアドレスです。'},
+{q:'192.168.0.0/23（サブネットマスク255.255.254.0）のネットワークで、ホストとして使用できるアドレスの個数の上限はどれか。（平成31年度）',choices:['23','24','254','510'],answer:3,explanation:'/23はネットワーク部23ビット、ホスト部は32−23＝9ビット。使えるホスト数は2⁹−2＝512−2＝<strong>510個</strong>です。ネットワークアドレスとブロードキャストアドレスの2つを引きます。'},
+{q:'IPv6のIPアドレスは何ビットか。（平成27年度）',choices:['32','64','128','256'],answer:2,explanation:'IPv6は<strong>128ビット</strong>で構成されます。IPv4の32ビット（約43億個）では足りなくなったアドレス枯渇問題を解決するために作られました。'},
+{q:'IPv6アドレスの表記の特徴として適切なものはどれか。（平成26年度）',choices:['アドレス長は96ビットである','すべてグローバルアドレスである','IPv4アドレスと1対1に対応付けられる','16進数表記を16ビットずつコロン（:）で区切る'],answer:3,explanation:'IPv6は16ビットごとに「:」（コロン）で区切って16進数で表記します（例：2001:0DB8:…）。アドレス長は128ビットで、総数がIPv4と桁違いのため1対1対応はできません。'},
+{q:'TCP/IPネットワークにおいて、IPアドレスを動的に割り当てるプロトコルはどれか。（平成28年度）',choices:['ARP','DHCP','RIP','SMTP'],answer:1,explanation:'IPアドレスを各コンピュータに自動的（動的）に割り当てるプロトコルは<strong>DHCP</strong>です。ARPはIP→MAC変換、RIPは経路選択、SMTPはメール送信のプロトコルです。'},
+{q:'プライベートIPアドレスをもつ複数の端末が、1つのグローバルIPアドレスを共有してインターネット接続する仕組みを実現するものはどれか。（平成28年度）',choices:['DHCP','DNS','NAPT','RADIUS'],answer:2,explanation:'複数のプライベートIPアドレスを1つのグローバルIPアドレスに変換する技術は<strong>NAPT</strong>です。NATは1対1の変換しかできない点が異なります。'},
+{q:'IPv4におけるインターネット接続用ルーターのNAT機能の説明として適切なものはどれか。（平成29年度）',choices:['同じWebサイトへのアクセスをキャッシュして表示を高速化する','IPパケットを検査して攻撃や侵入を検知する','特定の端末宛てのIPパケットだけを通過させる','プライベートIPアドレスとグローバルIPアドレスを相互に変換する'],answer:3,explanation:'<strong>NAT</strong>はプライベートIPアドレスとグローバルIPアドレスを相互に変換する機能です。ほかの選択肢はキャッシュ、IDS、パケットフィルタリングの説明です。'},
+{q:'TCP/IPネットワークでDNSが果たす役割はどれか。（平成30年度）',choices:['未使用のIPアドレスを要求元に割り当てる','プログラム名の指定だけでサーバ上のプログラムを呼び出す','プライベートIPをグローバルIPに変換する','ドメイン名やホスト名とIPアドレスを対応付ける'],answer:3,explanation:'<strong>DNS</strong>はドメイン名（ホスト名）とIPアドレスを対応付ける仕組みです。1番目はDHCP、3番目はNATの役割です。'},
+{q:'OSI基本参照モデルの物理層でデータ（信号）を中継し、弱まった信号を増幅・整形する装置はどれか。',choices:['リピータ','ブリッジ','ルーター','ゲートウェイ'],answer:0,explanation:'<strong>リピータ</strong>は物理層で信号を増幅・整形する装置です。データの内容を見ず、流れてきたすべての信号を中継します。'},
+{q:'MACアドレスを見てデータを別のLANへ中継すべきか判断する、OSI基本参照モデルのデータリンク層の装置はどれか。',choices:['リピータ','ブリッジ','ルーター','ゲートウェイ'],answer:1,explanation:'<strong>ブリッジ</strong>はデータリンク層の装置で、MACアドレスを見て中継の可否を判断します。複数LAN対応にしたものがレイヤー2スイッチ（スイッチングハブ）です。'},
+{q:'IPアドレスを見てルーティング（経路選択）を行う、OSI基本参照モデルのネットワーク層の装置はどれか。',choices:['リピータ','ブリッジ','ルーター','リピータハブ'],answer:2,explanation:'<strong>ルーター</strong>はネットワーク層でIPアドレスを見てルーティングを行い、指定されたLANだけにデータを送ります。'},
+{q:'TCP/IPネットワークで、サーバとクライアント間の時刻を合わせるためのプロトコルはどれか。',choices:['NTP','ARP','SMTP','FTP'],answer:0,explanation:'コンピュータの時刻を合わせるプロトコルは<strong>NTP</strong>（Network Time Protocol）です。NTPサーバにアクセスして内部時計を同期・修正します。'},
+{q:'電子メールで、他の受信者にはメールアドレスが分からないように送信先を指定する欄はどれか。',choices:['To','CC','BCC','Reply-To'],answer:2,explanation:'<strong>BCC</strong>（Blind Carbon Copy）に入れた宛先は、他の受信者からアドレスが見えません。ToとCCのアドレスは受信者全員に見えます。'}
+];
+let questions=[],answered=0;
+function shuffleArray(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
+function initQuiz(){questions=shuffleArray(allQuestions);answered=0;document.getElementById('submitBtn').style.display='none';document.getElementById('resultArea').style.display='none';document.getElementById('progressFill').style.width='0%';const c=document.getElementById('quizContainer');c.innerHTML='';questions.forEach((q,idx)=>{const sc=q.choices.map((c,i)=>({text:c,origIdx:i}));for(let i=sc.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[sc[i],sc[j]]=[sc[j],sc[i]]}q._shuffled=sc;q._selected=null;let h=`<div class="question-card"><div class="q-number">問題 ${idx+1} / ${questions.length}</div><div class="q-text">${q.q}</div><ul class="choices">`;sc.forEach((c,ci)=>{h+=`<li onclick="selectChoice(${idx},${ci})" id="q${idx}c${ci}">${c.text}</li>`});h+=`</ul><div class="explanation" id="exp${idx}"><div id="expText${idx}"></div></div></div>`;c.innerHTML+=h})}
+function selectChoice(qi,ci){const q=questions[qi];if(q._selected!==null)return;q._selected=ci;answered++;const corr=q.answer,sel=q._shuffled[ci].origIdx,ok=sel===corr;q._shuffled.forEach((c,i)=>{const li=document.getElementById(`q${qi}c${i}`);if(c.origIdx===corr)li.classList.add('correct');if(i===ci&&!ok)li.classList.add('wrong')});const e=document.getElementById(`exp${qi}`),t=document.getElementById(`expText${qi}`);t.innerHTML=(ok?'<span style="color:#4caf50;font-weight:bold">&#x2B55; 正解！</span>':'<span style="color:#f44336;font-weight:bold">&#x274C; 不正解</span>')+'<br>'+q.explanation;e.classList.add('show');document.getElementById('progressFill').style.width=(answered/questions.length*100)+'%';if(answered===questions.length)document.getElementById('submitBtn').style.display='inline-block'}
+function submitQuiz(){let c=0;questions.forEach(q=>{if(q._selected!==null&&q._shuffled[q._selected].origIdx===q.answer)c++});document.getElementById('resultArea').style.display='block';document.getElementById('resultScore').textContent=`${c} / ${questions.length}`;const p=c/questions.length*100;let m='';if(p===100)m='満点！完璧です！';else if(p>=80)m='よく理解できています！';else if(p>=60)m='合格ライン！もう少し復習しましょう。';else m='レッスンをもう一度確認しましょう。';document.getElementById('resultMsg').textContent=m;document.getElementById('resultArea').scrollIntoView({behavior:'smooth'})}
+function retryQuiz(){initQuiz();document.getElementById('quizContainer').scrollIntoView({behavior:'smooth'})}
+function showSection(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');const tabs=document.querySelectorAll('.nav-tab');const ids=['lesson1','lesson2','lesson3','lesson4','lesson5','quiz'];tabs[ids.indexOf(id)].classList.add('active');if(id==='quiz')initQuiz();window.scrollTo({top:0,behavior:'smooth'})}
+initQuiz();
+</script>
+</body>
+</html>
