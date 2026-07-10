@@ -316,6 +316,11 @@ strong{color:var(--ink-strong); font-weight:700;}
 @media (max-width:360px){
   .compare{grid-template-columns:1fr;}
 }
+.home-tab{flex:0 0 auto; display:inline-flex; align-items:center; gap:5px; cursor:pointer;
+  font-family:var(--font); font-size:var(--fs-sm); font-weight:600;
+  border:1px solid var(--line); background:var(--card); color:var(--sub);
+  border-radius:var(--r-pill); padding:8px 14px; transition:.18s ease;}
+.home-tab:hover{border-color:var(--accent-2); color:var(--ink); box-shadow:0 0 16px rgba(167,139,250,.25);}
 </style>
 </head>
 <body>
@@ -358,6 +363,7 @@ strong{color:var(--ink-strong); font-weight:700;}
 
 <div class="tabbar">
   <div class="tabbar-inner">
+    <button class="home-tab" onclick="goBack()">← ホーム</button>
     <nav class="nav-tabs" id="navTabs">
       <button class="nav-tab active" data-target="l1" onclick="showSection('l1')">① 論理演算</button>
       <button class="nav-tab" data-target="l2" onclick="showSection('l2')">② 論理回路</button>
