@@ -4,49 +4,392 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>第12章 システム開発技術｜基本情報技術者</title>
+<meta name="description" content="基本情報技術者試験 Web教材 — 第10章 ネットワーク。レッスンと確認テスト。">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Hiragino Sans','Noto Sans JP','Meiryo',sans-serif;background:#f5f5f0;color:#333;line-height:1.8;padding:0 0 60px 0}.header{background:linear-gradient(135deg,#e65100,#ff8f00);color:#fff;padding:24px 20px;text-align:center}.header h1{font-size:1.3em;margin-bottom:4px}.header .sub{font-size:.85em;opacity:.8}.container{max-width:720px;margin:0 auto;padding:16px}.nav-tabs{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap}.nav-tab{padding:10px 14px;border:2px solid #e65100;border-radius:8px;background:#fff;color:#e65100;font-weight:bold;font-size:.82em;cursor:pointer;transition:all .2s}.nav-tab:hover,.nav-tab.active{background:#e65100;color:#fff}.section{display:none}.section.active{display:block}.lesson-card{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.lesson-card h2{color:#e65100;font-size:1.2em;margin-bottom:16px;padding-bottom:8px;border-bottom:3px solid #ffe0b2}.lesson-card h3{color:#ff8f00;font-size:1.05em;margin:20px 0 10px 0}.key-point{background:#fff3e0;border-left:4px solid #e65100;padding:14px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-size:.95em}.key-point strong{color:#e65100}.vocab{display:inline-block;background:#e3f2fd;border:1px solid #64b5f6;border-radius:6px;padding:2px 8px;margin:2px 4px;font-weight:bold;font-size:.9em;color:#1565c0}.example{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:14px 16px;margin:12px 0;font-size:.9em}.formula{background:#fce4ec;border-left:4px solid #e91e63;padding:14px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-family:monospace;font-size:.95em;line-height:2}.compare{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}.compare-box{background:#fff;border:2px solid #e0e0e0;border-radius:10px;padding:14px;font-size:.9em}.compare-box h4{font-size:.95em;margin-bottom:8px;text-align:center}.compare-box.good{border-color:#4caf50}.compare-box.good h4{color:#2e7d32}.compare-box.bad{border-color:#ff9800}.compare-box.bad h4{color:#e65100}
-.quiz-area{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.quiz-area h2{color:#e65100;margin-bottom:16px}.question-card{background:#fafafa;border:1px solid #e0e0e0;border-radius:10px;padding:20px;margin:16px 0}.q-number{font-size:.8em;color:#999;margin-bottom:6px}.q-text{font-size:1.05em;font-weight:bold;margin-bottom:14px;line-height:1.6}.choices{list-style:none}.choices li{padding:12px 16px;margin:6px 0;border:2px solid #e0e0e0;border-radius:8px;cursor:pointer;transition:all .2s;font-size:.95em}.choices li:hover{border-color:#e65100;background:#fff3e0}.choices li.correct{border-color:#4caf50;background:#e8f5e9}.choices li.wrong{border-color:#f44336;background:#ffebee}.explanation{display:none;margin-top:12px;padding:14px;background:#f5f5f5;border-radius:8px;font-size:.9em;line-height:1.7}.explanation.show{display:block}.result-area{display:none;text-align:center;padding:30px;background:#fff;border-radius:12px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.result-score{font-size:2.5em;font-weight:bold;color:#e65100;margin:10px 0}.btn{display:inline-block;padding:12px 28px;background:#e65100;color:#fff;border:none;border-radius:8px;font-size:1em;cursor:pointer;margin:8px}.btn:hover{background:#ff8f00}.btn-outline{background:#fff;color:#e65100;border:2px solid #e65100}.progress-bar{width:100%;height:6px;background:#e0e0e0;border-radius:3px;margin:12px 0}.progress-fill{height:100%;background:#e65100;border-radius:3px;transition:width .3s}.back-link{display:inline-block;margin:16px 0;color:#e65100;text-decoration:none;font-weight:bold}
-.sql-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.88em}
-.sql-table th{background:#e65100;color:#fff;padding:6px;border:1px solid #ccc}
-.sql-table td{padding:6px;border:1px solid #ccc;background:#fff}
+/* =========================================================================
+   基本情報技術者 Web教材 — デザインシステム（案D：ネオ・モダン / ダーク）
+   このファイル1枚で完結。全22章はこの <style> と <script> を流用し、
+   各章の「レッスン本文」と「allQuestions 配列」を差し替えるだけで展開できます。
+   ========================================================================= */
+
+:root{
+  /* ---- 色：面 ---------------------------------------------------------- */
+  --bg:            #0A0E16;   /* ページ背景（最下層）           */
+  --bg-2:          #0D121C;   /* 一段明るい背景                 */
+  --card:          rgba(255,255,255,.045); /* ガラス質カード面   */
+  --card-solid:    #131926;   /* 不透明カード（表・数式など）   */
+  --inset:         rgba(0,0,0,.35);        /* へこみ面（数式）    */
+  --line:          rgba(255,255,255,.09);  /* 罫線・境界         */
+  --line-strong:   rgba(255,255,255,.16);  /* 強い罫線           */
+  /* ---- 色：文字 -------------------------------------------------------- */
+  --ink:           #EAEDF5;   /* 本文                          */
+  --ink-strong:    #F5F7FB;   /* 見出し・強調                  */
+  --sub:           #98A2B3;   /* サブ文字                      */
+  --faint:         #5E6779;   /* 補助・キャプション            */
+  /* ---- 色：アクセント / 意味 ------------------------------------------ */
+  --accent:        #56E1E9;   /* ネオンシアン（主アクセント）  */
+  --accent-ink:    #06222A;   /* アクセント上の文字            */
+  --accent-soft:   #7FEFF5;   /* 明るいシアン（テキスト用）    */
+  --accent-2:      #A78BFA;   /* バイオレット（副アクセント）  */
+  --success:       #4ADE80;   /* 成功・正解（緑）              */
+  --success-soft:  #7BE9A4;
+  --danger:        #FB7185;   /* 誤答（赤）                    */
+  --danger-soft:   #FDA4AF;
+  --warning:       #FBBF24;   /* 警告・注意（アンバー）        */
+  --warning-soft:  #FCD34D;
+  /* ---- 角丸 ------------------------------------------------------------ */
+  --r-xs:6px; --r-sm:10px; --r-md:14px; --r-lg:18px; --r-xl:24px; --r-pill:999px;
+  /* ---- 影・グロー ------------------------------------------------------ */
+  --shadow:        0 10px 34px rgba(0,0,0,.42);
+  --shadow-pop:    0 24px 64px rgba(0,0,0,.55);
+  --glow:          0 0 22px rgba(86,225,233,.30);
+  --glow-2:        0 0 22px rgba(167,139,250,.28);
+  /* ---- 余白（8pxベース） ---------------------------------------------- */
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:20px; --s6:24px; --s7:32px; --s8:40px;
+  --pad:20px;                 /* コンテナ左右パディング（狭幅で縮小）*/
+  --maxw:720px;               /* 本文最大幅（可読性）          */
+  /* ---- フォント（Webフォント不使用・システムフォント） --------------- */
+  --font:  -apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","Meiryo",sans-serif;
+  --mono:  ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Courier New",monospace;
+  /* ---- 文字サイズ ------------------------------------------------------ */
+  --fs-h1:24px; --fs-h2:19px; --fs-h3:15.5px; --fs-body:15px; --fs-sm:13px; --fs-xs:11.5px;
+  --lh:1.9;
+}
+
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{
+  margin:0; font-family:var(--font); color:var(--ink);
+  font-size:var(--fs-body); line-height:var(--lh);
+  background:
+    radial-gradient(680px 480px at 88% -6%, rgba(86,225,233,.16), transparent 60%),
+    radial-gradient(620px 520px at -8% 34%, rgba(167,139,250,.14), transparent 60%),
+    radial-gradient(700px 620px at 60% 108%, rgba(86,225,233,.08), transparent 60%),
+    var(--bg);
+  background-attachment:fixed;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--accent-soft); text-decoration:none;}
+a:hover{color:var(--accent);}
+::selection{background:rgba(86,225,233,.28); color:#fff;}
+.wrap{max-width:var(--maxw); margin:0 auto; padding-left:var(--pad); padding-right:var(--pad);}
+
+/* =====================  ヘッダー（章タイトル帯）  ======================= */
+.header{position:relative; overflow:hidden; border-bottom:1px solid var(--line);}
+.header::after{content:""; position:absolute; left:0; right:0; bottom:-1px; height:1px;
+  background:linear-gradient(90deg,transparent,rgba(86,225,233,.7),rgba(167,139,250,.5),transparent);}
+.header .wrap{padding-top:26px; padding-bottom:24px;}
+.back-link{display:inline-flex; align-items:center; gap:6px; font-size:var(--fs-sm);
+  font-weight:600; color:var(--accent-soft); margin-bottom:16px; cursor:pointer;
+  text-shadow:0 0 14px rgba(86,225,233,.35);}
+.back-link:hover{color:var(--accent);}
+.eyebrow{font-size:var(--fs-xs); font-weight:700; letter-spacing:.18em; color:var(--accent);}
+.header h1{margin:8px 0 0; font-size:var(--fs-h1); font-weight:800; letter-spacing:-.01em; color:var(--ink-strong);}
+.header .sub{margin:7px 0 0; font-size:var(--fs-sm); color:var(--sub);}
+
+/* =====================  レッスン切替タブ（折り返し）＋確認テストボタン  === */
+.tabbar{position:sticky; top:0; z-index:50;
+  background:rgba(10,14,22,.82); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);}
+.tabbar-inner{display:flex; flex-wrap:wrap; align-items:center; gap:10px;
+  max-width:var(--maxw); margin:0 auto; padding:11px var(--pad);}
+.nav-tabs{display:flex; flex-wrap:wrap; gap:8px; flex:1 1 auto; min-width:0;}
+.nav-tab{border:1px solid var(--line); white-space:nowrap;
+  background:var(--card); color:var(--sub); font-family:var(--font);
+  font-size:var(--fs-sm); font-weight:600; border-radius:var(--r-pill);
+  padding:8px 15px; cursor:pointer; transition:.18s ease;}
+.nav-tab:hover{border-color:rgba(86,225,233,.5); color:var(--ink);}
+.nav-tab.active{background:var(--accent); color:var(--accent-ink); border-color:transparent;
+  font-weight:700; box-shadow:var(--glow);}
+/* 確認テスト：レッスンタブと分けた独立アクセントボタン（常時表示） */
+.quiz-sep{align-self:stretch; width:1px; background:var(--line); margin:2px 0;}
+.quiz-btn{flex:0 0 auto; display:inline-flex; align-items:center; gap:7px; white-space:nowrap;
+  cursor:pointer; font-family:var(--font); font-size:var(--fs-sm); font-weight:700;
+  padding:9px 17px; border-radius:var(--r-pill); border:1px solid transparent; color:#160B2E;
+  background:linear-gradient(135deg,var(--accent),var(--accent-2)); box-shadow:var(--glow); transition:.18s ease;}
+.quiz-btn .arw{font-size:15px; transition:transform .18s ease;}
+.quiz-btn:hover{filter:brightness(1.08); transform:translateY(-1px);}
+.quiz-btn:hover .arw{transform:translateX(3px);}
+.quiz-btn.active{outline:2px solid rgba(167,139,250,.65); outline-offset:2px;}
+@media (max-width:520px){
+  .tabbar{position:static; backdrop-filter:none; background:rgba(255,255,255,.02);}
+  .quiz-sep{display:none;}
+  .quiz-btn{flex:1 1 100%; justify-content:center;}
+}
+
+/* =====================  レッスン内ナビ（次へ／確認テストへ）  =========== */
+.lesson-nav{display:flex; justify-content:flex-end; margin-top:16px;}
+.btn-next{display:inline-flex; align-items:center; gap:16px; cursor:pointer; text-align:left;
+  font-family:var(--font); border-radius:var(--r-md); padding:14px 20px;
+  background:var(--card); border:1px solid var(--line-strong); color:var(--ink);
+  box-shadow:var(--shadow); transition:.18s ease;}
+.btn-next:hover{border-color:rgba(86,225,233,.55); transform:translateY(-1px);}
+.btn-next .bn-meta{display:flex; flex-direction:column; line-height:1.35;}
+.btn-next .bn-label{font-size:var(--fs-xs); color:var(--sub); font-weight:600;}
+.btn-next .bn-title{font-size:var(--fs-body); color:var(--ink-strong); font-weight:700;}
+.btn-next .bn-arrow{font-size:20px; color:var(--accent-soft); transition:transform .18s ease;}
+.btn-next:hover .bn-arrow{transform:translateX(4px);}
+.btn-next.to-quiz{background:linear-gradient(135deg,rgba(86,225,233,.16),rgba(167,139,250,.16));
+  border-color:rgba(86,225,233,.5); box-shadow:0 0 26px rgba(86,225,233,.12);}
+.btn-next.to-quiz .bn-label{color:var(--accent-soft);}
+.btn-next.to-quiz .bn-arrow{color:var(--accent);}
+@media (max-width:480px){
+  .lesson-nav{justify-content:stretch;}
+  .btn-next{flex:1; justify-content:space-between;}
+}
+
+/* =====================  セクション切替  ================================= */
+.section{display:none; padding-top:22px; padding-bottom:64px;}
+.section.active{display:block; animation:fadeUp .34s ease both;}
+@keyframes fadeUp{from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;}}
+
+/* =====================  レッスンカード & 見出し階層  ==================== */
+.lesson-card{background:var(--card); border:1px solid var(--line); border-radius:var(--r-lg);
+  padding:24px; box-shadow:var(--shadow); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);}
+.lesson-card > h2:first-child{margin-top:0;}
+h2{margin:0 0 4px; font-size:var(--fs-h2); font-weight:800; color:var(--ink-strong); letter-spacing:-.01em;}
+.h2-rule{width:46px; height:2px; margin:10px 0 18px; border-radius:2px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2)); box-shadow:0 0 10px rgba(86,225,233,.5);}
+h3{margin:26px 0 12px; font-size:var(--fs-h3); font-weight:700; color:var(--accent-soft);
+  display:flex; align-items:center; gap:8px;}
+h3::before{content:""; width:7px; height:7px; border-radius:50%; background:var(--accent);
+  box-shadow:0 0 10px var(--accent); flex:0 0 auto;}
+p{margin:0 0 12px;} p:last-child{margin-bottom:0;}
+strong{color:var(--ink-strong); font-weight:700;}
+
+/* =====================  用語バッジ  ==================================== */
+.vocab{display:inline-flex; align-items:center; white-space:nowrap;
+  background:rgba(86,225,233,.10); border:1px solid rgba(86,225,233,.45); color:var(--accent-soft);
+  border-radius:var(--r-pill); padding:2px 10px; font-size:var(--fs-sm); font-weight:600;
+  margin:0 1px;}
+.vocab.v2{background:rgba(167,139,250,.12); border-color:rgba(167,139,250,.45); color:#C9B8FB;}
+
+/* =====================  ポイント囲み  ================================== */
+.key-point{background:rgba(86,225,233,.045); border:1px solid var(--line);
+  border-left:2px solid var(--accent); border-radius:0 var(--r-md) var(--r-md) 0;
+  padding:15px 17px; margin:14px 0; box-shadow:inset 0 0 26px rgba(86,225,233,.05);}
+.key-point .label{display:block; font-size:var(--fs-xs); font-weight:700; letter-spacing:.1em;
+  color:var(--accent); margin-bottom:8px;}
+.stack{display:flex; flex-direction:column; gap:10px;}
+
+/* =====================  具体例ブロック  ================================ */
+.example{background:rgba(251,191,36,.05); border:1px solid rgba(251,191,36,.22);
+  border-left:2px solid var(--warning); border-radius:0 var(--r-md) var(--r-md) 0;
+  padding:14px 17px; margin:14px 0; font-size:var(--fs-body); color:var(--ink);}
+.example b, .example strong{color:var(--warning-soft);}
+
+/* =====================  計算式ブロック（等幅）  ======================== */
+.formula{background:var(--inset); border:1px solid rgba(86,225,233,.20); border-radius:var(--r-md);
+  padding:15px 17px; margin:14px 0;}
+.formula .exp{font-family:var(--mono); font-size:14px; color:var(--accent-soft); line-height:1.85;}
+.formula .note{font-family:var(--mono); font-size:12px; color:var(--faint); margin-top:8px;}
+
+/* =====================  左右の対比カード  ============================== */
+.compare{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:14px 0;}
+.compare-box{border-radius:var(--r-md); padding:14px 15px; border:1px solid var(--line);}
+.compare-box h4{margin:0 0 3px; font-size:15px; font-weight:800;}
+.compare-box .en{font-size:var(--fs-xs); color:var(--faint); margin-bottom:8px;}
+.compare-box .body{font-size:var(--fs-sm); color:var(--ink); line-height:1.75;}
+.compare-box.good{background:rgba(74,222,128,.07); border-color:rgba(74,222,128,.30);}
+.compare-box.good h4{color:var(--success-soft);}
+.compare-box.bad{background:rgba(251,191,36,.07); border-color:rgba(251,191,36,.30);}
+.compare-box.bad h4{color:var(--warning-soft);}
+
+/* =====================  一覧表  ======================================== */
+.table-wrap{overflow-x:auto; border:1px solid var(--line); border-radius:var(--r-md); margin:14px 0;
+  scrollbar-width:thin;}
+.sql-table{width:100%; border-collapse:collapse; min-width:320px;}
+.sql-table th{ text-align:left; font-size:var(--fs-sm); font-weight:700; color:var(--accent-soft);
+  background:rgba(86,225,233,.07); padding:11px 14px; border-bottom:1px solid var(--line); white-space:nowrap;}
+.sql-table td{font-size:var(--fs-sm); color:var(--ink); padding:11px 14px; border-bottom:1px solid rgba(255,255,255,.055);}
+.sql-table tr:last-child td{border-bottom:none;}
+.sql-table tbody tr:hover, .sql-table tr:hover td{background:rgba(255,255,255,.02);}
+.sql-table td b{color:var(--ink-strong);}
+
+/* =====================  章末：最重要まとめ  ============================ */
+.summary{margin:20px 0 0; background:linear-gradient(135deg,rgba(86,225,233,.09),rgba(167,139,250,.09));
+  border:1px solid rgba(86,225,233,.28); border-radius:var(--r-md); padding:18px 18px 17px;
+  box-shadow:0 0 30px rgba(86,225,233,.08);}
+.summary .label{display:inline-flex; align-items:center; gap:8px; font-size:var(--fs-xs);
+  font-weight:800; letter-spacing:.1em; color:var(--accent-soft); margin-bottom:10px;}
+.summary .label::before{content:""; width:16px; height:2px; border-radius:2px;
+  background:var(--accent); box-shadow:0 0 8px var(--accent);}
+.summary p{font-size:var(--fs-body);}
+
+/* =====================  確認テスト  ==================================== */
+.quiz-head{margin-bottom:18px;}
+.quiz-head h2{margin-bottom:6px;}
+.quiz-note{font-size:var(--fs-sm); color:var(--sub); margin-bottom:16px;}
+.progress{display:flex; align-items:center; gap:12px;}
+.progress-bar{flex:1; height:10px; background:rgba(255,255,255,.06); border:1px solid var(--line);
+  border-radius:var(--r-pill); overflow:hidden;}
+.progress-fill{width:0%; height:100%; border-radius:var(--r-pill);
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  box-shadow:0 0 14px rgba(86,225,233,.5); transition:width .5s cubic-bezier(.2,.8,.2,1);}
+.progress-count{font-family:var(--mono); font-size:var(--fs-sm); color:var(--sub); min-width:52px; text-align:right;}
+
+.question-card{background:var(--card); border:1px solid var(--line); border-radius:var(--r-lg);
+  padding:20px; margin-bottom:16px; box-shadow:var(--shadow);
+  backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);}
+.q-number{font-family:var(--mono); font-size:var(--fs-xs); font-weight:700; letter-spacing:.08em;
+  color:var(--accent); margin-bottom:8px;}
+.q-text{font-size:var(--fs-body); font-weight:600; color:var(--ink-strong); line-height:1.7; margin-bottom:14px;}
+.choices{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:9px;}
+.choices li{display:flex; align-items:center; gap:12px; cursor:pointer;
+  background:rgba(255,255,255,.025); border:1px solid var(--line); border-radius:var(--r-sm);
+  padding:12px 14px; font-size:var(--fs-body); color:var(--ink); transition:.15s ease; user-select:none;}
+.choices li .key{flex:0 0 auto; width:24px; height:24px; border-radius:7px;
+  display:flex; align-items:center; justify-content:center; font-family:var(--mono);
+  font-size:12px; font-weight:700; color:var(--sub); background:rgba(255,255,255,.05);
+  border:1px solid var(--line); transition:.15s ease;}
+.choices li:hover{border-color:rgba(86,225,233,.55); background:rgba(86,225,233,.06); color:var(--ink-strong);}
+.choices li:hover .key{color:var(--accent-soft); border-color:rgba(86,225,233,.4);}
+.choices li:active{transform:scale(.99);}
+/* 回答後：クリック無効化 */
+.choices.answered li{cursor:default;}
+.choices.answered li:hover{border-color:var(--line); background:rgba(255,255,255,.025); color:var(--ink);}
+.choices.answered li:hover .key{color:var(--sub); border-color:var(--line);}
+/* 正解＝緑 */
+.choices li.correct{background:rgba(74,222,128,.12); border-color:rgba(74,222,128,.6); color:#EAFBF0;
+  box-shadow:0 0 18px rgba(74,222,128,.22); animation:pop .32s ease;}
+.choices li.correct .key{background:var(--success); border-color:transparent; color:#052E16;}
+.choices li.correct .key::after{content:"✓";}
+.choices li.correct .key span{display:none;}
+/* 誤選択＝赤 */
+.choices li.wrong{background:rgba(251,113,133,.12); border-color:rgba(251,113,133,.6); color:#FFECEF;}
+.choices li.wrong .key{background:var(--danger); border-color:transparent; color:#3B0A12;}
+.choices li.wrong .key::after{content:"✕";}
+.choices li.wrong .key span{display:none;}
+@keyframes pop{0%{transform:scale(1);}40%{transform:scale(1.02);}100%{transform:scale(1);}}
+
+/* 解説（回答後に開く） */
+.explanation{max-height:0; overflow:hidden; opacity:0; margin-top:0;
+  border-radius:var(--r-sm); transition:max-height .4s ease, opacity .3s ease, margin-top .3s ease;}
+.explanation.show{max-height:400px; opacity:1; margin-top:13px; padding:13px 15px;}
+.explanation.is-correct{background:rgba(74,222,128,.07); border:1px solid rgba(74,222,128,.28);}
+.explanation.is-wrong{background:rgba(251,113,133,.07); border:1px solid rgba(251,113,133,.28);}
+.exp-mark{display:block; font-size:var(--fs-sm); font-weight:800; margin-bottom:5px;}
+.explanation.is-correct .exp-mark{color:var(--success-soft);}
+.explanation.is-wrong .exp-mark{color:var(--danger-soft);}
+.exp-text{font-size:var(--fs-sm); color:var(--ink); line-height:1.8;}
+
+/* =====================  結果画面（オーバーレイ）  ====================== */
+.result-overlay{position:fixed; inset:0; z-index:100; display:none;
+  align-items:center; justify-content:center; padding:24px;
+  background:rgba(6,9,15,.72); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);}
+.result-overlay.show{display:flex; animation:ovFade .3s ease both;}
+@keyframes ovFade{from{opacity:0;}to{opacity:1;}}
+.result-area{position:relative; overflow:hidden; width:100%; max-width:420px; text-align:center;
+  background:linear-gradient(160deg,rgba(22,28,40,.96),rgba(13,18,28,.96));
+  border:1px solid rgba(86,225,233,.3); border-radius:var(--r-xl); padding:34px 26px 26px;
+  box-shadow:var(--shadow-pop), 0 0 60px rgba(86,225,233,.15);
+  animation:cardIn .42s cubic-bezier(.2,.9,.25,1.15) both;}
+@keyframes cardIn{from{opacity:0; transform:translateY(18px) scale(.94);}to{opacity:1; transform:none;}}
+.result-label{font-size:var(--fs-xs); font-weight:800; letter-spacing:.24em; color:var(--accent);
+  text-shadow:0 0 16px rgba(86,225,233,.5);}
+.result-score{margin:8px 0 6px; font-family:var(--mono); font-weight:800; line-height:1; color:var(--ink-strong);}
+.result-score #scoreNum{font-size:66px; background:linear-gradient(180deg,#fff,var(--accent-soft));
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+.result-total{font-size:24px; color:var(--sub); margin-left:6px;}
+.result-msg{font-size:var(--fs-body); color:var(--ink); line-height:1.7; margin:6px 4px 22px;}
+.result-actions{display:flex; flex-direction:column; gap:10px;}
+.btn{border:none; cursor:pointer; font-family:var(--font); font-size:var(--fs-body); font-weight:700;
+  padding:13px 20px; border-radius:var(--r-pill); background:var(--accent); color:var(--accent-ink);
+  box-shadow:var(--glow); transition:.18s ease;}
+.btn:hover{filter:brightness(1.08); transform:translateY(-1px);}
+.btn-outline{border:1px solid var(--line-strong); cursor:pointer; font-family:var(--font);
+  font-size:var(--fs-body); font-weight:600; padding:12px 20px; border-radius:var(--r-pill);
+  background:transparent; color:var(--ink); transition:.18s ease;}
+.btn-outline:hover{border-color:rgba(86,225,233,.55); color:var(--accent-soft);}
+.confetti{position:absolute; top:14px; width:8px; height:8px; border-radius:2px; opacity:0;
+  animation:confetti 1.35s ease-out forwards;}
+@keyframes confetti{0%{opacity:1; transform:translate(0,0) rotate(0deg);}
+  100%{opacity:0; transform:translate(var(--cx,0), 260px) rotate(400deg);}}
+
+/* =====================  レスポンシブ（〜スマホ360px）  ================= */
+@media (max-width:480px){
+  :root{--pad:15px; --fs-h1:21px; --fs-h2:17.5px; --fs-body:14.5px;}
+  .lesson-card{padding:18px;}
+  .question-card{padding:16px;}
+  .result-score #scoreNum{font-size:56px;}
+}
+@media (max-width:360px){
+  .compare{grid-template-columns:1fr;}
+}
 </style>
 </head>
 <body>
-<div class="header"><h1>第12章 システム開発技術</h1><div class="sub">基本情報技術者試験 Web教材</div></div>
-<div class="container">
-<a href="it_quiz.html" class="back-link">← 章の一覧にもどる</a>
-<div class="nav-tabs">
-<div class="nav-tab active" onclick="showSection('lesson1')">① 開発の流れ</div>
-<div class="nav-tab" onclick="showSection('lesson2')">② システム設計</div>
-<div class="nav-tab" onclick="showSection('lesson3')">③ オブジェクト指向</div>
-<div class="nav-tab" onclick="showSection('lesson4')">④ テスト</div>
-<div class="nav-tab" onclick="showSection('quiz')">確認テスト</div>
+
+<!-- スプラッシュ用サムネイル（オフライン展開時のプレースホルダ／JS無効時のフォールバック） -->
+<template id="__bundler_thumbnail" data-bg-color="#0A0E16">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="tbg" cx="50%" cy="40%" r="62%">
+        <stop offset="0%" stop-color="#123047"/>
+        <stop offset="100%" stop-color="#0A0E16"/>
+      </radialGradient>
+    </defs>
+    <rect width="1200" height="800" fill="url(#tbg)"/>
+    <g stroke="#56E1E9" stroke-width="4" opacity="0.45">
+      <line x1="600" y1="352" x2="378" y2="222"/>
+      <line x1="600" y1="352" x2="822" y2="222"/>
+      <line x1="600" y1="352" x2="356" y2="474"/>
+      <line x1="600" y1="352" x2="844" y2="474"/>
+    </g>
+    <circle cx="600" cy="352" r="36" fill="#56E1E9"/>
+    <circle cx="378" cy="222" r="21" fill="#A78BFA"/>
+    <circle cx="822" cy="222" r="21" fill="#A78BFA"/>
+    <circle cx="356" cy="474" r="21" fill="#4ADE80"/>
+    <circle cx="844" cy="474" r="21" fill="#56E1E9"/>
+    <text x="600" y="612" text-anchor="middle" fill="#EAEDF5" font-family="-apple-system,'Hiragino Kaku Gothic ProN',sans-serif" font-size="58" font-weight="800">第10章 ネットワーク</text>
+    <text x="600" y="668" text-anchor="middle" fill="#56E1E9" font-family="-apple-system,sans-serif" font-size="24" font-weight="700" letter-spacing="7">CHAPTER 12 · SYSTEM DEVELOPMENT</text>
+  </svg>
+</template>
+
+<!-- ============================ 章タイトルヘッダー ======================= -->
+<header class="header">
+  <div class="wrap">
+    <span class="back-link" onclick="goBack()">← 章の一覧にもどる</span>
+    <div class="eyebrow">CHAPTER 12 ・ SYSTEM DEVELOPMENT</div>
+    <h1>システム開発技術</h1>
+    <p class="sub">基本情報技術者試験 Web教材 ・ レッスン &amp; 確認テスト</p>
+  </div>
+</header>
+
+<div class="tabbar">
+  <div class="tabbar-inner">
+    <nav class="nav-tabs" id="navTabs">
+      <button class="nav-tab active" data-target="l1" onclick="showSection('l1')">① 開発の流れ</button>
+      <button class="nav-tab" data-target="l2" onclick="showSection('l2')">② システム設計</button>
+      <button class="nav-tab" data-target="l3" onclick="showSection('l3')">③ オブジェクト指向</button>
+      <button class="nav-tab" data-target="l4" onclick="showSection('l4')">④ テスト</button>
+    </nav>
+    <span class="quiz-sep"></span>
+    <button class="quiz-btn" data-target="quiz" onclick="showSection('quiz')">確認テスト<span class="arw">→</span></button>
+  </div>
 </div>
 
-<!-- ===== レッスン1 ===== -->
-<div id="lesson1" class="section active">
-<div class="lesson-card">
-<h2>① システム開発の流れ</h2>
+<main class="wrap">
 
+  <section id="l1" class="section active">
+    <div class="lesson-card">
+<h2>① システム開発の流れ</h2>
 <h3>ソフトウェアライフサイクルと共通フレーム</h3>
 <div class="key-point">
-<span class="vocab">SLCP</span>（ソフトウェアライフサイクルプロセス）：ソフトウェアの企画・要件定義・開発・運用・保守までの一連の活動を定義した国際規格（<strong>ISO/IEC 12207</strong>）<br><br>
+<span class="vocab">SLCP</span>（ソフトウェアライフサイクルプロセス）：ソフトウェアの企画・要件定義・開発・運用・保守までの一連の活動を定義した国際規格（<strong>ISO/IEC 12207</strong>）<br/><br/>
 <span class="vocab">共通フレーム</span>：システム開発とその取引を適正化するため、作業項目を1つずつ定義したガイドライン。<strong>IPA</strong>（情報処理推進機構）が策定し、関係者が「同じ言葉」で話せるように用語を統一したもの
 </div>
-
 <h3>開発の5つのプロセス</h3>
 <div class="key-point">
-基本情報試験で扱うソフトウェアライフサイクルは、主に次の流れで進む：<br><br>
-<strong>企画 → 要件定義 → 開発 → 運用 → 保守</strong><br><br>
-・<strong>開発</strong>：実際にシステムを作成するプロセス<br>
-・<strong>運用</strong>：本番へ移行し、システムを安定的に稼働させるプロセス<br>
+基本情報試験で扱うソフトウェアライフサイクルは、主に次の流れで進む：<br/><br/>
+<strong>企画 → 要件定義 → 開発 → 運用 → 保守</strong><br/><br/>
+・<strong>開発</strong>：実際にシステムを作成するプロセス<br/>
+・<strong>運用</strong>：本番へ移行し、システムを安定的に稼働させるプロセス<br/>
 ・<strong>保守</strong>：不具合の修正やアップデートを行うプロセス
 </div>
-
 <h3>開発プロセス（ウォーターフォールモデル）</h3>
 <div class="key-point">
-基本情報試験は<span class="vocab">ウォーターフォールモデル</span>（上流から下流へ後戻りせず流れる開発モデル）を前提に手順が問われる。大きな流れは次の4工程：<br><br>
+基本情報試験は<span class="vocab">ウォーターフォールモデル</span>（上流から下流へ後戻りせず流れる開発モデル）を前提に手順が問われる。大きな流れは次の4工程：<br/><br/>
 <strong>システム要件定義 → システム設計 → プログラミング → テスト</strong>
 </div>
 <table class="sql-table">
@@ -56,142 +399,140 @@
 <tr><td><strong>プログラミング</strong></td><td>実際にソースコードを書く</td></tr>
 <tr><td><strong>テスト</strong></td><td>仕様どおりに動くかを確認する</td></tr>
 </table>
-
 <h3>システム要件定義</h3>
 <div class="key-point">
-<span class="vocab">システム要件定義</span>：システムに必要な条件（システム要件）を決める、開発プロセスの<strong>最初の工程</strong><br><br>
-・「どのようなシステムを作るのか」を開発会社と明確にする<br>
-・システム要件＝業務要件のうち<strong>システムで実現する要件</strong>（＝機能や性能）<br>
+<span class="vocab">システム要件定義</span>：システムに必要な条件（システム要件）を決める、開発プロセスの<strong>最初の工程</strong><br/><br/>
+・「どのようなシステムを作るのか」を開発会社と明確にする<br/>
+・システム要件＝業務要件のうち<strong>システムで実現する要件</strong>（＝機能や性能）<br/>
 ・条件を書類に残して共有し、責任の所在を明確にして「言った言わない」の争いを防ぐ
 </div>
 <div class="example"><strong>例：</strong>株式売買システムなら、「株式が売買できること」が<strong>機能</strong>、「応答時間が0.001秒」が<strong>性能</strong>。応答に1時間かかるようでは役に立たない。</div>
-</div>
-</div>
+    </div>
+    <div class="lesson-nav">
+      <button class="btn-next" onclick="showSection('l2')">
+        <span class="bn-meta"><span class="bn-label">次のレッスン</span><span class="bn-title">② システム設計</span></span>
+        <span class="bn-arrow">→</span>
+      </button>
+    </div>
+  </section>
 
-<!-- ===== レッスン2 ===== -->
-<div id="lesson2" class="section">
-<div class="lesson-card">
+  <section id="l2" class="section">
+    <div class="lesson-card">
 <h2>② システム設計</h2>
-
 <h3>システム設計の4工程</h3>
 <div class="key-point">
-システム設計は、要件をもとに設計図を書き起こす工程。次の4つに分かれる：<br><br>
-（1）<span class="vocab">システム方式設計</span>：要件を「ハードウェア」「ソフトウェア」「手作業」のいずれかに振り分ける<br>
-（2）<span class="vocab">ソフトウェア要件定義</span>：ソフトウェアに割り振られた要件を具体化（画面・帳票・データなど）<br>
-（3）<span class="vocab">ソフトウェア方式設計</span>：ソフトウェア要件を<strong>プログラムの単位まで分割</strong>する<br>
+システム設計は、要件をもとに設計図を書き起こす工程。次の4つに分かれる：<br/><br/>
+（1）<span class="vocab">システム方式設計</span>：要件を「ハードウェア」「ソフトウェア」「手作業」のいずれかに振り分ける<br/>
+（2）<span class="vocab">ソフトウェア要件定義</span>：ソフトウェアに割り振られた要件を具体化（画面・帳票・データなど）<br/>
+（3）<span class="vocab">ソフトウェア方式設計</span>：ソフトウェア要件を<strong>プログラムの単位まで分割</strong>する<br/>
 （4）<span class="vocab">ソフトウェア詳細設計</span>：さらに<strong>コーディングできる単位（モジュール）</strong>まで分割し、流れ図で表す
 </div>
-
 <h3>外部設計と内部設計</h3>
 <div class="compare">
 <div class="compare-box good">
 <h4>外部設計</h4>
-<strong>ユーザーから見える箇所</strong>の設計<br><br>
-コンピュータの制約は考慮せず、業務機能中心。<br>例：画面レイアウト、帳票
+<strong>ユーザーから見える箇所</strong>の設計<br/><br/>
+コンピュータの制約は考慮せず、業務機能中心。<br/>例：画面レイアウト、帳票
 </div>
 <div class="compare-box bad">
 <h4>内部設計</h4>
-<strong>ユーザーから見えない箇所</strong>の設計<br><br>
+<strong>ユーザーから見えない箇所</strong>の設計<br/><br/>
 プログラムの内部構造や物理データベースなど、実装寄りの設計
 </div>
 </div>
 <div class="key-point">
 外部設計の完了時、顧客から承認を受けるのは<strong>画面レイアウト</strong>（ユーザーから見える箇所）。
 </div>
-
 <h3>プロセス中心とデータ中心アプローチ</h3>
 <div class="compare">
 <div class="compare-box bad">
 <h4>プロセス中心アプローチ</h4>
-<strong>処理（プロセス）</strong>に着目して設計<br><br>
+<strong>処理（プロセス）</strong>に着目して設計<br/><br/>
 処理の切り分けが主観的になりやすく、重複が増え<strong>保守が大変</strong>
 </div>
 <div class="compare-box good">
 <h4>データ中心アプローチ</h4>
-<strong>データ構造</strong>に着目して設計<br><br>
+<strong>データ構造</strong>に着目して設計<br/><br/>
 データは実世界に存在し要求で変化しにくい→仕様変更に強い。E-R図・DFDを使う
 </div>
 </div>
-
 <h3>DFD（データフロー図）</h3>
 <div class="key-point">
-<span class="vocab">DFD</span>（Data Flow Diagram）：<strong>データの流れ</strong>を表す図。処理の順序や時間の流れは表さない<br><br>
-4種類の記号を使う：<br>
-・<span class="vocab">データの源泉と吸収（外部）</span>：データの発生源・行き先（人・組織・システム）<br>
-・<span class="vocab">データフロー</span>：データの流れ（<strong>矢印</strong>）<br>
-・<span class="vocab">プロセス</span>：処理（<strong>○＝丸</strong>）。データの加工は必ずここで行う<br>
+<span class="vocab">DFD</span>（Data Flow Diagram）：<strong>データの流れ</strong>を表す図。処理の順序や時間の流れは表さない<br/><br/>
+4種類の記号を使う：<br/>
+・<span class="vocab">データの源泉と吸収（外部）</span>：データの発生源・行き先（人・組織・システム）<br/>
+・<span class="vocab">データフロー</span>：データの流れ（<strong>矢印</strong>）<br/>
+・<span class="vocab">プロセス</span>：処理（<strong>○＝丸</strong>）。データの加工は必ずここで行う<br/>
 ・<span class="vocab">データストア</span>：データの保管（<strong>2本の線</strong>）。加工はしない
 </div>
 <div class="key-point">
 DFDには必ず、2つ以上の<strong>外部</strong>（入力と出力）と、1つ以上の<strong>プロセス</strong>が必要。「○」がプロセスを表す点が頻出。
 </div>
-
 <h3>E-R図</h3>
 <div class="key-point">
 <span class="vocab">E-R図</span>（Entity-Relationship図）：データ（実体）どうしの<strong>関連</strong>を表す図。データ中心アプローチのデータ構造分析に使う。DFDが「流れ」なのに対し、E-R図は「関連」を表す。
 </div>
-
 <h3>モジュールと独立性</h3>
 <div class="key-point">
-<span class="vocab">モジュール</span>：プログラムを機能で分けた単位（その部分だけでコンパイルできる単位）。再利用も可能<br><br>
+<span class="vocab">モジュール</span>：プログラムを機能で分けた単位（その部分だけでコンパイルできる単位）。再利用も可能<br/><br/>
 モジュールの独立性が高い（結合度が弱く・凝集度が強い）ほど、変更の影響が広がりにくく<strong>保守性が高い</strong>。
 </div>
 <div class="key-point">
-<span class="vocab">モジュール結合度</span>：モジュール間の結び付きの強さ。<strong>弱いほど良い</strong>（保守性が高い）<br><br>
-最も結合度が<strong>弱い</strong>のは<span class="vocab">データ結合</span>＝必要な<strong>データ項目だけを引数</strong>で渡す。これは必ず覚える。<br>
+<span class="vocab">モジュール結合度</span>：モジュール間の結び付きの強さ。<strong>弱いほど良い</strong>（保守性が高い）<br/><br/>
+最も結合度が<strong>弱い</strong>のは<span class="vocab">データ結合</span>＝必要な<strong>データ項目だけを引数</strong>で渡す。これは必ず覚える。<br/>
 ・グローバル変数の共有（共通結合など）や、内部を直接参照（内容結合）は結合度が<strong>強い</strong>＝悪い
 </div>
-</div>
-</div>
+    </div>
+    <div class="lesson-nav">
+      <button class="btn-next" onclick="showSection('l3')">
+        <span class="bn-meta"><span class="bn-label">次のレッスン</span><span class="bn-title">③ オブジェクト指向</span></span>
+        <span class="bn-arrow">→</span>
+      </button>
+    </div>
+  </section>
 
-<!-- ===== レッスン3 ===== -->
-<div id="lesson3" class="section">
-<div class="lesson-card">
+  <section id="l3" class="section">
+    <div class="lesson-card">
 <h2>③ プログラミングとオブジェクト指向</h2>
-
 <h3>プログラミング</h3>
 <div class="key-point">
-<span class="vocab">プログラミング</span>：プログラム言語の文法にしたがって処理手順を書く工程。作業する人を<strong>プログラマ</strong>という。<br><br>
+<span class="vocab">プログラミング</span>：プログラム言語の文法にしたがって処理手順を書く工程。作業する人を<strong>プログラマ</strong>という。<br/><br/>
 システムの構成：システム＝ソフトウェア＋ハードウェア。ソフトウェア→プログラム→モジュール→関数→命令、という入れ子構造。
 </div>
-
 <h3>オブジェクト指向とは</h3>
 <div class="key-point">
-<span class="vocab">オブジェクト指向</span>：クラスや継承という概念でソフトウェアを<strong>部品化</strong>し、開発の生産性を上げる手法（現在の主流）。<br><br>
+<span class="vocab">オブジェクト指向</span>：クラスや継承という概念でソフトウェアを<strong>部品化</strong>し、開発の生産性を上げる手法（現在の主流）。<br/><br/>
 プロセス中心＝「処理」、データ中心＝「データ」に着目したのに対し、オブジェクト指向は「処理」と「データ」を<strong>1つにまとめて</strong>考える。処理のことを<strong>メソッド</strong>と呼ぶ。
 </div>
-
 <h3>クラスとインスタンス</h3>
 <div class="compare">
 <div class="compare-box good">
 <h4>クラス</h4>
-<strong>ひな型（設計図）</strong><br><br>
+<strong>ひな型（設計図）</strong><br/><br/>
 車でいえば設計図。まずクラスを定義する
 </div>
 <div class="compare-box bad">
 <h4>インスタンス（オブジェクト）</h4>
-<strong>実体</strong><br><br>
+<strong>実体</strong><br/><br/>
 車でいえば設計図から作られた車。クラスの定義に基づいて生成される
 </div>
 </div>
 <div class="key-point">
-<strong>クラスの定義に基づいてインスタンスが生成される</strong>。1つのクラスからインスタンスは<strong>いくつでも</strong>作れる。<br>
-・<span class="vocab">データ（属性）</span>＝オブジェクトの状態（車体の色・走行距離）<br>
+<strong>クラスの定義に基づいてインスタンスが生成される</strong>。1つのクラスからインスタンスは<strong>いくつでも</strong>作れる。<br/>
+・<span class="vocab">データ（属性）</span>＝オブジェクトの状態（車体の色・走行距離）<br/>
 ・<span class="vocab">メソッド</span>＝オブジェクトの操作（動く・止まる）
 </div>
-
 <h3>オブジェクト指向の3大特徴</h3>
 <div class="key-point">
-<span class="vocab">カプセル化</span>：データとメソッドを1つにまとめ、外部から<strong>直接データにアクセスさせない</strong>こと。内部構造を隠すことを<strong>情報隠蔽</strong>という<br><br>
-<span class="vocab">継承</span>：<strong>親クラス</strong>（基底・スーパークラス）のデータやメソッドを<strong>子クラス</strong>（派生・サブクラス）が引き継ぐこと。再実装の手間を省ける<br><br>
+<span class="vocab">カプセル化</span>：データとメソッドを1つにまとめ、外部から<strong>直接データにアクセスさせない</strong>こと。内部構造を隠すことを<strong>情報隠蔽</strong>という<br/><br/>
+<span class="vocab">継承</span>：<strong>親クラス</strong>（基底・スーパークラス）のデータやメソッドを<strong>子クラス</strong>（派生・サブクラス）が引き継ぐこと。再実装の手間を省ける<br/><br/>
 <span class="vocab">多相性（ポリモーフィズム）</span>：異なるオブジェクトに<strong>同一の操作</strong>を行っても、対象ごとに<strong>異なる動作</strong>をすること
 </div>
 <div class="example"><strong>多相性の例：</strong>車と飛行機に同じ「move（動く）」メソッドを呼ぶと、車は「道路を走る」、飛行機は「空を飛ぶ」と別々に動く。</div>
 <div class="key-point">
-<strong>汎化と特化</strong>：子クラスの共通の性質を取り出して親クラスを作るのが<span class="vocab">汎化</span>、親クラスを細かく分けて子クラスを作るのが<span class="vocab">特化</span>。<br>
+<strong>汎化と特化</strong>：子クラスの共通の性質を取り出して親クラスを作るのが<span class="vocab">汎化</span>、親クラスを細かく分けて子クラスを作るのが<span class="vocab">特化</span>。<br/>
 <strong>オーバーライド</strong>：親から継承したメソッドを子クラスで<strong>再定義（上書き）</strong>すること。
 </div>
-
 <h3>UML</h3>
 <div class="key-point">
 <span class="vocab">UML</span>（Unified Modeling Language）：オブジェクト指向の設計を図示する<strong>統一表記法</strong>。
@@ -207,25 +548,28 @@ DFDには必ず、2つ以上の<strong>外部</strong>（入力と出力）と�
 <div class="key-point">
 クラス図で<strong>汎化</strong>は<strong>白抜きの三角形の矢印</strong>で表す。四角形の中にはクラス名を記入する。
 </div>
-
 <h3>レビュー</h3>
 <div class="key-point">
-<span class="vocab">レビュー</span>：成果物を関係者で検討し誤りを早期発見する活動。<br>
-・<span class="vocab">デザインレビュー</span>：設計内容の妥当性を検証するレビュー<br>
-・<span class="vocab">ウォークスルー</span>：作成者主体で参加者が意見を出し合う<br>
+<span class="vocab">レビュー</span>：成果物を関係者で検討し誤りを早期発見する活動。<br/>
+・<span class="vocab">デザインレビュー</span>：設計内容の妥当性を検証するレビュー<br/>
+・<span class="vocab">ウォークスルー</span>：作成者主体で参加者が意見を出し合う<br/>
 ・<span class="vocab">インスペクション</span>：<strong>モデレータ（進行役）</strong>が中心となり公式な手順で行うレビュー
 </div>
-</div>
-</div>
+    </div>
+    <div class="lesson-nav">
+      <button class="btn-next" onclick="showSection('l4')">
+        <span class="bn-meta"><span class="bn-label">次のレッスン</span><span class="bn-title">④ テスト</span></span>
+        <span class="bn-arrow">→</span>
+      </button>
+    </div>
+  </section>
 
-<!-- ===== レッスン4 ===== -->
-<div id="lesson4" class="section">
-<div class="lesson-card">
+  <section id="l4" class="section">
+    <div class="lesson-card">
 <h2>④ テスト</h2>
-
 <h3>テストとV字モデル</h3>
 <div class="key-point">
-<span class="vocab">テスト</span>：システムが仕様どおりに動くかを確認する工程。設計・開発工程とテスト工程は<strong>1対1</strong>で対応し、図にすると<strong>V字</strong>になる。<br>
+<span class="vocab">テスト</span>：システムが仕様どおりに動くかを確認する工程。設計・開発工程とテスト工程は<strong>1対1</strong>で対応し、図にすると<strong>V字</strong>になる。<br/>
 下（単体テスト）から上（運用テスト）へ向かうほど、テスト対象の範囲が広がる。
 </div>
 <table class="sql-table">
@@ -238,7 +582,6 @@ DFDには必ず、2つ以上の<strong>外部</strong>（入力と出力）と�
 <div class="key-point">
 <span class="vocab">リグレッションテスト</span>（回帰テスト）：修正や機能追加によって、<strong>影響を受けないはずの箇所</strong>に新しいバグが出ていないか確認するテスト。
 </div>
-
 <h3>ホワイトボックステスト</h3>
 <div class="key-point">
 <span class="vocab">ホワイトボックステスト</span>：<strong>プログラムの内部構造</strong>を分析し、意図どおり処理されるか確認するテスト。開発者が行う。網羅性のレベルでテストケースを設計する。
@@ -251,97 +594,261 @@ DFDには必ず、2つ以上の<strong>外部</strong>（入力と出力）と�
 <tr><td><strong>判定条件条件網羅</strong></td><td>条件網羅＋判定条件網羅</td><td>3</td></tr>
 <tr><td><strong>複数条件網羅</strong></td><td>すべての条件の真偽の組合せ（最も強い＝最多）</td><td>4</td></tr>
 </table>
-
 <h3>ブラックボックステスト</h3>
 <div class="key-point">
-<span class="vocab">ブラックボックステスト</span>：内部構造を見ず、<strong>入力と出力だけ</strong>に着目し、仕様どおりの出力が得られるか確認する。冗長なコードや内部の誤りは検出できない。<br><br>
-代表的なテストデータの作り方：<br>
-・<span class="vocab">同値分割</span>：同じ結果になる入力群（同値クラス）から代表値を選ぶ<br>
+<span class="vocab">ブラックボックステスト</span>：内部構造を見ず、<strong>入力と出力だけ</strong>に着目し、仕様どおりの出力が得られるか確認する。冗長なコードや内部の誤りは検出できない。<br/><br/>
+代表的なテストデータの作り方：<br/>
+・<span class="vocab">同値分割</span>：同じ結果になる入力群（同値クラス）から代表値を選ぶ<br/>
 ・<span class="vocab">限界値分析</span>：仕様の<strong>境界値</strong>（境目とその前後）をテストデータにする
 </div>
-
 <h3>トップダウン／ボトムアップテスト（結合テスト）</h3>
 <div class="compare">
 <div class="compare-box good">
 <h4>トップダウンテスト</h4>
-<strong>上位→下位</strong>の順にテスト<br><br>
-未完成の下位モジュールの代わりに<br><span class="vocab">スタブ</span>（ダミーの下位）を用意
+<strong>上位→下位</strong>の順にテスト<br/><br/>
+未完成の下位モジュールの代わりに<br/><span class="vocab">スタブ</span>（ダミーの下位）を用意
 </div>
 <div class="compare-box bad">
 <h4>ボトムアップテスト</h4>
-<strong>下位→上位</strong>の順にテスト<br><br>
-未完成の上位モジュールの代わりに<br><span class="vocab">ドライバ</span>（ダミーの上位）を用意
+<strong>下位→上位</strong>の順にテスト<br/><br/>
+未完成の上位モジュールの代わりに<br/><span class="vocab">ドライバ</span>（ダミーの上位）を用意
 </div>
 </div>
 <div class="key-point">
-覚え方：<strong>スタブ＝下位</strong>の代替（トップダウンで使う）／<strong>ドライバ＝上位</strong>の代替（ボトムアップで使う）。<br>
+覚え方：<strong>スタブ＝下位</strong>の代替（トップダウンで使う）／<strong>ドライバ＝上位</strong>の代替（ボトムアップで使う）。<br/>
 <span class="vocab">バグ管理図（信頼度成長曲線）</span>：テストで摘出した累積バグ数の推移を表す。曲線が横ばい（頭打ち）になれば、バグが出尽くしテストが十分と判断できる目安になる。
 </div>
-
-<div class="key-point" style="background:#fce4ec;border-color:#e91e63">
-<strong style="color:#e91e63">第12章の最重要まとめ</strong><br><br>
-・開発の流れ＝要件定義→システム設計→プログラミング→テスト（ウォーターフォール前提）<br>
-・システム開発の最初の工程＝<strong>システム要件定義</strong><br>
-・システム設計4工程：システム方式設計→ソフトウェア要件定義→ソフトウェア方式設計→ソフトウェア詳細設計<br>
-・外部設計＝ユーザーから見える（画面レイアウト）／内部設計＝見えない<br>
-・DFDの「○」＝プロセス／データストア＝2本線／矢印＝データフロー<br>
-・モジュール結合度が最も弱い＝<strong>データ結合</strong>（データ項目だけを引数で渡す）<br>
-・オブジェクト指向：クラス（ひな型）→インスタンス（実体）／カプセル化・継承・多相性<br>
-・UML：クラス図＝汎化を白抜き三角矢印／シーケンス図＝時系列／オブジェクト図＝インスタンス間<br>
-・ホワイトボックス＝内部構造／ブラックボックス＝入出力（同値分割・限界値分析）<br>
-・複数条件網羅がテストケース最多／命令網羅が最少<br>
-・スタブ＝下位の代替（トップダウン）／ドライバ＝上位の代替（ボトムアップ）<br>
+<div class="summary"><span class="label">最重要まとめ</span><p>・開発の流れ＝要件定義→システム設計→プログラミング→テスト（ウォーターフォール前提）<br/>
+・システム開発の最初の工程＝<strong>システム要件定義</strong><br/>
+・システム設計4工程：システム方式設計→ソフトウェア要件定義→ソフトウェア方式設計→ソフトウェア詳細設計<br/>
+・外部設計＝ユーザーから見える（画面レイアウト）／内部設計＝見えない<br/>
+・DFDの「○」＝プロセス／データストア＝2本線／矢印＝データフロー<br/>
+・モジュール結合度が最も弱い＝<strong>データ結合</strong>（データ項目だけを引数で渡す）<br/>
+・オブジェクト指向：クラス（ひな型）→インスタンス（実体）／カプセル化・継承・多相性<br/>
+・UML：クラス図＝汎化を白抜き三角矢印／シーケンス図＝時系列／オブジェクト図＝インスタンス間<br/>
+・ホワイトボックス＝内部構造／ブラックボックス＝入出力（同値分割・限界値分析）<br/>
+・複数条件網羅がテストケース最多／命令網羅が最少<br/>
+・スタブ＝下位の代替（トップダウン）／ドライバ＝上位の代替（ボトムアップ）<br/>
 ・結合テスト＝インタフェース検証／リグレッションテスト＝変更の影響確認
-</div>
-</div>
-</div>
+</p></div>
+    </div>
+    <div class="lesson-nav">
+      <button class="btn-next to-quiz" onclick="showSection('quiz')">
+        <span class="bn-meta"><span class="bn-label">仕上げ</span><span class="bn-title">確認テストに進む</span></span>
+        <span class="bn-arrow">→</span>
+      </button>
+    </div>
+  </section>
 
-<!-- ===== 確認テスト ===== -->
-<div id="quiz" class="section">
-<div class="quiz-area">
-<h2>確認テスト ── 第12章</h2>
-<p style="color:#666;font-size:.9em;margin-bottom:16px">全問ランダム出題・選択肢シャッフル。何度でも挑戦できます。</p>
-<div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
-<div id="quizContainer"></div>
-<div style="text-align:center;margin-top:20px"><button class="btn" id="submitBtn" onclick="submitQuiz()" style="display:none">結果を見る</button></div>
-</div>
-<div class="result-area" id="resultArea"><h2>結果</h2><div class="result-score" id="resultScore"></div><div id="resultMsg" style="font-size:1.1em;margin:10px 0"></div><button class="btn" onclick="retryQuiz()">もう一度</button><button class="btn btn-outline" onclick="showSection('lesson1')">レッスンに戻る</button></div>
-</div>
+<section id="quiz" class="section">
+    <div class="quiz-head">
+      <h2>確認テスト — 第12章</h2>
+      <p class="quiz-note">ランダム出題・選択肢シャッフル。選ぶとすぐに正誤と解説が開きます。何度でも挑戦できます。</p>
+      <div class="progress">
+        <div class="progress-bar"><div class="progress-fill"></div></div>
+        <div class="progress-count">0 / 0</div>
+      </div>
+    </div>
+    <div id="quiz-questions"></div>
+  </section>
+
+</main>
+
+<div class="result-overlay" id="resultOverlay">
+  <div class="result-area" id="resultArea">
+    <div class="result-label" id="resultLabel">RESULT</div>
+    <div class="result-score"><span id="scoreNum">0</span><span class="result-total" id="scoreTotal">/ 0</span></div>
+    <div class="result-msg" id="resultMsg"></div>
+    <div class="result-actions">
+      <button class="btn" onclick="retryQuiz()">もう一度挑戦する</button>
+      <button class="btn-outline" onclick="closeResult()">解答を見直す</button>
+    </div>
+  </div>
 </div>
 
 <script>
-const allQuestions=[
-{q:'システム開発の最初の工程で行う作業として、適切なものはどれか。（平成21年度）',choices:['各プログラムの内部構造を設計する。','現状の業務を分析し、システム要件を整理する。','サブシステムをプログラム単位まで分割し、各プログラムの詳細を設計する。','ユーザーインタフェースを設計する。'],answer:1,explanation:'システム開発の最初の工程は<strong>システム要件定義</strong>で、現状の業務を分析してシステム要件を整理します。内部構造の設計や詳細設計は、より後の工程で行います。'},
-{q:'システム開発とその取引を適正化するために、作業項目を定義し、関係者が同じ用語で話せるようIPAが策定したガイドラインはどれか。',choices:['共通フレーム','ベンチマーク','ガントチャート','クリティカルパス'],answer:0,explanation:'<strong>共通フレーム</strong>は、システム開発と取引の作業項目を1つずつ定義し、経営者・ユーザー・ベンダー間の用語の食い違いを防ぐためにIPAが策定したガイドラインです。'},
-{q:'開発プロセスにおける、ソフトウェア方式設計で行うべき作業はどれか。（平成25年度）',choices:['顧客に意見を求めて仕様を決定する。','既に決定しているソフトウェア要件を、どのように実現させるかを決める。','プログラム1行ごとの処理まで明確になるように詳細化する。','要求内容を図表などの形式でまとめ、段階的に詳細化して分析する。'],answer:1,explanation:'<strong>ソフトウェア方式設計</strong>は、決定済みのソフトウェア要件を、どのようにプログラムで実現するか（プログラム単位まで分割）を決める工程です。アは要件定義、ウはソフトウェア詳細設計、エはソフトウェア要件定義の作業です。'},
-{q:'システムの外部設計を完了させるとき、顧客から承認を受けるものはどれか。（平成29年度）',choices:['画面レイアウト','システム開発計画','物理データベース仕様','プログラムの流れ図'],answer:0,explanation:'外部設計は<strong>ユーザーから見える箇所</strong>の設計です。選択肢の中で唯一ユーザーから見えるのは<strong>画面レイアウト</strong>です。物理データベース仕様や流れ図は内部（ソフトウェア詳細設計）の成果物です。'},
-{q:'ソフトウェアの分析・設計技法のうち、データ中心分析・設計技法の特徴として最も適切なものはどれか。（平成25年度）',choices:['機能の詳細化の過程で、モジュールの独立性が高くなるようにプログラムを分割していく。','システムの開発後の仕様変更は、データ構造や手続を局所的に変更・追加することで比較的容易に実現できる。','対象業務領域のモデル化に当たって、情報資源のデータ構造に着目する。','プログラムが最も効率よくアクセスできるようにデータ構造を設計する。'],answer:2,explanation:'<strong>データ中心アプローチ</strong>は、業務のモデル化に当たり情報資源の<strong>データ構造</strong>に着目します。データは実世界に存在し要求で変化しにくいため、仕様変更に強い設計になります。アはモジュール分割、エはデータベース設計の特徴です。'},
-{q:'構造化分析法で用いられるDFDにおいて、図中の「○」が表しているものはどれか。（令和元年度）',choices:['データストア','データフロー','データの源泉','プロセス'],answer:3,explanation:'DFDの「○（丸）」は<strong>プロセス（処理）</strong>を表します。データストアは2本の線、データフローは矢印で表します。'},
-{q:'モジュール結合度が最も弱くなるものはどれか。（令和元年度）',choices:['一つのモジュールで、できるだけ多くの機能を実現する。','モジュール間で必要なデータ項目だけを引数として渡す。','他のモジュールとデータ項目を共有するためにグローバルな領域を使用する。','他のモジュールを呼び出すときに、呼び出したモジュールの論理を制御するための引数を渡す。'],answer:1,explanation:'モジュール結合度が最も弱い（＝良い）のは<strong>データ結合</strong>で、必要なデータ項目だけを引数として渡す方式です。グローバル領域の共有は共通結合、制御用の引数を渡すのは制御結合で、いずれも結合度が強くなります。'},
-{q:'オブジェクト指向におけるクラスとインスタンスとの関係のうち、適切なものはどれか。（平成30年度）',choices:['インスタンスはクラスの仕様を定義したものである。','クラスの定義に基づいてインスタンスが生成される。','一つのインスタンスに対して、複数のクラスが対応する。','一つのクラスに対して、インスタンスはただ一つ存在する。'],answer:1,explanation:'クラスはひな型（テンプレート）で、その<strong>定義に基づいてインスタンス（実体）が生成</strong>されます。1つのクラスからインスタンスは複数作ることができ、1つのインスタンスには1つのクラスが対応します。'},
-{q:'オブジェクト指向において、あるクラスの属性や機能がサブクラスで利用できることを何というか。（平成30年度）',choices:['カプセル化','継承','抽象化','多相性'],answer:1,explanation:'親クラスのデータやメソッドを子クラス（サブクラス）が引き継いで利用できることを<strong>継承</strong>といいます。カプセル化はデータと手続をまとめて隠蔽すること、多相性は同じ操作で異なる動作をすることです。'},
-{q:'オブジェクト指向におけるカプセル化を説明したものはどれか。（平成28年度）',choices:['同じ性質をもつ複数のオブジェクトを抽象化して、整理すること','基底クラスの性質を派生クラスに受け継がせること','クラス間に共通する性質を抽出し、基底クラスを作ること','データとそれを操作する手続を一つのオブジェクトにまとめ、データと手続の詳細を外部から隠蔽すること'],answer:3,explanation:'<strong>カプセル化</strong>は、データと手続（メソッド）を1つのオブジェクトにまとめ、内部の詳細を外部から隠蔽（情報隠蔽）することです。アは抽象化、イは継承、ウは汎化の説明です。'},
-{q:'オブジェクト指向プログラミングの特徴のうち、異なるクラスのオブジェクトを同一のインタフェースで操作したときに、操作対象クラスに応じた異なる動作を可能にすることを何と呼ぶか。（令和7年度）',choices:['委譲','継承','コンポジション','多相性'],answer:3,explanation:'同一の操作に対して、対象オブジェクトごとに異なる動作を可能にすることを<strong>多相性（ポリモーフィズム）</strong>といいます。委譲は別オブジェクトに操作を任せること、コンポジションは部品を組み合わせて新しいオブジェクトを作ることです。'},
-{q:'UMLのクラス図において、四角形の枠の中に記述するものはどれか。（平成26年度）',choices:['関連名','クラス名','集約名','ユースケース名'],answer:1,explanation:'UMLのクラス図では、四角形（長方形）の中に<strong>クラス名</strong>・属性・メソッドを記入します。関連名は実線の上、集約名は白抜きひし形の矢印の上、ユースケース名は楕円形の中に記入します。'},
-{q:'UMLにおいて、オブジェクト間の相互作用を時系列に表す図はどれか。（平成29年度）',choices:['アクティビティ図','コンポーネント図','シーケンス図','状態遷移図'],answer:2,explanation:'オブジェクト間の相互作用を<strong>時系列</strong>に表すのは<strong>シーケンス図</strong>です。アクティビティ図は制御の流れ、状態遷移図（ステートマシン図）はオブジェクトの状態変化を表します。'},
-{q:'UMLにおける振る舞い図の説明のうち、アクティビティ図のものはどれか。（平成31年度）',choices:['ある振る舞いから次の振る舞いへの制御の流れを表現する。','オブジェクト間の相互作用を時系列で表現する。','システムが外部に提供する機能と、それを利用する者や外部システムとの関係を表現する。','一つのオブジェクトの状態がイベントの発生や時間の経過とともにどのように変化するかを表現する。'],answer:0,explanation:'<strong>アクティビティ図</strong>は、ある振る舞いから次の振る舞いへの制御の流れを表します。イはシーケンス図、ウはユースケース図、エは状態遷移図（ステートマシン図）の説明です。'},
-{q:'UMLのダイアグラムのうち、インスタンス間の関係を表現するものはどれか。（平成24年度）',choices:['アクティビティ図','オブジェクト図','コンポーネント図','ユースケース図'],answer:1,explanation:'インスタンス（オブジェクト）間の関係を表すのは<strong>オブジェクト図</strong>です。クラス間の関係はクラス図で表します。'},
-{q:'ブラックボックステストに関する記述として、最も適切なものはどれか。（平成31年度）',choices:['テストデータの作成基準として、プログラムの命令や分岐に対する網羅率を使用する。','被テストプログラムに冗長なコードがあっても検出できない。','プログラムの内部構造に着目し、必要な部分が実行されたかどうかを検証する。','分岐命令やモジュールの数が増えると、テストデータが急増する。'],answer:1,explanation:'<strong>ブラックボックステスト</strong>は内部構造を見ず入出力だけに着目するため、冗長なコードのような内部の問題は検出できません。ア・ウ・エはいずれもホワイトボックステストに関する記述です。'},
-{q:'図の構造をもつプログラムに対して、ホワイトボックステストのテストケースを設計するとき、少なくとも実施しなければならないテストケース数が最大になるテスト技法はどれか。（平成27年度）',choices:['条件網羅','判定条件網羅','複数条件網羅','命令網羅'],answer:2,explanation:'網羅性が最も高くテストケース数が最大になるのは<strong>複数条件網羅</strong>です。すべての条件の真偽の組合せを実行するため、最も多くのケースが必要になります。最少は命令網羅です。'},
-{q:'流れ図で表される部分を命令網羅によってテストするとき、テストケースは少なくとも幾つ用意する必要があるか（判定条件が1つある単純な流れ図の場合）。（平成28年度）',choices:['2','3','4','5'],answer:0,explanation:'<strong>命令網羅</strong>はすべての命令を少なくとも1回実行すればよく、判定条件を1つもつ単純な流れ図では、命令を通る経路（真の場合）を1系統たどれば足りるため、最少<strong>2つ</strong>のテストケースで満たせます。命令網羅は5つの網羅基準の中で最少です。'},
-{q:'階層構造のモジュール群から成るソフトウェアの結合テストを上位モジュールから行う。このとき使用する、下位モジュールの代替となるテスト用のモジュールはどれか。（令和6年度）',choices:['エミュレーター','シミュレーター','スタブ','ドライバ'],answer:2,explanation:'上位から行うのはトップダウンテストで、未完成の下位モジュールの代わりに<strong>スタブ</strong>（ダミーの下位モジュール）を用意します。ドライバはボトムアップテストで使うダミーの上位モジュールです。'},
-{q:'ボトムアップテストの特徴として、適切なものはどれか。（平成27年度）',choices:['開発の初期の段階では、並行作業が困難である。','スタブが必要である。','テスト済みの上位モジュールが必要である。','ドライバが必要である。'],answer:3,explanation:'<strong>ボトムアップテスト</strong>は下位から上位へテストするため、ダミーの上位モジュールである<strong>ドライバ</strong>が必要です。スタブが必要なのはトップダウンテストです。'},
-{q:'モジュール間やサブシステム間のインタフェースを検証するために行うテストはどれか。（平成18年度）',choices:['運用テスト','結合テスト','システムテスト','単体テスト'],answer:1,explanation:'モジュール間・サブシステム間のインタフェースを検証するのは<strong>結合テスト</strong>です。単体テストはモジュール単体、システムテストはシステム要件、運用テストは業務要件を検証します。'},
-{q:'ソフトウェア保守のために行った変更によって、影響を受けないはずの箇所に影響を及ぼしていないかどうかを確認する目的で行うテストはどれか。（平成26年度）',choices:['運用テスト','結合テスト','システムテスト','リグレッションテスト'],answer:3,explanation:'変更が影響を受けないはずの箇所に悪影響を与えていないかを確認するのは<strong>リグレッションテスト（回帰テスト）</strong>です。修正や機能追加で別の箇所に新しいバグが出ていないかを検証します。'}
+/* =========================================================================
+   ロジック（全22章で流用可能な骨格）
+   - showSection(id)        : レッスン／テストのタブ切替
+   - allQuestions           : 設問データ配列（章ごとに差し替え）
+   - selectChoice(qi, ci)   : 選択肢クリック→採点→解説表示
+   ========================================================================= */
+
+/* ---- タブ切替 ---------------------------------------------------------- */
+var STORE_KEY = 'fe_ch12_section';
+function showSection(id, opts){
+  opts = opts || {};
+  document.querySelectorAll('.section').forEach(function(s){
+    s.classList.toggle('active', s.id === id);
+  });
+  document.querySelectorAll('.tabbar [data-target]').forEach(function(t){
+    t.classList.toggle('active', t.dataset.target === id);
+  });
+  // 画面上部（タブ帯）へ
+  if(opts.scroll !== false){
+    var top = document.querySelector('.header').offsetHeight;
+    window.scrollTo(0, top);
+  }
+  try{ localStorage.setItem(STORE_KEY, id); }catch(e){}
+}
+function goBack(){ location.href='it_quiz.html'; }
+
+/* ---- 設問データ（第10章 ネットワーク） -------------------------------- */
+/* answer = choices の正解インデックス（0始まり）。章ごとにこの配列を差し替え。 */
+var allQuestions = [
+{q:'システム開発の最初の工程で行う作業として、適切なものはどれか。（平成21年度）',choices:['各プログラムの内部構造を設計する。','現状の業務を分析し、システム要件を整理する。','サブシステムをプログラム単位まで分割し、各プログラムの詳細を設計する。','ユーザーインタフェースを設計する。'],answer:1,explain:'システム開発の最初の工程は<strong>システム要件定義</strong>で、現状の業務を分析してシステム要件を整理します。内部構造の設計や詳細設計は、より後の工程で行います。'},
+{q:'システム開発とその取引を適正化するために、作業項目を定義し、関係者が同じ用語で話せるようIPAが策定したガイドラインはどれか。',choices:['共通フレーム','ベンチマーク','ガントチャート','クリティカルパス'],answer:0,explain:'<strong>共通フレーム</strong>は、システム開発と取引の作業項目を1つずつ定義し、経営者・ユーザー・ベンダー間の用語の食い違いを防ぐためにIPAが策定したガイドラインです。'},
+{q:'開発プロセスにおける、ソフトウェア方式設計で行うべき作業はどれか。（平成25年度）',choices:['顧客に意見を求めて仕様を決定する。','既に決定しているソフトウェア要件を、どのように実現させるかを決める。','プログラム1行ごとの処理まで明確になるように詳細化する。','要求内容を図表などの形式でまとめ、段階的に詳細化して分析する。'],answer:1,explain:'<strong>ソフトウェア方式設計</strong>は、決定済みのソフトウェア要件を、どのようにプログラムで実現するか（プログラム単位まで分割）を決める工程です。アは要件定義、ウはソフトウェア詳細設計、エはソフトウェア要件定義の作業です。'},
+{q:'システムの外部設計を完了させるとき、顧客から承認を受けるものはどれか。（平成29年度）',choices:['画面レイアウト','システム開発計画','物理データベース仕様','プログラムの流れ図'],answer:0,explain:'外部設計は<strong>ユーザーから見える箇所</strong>の設計です。選択肢の中で唯一ユーザーから見えるのは<strong>画面レイアウト</strong>です。物理データベース仕様や流れ図は内部（ソフトウェア詳細設計）の成果物です。'},
+{q:'ソフトウェアの分析・設計技法のうち、データ中心分析・設計技法の特徴として最も適切なものはどれか。（平成25年度）',choices:['機能の詳細化の過程で、モジュールの独立性が高くなるようにプログラムを分割していく。','システムの開発後の仕様変更は、データ構造や手続を局所的に変更・追加することで比較的容易に実現できる。','対象業務領域のモデル化に当たって、情報資源のデータ構造に着目する。','プログラムが最も効率よくアクセスできるようにデータ構造を設計する。'],answer:2,explain:'<strong>データ中心アプローチ</strong>は、業務のモデル化に当たり情報資源の<strong>データ構造</strong>に着目します。データは実世界に存在し要求で変化しにくいため、仕様変更に強い設計になります。アはモジュール分割、エはデータベース設計の特徴です。'},
+{q:'構造化分析法で用いられるDFDにおいて、図中の「○」が表しているものはどれか。（令和元年度）',choices:['データストア','データフロー','データの源泉','プロセス'],answer:3,explain:'DFDの「○（丸）」は<strong>プロセス（処理）</strong>を表します。データストアは2本の線、データフローは矢印で表します。'},
+{q:'モジュール結合度が最も弱くなるものはどれか。（令和元年度）',choices:['一つのモジュールで、できるだけ多くの機能を実現する。','モジュール間で必要なデータ項目だけを引数として渡す。','他のモジュールとデータ項目を共有するためにグローバルな領域を使用する。','他のモジュールを呼び出すときに、呼び出したモジュールの論理を制御するための引数を渡す。'],answer:1,explain:'モジュール結合度が最も弱い（＝良い）のは<strong>データ結合</strong>で、必要なデータ項目だけを引数として渡す方式です。グローバル領域の共有は共通結合、制御用の引数を渡すのは制御結合で、いずれも結合度が強くなります。'},
+{q:'オブジェクト指向におけるクラスとインスタンスとの関係のうち、適切なものはどれか。（平成30年度）',choices:['インスタンスはクラスの仕様を定義したものである。','クラスの定義に基づいてインスタンスが生成される。','一つのインスタンスに対して、複数のクラスが対応する。','一つのクラスに対して、インスタンスはただ一つ存在する。'],answer:1,explain:'クラスはひな型（テンプレート）で、その<strong>定義に基づいてインスタンス（実体）が生成</strong>されます。1つのクラスからインスタンスは複数作ることができ、1つのインスタンスには1つのクラスが対応します。'},
+{q:'オブジェクト指向において、あるクラスの属性や機能がサブクラスで利用できることを何というか。（平成30年度）',choices:['カプセル化','継承','抽象化','多相性'],answer:1,explain:'親クラスのデータやメソッドを子クラス（サブクラス）が引き継いで利用できることを<strong>継承</strong>といいます。カプセル化はデータと手続をまとめて隠蔽すること、多相性は同じ操作で異なる動作をすることです。'},
+{q:'オブジェクト指向におけるカプセル化を説明したものはどれか。（平成28年度）',choices:['同じ性質をもつ複数のオブジェクトを抽象化して、整理すること','基底クラスの性質を派生クラスに受け継がせること','クラス間に共通する性質を抽出し、基底クラスを作ること','データとそれを操作する手続を一つのオブジェクトにまとめ、データと手続の詳細を外部から隠蔽すること'],answer:3,explain:'<strong>カプセル化</strong>は、データと手続（メソッド）を1つのオブジェクトにまとめ、内部の詳細を外部から隠蔽（情報隠蔽）することです。アは抽象化、イは継承、ウは汎化の説明です。'},
+{q:'オブジェクト指向プログラミングの特徴のうち、異なるクラスのオブジェクトを同一のインタフェースで操作したときに、操作対象クラスに応じた異なる動作を可能にすることを何と呼ぶか。（令和7年度）',choices:['委譲','継承','コンポジション','多相性'],answer:3,explain:'同一の操作に対して、対象オブジェクトごとに異なる動作を可能にすることを<strong>多相性（ポリモーフィズム）</strong>といいます。委譲は別オブジェクトに操作を任せること、コンポジションは部品を組み合わせて新しいオブジェクトを作ることです。'},
+{q:'UMLのクラス図において、四角形の枠の中に記述するものはどれか。（平成26年度）',choices:['関連名','クラス名','集約名','ユースケース名'],answer:1,explain:'UMLのクラス図では、四角形（長方形）の中に<strong>クラス名</strong>・属性・メソッドを記入します。関連名は実線の上、集約名は白抜きひし形の矢印の上、ユースケース名は楕円形の中に記入します。'},
+{q:'UMLにおいて、オブジェクト間の相互作用を時系列に表す図はどれか。（平成29年度）',choices:['アクティビティ図','コンポーネント図','シーケンス図','状態遷移図'],answer:2,explain:'オブジェクト間の相互作用を<strong>時系列</strong>に表すのは<strong>シーケンス図</strong>です。アクティビティ図は制御の流れ、状態遷移図（ステートマシン図）はオブジェクトの状態変化を表します。'},
+{q:'UMLにおける振る舞い図の説明のうち、アクティビティ図のものはどれか。（平成31年度）',choices:['ある振る舞いから次の振る舞いへの制御の流れを表現する。','オブジェクト間の相互作用を時系列で表現する。','システムが外部に提供する機能と、それを利用する者や外部システムとの関係を表現する。','一つのオブジェクトの状態がイベントの発生や時間の経過とともにどのように変化するかを表現する。'],answer:0,explain:'<strong>アクティビティ図</strong>は、ある振る舞いから次の振る舞いへの制御の流れを表します。イはシーケンス図、ウはユースケース図、エは状態遷移図（ステートマシン図）の説明です。'},
+{q:'UMLのダイアグラムのうち、インスタンス間の関係を表現するものはどれか。（平成24年度）',choices:['アクティビティ図','オブジェクト図','コンポーネント図','ユースケース図'],answer:1,explain:'インスタンス（オブジェクト）間の関係を表すのは<strong>オブジェクト図</strong>です。クラス間の関係はクラス図で表します。'},
+{q:'ブラックボックステストに関する記述として、最も適切なものはどれか。（平成31年度）',choices:['テストデータの作成基準として、プログラムの命令や分岐に対する網羅率を使用する。','被テストプログラムに冗長なコードがあっても検出できない。','プログラムの内部構造に着目し、必要な部分が実行されたかどうかを検証する。','分岐命令やモジュールの数が増えると、テストデータが急増する。'],answer:1,explain:'<strong>ブラックボックステスト</strong>は内部構造を見ず入出力だけに着目するため、冗長なコードのような内部の問題は検出できません。ア・ウ・エはいずれもホワイトボックステストに関する記述です。'},
+{q:'図の構造をもつプログラムに対して、ホワイトボックステストのテストケースを設計するとき、少なくとも実施しなければならないテストケース数が最大になるテスト技法はどれか。（平成27年度）',choices:['条件網羅','判定条件網羅','複数条件網羅','命令網羅'],answer:2,explain:'網羅性が最も高くテストケース数が最大になるのは<strong>複数条件網羅</strong>です。すべての条件の真偽の組合せを実行するため、最も多くのケースが必要になります。最少は命令網羅です。'},
+{q:'流れ図で表される部分を命令網羅によってテストするとき、テストケースは少なくとも幾つ用意する必要があるか（判定条件が1つある単純な流れ図の場合）。（平成28年度）',choices:['2','3','4','5'],answer:0,explain:'<strong>命令網羅</strong>はすべての命令を少なくとも1回実行すればよく、判定条件を1つもつ単純な流れ図では、命令を通る経路（真の場合）を1系統たどれば足りるため、最少<strong>2つ</strong>のテストケースで満たせます。命令網羅は5つの網羅基準の中で最少です。'},
+{q:'階層構造のモジュール群から成るソフトウェアの結合テストを上位モジュールから行う。このとき使用する、下位モジュールの代替となるテスト用のモジュールはどれか。（令和6年度）',choices:['エミュレーター','シミュレーター','スタブ','ドライバ'],answer:2,explain:'上位から行うのはトップダウンテストで、未完成の下位モジュールの代わりに<strong>スタブ</strong>（ダミーの下位モジュール）を用意します。ドライバはボトムアップテストで使うダミーの上位モジュールです。'},
+{q:'ボトムアップテストの特徴として、適切なものはどれか。（平成27年度）',choices:['開発の初期の段階では、並行作業が困難である。','スタブが必要である。','テスト済みの上位モジュールが必要である。','ドライバが必要である。'],answer:3,explain:'<strong>ボトムアップテスト</strong>は下位から上位へテストするため、ダミーの上位モジュールである<strong>ドライバ</strong>が必要です。スタブが必要なのはトップダウンテストです。'},
+{q:'モジュール間やサブシステム間のインタフェースを検証するために行うテストはどれか。（平成18年度）',choices:['運用テスト','結合テスト','システムテスト','単体テスト'],answer:1,explain:'モジュール間・サブシステム間のインタフェースを検証するのは<strong>結合テスト</strong>です。単体テストはモジュール単体、システムテストはシステム要件、運用テストは業務要件を検証します。'},
+{q:'ソフトウェア保守のために行った変更によって、影響を受けないはずの箇所に影響を及ぼしていないかどうかを確認する目的で行うテストはどれか。（平成26年度）',choices:['運用テスト','結合テスト','システムテスト','リグレッションテスト'],answer:3,explain:'変更が影響を受けないはずの箇所に悪影響を与えていないかを確認するのは<strong>リグレッションテスト（回帰テスト）</strong>です。修正や機能追加で別の箇所に新しいバグが出ていないかを検証します。'}
 ];
-let questions=[],answered=0;
-function shuffleArray(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
-function initQuiz(){questions=shuffleArray(allQuestions);answered=0;document.getElementById('submitBtn').style.display='none';document.getElementById('resultArea').style.display='none';document.getElementById('progressFill').style.width='0%';const c=document.getElementById('quizContainer');c.innerHTML='';questions.forEach((q,idx)=>{const sc=q.choices.map((c,i)=>({text:c,origIdx:i}));for(let i=sc.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[sc[i],sc[j]]=[sc[j],sc[i]]}q._shuffled=sc;q._selected=null;let h=`<div class="question-card"><div class="q-number">問題 ${idx+1} / ${questions.length}</div><div class="q-text">${q.q}</div><ul class="choices">`;sc.forEach((c,ci)=>{h+=`<li onclick="selectChoice(${idx},${ci})" id="q${idx}c${ci}">${c.text}</li>`});h+=`</ul><div class="explanation" id="exp${idx}"><div id="expText${idx}"></div></div></div>`;c.innerHTML+=h})}
-function selectChoice(qi,ci){const q=questions[qi];if(q._selected!==null)return;q._selected=ci;answered++;const corr=q.answer,sel=q._shuffled[ci].origIdx,ok=sel===corr;q._shuffled.forEach((c,i)=>{const li=document.getElementById(`q${qi}c${i}`);if(c.origIdx===corr)li.classList.add('correct');if(i===ci&&!ok)li.classList.add('wrong')});const e=document.getElementById(`exp${qi}`),t=document.getElementById(`expText${qi}`);t.innerHTML=(ok?'<span style="color:#4caf50;font-weight:bold">&#x2B55; 正解！</span>':'<span style="color:#f44336;font-weight:bold">&#x274C; 不正解</span>')+'<br>'+q.explanation;e.classList.add('show');document.getElementById('progressFill').style.width=(answered/questions.length*100)+'%';if(answered===questions.length)document.getElementById('submitBtn').style.display='inline-block'}
-function submitQuiz(){let c=0;questions.forEach(q=>{if(q._selected!==null&&q._shuffled[q._selected].origIdx===q.answer)c++});document.getElementById('resultArea').style.display='block';document.getElementById('resultScore').textContent=`${c} / ${questions.length}`;const p=c/questions.length*100;let m='';if(p===100)m='満点！完璧です！';else if(p>=80)m='よく理解できています！';else if(p>=60)m='合格ライン！もう少し復習しましょう。';else m='レッスンをもう一度確認しましょう。';document.getElementById('resultMsg').textContent=m;document.getElementById('resultArea').scrollIntoView({behavior:'smooth'})}
-function retryQuiz(){initQuiz();document.getElementById('quizContainer').scrollIntoView({behavior:'smooth'})}
-function showSection(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');const tabs=document.querySelectorAll('.nav-tab');const ids=['lesson1','lesson2','lesson3','lesson4','quiz'];tabs[ids.indexOf(id)].classList.add('active');if(id==='quiz')initQuiz();window.scrollTo({top:0,behavior:'smooth'})}
-initQuiz();
+
+/* ---- 出題状態 ---------------------------------------------------------- */
+var quiz = [];   // 表示中の設問（シャッフル済み）
+function shuffle(a){ for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t;} return a; }
+var KEYS = ['A','B','C','D','E'];
+
+function buildQuiz(){
+  var order = shuffle(allQuestions.map(function(q,i){return i;}));
+  quiz = order.map(function(oi){
+    var src = allQuestions[oi];
+    var idx = shuffle(src.choices.map(function(_,i){return i;}));
+    return {
+      q: src.q,
+      choices: idx.map(function(i){return src.choices[i];}),
+      answer: idx.indexOf(src.answer),
+      explain: src.explain,
+      answered:false, correct:false
+    };
+  });
+  renderQuiz();
+}
+
+function renderQuiz(){
+  var html = '';
+  for(var qi=0; qi<quiz.length; qi++){
+    var it = quiz[qi];
+    var lis = '';
+    for(var ci=0; ci<it.choices.length; ci++){
+      lis += '<li class="choice" onclick="selectChoice('+qi+','+ci+')">'
+           +   '<span class="key"><span>'+KEYS[ci]+'</span></span>'
+           +   '<span class="txt">'+it.choices[ci]+'</span>'
+           + '</li>';
+    }
+    html += '<div class="question-card" id="q'+qi+'">'
+         +    '<div class="q-number">問題 '+(qi+1)+' / '+quiz.length+'</div>'
+         +    '<div class="q-text">'+it.q+'</div>'
+         +    '<ul class="choices">'+lis+'</ul>'
+         +    '<div class="explanation"><span class="exp-mark"></span><span class="exp-text">'+it.explain+'</span></div>'
+         +  '</div>';
+  }
+  document.getElementById('quiz-questions').innerHTML = html;
+  updateProgress();
+}
+
+function selectChoice(qi, ci){
+  var it = quiz[qi];
+  if(it.answered) return;
+  it.answered = true;
+  it.correct = (ci === it.answer);
+  var card = document.getElementById('q'+qi);
+  var lis = card.querySelectorAll('.choice');
+  for(var i=0;i<lis.length;i++){
+    if(i === it.answer) lis[i].classList.add('correct');
+    if(i === ci && ci !== it.answer) lis[i].classList.add('wrong');
+  }
+  card.querySelector('.choices').classList.add('answered');
+  var exp = card.querySelector('.explanation');
+  exp.classList.add('show', it.correct ? 'is-correct' : 'is-wrong');
+  exp.querySelector('.exp-mark').textContent = it.correct ? '◯ 正解！' : '✕ 不正解';
+  updateProgress();
+  if(quiz.every(function(x){return x.answered;})) setTimeout(showResult, 500);
+}
+
+function updateProgress(){
+  var total = quiz.length;
+  var done = quiz.filter(function(x){return x.answered;}).length;
+  document.querySelector('.progress-fill').style.width = total ? (done/total*100)+'%' : '0%';
+  document.querySelector('.progress-count').textContent = done + ' / ' + total;
+}
+
+/* ---- 結果画面 ---------------------------------------------------------- */
+function showResult(){
+  var total = quiz.length;
+  var score = quiz.filter(function(x){return x.correct;}).length;
+  var pct = total ? Math.round(score/total*100) : 0;
+  var label, msg;
+  if(pct >= 90){ label='PERFECT'; msg='文句なし。この調子なら本番でも通用します。'; }
+  else if(pct >= 70){ label='GREAT'; msg='good。あと少しで満点、間違えた所だけ復習しよう。'; }
+  else if(pct >= 50){ label='GOOD'; msg='基礎はOK。間違えた問題の解説を読み直そう。'; }
+  else { label='KEEP GOING'; msg='復習して再挑戦！解説を読めば必ず伸びます。'; }
+  document.getElementById('resultLabel').textContent = label;
+  document.getElementById('scoreTotal').textContent = '/ ' + total;
+  document.getElementById('resultMsg').textContent = msg;
+  var overlay = document.getElementById('resultOverlay');
+  overlay.classList.add('show');
+  countUp(document.getElementById('scoreNum'), score);
+  if(pct >= 50) confetti();
+}
+function countUp(el, to){
+  el.textContent = 0;
+  if(to <= 0) return;
+  var dur = 700, startT = Date.now();
+  var t = setInterval(function(){
+    var p = Math.min(1, (Date.now() - startT) / dur);
+    el.textContent = Math.round(p * to);
+    if(p >= 1){ el.textContent = to; clearInterval(t); }
+  }, 40);
+}
+function confetti(){
+  var host = document.getElementById('resultArea');
+  var colors = ['#56E1E9','#A78BFA','#4ADE80','#FBBF24'];
+  for(var i=0;i<18;i++){
+    var s = document.createElement('span');
+    s.className = 'confetti';
+    s.style.left = (Math.random()*100) + '%';
+    s.style.background = colors[i % 4];
+    s.style.animationDelay = (Math.random()*0.35) + 's';
+    s.style.setProperty('--cx', (Math.random()*160-80) + 'px');
+    host.appendChild(s);
+    (function(node){ setTimeout(function(){ if(node.parentNode) node.parentNode.removeChild(node); }, 1800); })(s);
+  }
+}
+function closeResult(){ document.getElementById('resultOverlay').classList.remove('show'); }
+function retryQuiz(){
+  closeResult();
+  buildQuiz();
+  showSection('quiz');
+}
+
+/* ---- 初期化 ------------------------------------------------------------ */
+(function init(){
+  buildQuiz();
+  var saved = null;
+  try{ saved = localStorage.getItem(STORE_KEY); }catch(e){}
+  if(saved && document.getElementById(saved)){ showSection(saved, {scroll:false}); }
+  // 結果オーバーレイの背景クリックで閉じる
+  document.getElementById('resultOverlay').addEventListener('click', function(e){
+    if(e.target === this) closeResult();
+  });
+})();
 </script>
 </body>
 </html>

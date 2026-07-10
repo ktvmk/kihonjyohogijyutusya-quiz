@@ -4,53 +4,394 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>第9章 データベース｜基本情報技術者</title>
+<meta name="description" content="基本情報技術者試験 Web教材 — 第10章 ネットワーク。レッスンと確認テスト。">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Hiragino Sans','Noto Sans JP','Meiryo',sans-serif;background:#f5f5f0;color:#333;line-height:1.8;padding:0 0 60px 0}.header{background:linear-gradient(135deg,#e65100,#ff8f00);color:#fff;padding:24px 20px;text-align:center}.header h1{font-size:1.3em;margin-bottom:4px}.header .sub{font-size:.85em;opacity:.8}.container{max-width:720px;margin:0 auto;padding:16px}.nav-tabs{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap}.nav-tab{padding:10px 14px;border:2px solid #e65100;border-radius:8px;background:#fff;color:#e65100;font-weight:bold;font-size:.82em;cursor:pointer;transition:all .2s}.nav-tab:hover,.nav-tab.active{background:#e65100;color:#fff}.section{display:none}.section.active{display:block}.lesson-card{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.lesson-card h2{color:#e65100;font-size:1.2em;margin-bottom:16px;padding-bottom:8px;border-bottom:3px solid #ffe0b2}.lesson-card h3{color:#ff8f00;font-size:1.05em;margin:20px 0 10px 0}.key-point{background:#fff3e0;border-left:4px solid #e65100;padding:14px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-size:.95em}.key-point strong{color:#e65100}.vocab{display:inline-block;background:#e3f2fd;border:1px solid #64b5f6;border-radius:6px;padding:2px 8px;margin:2px 4px;font-weight:bold;font-size:.9em;color:#1565c0}.example{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:14px 16px;margin:12px 0;font-size:.9em}.formula{background:#fce4ec;border-left:4px solid #e91e63;padding:14px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-family:monospace;font-size:.95em;line-height:2}.compare{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}.compare-box{background:#fff;border:2px solid #e0e0e0;border-radius:10px;padding:14px;font-size:.9em}.compare-box h4{font-size:.95em;margin-bottom:8px;text-align:center}.compare-box.good{border-color:#4caf50}.compare-box.good h4{color:#2e7d32}.compare-box.bad{border-color:#ff9800}.compare-box.bad h4{color:#e65100}
-.quiz-area{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.quiz-area h2{color:#e65100;margin-bottom:16px}.question-card{background:#fafafa;border:1px solid #e0e0e0;border-radius:10px;padding:20px;margin:16px 0}.q-number{font-size:.8em;color:#999;margin-bottom:6px}.q-text{font-size:1.05em;font-weight:bold;margin-bottom:14px;line-height:1.6}.choices{list-style:none}.choices li{padding:12px 16px;margin:6px 0;border:2px solid #e0e0e0;border-radius:8px;cursor:pointer;transition:all .2s;font-size:.95em}.choices li:hover{border-color:#e65100;background:#fff3e0}.choices li.correct{border-color:#4caf50;background:#e8f5e9}.choices li.wrong{border-color:#f44336;background:#ffebee}.explanation{display:none;margin-top:12px;padding:14px;background:#f5f5f5;border-radius:8px;font-size:.9em;line-height:1.7}.explanation.show{display:block}.result-area{display:none;text-align:center;padding:30px;background:#fff;border-radius:12px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.result-score{font-size:2.5em;font-weight:bold;color:#e65100;margin:10px 0}.btn{display:inline-block;padding:12px 28px;background:#e65100;color:#fff;border:none;border-radius:8px;font-size:1em;cursor:pointer;margin:8px}.btn:hover{background:#ff8f00}.btn-outline{background:#fff;color:#e65100;border:2px solid #e65100}.progress-bar{width:100%;height:6px;background:#e0e0e0;border-radius:3px;margin:12px 0}.progress-fill{height:100%;background:#e65100;border-radius:3px;transition:width .3s}.back-link{display:inline-block;margin:16px 0;color:#e65100;text-decoration:none;font-weight:bold}
-.sql-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.88em}
-.sql-table th{background:#e65100;color:#fff;padding:6px;border:1px solid #ccc}
-.sql-table td{padding:6px;border:1px solid #ccc;background:#fff}
+/* =========================================================================
+   基本情報技術者 Web教材 — デザインシステム（案D：ネオ・モダン / ダーク）
+   このファイル1枚で完結。全22章はこの <style> と <script> を流用し、
+   各章の「レッスン本文」と「allQuestions 配列」を差し替えるだけで展開できます。
+   ========================================================================= */
+
+:root{
+  /* ---- 色：面 ---------------------------------------------------------- */
+  --bg:            #0A0E16;   /* ページ背景（最下層）           */
+  --bg-2:          #0D121C;   /* 一段明るい背景                 */
+  --card:          rgba(255,255,255,.045); /* ガラス質カード面   */
+  --card-solid:    #131926;   /* 不透明カード（表・数式など）   */
+  --inset:         rgba(0,0,0,.35);        /* へこみ面（数式）    */
+  --line:          rgba(255,255,255,.09);  /* 罫線・境界         */
+  --line-strong:   rgba(255,255,255,.16);  /* 強い罫線           */
+  /* ---- 色：文字 -------------------------------------------------------- */
+  --ink:           #EAEDF5;   /* 本文                          */
+  --ink-strong:    #F5F7FB;   /* 見出し・強調                  */
+  --sub:           #98A2B3;   /* サブ文字                      */
+  --faint:         #5E6779;   /* 補助・キャプション            */
+  /* ---- 色：アクセント / 意味 ------------------------------------------ */
+  --accent:        #56E1E9;   /* ネオンシアン（主アクセント）  */
+  --accent-ink:    #06222A;   /* アクセント上の文字            */
+  --accent-soft:   #7FEFF5;   /* 明るいシアン（テキスト用）    */
+  --accent-2:      #A78BFA;   /* バイオレット（副アクセント）  */
+  --success:       #4ADE80;   /* 成功・正解（緑）              */
+  --success-soft:  #7BE9A4;
+  --danger:        #FB7185;   /* 誤答（赤）                    */
+  --danger-soft:   #FDA4AF;
+  --warning:       #FBBF24;   /* 警告・注意（アンバー）        */
+  --warning-soft:  #FCD34D;
+  /* ---- 角丸 ------------------------------------------------------------ */
+  --r-xs:6px; --r-sm:10px; --r-md:14px; --r-lg:18px; --r-xl:24px; --r-pill:999px;
+  /* ---- 影・グロー ------------------------------------------------------ */
+  --shadow:        0 10px 34px rgba(0,0,0,.42);
+  --shadow-pop:    0 24px 64px rgba(0,0,0,.55);
+  --glow:          0 0 22px rgba(86,225,233,.30);
+  --glow-2:        0 0 22px rgba(167,139,250,.28);
+  /* ---- 余白（8pxベース） ---------------------------------------------- */
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:20px; --s6:24px; --s7:32px; --s8:40px;
+  --pad:20px;                 /* コンテナ左右パディング（狭幅で縮小）*/
+  --maxw:720px;               /* 本文最大幅（可読性）          */
+  /* ---- フォント（Webフォント不使用・システムフォント） --------------- */
+  --font:  -apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","Meiryo",sans-serif;
+  --mono:  ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Courier New",monospace;
+  /* ---- 文字サイズ ------------------------------------------------------ */
+  --fs-h1:24px; --fs-h2:19px; --fs-h3:15.5px; --fs-body:15px; --fs-sm:13px; --fs-xs:11.5px;
+  --lh:1.9;
+}
+
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{
+  margin:0; font-family:var(--font); color:var(--ink);
+  font-size:var(--fs-body); line-height:var(--lh);
+  background:
+    radial-gradient(680px 480px at 88% -6%, rgba(86,225,233,.16), transparent 60%),
+    radial-gradient(620px 520px at -8% 34%, rgba(167,139,250,.14), transparent 60%),
+    radial-gradient(700px 620px at 60% 108%, rgba(86,225,233,.08), transparent 60%),
+    var(--bg);
+  background-attachment:fixed;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--accent-soft); text-decoration:none;}
+a:hover{color:var(--accent);}
+::selection{background:rgba(86,225,233,.28); color:#fff;}
+.wrap{max-width:var(--maxw); margin:0 auto; padding-left:var(--pad); padding-right:var(--pad);}
+
+/* =====================  ヘッダー（章タイトル帯）  ======================= */
+.header{position:relative; overflow:hidden; border-bottom:1px solid var(--line);}
+.header::after{content:""; position:absolute; left:0; right:0; bottom:-1px; height:1px;
+  background:linear-gradient(90deg,transparent,rgba(86,225,233,.7),rgba(167,139,250,.5),transparent);}
+.header .wrap{padding-top:26px; padding-bottom:24px;}
+.back-link{display:inline-flex; align-items:center; gap:6px; font-size:var(--fs-sm);
+  font-weight:600; color:var(--accent-soft); margin-bottom:16px; cursor:pointer;
+  text-shadow:0 0 14px rgba(86,225,233,.35);}
+.back-link:hover{color:var(--accent);}
+.eyebrow{font-size:var(--fs-xs); font-weight:700; letter-spacing:.18em; color:var(--accent);}
+.header h1{margin:8px 0 0; font-size:var(--fs-h1); font-weight:800; letter-spacing:-.01em; color:var(--ink-strong);}
+.header .sub{margin:7px 0 0; font-size:var(--fs-sm); color:var(--sub);}
+
+/* =====================  レッスン切替タブ（折り返し）＋確認テストボタン  === */
+.tabbar{position:sticky; top:0; z-index:50;
+  background:rgba(10,14,22,.82); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);}
+.tabbar-inner{display:flex; flex-wrap:wrap; align-items:center; gap:10px;
+  max-width:var(--maxw); margin:0 auto; padding:11px var(--pad);}
+.nav-tabs{display:flex; flex-wrap:wrap; gap:8px; flex:1 1 auto; min-width:0;}
+.nav-tab{border:1px solid var(--line); white-space:nowrap;
+  background:var(--card); color:var(--sub); font-family:var(--font);
+  font-size:var(--fs-sm); font-weight:600; border-radius:var(--r-pill);
+  padding:8px 15px; cursor:pointer; transition:.18s ease;}
+.nav-tab:hover{border-color:rgba(86,225,233,.5); color:var(--ink);}
+.nav-tab.active{background:var(--accent); color:var(--accent-ink); border-color:transparent;
+  font-weight:700; box-shadow:var(--glow);}
+/* 確認テスト：レッスンタブと分けた独立アクセントボタン（常時表示） */
+.quiz-sep{align-self:stretch; width:1px; background:var(--line); margin:2px 0;}
+.quiz-btn{flex:0 0 auto; display:inline-flex; align-items:center; gap:7px; white-space:nowrap;
+  cursor:pointer; font-family:var(--font); font-size:var(--fs-sm); font-weight:700;
+  padding:9px 17px; border-radius:var(--r-pill); border:1px solid transparent; color:#160B2E;
+  background:linear-gradient(135deg,var(--accent),var(--accent-2)); box-shadow:var(--glow); transition:.18s ease;}
+.quiz-btn .arw{font-size:15px; transition:transform .18s ease;}
+.quiz-btn:hover{filter:brightness(1.08); transform:translateY(-1px);}
+.quiz-btn:hover .arw{transform:translateX(3px);}
+.quiz-btn.active{outline:2px solid rgba(167,139,250,.65); outline-offset:2px;}
+@media (max-width:520px){
+  .tabbar{position:static; backdrop-filter:none; background:rgba(255,255,255,.02);}
+  .quiz-sep{display:none;}
+  .quiz-btn{flex:1 1 100%; justify-content:center;}
+}
+
+/* =====================  レッスン内ナビ（次へ／確認テストへ）  =========== */
+.lesson-nav{display:flex; justify-content:flex-end; margin-top:16px;}
+.btn-next{display:inline-flex; align-items:center; gap:16px; cursor:pointer; text-align:left;
+  font-family:var(--font); border-radius:var(--r-md); padding:14px 20px;
+  background:var(--card); border:1px solid var(--line-strong); color:var(--ink);
+  box-shadow:var(--shadow); transition:.18s ease;}
+.btn-next:hover{border-color:rgba(86,225,233,.55); transform:translateY(-1px);}
+.btn-next .bn-meta{display:flex; flex-direction:column; line-height:1.35;}
+.btn-next .bn-label{font-size:var(--fs-xs); color:var(--sub); font-weight:600;}
+.btn-next .bn-title{font-size:var(--fs-body); color:var(--ink-strong); font-weight:700;}
+.btn-next .bn-arrow{font-size:20px; color:var(--accent-soft); transition:transform .18s ease;}
+.btn-next:hover .bn-arrow{transform:translateX(4px);}
+.btn-next.to-quiz{background:linear-gradient(135deg,rgba(86,225,233,.16),rgba(167,139,250,.16));
+  border-color:rgba(86,225,233,.5); box-shadow:0 0 26px rgba(86,225,233,.12);}
+.btn-next.to-quiz .bn-label{color:var(--accent-soft);}
+.btn-next.to-quiz .bn-arrow{color:var(--accent);}
+@media (max-width:480px){
+  .lesson-nav{justify-content:stretch;}
+  .btn-next{flex:1; justify-content:space-between;}
+}
+
+/* =====================  セクション切替  ================================= */
+.section{display:none; padding-top:22px; padding-bottom:64px;}
+.section.active{display:block; animation:fadeUp .34s ease both;}
+@keyframes fadeUp{from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;}}
+
+/* =====================  レッスンカード & 見出し階層  ==================== */
+.lesson-card{background:var(--card); border:1px solid var(--line); border-radius:var(--r-lg);
+  padding:24px; box-shadow:var(--shadow); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);}
+.lesson-card > h2:first-child{margin-top:0;}
+h2{margin:0 0 4px; font-size:var(--fs-h2); font-weight:800; color:var(--ink-strong); letter-spacing:-.01em;}
+.h2-rule{width:46px; height:2px; margin:10px 0 18px; border-radius:2px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2)); box-shadow:0 0 10px rgba(86,225,233,.5);}
+h3{margin:26px 0 12px; font-size:var(--fs-h3); font-weight:700; color:var(--accent-soft);
+  display:flex; align-items:center; gap:8px;}
+h3::before{content:""; width:7px; height:7px; border-radius:50%; background:var(--accent);
+  box-shadow:0 0 10px var(--accent); flex:0 0 auto;}
+p{margin:0 0 12px;} p:last-child{margin-bottom:0;}
+strong{color:var(--ink-strong); font-weight:700;}
+
+/* =====================  用語バッジ  ==================================== */
+.vocab{display:inline-flex; align-items:center; white-space:nowrap;
+  background:rgba(86,225,233,.10); border:1px solid rgba(86,225,233,.45); color:var(--accent-soft);
+  border-radius:var(--r-pill); padding:2px 10px; font-size:var(--fs-sm); font-weight:600;
+  margin:0 1px;}
+.vocab.v2{background:rgba(167,139,250,.12); border-color:rgba(167,139,250,.45); color:#C9B8FB;}
+
+/* =====================  ポイント囲み  ================================== */
+.key-point{background:rgba(86,225,233,.045); border:1px solid var(--line);
+  border-left:2px solid var(--accent); border-radius:0 var(--r-md) var(--r-md) 0;
+  padding:15px 17px; margin:14px 0; box-shadow:inset 0 0 26px rgba(86,225,233,.05);}
+.key-point .label{display:block; font-size:var(--fs-xs); font-weight:700; letter-spacing:.1em;
+  color:var(--accent); margin-bottom:8px;}
+.stack{display:flex; flex-direction:column; gap:10px;}
+
+/* =====================  具体例ブロック  ================================ */
+.example{background:rgba(251,191,36,.05); border:1px solid rgba(251,191,36,.22);
+  border-left:2px solid var(--warning); border-radius:0 var(--r-md) var(--r-md) 0;
+  padding:14px 17px; margin:14px 0; font-size:var(--fs-body); color:var(--ink);}
+.example b, .example strong{color:var(--warning-soft);}
+
+/* =====================  計算式ブロック（等幅）  ======================== */
+.formula{background:var(--inset); border:1px solid rgba(86,225,233,.20); border-radius:var(--r-md);
+  padding:15px 17px; margin:14px 0;}
+.formula .exp{font-family:var(--mono); font-size:14px; color:var(--accent-soft); line-height:1.85;}
+.formula .note{font-family:var(--mono); font-size:12px; color:var(--faint); margin-top:8px;}
+
+/* =====================  左右の対比カード  ============================== */
+.compare{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:14px 0;}
+.compare-box{border-radius:var(--r-md); padding:14px 15px; border:1px solid var(--line);}
+.compare-box h4{margin:0 0 3px; font-size:15px; font-weight:800;}
+.compare-box .en{font-size:var(--fs-xs); color:var(--faint); margin-bottom:8px;}
+.compare-box .body{font-size:var(--fs-sm); color:var(--ink); line-height:1.75;}
+.compare-box.good{background:rgba(74,222,128,.07); border-color:rgba(74,222,128,.30);}
+.compare-box.good h4{color:var(--success-soft);}
+.compare-box.bad{background:rgba(251,191,36,.07); border-color:rgba(251,191,36,.30);}
+.compare-box.bad h4{color:var(--warning-soft);}
+
+/* =====================  一覧表  ======================================== */
+.table-wrap{overflow-x:auto; border:1px solid var(--line); border-radius:var(--r-md); margin:14px 0;
+  scrollbar-width:thin;}
+.sql-table{width:100%; border-collapse:collapse; min-width:320px;}
+.sql-table th{ text-align:left; font-size:var(--fs-sm); font-weight:700; color:var(--accent-soft);
+  background:rgba(86,225,233,.07); padding:11px 14px; border-bottom:1px solid var(--line); white-space:nowrap;}
+.sql-table td{font-size:var(--fs-sm); color:var(--ink); padding:11px 14px; border-bottom:1px solid rgba(255,255,255,.055);}
+.sql-table tr:last-child td{border-bottom:none;}
+.sql-table tbody tr:hover, .sql-table tr:hover td{background:rgba(255,255,255,.02);}
+.sql-table td b{color:var(--ink-strong);}
+
+/* =====================  章末：最重要まとめ  ============================ */
+.summary{margin:20px 0 0; background:linear-gradient(135deg,rgba(86,225,233,.09),rgba(167,139,250,.09));
+  border:1px solid rgba(86,225,233,.28); border-radius:var(--r-md); padding:18px 18px 17px;
+  box-shadow:0 0 30px rgba(86,225,233,.08);}
+.summary .label{display:inline-flex; align-items:center; gap:8px; font-size:var(--fs-xs);
+  font-weight:800; letter-spacing:.1em; color:var(--accent-soft); margin-bottom:10px;}
+.summary .label::before{content:""; width:16px; height:2px; border-radius:2px;
+  background:var(--accent); box-shadow:0 0 8px var(--accent);}
+.summary p{font-size:var(--fs-body);}
+
+/* =====================  確認テスト  ==================================== */
+.quiz-head{margin-bottom:18px;}
+.quiz-head h2{margin-bottom:6px;}
+.quiz-note{font-size:var(--fs-sm); color:var(--sub); margin-bottom:16px;}
+.progress{display:flex; align-items:center; gap:12px;}
+.progress-bar{flex:1; height:10px; background:rgba(255,255,255,.06); border:1px solid var(--line);
+  border-radius:var(--r-pill); overflow:hidden;}
+.progress-fill{width:0%; height:100%; border-radius:var(--r-pill);
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  box-shadow:0 0 14px rgba(86,225,233,.5); transition:width .5s cubic-bezier(.2,.8,.2,1);}
+.progress-count{font-family:var(--mono); font-size:var(--fs-sm); color:var(--sub); min-width:52px; text-align:right;}
+
+.question-card{background:var(--card); border:1px solid var(--line); border-radius:var(--r-lg);
+  padding:20px; margin-bottom:16px; box-shadow:var(--shadow);
+  backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);}
+.q-number{font-family:var(--mono); font-size:var(--fs-xs); font-weight:700; letter-spacing:.08em;
+  color:var(--accent); margin-bottom:8px;}
+.q-text{font-size:var(--fs-body); font-weight:600; color:var(--ink-strong); line-height:1.7; margin-bottom:14px;}
+.choices{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:9px;}
+.choices li{display:flex; align-items:center; gap:12px; cursor:pointer;
+  background:rgba(255,255,255,.025); border:1px solid var(--line); border-radius:var(--r-sm);
+  padding:12px 14px; font-size:var(--fs-body); color:var(--ink); transition:.15s ease; user-select:none;}
+.choices li .key{flex:0 0 auto; width:24px; height:24px; border-radius:7px;
+  display:flex; align-items:center; justify-content:center; font-family:var(--mono);
+  font-size:12px; font-weight:700; color:var(--sub); background:rgba(255,255,255,.05);
+  border:1px solid var(--line); transition:.15s ease;}
+.choices li:hover{border-color:rgba(86,225,233,.55); background:rgba(86,225,233,.06); color:var(--ink-strong);}
+.choices li:hover .key{color:var(--accent-soft); border-color:rgba(86,225,233,.4);}
+.choices li:active{transform:scale(.99);}
+/* 回答後：クリック無効化 */
+.choices.answered li{cursor:default;}
+.choices.answered li:hover{border-color:var(--line); background:rgba(255,255,255,.025); color:var(--ink);}
+.choices.answered li:hover .key{color:var(--sub); border-color:var(--line);}
+/* 正解＝緑 */
+.choices li.correct{background:rgba(74,222,128,.12); border-color:rgba(74,222,128,.6); color:#EAFBF0;
+  box-shadow:0 0 18px rgba(74,222,128,.22); animation:pop .32s ease;}
+.choices li.correct .key{background:var(--success); border-color:transparent; color:#052E16;}
+.choices li.correct .key::after{content:"✓";}
+.choices li.correct .key span{display:none;}
+/* 誤選択＝赤 */
+.choices li.wrong{background:rgba(251,113,133,.12); border-color:rgba(251,113,133,.6); color:#FFECEF;}
+.choices li.wrong .key{background:var(--danger); border-color:transparent; color:#3B0A12;}
+.choices li.wrong .key::after{content:"✕";}
+.choices li.wrong .key span{display:none;}
+@keyframes pop{0%{transform:scale(1);}40%{transform:scale(1.02);}100%{transform:scale(1);}}
+
+/* 解説（回答後に開く） */
+.explanation{max-height:0; overflow:hidden; opacity:0; margin-top:0;
+  border-radius:var(--r-sm); transition:max-height .4s ease, opacity .3s ease, margin-top .3s ease;}
+.explanation.show{max-height:400px; opacity:1; margin-top:13px; padding:13px 15px;}
+.explanation.is-correct{background:rgba(74,222,128,.07); border:1px solid rgba(74,222,128,.28);}
+.explanation.is-wrong{background:rgba(251,113,133,.07); border:1px solid rgba(251,113,133,.28);}
+.exp-mark{display:block; font-size:var(--fs-sm); font-weight:800; margin-bottom:5px;}
+.explanation.is-correct .exp-mark{color:var(--success-soft);}
+.explanation.is-wrong .exp-mark{color:var(--danger-soft);}
+.exp-text{font-size:var(--fs-sm); color:var(--ink); line-height:1.8;}
+
+/* =====================  結果画面（オーバーレイ）  ====================== */
+.result-overlay{position:fixed; inset:0; z-index:100; display:none;
+  align-items:center; justify-content:center; padding:24px;
+  background:rgba(6,9,15,.72); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);}
+.result-overlay.show{display:flex; animation:ovFade .3s ease both;}
+@keyframes ovFade{from{opacity:0;}to{opacity:1;}}
+.result-area{position:relative; overflow:hidden; width:100%; max-width:420px; text-align:center;
+  background:linear-gradient(160deg,rgba(22,28,40,.96),rgba(13,18,28,.96));
+  border:1px solid rgba(86,225,233,.3); border-radius:var(--r-xl); padding:34px 26px 26px;
+  box-shadow:var(--shadow-pop), 0 0 60px rgba(86,225,233,.15);
+  animation:cardIn .42s cubic-bezier(.2,.9,.25,1.15) both;}
+@keyframes cardIn{from{opacity:0; transform:translateY(18px) scale(.94);}to{opacity:1; transform:none;}}
+.result-label{font-size:var(--fs-xs); font-weight:800; letter-spacing:.24em; color:var(--accent);
+  text-shadow:0 0 16px rgba(86,225,233,.5);}
+.result-score{margin:8px 0 6px; font-family:var(--mono); font-weight:800; line-height:1; color:var(--ink-strong);}
+.result-score #scoreNum{font-size:66px; background:linear-gradient(180deg,#fff,var(--accent-soft));
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+.result-total{font-size:24px; color:var(--sub); margin-left:6px;}
+.result-msg{font-size:var(--fs-body); color:var(--ink); line-height:1.7; margin:6px 4px 22px;}
+.result-actions{display:flex; flex-direction:column; gap:10px;}
+.btn{border:none; cursor:pointer; font-family:var(--font); font-size:var(--fs-body); font-weight:700;
+  padding:13px 20px; border-radius:var(--r-pill); background:var(--accent); color:var(--accent-ink);
+  box-shadow:var(--glow); transition:.18s ease;}
+.btn:hover{filter:brightness(1.08); transform:translateY(-1px);}
+.btn-outline{border:1px solid var(--line-strong); cursor:pointer; font-family:var(--font);
+  font-size:var(--fs-body); font-weight:600; padding:12px 20px; border-radius:var(--r-pill);
+  background:transparent; color:var(--ink); transition:.18s ease;}
+.btn-outline:hover{border-color:rgba(86,225,233,.55); color:var(--accent-soft);}
+.confetti{position:absolute; top:14px; width:8px; height:8px; border-radius:2px; opacity:0;
+  animation:confetti 1.35s ease-out forwards;}
+@keyframes confetti{0%{opacity:1; transform:translate(0,0) rotate(0deg);}
+  100%{opacity:0; transform:translate(var(--cx,0), 260px) rotate(400deg);}}
+
+/* =====================  レスポンシブ（〜スマホ360px）  ================= */
+@media (max-width:480px){
+  :root{--pad:15px; --fs-h1:21px; --fs-h2:17.5px; --fs-body:14.5px;}
+  .lesson-card{padding:18px;}
+  .question-card{padding:16px;}
+  .result-score #scoreNum{font-size:56px;}
+}
+@media (max-width:360px){
+  .compare{grid-template-columns:1fr;}
+}
 </style>
 </head>
 <body>
-<div class="header"><h1>第9章 データベース</h1><div class="sub">基本情報技術者試験 Web教材</div></div>
-<div class="container">
-<a href="it_quiz.html" class="back-link">← 章の一覧にもどる</a>
-<div class="nav-tabs">
-<div class="nav-tab active" onclick="showSection('lesson1')">① DB基本・関係DB</div>
-<div class="nav-tab" onclick="showSection('lesson2')">② 正規化</div>
-<div class="nav-tab" onclick="showSection('lesson3')">③ SQL・DBMS</div>
-<div class="nav-tab" onclick="showSection('lesson4')">④ トランザクション</div>
-<div class="nav-tab" onclick="showSection('quiz')">確認テスト</div>
+
+<!-- スプラッシュ用サムネイル（オフライン展開時のプレースホルダ／JS無効時のフォールバック） -->
+<template id="__bundler_thumbnail" data-bg-color="#0A0E16">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="tbg" cx="50%" cy="40%" r="62%">
+        <stop offset="0%" stop-color="#123047"/>
+        <stop offset="100%" stop-color="#0A0E16"/>
+      </radialGradient>
+    </defs>
+    <rect width="1200" height="800" fill="url(#tbg)"/>
+    <g stroke="#56E1E9" stroke-width="4" opacity="0.45">
+      <line x1="600" y1="352" x2="378" y2="222"/>
+      <line x1="600" y1="352" x2="822" y2="222"/>
+      <line x1="600" y1="352" x2="356" y2="474"/>
+      <line x1="600" y1="352" x2="844" y2="474"/>
+    </g>
+    <circle cx="600" cy="352" r="36" fill="#56E1E9"/>
+    <circle cx="378" cy="222" r="21" fill="#A78BFA"/>
+    <circle cx="822" cy="222" r="21" fill="#A78BFA"/>
+    <circle cx="356" cy="474" r="21" fill="#4ADE80"/>
+    <circle cx="844" cy="474" r="21" fill="#56E1E9"/>
+    <text x="600" y="612" text-anchor="middle" fill="#EAEDF5" font-family="-apple-system,'Hiragino Kaku Gothic ProN',sans-serif" font-size="58" font-weight="800">第10章 ネットワーク</text>
+    <text x="600" y="668" text-anchor="middle" fill="#56E1E9" font-family="-apple-system,sans-serif" font-size="24" font-weight="700" letter-spacing="7">CHAPTER 9 · DATABASE</text>
+  </svg>
+</template>
+
+<!-- ============================ 章タイトルヘッダー ======================= -->
+<header class="header">
+  <div class="wrap">
+    <span class="back-link" onclick="goBack()">← 章の一覧にもどる</span>
+    <div class="eyebrow">CHAPTER 9 ・ DATABASE</div>
+    <h1>データベース</h1>
+    <p class="sub">基本情報技術者試験 Web教材 ・ レッスン &amp; 確認テスト</p>
+  </div>
+</header>
+
+<div class="tabbar">
+  <div class="tabbar-inner">
+    <nav class="nav-tabs" id="navTabs">
+      <button class="nav-tab active" data-target="l1" onclick="showSection('l1')">① DB基本・関係DB</button>
+      <button class="nav-tab" data-target="l2" onclick="showSection('l2')">② 正規化</button>
+      <button class="nav-tab" data-target="l3" onclick="showSection('l3')">③ SQL・DBMS</button>
+      <button class="nav-tab" data-target="l4" onclick="showSection('l4')">④ トランザクション</button>
+    </nav>
+    <span class="quiz-sep"></span>
+    <button class="quiz-btn" data-target="quiz" onclick="showSection('quiz')">確認テスト<span class="arw">→</span></button>
+  </div>
 </div>
 
-<!-- ===== レッスン1: DB基本 ===== -->
-<div id="lesson1" class="section active">
-<div class="lesson-card">
+<main class="wrap">
+
+  <section id="l1" class="section active">
+    <div class="lesson-card">
 <h2>① データベースの基本と関係データベース</h2>
-
 <p><span class="vocab">データベース</span>とは、データを一元管理するために集められた情報の集まりです。4大経営資源（ヒト・モノ・カネ・情報）の「情報」を管理する重要な仕組みです。</p>
-
 <h3>データモデル</h3>
 <div class="key-point">
-<span class="vocab">データモデル</span>：現実世界のデータの相互関係をわかりやすく表した図（データベースの設計図）<br><br>
-種類：階層データモデル、ネットワークデータモデル、<strong>関係データモデル</strong><br>
+<span class="vocab">データモデル</span>：現実世界のデータの相互関係をわかりやすく表した図（データベースの設計図）<br/><br/>
+種類：階層データモデル、ネットワークデータモデル、<strong>関係データモデル</strong><br/>
 → 現在最も普及しているのは<span class="vocab">関係データモデル</span>（関係モデル）
 </div>
-
 <h3>関係データベース</h3>
 <p><span class="vocab">関係データベース</span>とは、データを<strong>2次元の表（テーブル）</strong>で管理するデータベースです。</p>
-
 <div class="key-point">
-<strong>用語の使い分け：</strong><br><br>
-関係データベースでは…<br>
-・<span class="vocab">テーブル</span>（表）：データの集まり<br>
-・<span class="vocab">レコード</span>（行）：横の並び<br>
-・<span class="vocab">列</span>：縦の並び（データの属性）<br><br>
-関係データモデル（設計図）では…<br>
+<strong>用語の使い分け：</strong><br/><br/>
+関係データベースでは…<br/>
+・<span class="vocab">テーブル</span>（表）：データの集まり<br/>
+・<span class="vocab">レコード</span>（行）：横の並び<br/>
+・<span class="vocab">列</span>：縦の並び（データの属性）<br/><br/>
+関係データモデル（設計図）では…<br/>
 ・<span class="vocab">関係</span>＝テーブル、<span class="vocab">組</span>＝レコード、<span class="vocab">属性</span>＝列
 </div>
-
 <div class="example"><strong>学生テーブルの例：</strong>
 <table class="sql-table">
 <tr><th>学生番号</th><th>学生名</th><th>電話番号</th></tr>
@@ -60,244 +401,402 @@
 </table>
 レコード数 3、列数 3
 </div>
-
 <h3>主キーと外部キー</h3>
 <div class="key-point">
-<span class="vocab">主キー</span>：テーブル内のレコードを<strong>一意に識別</strong>するための列<br>
-→ 重複してはいけない / NULL（空）ではいけない<br>
-→ 例：学生番号、社員番号<br><br>
-<span class="vocab">複合主キー</span>：複数の属性の組み合わせで主キーになるもの<br><br>
-<span class="vocab">外部キー</span>：<strong>他のテーブルの主キーを参照</strong>する列<br>
-→ テーブル同士の関連を表す<br>
+<span class="vocab">主キー</span>：テーブル内のレコードを<strong>一意に識別</strong>するための列<br/>
+→ 重複してはいけない / NULL（空）ではいけない<br/>
+→ 例：学生番号、社員番号<br/><br/>
+<span class="vocab">複合主キー</span>：複数の属性の組み合わせで主キーになるもの<br/><br/>
+<span class="vocab">外部キー</span>：<strong>他のテーブルの主キーを参照</strong>する列<br/>
+→ テーブル同士の関連を表す<br/>
 → 例：学生テーブルの「教員番号」が、教員テーブルの主キー「教員番号」を参照
 </div>
-</div>
-</div>
+    </div>
+    <div class="lesson-nav">
+      <button class="btn-next" onclick="showSection('l2')">
+        <span class="bn-meta"><span class="bn-label">次のレッスン</span><span class="bn-title">② 正規化</span></span>
+        <span class="bn-arrow">→</span>
+      </button>
+    </div>
+  </section>
 
-<!-- ===== レッスン2: 正規化 ===== -->
-<div id="lesson2" class="section">
-<div class="lesson-card">
+  <section id="l2" class="section">
+    <div class="lesson-card">
 <h2>② 正規化と関数従属</h2>
-
 <p><span class="vocab">正規化</span>とは、データベースの設計時に、<strong>データの重複や更新時の矛盾が生じないように</strong>テーブルを整理することです。</p>
-
 <h3>関数従属</h3>
 <p><span class="vocab">関数従属</span>とは、ある属性Aの値が決まると、別の属性Bの値が<strong>一意に決まる</strong>関係です。</p>
-
 <div class="key-point">
-<strong>3つの関数従属：</strong><br><br>
-<span class="vocab">完全関数従属</span>：属性が<strong>主キー全体</strong>に関数従属している<br>
-→ 例：[学生番号] が決まると [学生名] が決まる<br><br>
-<span class="vocab">部分関数従属</span>：属性が<strong>主キーの一部</strong>に関数従属している（複合主キーの場合）<br>
-→ 例：複合主キー[学生番号,試験ID]のうち、[学生番号]だけで[学生名]が決まる<br><br>
-<span class="vocab">推移的関数従属</span>：属性が<strong>主キー以外の属性を介して</strong>間接的に主キーに従属<br>
+<strong>3つの関数従属：</strong><br/><br/>
+<span class="vocab">完全関数従属</span>：属性が<strong>主キー全体</strong>に関数従属している<br/>
+→ 例：[学生番号] が決まると [学生名] が決まる<br/><br/>
+<span class="vocab">部分関数従属</span>：属性が<strong>主キーの一部</strong>に関数従属している（複合主キーの場合）<br/>
+→ 例：複合主キー[学生番号,試験ID]のうち、[学生番号]だけで[学生名]が決まる<br/><br/>
+<span class="vocab">推移的関数従属</span>：属性が<strong>主キー以外の属性を介して</strong>間接的に主キーに従属<br/>
 → 例：[学生番号]→[教員番号]→[教員名]
 </div>
-
 <h3>正規化の手順</h3>
-<div class="key-point" style="background:#e8f5e9;border-color:#4caf50">
-<strong style="color:#2e7d32">正規化のゴール：</strong>部分関数従属と推移的関数従属を取り除き、<strong>完全関数従属だけを残すこと</strong><br>
+<div class="key-point">
+<strong>正規化のゴール：</strong>部分関数従属と推移的関数従属を取り除き、<strong>完全関数従属だけを残すこと</strong><br/>
 （＝すべての矢印が主キーから出るようにテーブルを分割）
 </div>
-
 <div class="key-point">
-<span class="vocab">非正規形</span>：属性に繰り返しがある状態（正規化前）<br><br>
-<span class="vocab">第1正規形</span>：属性の<strong>繰り返しがない</strong>状態にする<br>
-→ レコードを追加して繰り返しを解消<br><br>
-<span class="vocab">第2正規形</span>：<strong>部分関数従属をなくす</strong><br>
-→ テーブルを分割して、複合主キーの一部に従属する属性を別テーブルに<br><br>
-<span class="vocab">第3正規形</span>：<strong>推移的関数従属をなくす</strong><br>
+<span class="vocab">非正規形</span>：属性に繰り返しがある状態（正規化前）<br/><br/>
+<span class="vocab">第1正規形</span>：属性の<strong>繰り返しがない</strong>状態にする<br/>
+→ レコードを追加して繰り返しを解消<br/><br/>
+<span class="vocab">第2正規形</span>：<strong>部分関数従属をなくす</strong><br/>
+→ テーブルを分割して、複合主キーの一部に従属する属性を別テーブルに<br/><br/>
+<span class="vocab">第3正規形</span>：<strong>推移的関数従属をなくす</strong><br/>
 → テーブルをさらに分割して、主キー以外の属性に従属する属性を別テーブルに
 </div>
-
-<div class="example"><strong>覚え方：</strong><br>
-第1正規化 → 繰り返し除去<br>
-第2正規化 → <strong>部分</strong>関数従属除去<br>
+<div class="example"><strong>覚え方：</strong><br/>
+第1正規化 → 繰り返し除去<br/>
+第2正規化 → <strong>部分</strong>関数従属除去<br/>
 第3正規化 → <strong>推移的</strong>関数従属除去</div>
-</div>
-</div>
+    </div>
+    <div class="lesson-nav">
+      <button class="btn-next" onclick="showSection('l3')">
+        <span class="bn-meta"><span class="bn-label">次のレッスン</span><span class="bn-title">③ SQL・DBMS</span></span>
+        <span class="bn-arrow">→</span>
+      </button>
+    </div>
+  </section>
 
-<!-- ===== レッスン3: SQL・DBMS ===== -->
-<div id="lesson3" class="section">
-<div class="lesson-card">
+  <section id="l3" class="section">
+    <div class="lesson-card">
 <h2>③ SQLとデータベース管理システム（DBMS）</h2>
-
 <p><span class="vocab">DBMS</span>（DataBase Management System）とは、データベースを管理するシステムです。主な機能は「データ操作」「トランザクション管理」「排他制御」の3つです。</p>
-
 <h3>関係演算の3種類</h3>
 <div class="key-point">
-<span class="vocab">選択</span>：テーブルから条件を満たす<strong>レコード（行）</strong>を取り出す<br>
-<span class="vocab">射影</span>：テーブルから指定した<strong>列</strong>を取り出す<br>
+<span class="vocab">選択</span>：テーブルから条件を満たす<strong>レコード（行）</strong>を取り出す<br/>
+<span class="vocab">射影</span>：テーブルから指定した<strong>列</strong>を取り出す<br/>
 <span class="vocab">結合</span>：複数のテーブルを<strong>くっつけて</strong>1つのテーブルのように扱う
 </div>
-
 <h3>SQL ── SELECT文</h3>
 <p><span class="vocab">SQL</span>は、データベースを操作するための言語です。最頻出なのが<strong>SELECT文</strong>です。</p>
-
-<div class="formula"><strong>SELECT文の基本構文：</strong><br><br>
-SELECT 列名<br>
-FROM テーブル名<br>
-WHERE 条件式<br><br>
-<strong>例：学生名が「鈴木愛子」のレコードを取り出す</strong><br>
-SELECT *<br>
-FROM 学生<br>
+<div class="formula"><strong>SELECT文の基本構文：</strong><br/><br/>
+SELECT 列名<br/>
+FROM テーブル名<br/>
+WHERE 条件式<br/><br/>
+<strong>例：学生名が「鈴木愛子」のレコードを取り出す</strong><br/>
+SELECT *<br/>
+FROM 学生<br/>
 WHERE 学生名 = '鈴木愛子'
 </div>
-
 <div class="key-point">
-<strong>SELECT文のポイント：</strong><br>
-・SELECT 列名 → <strong>取り出す列</strong>を指定（* ですべての列）<br>
-・FROM テーブル名 → <strong>検索対象のテーブル</strong><br>
-・WHERE 条件式 → <strong>取り出すレコードの条件</strong>（省略可）<br>
+<strong>SELECT文のポイント：</strong><br/>
+・SELECT 列名 → <strong>取り出す列</strong>を指定（* ですべての列）<br/>
+・FROM テーブル名 → <strong>検索対象のテーブル</strong><br/>
+・WHERE 条件式 → <strong>取り出すレコードの条件</strong>（省略可）<br/>
 ・複数列は「,」区切り
 </div>
-
 <div class="key-point">
-<strong>比較演算子：</strong>= 、≠（&lt;&gt;）、&gt;、&lt;、&gt;=、&lt;=<br><br>
-<strong>論理演算子：</strong>AND（かつ）、OR（または）、NOT（否定）<br><br>
-<strong>テーブルの結合：</strong><br>
-FROM テーブル1, テーブル2<br>
+<strong>比較演算子：</strong>= 、≠（&lt;&gt;）、&gt;、&lt;、&gt;=、&lt;=<br/><br/>
+<strong>論理演算子：</strong>AND（かつ）、OR（または）、NOT（否定）<br/><br/>
+<strong>テーブルの結合：</strong><br/>
+FROM テーブル1, テーブル2<br/>
 WHERE テーブル1.列 = テーブル2.列
 </div>
-
 <h3>ビュー</h3>
 <div class="key-point">
-<span class="vocab">ビュー</span>：既存のテーブルから必要な部分だけを抜き出した<strong>仮想的なテーブル</strong><br>
-・元のテーブル（実表）のデータを変更すると、ビューにも反映される<br>
+<span class="vocab">ビュー</span>：既存のテーブルから必要な部分だけを抜き出した<strong>仮想的なテーブル</strong><br/>
+・元のテーブル（実表）のデータを変更すると、ビューにも反映される<br/>
 ・ビューは実データを持たず、SELECTの結果を都度生成
 </div>
-
 <h3>インデックス</h3>
 <div class="key-point">
-<span class="vocab">インデックス</span>（索引）：データベースの<strong>検索を高速化</strong>する機能<br>
-・「列」と「レコードの位置を指すポインタ」で構成<br>
-・本の索引と同じ仕組み<br>
+<span class="vocab">インデックス</span>（索引）：データベースの<strong>検索を高速化</strong>する機能<br/>
+・「列」と「レコードの位置を指すポインタ」で構成<br/>
+・本の索引と同じ仕組み<br/>
 ・ただし、データ更新時にインデックスの再構築が必要なため、更新は遅くなる
 </div>
-</div>
-</div>
+    </div>
+    <div class="lesson-nav">
+      <button class="btn-next" onclick="showSection('l4')">
+        <span class="bn-meta"><span class="bn-label">次のレッスン</span><span class="bn-title">④ トランザクション</span></span>
+        <span class="bn-arrow">→</span>
+      </button>
+    </div>
+  </section>
 
-<!-- ===== レッスン4: トランザクション ===== -->
-<div id="lesson4" class="section">
-<div class="lesson-card">
+  <section id="l4" class="section">
+    <div class="lesson-card">
 <h2>④ トランザクション管理・障害回復・排他制御</h2>
-
 <h3>トランザクション</h3>
 <div class="key-point">
-<span class="vocab">トランザクション</span>：関連する複数の処理の<strong>まとまり</strong>（ユーザーから見た1つの処理）<br><br>
+<span class="vocab">トランザクション</span>：関連する複数の処理の<strong>まとまり</strong>（ユーザーから見た1つの処理）<br/><br/>
 例：銀行の振込処理＝「出金」＋「入金」の2処理 → 両方成功しないとダメ
 </div>
-
 <h3>ACID特性（トランザクションに必要な4つの性質）</h3>
-
 <div class="key-point">
-<span class="vocab">A</span> - <strong>原子性（Atomicity）</strong>：トランザクション内の処理が<strong>「すべて実行される」か「すべて取り消される」</strong>かのどちらか ← <strong>最頻出！</strong><br><br>
-<span class="vocab">C</span> - <strong>一貫性（Consistency）</strong>：トランザクションの前後でデータベースに<strong>矛盾がない</strong><br><br>
-<span class="vocab">I</span> - <strong>独立性（Isolation）</strong>：1つのトランザクションが<strong>他のトランザクションの影響を受けない</strong><br><br>
+<span class="vocab">A</span> - <strong>原子性（Atomicity）</strong>：トランザクション内の処理が<strong>「すべて実行される」か「すべて取り消される」</strong>かのどちらか ← <strong>最頻出！</strong><br/><br/>
+<span class="vocab">C</span> - <strong>一貫性（Consistency）</strong>：トランザクションの前後でデータベースに<strong>矛盾がない</strong><br/><br/>
+<span class="vocab">I</span> - <strong>独立性（Isolation）</strong>：1つのトランザクションが<strong>他のトランザクションの影響を受けない</strong><br/><br/>
 <span class="vocab">D</span> - <strong>耐久性（Durability）</strong>：完了後にハードウェア障害が発生しても<strong>結果が保証</strong>される
 </div>
-
 <h3>障害回復（リカバリ）</h3>
-
 <div class="key-point">
-<strong>障害回復に必要な2つのファイル：</strong><br><br>
-<span class="vocab">バックアップファイル</span>：データベース全体を保存したファイル（定期取得）<br><br>
-<span class="vocab">ログファイル（ジャーナルファイル）</span>：トランザクション前後の状態を保存<br>
-・<strong>更新前ログ</strong>：トランザクション直前の状態<br>
+<strong>障害回復に必要な2つのファイル：</strong><br/><br/>
+<span class="vocab">バックアップファイル</span>：データベース全体を保存したファイル（定期取得）<br/><br/>
+<span class="vocab">ログファイル（ジャーナルファイル）</span>：トランザクション前後の状態を保存<br/>
+・<strong>更新前ログ</strong>：トランザクション直前の状態<br/>
 ・<strong>更新後ログ</strong>：トランザクション完了後の状態
 </div>
-
 <div class="compare">
 <div class="compare-box good">
 <h4>ロールバック</h4>
-<strong>トランザクション実行中</strong>に障害発生<br><br>
-→ トランザクション<strong>開始直前</strong>の状態に戻す<br>
+<strong>トランザクション実行中</strong>に障害発生<br/><br/>
+→ トランザクション<strong>開始直前</strong>の状態に戻す<br/>
 → <strong>更新前ログ</strong>を使用
 </div>
 <div class="compare-box bad">
 <h4>ロールフォワード</h4>
-<strong>トランザクション完了後</strong>に障害発生<br><br>
-→ トランザクション<strong>完了直後</strong>の状態に戻す<br>
+<strong>トランザクション完了後</strong>に障害発生<br/><br/>
+→ トランザクション<strong>完了直後</strong>の状態に戻す<br/>
 → <strong>バックアップ ＋ 更新後ログ</strong>を使用
 </div>
 </div>
-
 <h3>排他制御（ロック）</h3>
 <div class="key-point">
-<span class="vocab">排他制御</span>：複数の人が同じデータを同時に更新しようとした際、<strong>データに矛盾が生じないようにする</strong>機能<br><br>
-<span class="vocab">ロック</span>：データへの読み書きを一時的に制限する機能<br>
+<span class="vocab">排他制御</span>：複数の人が同じデータを同時に更新しようとした際、<strong>データに矛盾が生じないようにする</strong>機能<br/><br/>
+<span class="vocab">ロック</span>：データへの読み書きを一時的に制限する機能<br/>
 <span class="vocab">アンロック</span>：ロックの解除
 </div>
-
 <div class="compare">
 <div class="compare-box good">
 <h4>共有ロック</h4>
-<strong>読み出しのみ</strong>OK（複数可）<br>
-書き込みNG<br><br>
+<strong>読み出しのみ</strong>OK（複数可）<br/>
+書き込みNG<br/><br/>
 → データの参照時に使用
 </div>
 <div class="compare-box bad">
 <h4>専有ロック（排他ロック）</h4>
-かけた人だけ<strong>読み書きOK</strong><br>
-他はNG<br><br>
+かけた人だけ<strong>読み書きOK</strong><br/>
+他はNG<br/><br/>
 → データの更新時に使用
 </div>
 </div>
-
-<div class="key-point" style="background:#fce4ec;border-color:#e91e63">
-<strong style="color:#e91e63">第9章の最重要まとめ</strong><br><br>
-・関係データベース：テーブル（表）＝レコード（行）＋列<br>
-・主キー＝レコードを一意に識別、外部キー＝他テーブルへの参照<br>
-・正規化：第1（繰り返し除去）→第2（部分関数従属除去）→第3（推移的関数従属除去）<br>
-・SELECT/FROM/WHEREの構文<br>
-・ACID：原子性・一貫性・独立性・耐久性<br>
-・ロールバック＝更新前ログ、ロールフォワード＝バックアップ＋更新後ログ<br>
+<div class="summary"><span class="label">最重要まとめ</span><p>・関係データベース：テーブル（表）＝レコード（行）＋列<br/>
+・主キー＝レコードを一意に識別、外部キー＝他テーブルへの参照<br/>
+・正規化：第1（繰り返し除去）→第2（部分関数従属除去）→第3（推移的関数従属除去）<br/>
+・SELECT/FROM/WHEREの構文<br/>
+・ACID：原子性・一貫性・独立性・耐久性<br/>
+・ロールバック＝更新前ログ、ロールフォワード＝バックアップ＋更新後ログ<br/>
 ・共有ロック＝読み出しのみ、専有ロック＝排他
-</div>
-</div>
-</div>
+</p></div>
+    </div>
+    <div class="lesson-nav">
+      <button class="btn-next to-quiz" onclick="showSection('quiz')">
+        <span class="bn-meta"><span class="bn-label">仕上げ</span><span class="bn-title">確認テストに進む</span></span>
+        <span class="bn-arrow">→</span>
+      </button>
+    </div>
+  </section>
 
-<!-- ===== 確認テスト ===== -->
-<div id="quiz" class="section">
-<div class="quiz-area">
-<h2>確認テスト ── 第9章</h2>
-<p style="color:#666;font-size:.9em;margin-bottom:16px">全問ランダム出題・選択肢シャッフル。何度でも挑戦できます。</p>
-<div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
-<div id="quizContainer"></div>
-<div style="text-align:center;margin-top:20px"><button class="btn" id="submitBtn" onclick="submitQuiz()" style="display:none">結果を見る</button></div>
-</div>
-<div class="result-area" id="resultArea"><h2>結果</h2><div class="result-score" id="resultScore"></div><div id="resultMsg" style="font-size:1.1em;margin:10px 0"></div><button class="btn" onclick="retryQuiz()">もう一度</button><button class="btn btn-outline" onclick="showSection('lesson1')">レッスンに戻る</button></div>
-</div>
+<section id="quiz" class="section">
+    <div class="quiz-head">
+      <h2>確認テスト — 第9章</h2>
+      <p class="quiz-note">ランダム出題・選択肢シャッフル。選ぶとすぐに正誤と解説が開きます。何度でも挑戦できます。</p>
+      <div class="progress">
+        <div class="progress-bar"><div class="progress-fill"></div></div>
+        <div class="progress-count">0 / 0</div>
+      </div>
+    </div>
+    <div id="quiz-questions"></div>
+  </section>
+
+</main>
+
+<div class="result-overlay" id="resultOverlay">
+  <div class="result-area" id="resultArea">
+    <div class="result-label" id="resultLabel">RESULT</div>
+    <div class="result-score"><span id="scoreNum">0</span><span class="result-total" id="scoreTotal">/ 0</span></div>
+    <div class="result-msg" id="resultMsg"></div>
+    <div class="result-actions">
+      <button class="btn" onclick="retryQuiz()">もう一度挑戦する</button>
+      <button class="btn-outline" onclick="closeResult()">解答を見直す</button>
+    </div>
+  </div>
 </div>
 
 <script>
-const allQuestions=[
-{q:'データを2次元の表（テーブル）で管理するデータベースはどれか。',choices:['階層データベース','ネットワークデータベース','関係データベース','オブジェクト指向データベース'],answer:2,explanation:'<strong>関係データベース</strong>はデータを2次元の表（テーブル）で管理するデータベースで、現在最も普及しています。関係データモデルをコンピュータ上に実装したものです。'},
-{q:'テーブルの中からレコードを一意に識別するための列を何というか。',choices:['主キー','外部キー','インデックス','ビュー'],answer:0,explanation:'<strong>主キー</strong>はテーブルの中から特定のレコードを一意に識別するための列です。重複してはいけない、NULL（空）ではいけないという制約があります。'},
-{q:'他のテーブルの主キーを参照する列を何というか。',choices:['主キー','外部キー','複合主キー','インデックス'],answer:1,explanation:'<strong>外部キー</strong>は他のテーブルの主キーを参照する列で、テーブル同士の関連を表します。学生テーブルの「教員番号」列が、教員テーブルの主キー「教員番号」を参照するような使い方をします。'},
-{q:'正規化の目的として最も適切なものはどれか。',choices:['データの検索を高速化する','データの重複や更新時の矛盾を防ぐ','データの暗号化を行う','データを圧縮してサイズを小さくする'],answer:1,explanation:'<strong>正規化</strong>の目的は、データの重複や更新時の矛盾を防ぐことです。具体的には、部分関数従属と推移的関数従属を取り除き、完全関数従属だけを残すためにテーブルを分割します。'},
-{q:'属性に繰り返しがある状態から、属性の繰り返しがない状態にすることを何というか。',choices:['第1正規化','第2正規化','第3正規化','第4正規化'],answer:0,explanation:'<strong>第1正規化</strong>は、属性の繰り返しがない状態にすることです。非正規形のテーブルを第1正規形にするにはレコードを追加して繰り返しを解消します。'},
-{q:'部分関数従属をなくすのは第何正規化か。',choices:['第1正規化','第2正規化','第3正規化','第4正規化'],answer:1,explanation:'<strong>第2正規化</strong>では、部分関数従属を取り除きます。複合主キーの一部にしか従属しない属性を別テーブルに分割します。第3正規化は推移的関数従属を取り除きます。'},
-{q:'推移的関数従属を取り除くのは第何正規化か。',choices:['第1正規化','第2正規化','第3正規化','第4正規化'],answer:2,explanation:'<strong>第3正規化</strong>では、推移的関数従属（主キー以外の属性を介して間接的に主キーに従属する関係）を取り除きます。'},
-{q:'SQLでテーブルから条件を満たすレコード（行）を取り出す関係演算は何か。',choices:['選択','射影','結合','和集合'],answer:0,explanation:'<strong>選択</strong>は、テーブルから条件を満たすレコード（行）を取り出す関係演算です。一方、<strong>射影</strong>は指定した列を取り出す演算です。'},
-{q:'SELECT文で「学生テーブルから学生名が鈴木愛子のレコードを取り出す」SQLとして正しいのはどれか。',choices:["SELECT * FROM 学生 IF 学生名 = '鈴木愛子'","SELECT * FROM 学生 WHERE 学生名 = '鈴木愛子'","SELECT 学生 WHERE 学生名 = '鈴木愛子'","FROM 学生 SELECT * WHERE 学生名 = '鈴木愛子'"],answer:1,explanation:'SELECT文の基本構文は「SELECT 列名 FROM テーブル名 WHERE 条件式」です。条件指定にはIFではなく<strong>WHERE</strong>を使います。'},
-{q:'データベースの検索を高速化する機能はどれか。',choices:['ビュー','インデックス','トランザクション','ロック'],answer:1,explanation:'<strong>インデックス（索引）</strong>はデータベースの検索を高速化する機能です。「列」と「レコードの位置を指し示すポインタ」で構成され、本の索引と同じ仕組みです。'},
-{q:'ACID特性のうち、「トランザクション内の処理がすべて実行されるか、すべてが取り消されるかのどちらかになること」を何というか。',choices:['原子性（Atomicity）','一貫性（Consistency）','独立性（Isolation）','耐久性（Durability）'],answer:0,explanation:'<strong>原子性（Atomicity）</strong>は、トランザクション内の処理がすべて実行されるか、すべてが取り消されるかのどちらかになる性質です。中途半端な状態にならないことを保証します。銀行の振込で「出金だけ実行されて入金は失敗」のような状態を防ぎます。'},
-{q:'ACID特性のうち、「1つのトランザクションの処理結果が他のトランザクションの影響を受けないこと」を何というか。',choices:['原子性','一貫性','独立性','耐久性'],answer:2,explanation:'<strong>独立性（Isolation）</strong>は、あるトランザクションが他のトランザクションの影響を受けずに実行される性質です。並行して実行されるトランザクションが互いに干渉しないことを保証します。'},
-{q:'トランザクションの前後の状態を保存したファイルを何というか。',choices:['バックアップファイル','ログファイル（ジャーナルファイル）','データファイル','インデックスファイル'],answer:1,explanation:'<strong>ログファイル（ジャーナルファイル）</strong>はトランザクションの前後の状態を保存したファイルです。更新前ログ（開始直前）と更新後ログ（完了後）の2種類があります。'},
-{q:'トランザクション実行中に障害が発生した際、開始直前の状態に戻す障害回復手法はどれか。',choices:['ロールバック','ロールフォワード','リストア','チェックポイント'],answer:0,explanation:'<strong>ロールバック</strong>はトランザクション実行中に障害が発生した際、更新前ログファイルを使ってトランザクション開始直前の状態に戻す手法です。'},
-{q:'ロールフォワードで障害回復する際に使用するファイルの組み合わせはどれか。',choices:['更新前ログファイルのみ','バックアップファイルと更新後ログファイル','バックアップファイルと更新前ログファイル','更新後ログファイルのみ'],answer:1,explanation:'<strong>ロールフォワード</strong>では、<strong>バックアップファイル</strong>と<strong>更新後ログファイル</strong>を使ってトランザクション完了直後の状態に戻します。バックアップを復元してから、その時点以降のログを順に適用します。'},
-{q:'複数の人が同じデータを同時に更新しようとした場合に、データに矛盾が生じないようにする機能は何か。',choices:['トランザクション管理','排他制御','障害回復','正規化'],answer:1,explanation:'<strong>排他制御</strong>は、複数の人が同じデータを同時に更新しようとした場合にデータに矛盾が生じないようにする機能です。ロック機能を使ってデータの一貫性を保ちます。'},
-{q:'ロックをかけたトランザクションのみがデータを読み書きでき、他のトランザクションは読み書きできないロックは何か。',choices:['共有ロック','専有ロック（排他ロック）','楽観ロック','タイムロック'],answer:1,explanation:'<strong>専有ロック（排他ロック）</strong>は、ロックをかけたトランザクションのみがデータを読み書きでき、他のトランザクションは一切アクセスできません。データを更新する際に使われます。共有ロックは複数のトランザクションが読み出しのみ可能です。'}
+/* =========================================================================
+   ロジック（全22章で流用可能な骨格）
+   - showSection(id)        : レッスン／テストのタブ切替
+   - allQuestions           : 設問データ配列（章ごとに差し替え）
+   - selectChoice(qi, ci)   : 選択肢クリック→採点→解説表示
+   ========================================================================= */
+
+/* ---- タブ切替 ---------------------------------------------------------- */
+var STORE_KEY = 'fe_ch9_section';
+function showSection(id, opts){
+  opts = opts || {};
+  document.querySelectorAll('.section').forEach(function(s){
+    s.classList.toggle('active', s.id === id);
+  });
+  document.querySelectorAll('.tabbar [data-target]').forEach(function(t){
+    t.classList.toggle('active', t.dataset.target === id);
+  });
+  // 画面上部（タブ帯）へ
+  if(opts.scroll !== false){
+    var top = document.querySelector('.header').offsetHeight;
+    window.scrollTo(0, top);
+  }
+  try{ localStorage.setItem(STORE_KEY, id); }catch(e){}
+}
+function goBack(){ location.href='it_quiz.html'; }
+
+/* ---- 設問データ（第10章 ネットワーク） -------------------------------- */
+/* answer = choices の正解インデックス（0始まり）。章ごとにこの配列を差し替え。 */
+var allQuestions = [
+{q:'データを2次元の表（テーブル）で管理するデータベースはどれか。',choices:['階層データベース','ネットワークデータベース','関係データベース','オブジェクト指向データベース'],answer:2,explain:'<strong>関係データベース</strong>はデータを2次元の表（テーブル）で管理するデータベースで、現在最も普及しています。関係データモデルをコンピュータ上に実装したものです。'},
+{q:'テーブルの中からレコードを一意に識別するための列を何というか。',choices:['主キー','外部キー','インデックス','ビュー'],answer:0,explain:'<strong>主キー</strong>はテーブルの中から特定のレコードを一意に識別するための列です。重複してはいけない、NULL（空）ではいけないという制約があります。'},
+{q:'他のテーブルの主キーを参照する列を何というか。',choices:['主キー','外部キー','複合主キー','インデックス'],answer:1,explain:'<strong>外部キー</strong>は他のテーブルの主キーを参照する列で、テーブル同士の関連を表します。学生テーブルの「教員番号」列が、教員テーブルの主キー「教員番号」を参照するような使い方をします。'},
+{q:'正規化の目的として最も適切なものはどれか。',choices:['データの検索を高速化する','データの重複や更新時の矛盾を防ぐ','データの暗号化を行う','データを圧縮してサイズを小さくする'],answer:1,explain:'<strong>正規化</strong>の目的は、データの重複や更新時の矛盾を防ぐことです。具体的には、部分関数従属と推移的関数従属を取り除き、完全関数従属だけを残すためにテーブルを分割します。'},
+{q:'属性に繰り返しがある状態から、属性の繰り返しがない状態にすることを何というか。',choices:['第1正規化','第2正規化','第3正規化','第4正規化'],answer:0,explain:'<strong>第1正規化</strong>は、属性の繰り返しがない状態にすることです。非正規形のテーブルを第1正規形にするにはレコードを追加して繰り返しを解消します。'},
+{q:'部分関数従属をなくすのは第何正規化か。',choices:['第1正規化','第2正規化','第3正規化','第4正規化'],answer:1,explain:'<strong>第2正規化</strong>では、部分関数従属を取り除きます。複合主キーの一部にしか従属しない属性を別テーブルに分割します。第3正規化は推移的関数従属を取り除きます。'},
+{q:'推移的関数従属を取り除くのは第何正規化か。',choices:['第1正規化','第2正規化','第3正規化','第4正規化'],answer:2,explain:'<strong>第3正規化</strong>では、推移的関数従属（主キー以外の属性を介して間接的に主キーに従属する関係）を取り除きます。'},
+{q:'SQLでテーブルから条件を満たすレコード（行）を取り出す関係演算は何か。',choices:['選択','射影','結合','和集合'],answer:0,explain:'<strong>選択</strong>は、テーブルから条件を満たすレコード（行）を取り出す関係演算です。一方、<strong>射影</strong>は指定した列を取り出す演算です。'},
+{q:'SELECT文で「学生テーブルから学生名が鈴木愛子のレコードを取り出す」SQLとして正しいのはどれか。',choices:["SELECT * FROM 学生 IF 学生名 = '鈴木愛子'","SELECT * FROM 学生 WHERE 学生名 = '鈴木愛子'","SELECT 学生 WHERE 学生名 = '鈴木愛子'","FROM 学生 SELECT * WHERE 学生名 = '鈴木愛子'"],answer:1,explain:'SELECT文の基本構文は「SELECT 列名 FROM テーブル名 WHERE 条件式」です。条件指定にはIFではなく<strong>WHERE</strong>を使います。'},
+{q:'データベースの検索を高速化する機能はどれか。',choices:['ビュー','インデックス','トランザクション','ロック'],answer:1,explain:'<strong>インデックス（索引）</strong>はデータベースの検索を高速化する機能です。「列」と「レコードの位置を指し示すポインタ」で構成され、本の索引と同じ仕組みです。'},
+{q:'ACID特性のうち、「トランザクション内の処理がすべて実行されるか、すべてが取り消されるかのどちらかになること」を何というか。',choices:['原子性（Atomicity）','一貫性（Consistency）','独立性（Isolation）','耐久性（Durability）'],answer:0,explain:'<strong>原子性（Atomicity）</strong>は、トランザクション内の処理がすべて実行されるか、すべてが取り消されるかのどちらかになる性質です。中途半端な状態にならないことを保証します。銀行の振込で「出金だけ実行されて入金は失敗」のような状態を防ぎます。'},
+{q:'ACID特性のうち、「1つのトランザクションの処理結果が他のトランザクションの影響を受けないこと」を何というか。',choices:['原子性','一貫性','独立性','耐久性'],answer:2,explain:'<strong>独立性（Isolation）</strong>は、あるトランザクションが他のトランザクションの影響を受けずに実行される性質です。並行して実行されるトランザクションが互いに干渉しないことを保証します。'},
+{q:'トランザクションの前後の状態を保存したファイルを何というか。',choices:['バックアップファイル','ログファイル（ジャーナルファイル）','データファイル','インデックスファイル'],answer:1,explain:'<strong>ログファイル（ジャーナルファイル）</strong>はトランザクションの前後の状態を保存したファイルです。更新前ログ（開始直前）と更新後ログ（完了後）の2種類があります。'},
+{q:'トランザクション実行中に障害が発生した際、開始直前の状態に戻す障害回復手法はどれか。',choices:['ロールバック','ロールフォワード','リストア','チェックポイント'],answer:0,explain:'<strong>ロールバック</strong>はトランザクション実行中に障害が発生した際、更新前ログファイルを使ってトランザクション開始直前の状態に戻す手法です。'},
+{q:'ロールフォワードで障害回復する際に使用するファイルの組み合わせはどれか。',choices:['更新前ログファイルのみ','バックアップファイルと更新後ログファイル','バックアップファイルと更新前ログファイル','更新後ログファイルのみ'],answer:1,explain:'<strong>ロールフォワード</strong>では、<strong>バックアップファイル</strong>と<strong>更新後ログファイル</strong>を使ってトランザクション完了直後の状態に戻します。バックアップを復元してから、その時点以降のログを順に適用します。'},
+{q:'複数の人が同じデータを同時に更新しようとした場合に、データに矛盾が生じないようにする機能は何か。',choices:['トランザクション管理','排他制御','障害回復','正規化'],answer:1,explain:'<strong>排他制御</strong>は、複数の人が同じデータを同時に更新しようとした場合にデータに矛盾が生じないようにする機能です。ロック機能を使ってデータの一貫性を保ちます。'},
+{q:'ロックをかけたトランザクションのみがデータを読み書きでき、他のトランザクションは読み書きできないロックは何か。',choices:['共有ロック','専有ロック（排他ロック）','楽観ロック','タイムロック'],answer:1,explain:'<strong>専有ロック（排他ロック）</strong>は、ロックをかけたトランザクションのみがデータを読み書きでき、他のトランザクションは一切アクセスできません。データを更新する際に使われます。共有ロックは複数のトランザクションが読み出しのみ可能です。'}
 ];
-let questions=[],answered=0;
-function shuffleArray(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
-function initQuiz(){questions=shuffleArray(allQuestions);answered=0;document.getElementById('submitBtn').style.display='none';document.getElementById('resultArea').style.display='none';document.getElementById('progressFill').style.width='0%';const c=document.getElementById('quizContainer');c.innerHTML='';questions.forEach((q,idx)=>{const sc=q.choices.map((c,i)=>({text:c,origIdx:i}));for(let i=sc.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[sc[i],sc[j]]=[sc[j],sc[i]]}q._shuffled=sc;q._selected=null;let h=`<div class="question-card"><div class="q-number">問題 ${idx+1} / ${questions.length}</div><div class="q-text">${q.q}</div><ul class="choices">`;sc.forEach((c,ci)=>{h+=`<li onclick="selectChoice(${idx},${ci})" id="q${idx}c${ci}">${c.text}</li>`});h+=`</ul><div class="explanation" id="exp${idx}"><div id="expText${idx}"></div></div></div>`;c.innerHTML+=h})}
-function selectChoice(qi,ci){const q=questions[qi];if(q._selected!==null)return;q._selected=ci;answered++;const corr=q.answer,sel=q._shuffled[ci].origIdx,ok=sel===corr;q._shuffled.forEach((c,i)=>{const li=document.getElementById(`q${qi}c${i}`);if(c.origIdx===corr)li.classList.add('correct');if(i===ci&&!ok)li.classList.add('wrong')});const e=document.getElementById(`exp${qi}`),t=document.getElementById(`expText${qi}`);t.innerHTML=(ok?'<span style="color:#4caf50;font-weight:bold">&#x2B55; 正解！</span>':'<span style="color:#f44336;font-weight:bold">&#x274C; 不正解</span>')+'<br>'+q.explanation;e.classList.add('show');document.getElementById('progressFill').style.width=(answered/questions.length*100)+'%';if(answered===questions.length)document.getElementById('submitBtn').style.display='inline-block'}
-function submitQuiz(){let c=0;questions.forEach(q=>{if(q._selected!==null&&q._shuffled[q._selected].origIdx===q.answer)c++});document.getElementById('resultArea').style.display='block';document.getElementById('resultScore').textContent=`${c} / ${questions.length}`;const p=c/questions.length*100;let m='';if(p===100)m='満点！完璧です！';else if(p>=80)m='よく理解できています！';else if(p>=60)m='合格ライン！もう少し復習しましょう。';else m='レッスンをもう一度確認しましょう。';document.getElementById('resultMsg').textContent=m;document.getElementById('resultArea').scrollIntoView({behavior:'smooth'})}
-function retryQuiz(){initQuiz();document.getElementById('quizContainer').scrollIntoView({behavior:'smooth'})}
-function showSection(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');const tabs=document.querySelectorAll('.nav-tab');const ids=['lesson1','lesson2','lesson3','lesson4','quiz'];tabs[ids.indexOf(id)].classList.add('active');if(id==='quiz')initQuiz();window.scrollTo({top:0,behavior:'smooth'})}
-initQuiz();
+
+/* ---- 出題状態 ---------------------------------------------------------- */
+var quiz = [];   // 表示中の設問（シャッフル済み）
+function shuffle(a){ for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t;} return a; }
+var KEYS = ['A','B','C','D','E'];
+
+function buildQuiz(){
+  var order = shuffle(allQuestions.map(function(q,i){return i;}));
+  quiz = order.map(function(oi){
+    var src = allQuestions[oi];
+    var idx = shuffle(src.choices.map(function(_,i){return i;}));
+    return {
+      q: src.q,
+      choices: idx.map(function(i){return src.choices[i];}),
+      answer: idx.indexOf(src.answer),
+      explain: src.explain,
+      answered:false, correct:false
+    };
+  });
+  renderQuiz();
+}
+
+function renderQuiz(){
+  var html = '';
+  for(var qi=0; qi<quiz.length; qi++){
+    var it = quiz[qi];
+    var lis = '';
+    for(var ci=0; ci<it.choices.length; ci++){
+      lis += '<li class="choice" onclick="selectChoice('+qi+','+ci+')">'
+           +   '<span class="key"><span>'+KEYS[ci]+'</span></span>'
+           +   '<span class="txt">'+it.choices[ci]+'</span>'
+           + '</li>';
+    }
+    html += '<div class="question-card" id="q'+qi+'">'
+         +    '<div class="q-number">問題 '+(qi+1)+' / '+quiz.length+'</div>'
+         +    '<div class="q-text">'+it.q+'</div>'
+         +    '<ul class="choices">'+lis+'</ul>'
+         +    '<div class="explanation"><span class="exp-mark"></span><span class="exp-text">'+it.explain+'</span></div>'
+         +  '</div>';
+  }
+  document.getElementById('quiz-questions').innerHTML = html;
+  updateProgress();
+}
+
+function selectChoice(qi, ci){
+  var it = quiz[qi];
+  if(it.answered) return;
+  it.answered = true;
+  it.correct = (ci === it.answer);
+  var card = document.getElementById('q'+qi);
+  var lis = card.querySelectorAll('.choice');
+  for(var i=0;i<lis.length;i++){
+    if(i === it.answer) lis[i].classList.add('correct');
+    if(i === ci && ci !== it.answer) lis[i].classList.add('wrong');
+  }
+  card.querySelector('.choices').classList.add('answered');
+  var exp = card.querySelector('.explanation');
+  exp.classList.add('show', it.correct ? 'is-correct' : 'is-wrong');
+  exp.querySelector('.exp-mark').textContent = it.correct ? '◯ 正解！' : '✕ 不正解';
+  updateProgress();
+  if(quiz.every(function(x){return x.answered;})) setTimeout(showResult, 500);
+}
+
+function updateProgress(){
+  var total = quiz.length;
+  var done = quiz.filter(function(x){return x.answered;}).length;
+  document.querySelector('.progress-fill').style.width = total ? (done/total*100)+'%' : '0%';
+  document.querySelector('.progress-count').textContent = done + ' / ' + total;
+}
+
+/* ---- 結果画面 ---------------------------------------------------------- */
+function showResult(){
+  var total = quiz.length;
+  var score = quiz.filter(function(x){return x.correct;}).length;
+  var pct = total ? Math.round(score/total*100) : 0;
+  var label, msg;
+  if(pct >= 90){ label='PERFECT'; msg='文句なし。この調子なら本番でも通用します。'; }
+  else if(pct >= 70){ label='GREAT'; msg='good。あと少しで満点、間違えた所だけ復習しよう。'; }
+  else if(pct >= 50){ label='GOOD'; msg='基礎はOK。間違えた問題の解説を読み直そう。'; }
+  else { label='KEEP GOING'; msg='復習して再挑戦！解説を読めば必ず伸びます。'; }
+  document.getElementById('resultLabel').textContent = label;
+  document.getElementById('scoreTotal').textContent = '/ ' + total;
+  document.getElementById('resultMsg').textContent = msg;
+  var overlay = document.getElementById('resultOverlay');
+  overlay.classList.add('show');
+  countUp(document.getElementById('scoreNum'), score);
+  if(pct >= 50) confetti();
+}
+function countUp(el, to){
+  el.textContent = 0;
+  if(to <= 0) return;
+  var dur = 700, startT = Date.now();
+  var t = setInterval(function(){
+    var p = Math.min(1, (Date.now() - startT) / dur);
+    el.textContent = Math.round(p * to);
+    if(p >= 1){ el.textContent = to; clearInterval(t); }
+  }, 40);
+}
+function confetti(){
+  var host = document.getElementById('resultArea');
+  var colors = ['#56E1E9','#A78BFA','#4ADE80','#FBBF24'];
+  for(var i=0;i<18;i++){
+    var s = document.createElement('span');
+    s.className = 'confetti';
+    s.style.left = (Math.random()*100) + '%';
+    s.style.background = colors[i % 4];
+    s.style.animationDelay = (Math.random()*0.35) + 's';
+    s.style.setProperty('--cx', (Math.random()*160-80) + 'px');
+    host.appendChild(s);
+    (function(node){ setTimeout(function(){ if(node.parentNode) node.parentNode.removeChild(node); }, 1800); })(s);
+  }
+}
+function closeResult(){ document.getElementById('resultOverlay').classList.remove('show'); }
+function retryQuiz(){
+  closeResult();
+  buildQuiz();
+  showSection('quiz');
+}
+
+/* ---- 初期化 ------------------------------------------------------------ */
+(function init(){
+  buildQuiz();
+  var saved = null;
+  try{ saved = localStorage.getItem(STORE_KEY); }catch(e){}
+  if(saved && document.getElementById(saved)){ showSection(saved, {scroll:false}); }
+  // 結果オーバーレイの背景クリックで閉じる
+  document.getElementById('resultOverlay').addEventListener('click', function(e){
+    if(e.target === this) closeResult();
+  });
+})();
 </script>
 </body>
 </html>

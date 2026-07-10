@@ -4,51 +4,394 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>第19章 ビジネスインダストリ｜基本情報技術者</title>
+<meta name="description" content="基本情報技術者試験 Web教材 — 第10章 ネットワーク。レッスンと確認テスト。">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Hiragino Sans','Noto Sans JP','Meiryo',sans-serif;background:#f5f5f0;color:#333;line-height:1.8;padding:0 0 60px 0}.header{background:linear-gradient(135deg,#e65100,#ff8f00);color:#fff;padding:24px 20px;text-align:center}.header h1{font-size:1.3em;margin-bottom:4px}.header .sub{font-size:.85em;opacity:.8}.container{max-width:720px;margin:0 auto;padding:16px}.nav-tabs{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap}.nav-tab{padding:10px 14px;border:2px solid #e65100;border-radius:8px;background:#fff;color:#e65100;font-weight:bold;font-size:.82em;cursor:pointer;transition:all .2s}.nav-tab:hover,.nav-tab.active{background:#e65100;color:#fff}.section{display:none}.section.active{display:block}.lesson-card{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.lesson-card h2{color:#e65100;font-size:1.2em;margin-bottom:16px;padding-bottom:8px;border-bottom:3px solid #ffe0b2}.lesson-card h3{color:#ff8f00;font-size:1.05em;margin:20px 0 10px 0}.key-point{background:#fff3e0;border-left:4px solid #e65100;padding:14px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-size:.95em}.key-point strong{color:#e65100}.vocab{display:inline-block;background:#e3f2fd;border:1px solid #64b5f6;border-radius:6px;padding:2px 8px;margin:2px 4px;font-weight:bold;font-size:.9em;color:#1565c0}.example{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:14px 16px;margin:12px 0;font-size:.9em}.formula{background:#fce4ec;border-left:4px solid #e91e63;padding:14px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-family:monospace;font-size:.95em;line-height:2}.compare{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}.compare-box{background:#fff;border:2px solid #e0e0e0;border-radius:10px;padding:14px;font-size:.9em}.compare-box h4{font-size:.95em;margin-bottom:8px;text-align:center}.compare-box.good{border-color:#4caf50}.compare-box.good h4{color:#2e7d32}.compare-box.bad{border-color:#ff9800}.compare-box.bad h4{color:#e65100}
-.quiz-area{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.quiz-area h2{color:#e65100;margin-bottom:16px}.question-card{background:#fafafa;border:1px solid #e0e0e0;border-radius:10px;padding:20px;margin:16px 0}.q-number{font-size:.8em;color:#999;margin-bottom:6px}.q-text{font-size:1.05em;font-weight:bold;margin-bottom:14px;line-height:1.6}.choices{list-style:none}.choices li{padding:12px 16px;margin:6px 0;border:2px solid #e0e0e0;border-radius:8px;cursor:pointer;transition:all .2s;font-size:.95em}.choices li:hover{border-color:#e65100;background:#fff3e0}.choices li.correct{border-color:#4caf50;background:#e8f5e9}.choices li.wrong{border-color:#f44336;background:#ffebee}.explanation{display:none;margin-top:12px;padding:14px;background:#f5f5f5;border-radius:8px;font-size:.9em;line-height:1.7}.explanation.show{display:block}.result-area{display:none;text-align:center;padding:30px;background:#fff;border-radius:12px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.result-score{font-size:2.5em;font-weight:bold;color:#e65100;margin:10px 0}.btn{display:inline-block;padding:12px 28px;background:#e65100;color:#fff;border:none;border-radius:8px;font-size:1em;cursor:pointer;margin:8px}.btn:hover{background:#ff8f00}.btn-outline{background:#fff;color:#e65100;border:2px solid #e65100}.progress-bar{width:100%;height:6px;background:#e0e0e0;border-radius:3px;margin:12px 0}.progress-fill{height:100%;background:#e65100;border-radius:3px;transition:width .3s}.back-link{display:inline-block;margin:16px 0;color:#e65100;text-decoration:none;font-weight:bold}
-.sql-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.88em}
-.sql-table th{background:#e65100;color:#fff;padding:6px;border:1px solid #ccc}
-.sql-table td{padding:6px;border:1px solid #ccc;background:#fff}
+/* =========================================================================
+   基本情報技術者 Web教材 — デザインシステム（案D：ネオ・モダン / ダーク）
+   このファイル1枚で完結。全22章はこの <style> と <script> を流用し、
+   各章の「レッスン本文」と「allQuestions 配列」を差し替えるだけで展開できます。
+   ========================================================================= */
+
+:root{
+  /* ---- 色：面 ---------------------------------------------------------- */
+  --bg:            #0A0E16;   /* ページ背景（最下層）           */
+  --bg-2:          #0D121C;   /* 一段明るい背景                 */
+  --card:          rgba(255,255,255,.045); /* ガラス質カード面   */
+  --card-solid:    #131926;   /* 不透明カード（表・数式など）   */
+  --inset:         rgba(0,0,0,.35);        /* へこみ面（数式）    */
+  --line:          rgba(255,255,255,.09);  /* 罫線・境界         */
+  --line-strong:   rgba(255,255,255,.16);  /* 強い罫線           */
+  /* ---- 色：文字 -------------------------------------------------------- */
+  --ink:           #EAEDF5;   /* 本文                          */
+  --ink-strong:    #F5F7FB;   /* 見出し・強調                  */
+  --sub:           #98A2B3;   /* サブ文字                      */
+  --faint:         #5E6779;   /* 補助・キャプション            */
+  /* ---- 色：アクセント / 意味 ------------------------------------------ */
+  --accent:        #56E1E9;   /* ネオンシアン（主アクセント）  */
+  --accent-ink:    #06222A;   /* アクセント上の文字            */
+  --accent-soft:   #7FEFF5;   /* 明るいシアン（テキスト用）    */
+  --accent-2:      #A78BFA;   /* バイオレット（副アクセント）  */
+  --success:       #4ADE80;   /* 成功・正解（緑）              */
+  --success-soft:  #7BE9A4;
+  --danger:        #FB7185;   /* 誤答（赤）                    */
+  --danger-soft:   #FDA4AF;
+  --warning:       #FBBF24;   /* 警告・注意（アンバー）        */
+  --warning-soft:  #FCD34D;
+  /* ---- 角丸 ------------------------------------------------------------ */
+  --r-xs:6px; --r-sm:10px; --r-md:14px; --r-lg:18px; --r-xl:24px; --r-pill:999px;
+  /* ---- 影・グロー ------------------------------------------------------ */
+  --shadow:        0 10px 34px rgba(0,0,0,.42);
+  --shadow-pop:    0 24px 64px rgba(0,0,0,.55);
+  --glow:          0 0 22px rgba(86,225,233,.30);
+  --glow-2:        0 0 22px rgba(167,139,250,.28);
+  /* ---- 余白（8pxベース） ---------------------------------------------- */
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:20px; --s6:24px; --s7:32px; --s8:40px;
+  --pad:20px;                 /* コンテナ左右パディング（狭幅で縮小）*/
+  --maxw:720px;               /* 本文最大幅（可読性）          */
+  /* ---- フォント（Webフォント不使用・システムフォント） --------------- */
+  --font:  -apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","Meiryo",sans-serif;
+  --mono:  ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Courier New",monospace;
+  /* ---- 文字サイズ ------------------------------------------------------ */
+  --fs-h1:24px; --fs-h2:19px; --fs-h3:15.5px; --fs-body:15px; --fs-sm:13px; --fs-xs:11.5px;
+  --lh:1.9;
+}
+
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{
+  margin:0; font-family:var(--font); color:var(--ink);
+  font-size:var(--fs-body); line-height:var(--lh);
+  background:
+    radial-gradient(680px 480px at 88% -6%, rgba(86,225,233,.16), transparent 60%),
+    radial-gradient(620px 520px at -8% 34%, rgba(167,139,250,.14), transparent 60%),
+    radial-gradient(700px 620px at 60% 108%, rgba(86,225,233,.08), transparent 60%),
+    var(--bg);
+  background-attachment:fixed;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--accent-soft); text-decoration:none;}
+a:hover{color:var(--accent);}
+::selection{background:rgba(86,225,233,.28); color:#fff;}
+.wrap{max-width:var(--maxw); margin:0 auto; padding-left:var(--pad); padding-right:var(--pad);}
+
+/* =====================  ヘッダー（章タイトル帯）  ======================= */
+.header{position:relative; overflow:hidden; border-bottom:1px solid var(--line);}
+.header::after{content:""; position:absolute; left:0; right:0; bottom:-1px; height:1px;
+  background:linear-gradient(90deg,transparent,rgba(86,225,233,.7),rgba(167,139,250,.5),transparent);}
+.header .wrap{padding-top:26px; padding-bottom:24px;}
+.back-link{display:inline-flex; align-items:center; gap:6px; font-size:var(--fs-sm);
+  font-weight:600; color:var(--accent-soft); margin-bottom:16px; cursor:pointer;
+  text-shadow:0 0 14px rgba(86,225,233,.35);}
+.back-link:hover{color:var(--accent);}
+.eyebrow{font-size:var(--fs-xs); font-weight:700; letter-spacing:.18em; color:var(--accent);}
+.header h1{margin:8px 0 0; font-size:var(--fs-h1); font-weight:800; letter-spacing:-.01em; color:var(--ink-strong);}
+.header .sub{margin:7px 0 0; font-size:var(--fs-sm); color:var(--sub);}
+
+/* =====================  レッスン切替タブ（折り返し）＋確認テストボタン  === */
+.tabbar{position:sticky; top:0; z-index:50;
+  background:rgba(10,14,22,.82); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);}
+.tabbar-inner{display:flex; flex-wrap:wrap; align-items:center; gap:10px;
+  max-width:var(--maxw); margin:0 auto; padding:11px var(--pad);}
+.nav-tabs{display:flex; flex-wrap:wrap; gap:8px; flex:1 1 auto; min-width:0;}
+.nav-tab{border:1px solid var(--line); white-space:nowrap;
+  background:var(--card); color:var(--sub); font-family:var(--font);
+  font-size:var(--fs-sm); font-weight:600; border-radius:var(--r-pill);
+  padding:8px 15px; cursor:pointer; transition:.18s ease;}
+.nav-tab:hover{border-color:rgba(86,225,233,.5); color:var(--ink);}
+.nav-tab.active{background:var(--accent); color:var(--accent-ink); border-color:transparent;
+  font-weight:700; box-shadow:var(--glow);}
+/* 確認テスト：レッスンタブと分けた独立アクセントボタン（常時表示） */
+.quiz-sep{align-self:stretch; width:1px; background:var(--line); margin:2px 0;}
+.quiz-btn{flex:0 0 auto; display:inline-flex; align-items:center; gap:7px; white-space:nowrap;
+  cursor:pointer; font-family:var(--font); font-size:var(--fs-sm); font-weight:700;
+  padding:9px 17px; border-radius:var(--r-pill); border:1px solid transparent; color:#160B2E;
+  background:linear-gradient(135deg,var(--accent),var(--accent-2)); box-shadow:var(--glow); transition:.18s ease;}
+.quiz-btn .arw{font-size:15px; transition:transform .18s ease;}
+.quiz-btn:hover{filter:brightness(1.08); transform:translateY(-1px);}
+.quiz-btn:hover .arw{transform:translateX(3px);}
+.quiz-btn.active{outline:2px solid rgba(167,139,250,.65); outline-offset:2px;}
+@media (max-width:520px){
+  .tabbar{position:static; backdrop-filter:none; background:rgba(255,255,255,.02);}
+  .quiz-sep{display:none;}
+  .quiz-btn{flex:1 1 100%; justify-content:center;}
+}
+
+/* =====================  レッスン内ナビ（次へ／確認テストへ）  =========== */
+.lesson-nav{display:flex; justify-content:flex-end; margin-top:16px;}
+.btn-next{display:inline-flex; align-items:center; gap:16px; cursor:pointer; text-align:left;
+  font-family:var(--font); border-radius:var(--r-md); padding:14px 20px;
+  background:var(--card); border:1px solid var(--line-strong); color:var(--ink);
+  box-shadow:var(--shadow); transition:.18s ease;}
+.btn-next:hover{border-color:rgba(86,225,233,.55); transform:translateY(-1px);}
+.btn-next .bn-meta{display:flex; flex-direction:column; line-height:1.35;}
+.btn-next .bn-label{font-size:var(--fs-xs); color:var(--sub); font-weight:600;}
+.btn-next .bn-title{font-size:var(--fs-body); color:var(--ink-strong); font-weight:700;}
+.btn-next .bn-arrow{font-size:20px; color:var(--accent-soft); transition:transform .18s ease;}
+.btn-next:hover .bn-arrow{transform:translateX(4px);}
+.btn-next.to-quiz{background:linear-gradient(135deg,rgba(86,225,233,.16),rgba(167,139,250,.16));
+  border-color:rgba(86,225,233,.5); box-shadow:0 0 26px rgba(86,225,233,.12);}
+.btn-next.to-quiz .bn-label{color:var(--accent-soft);}
+.btn-next.to-quiz .bn-arrow{color:var(--accent);}
+@media (max-width:480px){
+  .lesson-nav{justify-content:stretch;}
+  .btn-next{flex:1; justify-content:space-between;}
+}
+
+/* =====================  セクション切替  ================================= */
+.section{display:none; padding-top:22px; padding-bottom:64px;}
+.section.active{display:block; animation:fadeUp .34s ease both;}
+@keyframes fadeUp{from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;}}
+
+/* =====================  レッスンカード & 見出し階層  ==================== */
+.lesson-card{background:var(--card); border:1px solid var(--line); border-radius:var(--r-lg);
+  padding:24px; box-shadow:var(--shadow); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);}
+.lesson-card > h2:first-child{margin-top:0;}
+h2{margin:0 0 4px; font-size:var(--fs-h2); font-weight:800; color:var(--ink-strong); letter-spacing:-.01em;}
+.h2-rule{width:46px; height:2px; margin:10px 0 18px; border-radius:2px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2)); box-shadow:0 0 10px rgba(86,225,233,.5);}
+h3{margin:26px 0 12px; font-size:var(--fs-h3); font-weight:700; color:var(--accent-soft);
+  display:flex; align-items:center; gap:8px;}
+h3::before{content:""; width:7px; height:7px; border-radius:50%; background:var(--accent);
+  box-shadow:0 0 10px var(--accent); flex:0 0 auto;}
+p{margin:0 0 12px;} p:last-child{margin-bottom:0;}
+strong{color:var(--ink-strong); font-weight:700;}
+
+/* =====================  用語バッジ  ==================================== */
+.vocab{display:inline-flex; align-items:center; white-space:nowrap;
+  background:rgba(86,225,233,.10); border:1px solid rgba(86,225,233,.45); color:var(--accent-soft);
+  border-radius:var(--r-pill); padding:2px 10px; font-size:var(--fs-sm); font-weight:600;
+  margin:0 1px;}
+.vocab.v2{background:rgba(167,139,250,.12); border-color:rgba(167,139,250,.45); color:#C9B8FB;}
+
+/* =====================  ポイント囲み  ================================== */
+.key-point{background:rgba(86,225,233,.045); border:1px solid var(--line);
+  border-left:2px solid var(--accent); border-radius:0 var(--r-md) var(--r-md) 0;
+  padding:15px 17px; margin:14px 0; box-shadow:inset 0 0 26px rgba(86,225,233,.05);}
+.key-point .label{display:block; font-size:var(--fs-xs); font-weight:700; letter-spacing:.1em;
+  color:var(--accent); margin-bottom:8px;}
+.stack{display:flex; flex-direction:column; gap:10px;}
+
+/* =====================  具体例ブロック  ================================ */
+.example{background:rgba(251,191,36,.05); border:1px solid rgba(251,191,36,.22);
+  border-left:2px solid var(--warning); border-radius:0 var(--r-md) var(--r-md) 0;
+  padding:14px 17px; margin:14px 0; font-size:var(--fs-body); color:var(--ink);}
+.example b, .example strong{color:var(--warning-soft);}
+
+/* =====================  計算式ブロック（等幅）  ======================== */
+.formula{background:var(--inset); border:1px solid rgba(86,225,233,.20); border-radius:var(--r-md);
+  padding:15px 17px; margin:14px 0;}
+.formula .exp{font-family:var(--mono); font-size:14px; color:var(--accent-soft); line-height:1.85;}
+.formula .note{font-family:var(--mono); font-size:12px; color:var(--faint); margin-top:8px;}
+
+/* =====================  左右の対比カード  ============================== */
+.compare{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:14px 0;}
+.compare-box{border-radius:var(--r-md); padding:14px 15px; border:1px solid var(--line);}
+.compare-box h4{margin:0 0 3px; font-size:15px; font-weight:800;}
+.compare-box .en{font-size:var(--fs-xs); color:var(--faint); margin-bottom:8px;}
+.compare-box .body{font-size:var(--fs-sm); color:var(--ink); line-height:1.75;}
+.compare-box.good{background:rgba(74,222,128,.07); border-color:rgba(74,222,128,.30);}
+.compare-box.good h4{color:var(--success-soft);}
+.compare-box.bad{background:rgba(251,191,36,.07); border-color:rgba(251,191,36,.30);}
+.compare-box.bad h4{color:var(--warning-soft);}
+
+/* =====================  一覧表  ======================================== */
+.table-wrap{overflow-x:auto; border:1px solid var(--line); border-radius:var(--r-md); margin:14px 0;
+  scrollbar-width:thin;}
+.sql-table{width:100%; border-collapse:collapse; min-width:320px;}
+.sql-table th{ text-align:left; font-size:var(--fs-sm); font-weight:700; color:var(--accent-soft);
+  background:rgba(86,225,233,.07); padding:11px 14px; border-bottom:1px solid var(--line); white-space:nowrap;}
+.sql-table td{font-size:var(--fs-sm); color:var(--ink); padding:11px 14px; border-bottom:1px solid rgba(255,255,255,.055);}
+.sql-table tr:last-child td{border-bottom:none;}
+.sql-table tbody tr:hover, .sql-table tr:hover td{background:rgba(255,255,255,.02);}
+.sql-table td b{color:var(--ink-strong);}
+
+/* =====================  章末：最重要まとめ  ============================ */
+.summary{margin:20px 0 0; background:linear-gradient(135deg,rgba(86,225,233,.09),rgba(167,139,250,.09));
+  border:1px solid rgba(86,225,233,.28); border-radius:var(--r-md); padding:18px 18px 17px;
+  box-shadow:0 0 30px rgba(86,225,233,.08);}
+.summary .label{display:inline-flex; align-items:center; gap:8px; font-size:var(--fs-xs);
+  font-weight:800; letter-spacing:.1em; color:var(--accent-soft); margin-bottom:10px;}
+.summary .label::before{content:""; width:16px; height:2px; border-radius:2px;
+  background:var(--accent); box-shadow:0 0 8px var(--accent);}
+.summary p{font-size:var(--fs-body);}
+
+/* =====================  確認テスト  ==================================== */
+.quiz-head{margin-bottom:18px;}
+.quiz-head h2{margin-bottom:6px;}
+.quiz-note{font-size:var(--fs-sm); color:var(--sub); margin-bottom:16px;}
+.progress{display:flex; align-items:center; gap:12px;}
+.progress-bar{flex:1; height:10px; background:rgba(255,255,255,.06); border:1px solid var(--line);
+  border-radius:var(--r-pill); overflow:hidden;}
+.progress-fill{width:0%; height:100%; border-radius:var(--r-pill);
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  box-shadow:0 0 14px rgba(86,225,233,.5); transition:width .5s cubic-bezier(.2,.8,.2,1);}
+.progress-count{font-family:var(--mono); font-size:var(--fs-sm); color:var(--sub); min-width:52px; text-align:right;}
+
+.question-card{background:var(--card); border:1px solid var(--line); border-radius:var(--r-lg);
+  padding:20px; margin-bottom:16px; box-shadow:var(--shadow);
+  backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);}
+.q-number{font-family:var(--mono); font-size:var(--fs-xs); font-weight:700; letter-spacing:.08em;
+  color:var(--accent); margin-bottom:8px;}
+.q-text{font-size:var(--fs-body); font-weight:600; color:var(--ink-strong); line-height:1.7; margin-bottom:14px;}
+.choices{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:9px;}
+.choices li{display:flex; align-items:center; gap:12px; cursor:pointer;
+  background:rgba(255,255,255,.025); border:1px solid var(--line); border-radius:var(--r-sm);
+  padding:12px 14px; font-size:var(--fs-body); color:var(--ink); transition:.15s ease; user-select:none;}
+.choices li .key{flex:0 0 auto; width:24px; height:24px; border-radius:7px;
+  display:flex; align-items:center; justify-content:center; font-family:var(--mono);
+  font-size:12px; font-weight:700; color:var(--sub); background:rgba(255,255,255,.05);
+  border:1px solid var(--line); transition:.15s ease;}
+.choices li:hover{border-color:rgba(86,225,233,.55); background:rgba(86,225,233,.06); color:var(--ink-strong);}
+.choices li:hover .key{color:var(--accent-soft); border-color:rgba(86,225,233,.4);}
+.choices li:active{transform:scale(.99);}
+/* 回答後：クリック無効化 */
+.choices.answered li{cursor:default;}
+.choices.answered li:hover{border-color:var(--line); background:rgba(255,255,255,.025); color:var(--ink);}
+.choices.answered li:hover .key{color:var(--sub); border-color:var(--line);}
+/* 正解＝緑 */
+.choices li.correct{background:rgba(74,222,128,.12); border-color:rgba(74,222,128,.6); color:#EAFBF0;
+  box-shadow:0 0 18px rgba(74,222,128,.22); animation:pop .32s ease;}
+.choices li.correct .key{background:var(--success); border-color:transparent; color:#052E16;}
+.choices li.correct .key::after{content:"✓";}
+.choices li.correct .key span{display:none;}
+/* 誤選択＝赤 */
+.choices li.wrong{background:rgba(251,113,133,.12); border-color:rgba(251,113,133,.6); color:#FFECEF;}
+.choices li.wrong .key{background:var(--danger); border-color:transparent; color:#3B0A12;}
+.choices li.wrong .key::after{content:"✕";}
+.choices li.wrong .key span{display:none;}
+@keyframes pop{0%{transform:scale(1);}40%{transform:scale(1.02);}100%{transform:scale(1);}}
+
+/* 解説（回答後に開く） */
+.explanation{max-height:0; overflow:hidden; opacity:0; margin-top:0;
+  border-radius:var(--r-sm); transition:max-height .4s ease, opacity .3s ease, margin-top .3s ease;}
+.explanation.show{max-height:400px; opacity:1; margin-top:13px; padding:13px 15px;}
+.explanation.is-correct{background:rgba(74,222,128,.07); border:1px solid rgba(74,222,128,.28);}
+.explanation.is-wrong{background:rgba(251,113,133,.07); border:1px solid rgba(251,113,133,.28);}
+.exp-mark{display:block; font-size:var(--fs-sm); font-weight:800; margin-bottom:5px;}
+.explanation.is-correct .exp-mark{color:var(--success-soft);}
+.explanation.is-wrong .exp-mark{color:var(--danger-soft);}
+.exp-text{font-size:var(--fs-sm); color:var(--ink); line-height:1.8;}
+
+/* =====================  結果画面（オーバーレイ）  ====================== */
+.result-overlay{position:fixed; inset:0; z-index:100; display:none;
+  align-items:center; justify-content:center; padding:24px;
+  background:rgba(6,9,15,.72); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);}
+.result-overlay.show{display:flex; animation:ovFade .3s ease both;}
+@keyframes ovFade{from{opacity:0;}to{opacity:1;}}
+.result-area{position:relative; overflow:hidden; width:100%; max-width:420px; text-align:center;
+  background:linear-gradient(160deg,rgba(22,28,40,.96),rgba(13,18,28,.96));
+  border:1px solid rgba(86,225,233,.3); border-radius:var(--r-xl); padding:34px 26px 26px;
+  box-shadow:var(--shadow-pop), 0 0 60px rgba(86,225,233,.15);
+  animation:cardIn .42s cubic-bezier(.2,.9,.25,1.15) both;}
+@keyframes cardIn{from{opacity:0; transform:translateY(18px) scale(.94);}to{opacity:1; transform:none;}}
+.result-label{font-size:var(--fs-xs); font-weight:800; letter-spacing:.24em; color:var(--accent);
+  text-shadow:0 0 16px rgba(86,225,233,.5);}
+.result-score{margin:8px 0 6px; font-family:var(--mono); font-weight:800; line-height:1; color:var(--ink-strong);}
+.result-score #scoreNum{font-size:66px; background:linear-gradient(180deg,#fff,var(--accent-soft));
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+.result-total{font-size:24px; color:var(--sub); margin-left:6px;}
+.result-msg{font-size:var(--fs-body); color:var(--ink); line-height:1.7; margin:6px 4px 22px;}
+.result-actions{display:flex; flex-direction:column; gap:10px;}
+.btn{border:none; cursor:pointer; font-family:var(--font); font-size:var(--fs-body); font-weight:700;
+  padding:13px 20px; border-radius:var(--r-pill); background:var(--accent); color:var(--accent-ink);
+  box-shadow:var(--glow); transition:.18s ease;}
+.btn:hover{filter:brightness(1.08); transform:translateY(-1px);}
+.btn-outline{border:1px solid var(--line-strong); cursor:pointer; font-family:var(--font);
+  font-size:var(--fs-body); font-weight:600; padding:12px 20px; border-radius:var(--r-pill);
+  background:transparent; color:var(--ink); transition:.18s ease;}
+.btn-outline:hover{border-color:rgba(86,225,233,.55); color:var(--accent-soft);}
+.confetti{position:absolute; top:14px; width:8px; height:8px; border-radius:2px; opacity:0;
+  animation:confetti 1.35s ease-out forwards;}
+@keyframes confetti{0%{opacity:1; transform:translate(0,0) rotate(0deg);}
+  100%{opacity:0; transform:translate(var(--cx,0), 260px) rotate(400deg);}}
+
+/* =====================  レスポンシブ（〜スマホ360px）  ================= */
+@media (max-width:480px){
+  :root{--pad:15px; --fs-h1:21px; --fs-h2:17.5px; --fs-body:14.5px;}
+  .lesson-card{padding:18px;}
+  .question-card{padding:16px;}
+  .result-score #scoreNum{font-size:56px;}
+}
+@media (max-width:360px){
+  .compare{grid-template-columns:1fr;}
+}
 </style>
 </head>
 <body>
-<div class="header"><h1>第19章 ビジネスインダストリ</h1><div class="sub">基本情報技術者試験 Web教材</div></div>
-<div class="container">
-<a href="it_quiz.html" class="back-link">← 章の一覧にもどる</a>
-<div class="nav-tabs">
-<div class="nav-tab active" onclick="showSection('lesson1')">① ビジネス・産業システム</div>
-<div class="nav-tab" onclick="showSection('lesson2')">② e-ビジネス</div>
-<div class="nav-tab" onclick="showSection('lesson3')">③ 組込み・IoT</div>
-<div class="nav-tab" onclick="showSection('quiz')">確認テスト</div>
+
+<!-- スプラッシュ用サムネイル（オフライン展開時のプレースホルダ／JS無効時のフォールバック） -->
+<template id="__bundler_thumbnail" data-bg-color="#0A0E16">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="tbg" cx="50%" cy="40%" r="62%">
+        <stop offset="0%" stop-color="#123047"/>
+        <stop offset="100%" stop-color="#0A0E16"/>
+      </radialGradient>
+    </defs>
+    <rect width="1200" height="800" fill="url(#tbg)"/>
+    <g stroke="#56E1E9" stroke-width="4" opacity="0.45">
+      <line x1="600" y1="352" x2="378" y2="222"/>
+      <line x1="600" y1="352" x2="822" y2="222"/>
+      <line x1="600" y1="352" x2="356" y2="474"/>
+      <line x1="600" y1="352" x2="844" y2="474"/>
+    </g>
+    <circle cx="600" cy="352" r="36" fill="#56E1E9"/>
+    <circle cx="378" cy="222" r="21" fill="#A78BFA"/>
+    <circle cx="822" cy="222" r="21" fill="#A78BFA"/>
+    <circle cx="356" cy="474" r="21" fill="#4ADE80"/>
+    <circle cx="844" cy="474" r="21" fill="#56E1E9"/>
+    <text x="600" y="612" text-anchor="middle" fill="#EAEDF5" font-family="-apple-system,'Hiragino Kaku Gothic ProN',sans-serif" font-size="58" font-weight="800">第10章 ネットワーク</text>
+    <text x="600" y="668" text-anchor="middle" fill="#56E1E9" font-family="-apple-system,sans-serif" font-size="24" font-weight="700" letter-spacing="7">CHAPTER 19 · BUSINESS & INDUSTRY</text>
+  </svg>
+</template>
+
+<!-- ============================ 章タイトルヘッダー ======================= -->
+<header class="header">
+  <div class="wrap">
+    <span class="back-link" onclick="goBack()">← 章の一覧にもどる</span>
+    <div class="eyebrow">CHAPTER 19 ・ BUSINESS & INDUSTRY</div>
+    <h1>ビジネスインダストリ</h1>
+    <p class="sub">基本情報技術者試験 Web教材 ・ レッスン &amp; 確認テスト</p>
+  </div>
+</header>
+
+<div class="tabbar">
+  <div class="tabbar-inner">
+    <nav class="nav-tabs" id="navTabs">
+      <button class="nav-tab active" data-target="l1" onclick="showSection('l1')">① ビジネス・産業システム</button>
+      <button class="nav-tab" data-target="l2" onclick="showSection('l2')">② e-ビジネス</button>
+      <button class="nav-tab" data-target="l3" onclick="showSection('l3')">③ 組込み・IoT</button>
+    </nav>
+    <span class="quiz-sep"></span>
+    <button class="quiz-btn" data-target="quiz" onclick="showSection('quiz')">確認テスト<span class="arw">→</span></button>
+  </div>
 </div>
 
-<!-- ===== レッスン1 ===== -->
-<div id="lesson1" class="section active">
-<div class="lesson-card">
-<h2>① ビジネスシステムと産業システム</h2>
+<main class="wrap">
 
+  <section id="l1" class="section active">
+    <div class="lesson-card">
+<h2>① ビジネスシステムと産業システム</h2>
 <h3>身近なビジネスシステム</h3>
 <div class="key-point">
-<span class="vocab">POSシステム</span>（販売時点情報管理システム）：商品が売れた時点で、バーコードを読み取り「いつ・どこで・何を・いくつ・いくらで」買ったかを管理する仕組み。得られる情報を<strong>POSデータ</strong>という<br><br>
+<span class="vocab">POSシステム</span>（販売時点情報管理システム）：商品が売れた時点で、バーコードを読み取り「いつ・どこで・何を・いくつ・いくらで」買ったかを管理する仕組み。得られる情報を<strong>POSデータ</strong>という<br/><br/>
 <span class="vocab">ID-POSデータ</span>：POSデータに<strong>個人（ID）</strong>を結び付けたもの。ポイントカード提示で「誰が」買ったかまで把握でき、<strong>最終購買日・購買頻度・累計購買総額</strong>などの購入履歴を確認できる
 </div>
 <div class="key-point">
-<span class="vocab">GPS</span>：人工衛星を使って現在位置を測定する仕組み（カーナビ等）<br>
-<span class="vocab">ETC</span>：料金所で停止せず自動料金収受を行うシステム<br>
-<span class="vocab">電子マネー</span>：現金の代わりにICカード等で支払う仕組み（Suica・ICOCA等）<br>
+<span class="vocab">GPS</span>：人工衛星を使って現在位置を測定する仕組み（カーナビ等）<br/>
+<span class="vocab">ETC</span>：料金所で停止せず自動料金収受を行うシステム<br/>
+<span class="vocab">電子マネー</span>：現金の代わりにICカード等で支払う仕組み（Suica・ICOCA等）<br/>
 <span class="vocab">GIS</span>：地理情報システム。地図上に各種情報を重ねて表示・分析する
 </div>
-
 <h3>社会インフラのシステム</h3>
 <div class="key-point">
-<span class="vocab">スマートグリッド</span>：ITで発電と電力消費を総合制御し、<strong>電力の需給量の最適化</strong>を図る次世代電力網。再生可能エネルギーの活用と安定供給を両立する<br><br>
-<span class="vocab">スマートメーター</span>：通信機能をもつ高機能な電力メーター。目的は①<strong>自動検針</strong>②<strong>電力需要制御</strong>③<strong>電力消費量の可視化</strong>の3つ（※補助電源で停電時に給電する機能は目的ではない）<br><br>
+<span class="vocab">スマートグリッド</span>：ITで発電と電力消費を総合制御し、<strong>電力の需給量の最適化</strong>を図る次世代電力網。再生可能エネルギーの活用と安定供給を両立する<br/><br/>
+<span class="vocab">スマートメーター</span>：通信機能をもつ高機能な電力メーター。目的は①<strong>自動検針</strong>②<strong>電力需要制御</strong>③<strong>電力消費量の可視化</strong>の3つ（※補助電源で停電時に給電する機能は目的ではない）<br/><br/>
 <span class="vocab">HEMS</span>（家庭用エネルギー管理システム）：複数の家電をネットワークでつなぎ、電力の<strong>可視化（見える化）</strong>と<strong>制御（コントロール）</strong>を行うシステム
 </div>
-<div class="example"><strong>その他の社会システム</strong><br>
+<div class="example"><strong>その他の社会システム</strong><br/>
 金融システム（勘定系・情報系）、行政システム（住民基本台帳ネットワーク・電子申請）、流通情報システム（受発注・在庫管理）など。「発電と電力消費を総合制御」＝スマートグリッド、と結び付けて覚える。</div>
-
 <h3>エンジニアリングシステムと生産方式</h3>
 <div class="key-point">
 <span class="vocab">エンジニアリングシステム</span>：生産プロセスを自動化・支援するシステム。試験では<strong>かんばん方式・セル生産方式・MRP</strong>の3つが頻出
@@ -56,12 +399,12 @@
 <div class="compare">
 <div class="compare-box good">
 <h4>受注生産方式</h4>
-注文を<strong>受けてから</strong>生産を開始<br><br>
+注文を<strong>受けてから</strong>生産を開始<br/><br/>
 在庫リスクは小さいが、納期は長め
 </div>
 <div class="compare-box bad">
 <h4>見込生産方式</h4>
-注文を待たず<strong>計画に基づき</strong>先に生産<br><br>
+注文を待たず<strong>計画に基づき</strong>先に生産<br/><br/>
 すぐ出荷できるが、売れ残りリスクあり
 </div>
 </div>
@@ -71,32 +414,35 @@
 <div class="compare">
 <div class="compare-box good">
 <h4>ライン生産方式</h4>
-ベルトコンベアの流れ作業<br><br>
+ベルトコンベアの流れ作業<br/><br/>
 単能工・専能工／<strong>少品種・多量生産</strong>向き
 </div>
 <div class="compare-box bad">
 <h4>セル生産方式</h4>
-1人〜数人が全工程を担当<br><br>
+1人〜数人が全工程を担当<br/><br/>
 多能工／<strong>多品種・少量生産</strong>（多種類でフレキシブル）向き
 </div>
 </div>
-
 <h3>MRP・CAD・CAM・コンカレント</h3>
 <table class="sql-table">
 <tr><th>用語</th><th>意味</th></tr>
-<tr><td><strong>MRP</strong><br>（資材所要量計画）</td><td>製品の生産計画（基準生産計画）を基に、必要な資材の量と時期を求め、資材の手配数量を算出する手法</td></tr>
-<tr><td><strong>CAD</strong><br>（コンピュータ支援設計）</td><td>製品の形状・構造などのデータから、製品の設計図面をコンピュータで作成する</td></tr>
-<tr><td><strong>CAM</strong><br>（コンピュータ支援製造）</td><td>CADの設計データを工程設計情報に変換し、工作機械を操作するプログラムを作る</td></tr>
-<tr><td><strong>コンカレント<br>エンジニアリング</strong></td><td>設計・生産計画などの工程を<strong>同時並行</strong>で行い、開発期間を短縮する（concurrent＝同時）</td></tr>
+<tr><td><strong>MRP</strong><br/>（資材所要量計画）</td><td>製品の生産計画（基準生産計画）を基に、必要な資材の量と時期を求め、資材の手配数量を算出する手法</td></tr>
+<tr><td><strong>CAD</strong><br/>（コンピュータ支援設計）</td><td>製品の形状・構造などのデータから、製品の設計図面をコンピュータで作成する</td></tr>
+<tr><td><strong>CAM</strong><br/>（コンピュータ支援製造）</td><td>CADの設計データを工程設計情報に変換し、工作機械を操作するプログラムを作る</td></tr>
+<tr><td><strong>コンカレント<br/>エンジニアリング</strong></td><td>設計・生産計画などの工程を<strong>同時並行</strong>で行い、開発期間を短縮する（concurrent＝同時）</td></tr>
 </table>
-</div>
-</div>
+    </div>
+    <div class="lesson-nav">
+      <button class="btn-next" onclick="showSection('l2')">
+        <span class="bn-meta"><span class="bn-label">次のレッスン</span><span class="bn-title">② e-ビジネス</span></span>
+        <span class="bn-arrow">→</span>
+      </button>
+    </div>
+  </section>
 
-<!-- ===== レッスン2 ===== -->
-<div id="lesson2" class="section">
-<div class="lesson-card">
+  <section id="l2" class="section">
+    <div class="lesson-card">
 <h2>② e-ビジネス（電子商取引）</h2>
-
 <h3>EC（電子商取引）とその分類</h3>
 <div class="key-point">
 <span class="vocab">EC</span>（Electronic Commerce＝電子商取引）：インターネット上で商品を売買すること。取引の当事者の組み合わせで「◯to◯」に分類する
@@ -110,129 +456,295 @@
 <tr><td><strong>O2O</strong></td><td>仮想店舗⇔実店舗の連携</td><td>電子クーポン・価格比較</td></tr>
 </table>
 <div class="key-point">
-<span class="vocab">O2O</span>（Online to Offline）：モバイル端末などを使い、<strong>仮想店舗から実店舗へ、または実店舗から仮想店舗へ</strong>顧客を誘導し購入につなげる仕組み<br><br>
-<span class="vocab">電子オークション</span>：ネット上の競売。売り手が希望価格を出し、最高値の買い手が落札（CtoCの代表）<br>
+<span class="vocab">O2O</span>（Online to Offline）：モバイル端末などを使い、<strong>仮想店舗から実店舗へ、または実店舗から仮想店舗へ</strong>顧客を誘導し購入につなげる仕組み<br/><br/>
+<span class="vocab">電子オークション</span>：ネット上の競売。売り手が希望価格を出し、最高値の買い手が落札（CtoCの代表）<br/>
 <span class="vocab">逆オークション</span>：<strong>買う人が希望価格を提示</strong>し、最も安い価格を出した売り手が売れる取引（売り手と買い手が逆）
 </div>
-
 <h3>決済・物流の仕組み</h3>
 <div class="key-point">
-<span class="vocab">エスクローサービス</span>：ネット取引を安全にするため、売り手と買い手の間に仲介会社が入って決済を仲介するサービス（第三者預託）。「代金を払ったのに商品が届かない」等のトラブルを防ぐ<br><br>
-<span class="vocab">RFID</span>：電波・電磁波で<strong>非接触</strong>で情報をやり取りする技術。代表例が<span class="vocab">ICタグ</span>（RFIDタグ）で、①<strong>汚れに強い</strong>②<strong>梱包の外から読める</strong>のが特徴<br><br>
+<span class="vocab">エスクローサービス</span>：ネット取引を安全にするため、売り手と買い手の間に仲介会社が入って決済を仲介するサービス（第三者預託）。「代金を払ったのに商品が届かない」等のトラブルを防ぐ<br/><br/>
+<span class="vocab">RFID</span>：電波・電磁波で<strong>非接触</strong>で情報をやり取りする技術。代表例が<span class="vocab">ICタグ</span>（RFIDタグ）で、①<strong>汚れに強い</strong>②<strong>梱包の外から読める</strong>のが特徴<br/><br/>
 <span class="vocab">EDI</span>（電子データ交換）：商取引のためのデータを、標準的な<strong>規約</strong>に基づいてコンピュータ間で交換すること。発注書・納品書・請求書などを電子化する
 </div>
-
 <h3>EC特有の考え方・ソーシャルメディア</h3>
 <div class="key-point">
-<span class="vocab">ロングテール</span>：あまり売れない商品でも、その種類が膨大になると売上合計が無視できない割合になる法則。実店舗の陳列面積の制約がないECならではの特徴<br><br>
-<span class="vocab">フィンテック</span>：金融（Finance）とIT（Technology）の融合サービス<br>
-<span class="vocab">暗号資産</span>（仮想通貨）：ブロックチェーン等で管理される電子的な資産<br>
-<span class="vocab">SEO</span>：検索結果で自サイトを上位表示させる工夫<br>
-<span class="vocab">レコメンデーション</span>：購入履歴などからおすすめ商品を提示する<br>
+<span class="vocab">ロングテール</span>：あまり売れない商品でも、その種類が膨大になると売上合計が無視できない割合になる法則。実店舗の陳列面積の制約がないECならではの特徴<br/><br/>
+<span class="vocab">フィンテック</span>：金融（Finance）とIT（Technology）の融合サービス<br/>
+<span class="vocab">暗号資産</span>（仮想通貨）：ブロックチェーン等で管理される電子的な資産<br/>
+<span class="vocab">SEO</span>：検索結果で自サイトを上位表示させる工夫<br/>
+<span class="vocab">レコメンデーション</span>：購入履歴などからおすすめ商品を提示する<br/>
 <span class="vocab">アフィリエイト</span>：自サイトのリンク経由で商品が売れると紹介料が入る成功報酬型広告
 </div>
 <div class="key-point">
-<span class="vocab">CGM</span>（消費者生成メディア）：一般消費者がネットを通じて自ら情報を発信するメディアの総称（ブログ・SNS・口コミサイトなど）<br><br>
+<span class="vocab">CGM</span>（消費者生成メディア）：一般消費者がネットを通じて自ら情報を発信するメディアの総称（ブログ・SNS・口コミサイトなど）<br/><br/>
 <span class="vocab">シェアリングエコノミー</span>：個人が保有する<strong>遊休資産</strong>を、主に個人同士で共有・貸し借りする仕組み（民泊・ライドシェア・クラウドソーシングなど）
 </div>
-</div>
-</div>
+    </div>
+    <div class="lesson-nav">
+      <button class="btn-next" onclick="showSection('l3')">
+        <span class="bn-meta"><span class="bn-label">次のレッスン</span><span class="bn-title">③ 組込み・IoT</span></span>
+        <span class="bn-arrow">→</span>
+      </button>
+    </div>
+  </section>
 
-<!-- ===== レッスン3 ===== -->
-<div id="lesson3" class="section">
-<div class="lesson-card">
+  <section id="l3" class="section">
+    <div class="lesson-card">
 <h2>③ 組込みシステムとIoTシステム</h2>
-
 <h3>組込みシステム</h3>
 <div class="key-point">
-<span class="vocab">組込みシステム</span>：<strong>特定の機能のみ</strong>を実行するように作られたシステム。通常はマイクロコンピュータを指す。「汎用（いろいろな用途）」と対比される<br><br>
-・<strong>民生機器</strong>：家庭用の電化製品（電子レンジ・炊飯器・エアコンなど）<br>
+<span class="vocab">組込みシステム</span>：<strong>特定の機能のみ</strong>を実行するように作られたシステム。通常はマイクロコンピュータを指す。「汎用（いろいろな用途）」と対比される<br/><br/>
+・<strong>民生機器</strong>：家庭用の電化製品（電子レンジ・炊飯器・エアコンなど）<br/>
 ・<strong>産業機器</strong>：産業用の機器（産業用ロボット・自動倉庫・自動販売機など）
 </div>
 <div class="key-point">
-<span class="vocab">組込みソフトウェア（ファームウェア）</span>：組込みシステム内の読み出し専用の記憶装置（<strong>ROM</strong>）に書き込まれたソフトウェア。ユーザーが誤って上書きするのを防ぐためROMに書き込んで出荷する<br><br>
+<span class="vocab">組込みソフトウェア（ファームウェア）</span>：組込みシステム内の読み出し専用の記憶装置（<strong>ROM</strong>）に書き込まれたソフトウェア。ユーザーが誤って上書きするのを防ぐためROMに書き込んで出荷する<br/><br/>
 <span class="vocab">リアルタイムOS</span>：決められた時間内に確実に処理を終えることを重視した、組込み機器向けのOS
 </div>
-
 <h3>IoT（モノのインターネット）</h3>
 <div class="key-point">
-<span class="vocab">IoT</span>（Internet of Things）：自動車や家電などの「モノ」が直接インターネットにつながり、互いに情報をやり取りする仕組み<br>
-・構成要素は<strong>IoTデバイス（モノ）</strong>と<strong>IoTサーバ（デバイスを管理する機器）</strong><br>
-・対象は<strong>インターネット又は閉域網に接続できるすべてのもの</strong>（アナログ機器・人・生物なども含む）<br><br>
-<span class="vocab">M2M</span>（Machine to Machine）：人を介さず、機器同士が自律的に通信し合う仕組み<br>
+<span class="vocab">IoT</span>（Internet of Things）：自動車や家電などの「モノ」が直接インターネットにつながり、互いに情報をやり取りする仕組み<br/>
+・構成要素は<strong>IoTデバイス（モノ）</strong>と<strong>IoTサーバ（デバイスを管理する機器）</strong><br/>
+・対象は<strong>インターネット又は閉域網に接続できるすべてのもの</strong>（アナログ機器・人・生物なども含む）<br/><br/>
+<span class="vocab">M2M</span>（Machine to Machine）：人を介さず、機器同士が自律的に通信し合う仕組み<br/>
 <span class="vocab">閉域網</span>：インターネットに接続していない閉じたネットワーク。許可された人しか使えずセキュリティが高い
 </div>
-
 <h3>IoTを支える通信・技術</h3>
 <table class="sql-table">
 <tr><th>用語</th><th>特徴</th></tr>
-<tr><td><strong>BLE</strong><br>（Bluetooth Low Energy）</td><td>省電力の近距離通信。通信速度は遅いが、ボタン電池で数年稼働。IoT機器向き</td></tr>
-<tr><td><strong>LPWA</strong><br>（Low Power Wide Area）</td><td>省電力かつ広範囲（数十km）。BLEより遠く、LTEより省電力。速度は遅い</td></tr>
-<tr><td><strong>エッジ<br>コンピューティング</strong></td><td>センサなどデータ発生源の<strong>近くにサーバ</strong>を置いて一次処理し、<strong>リアルタイム性</strong>を高める。必要なデータだけをクラウドへ送る</td></tr>
+<tr><td><strong>BLE</strong><br/>（Bluetooth Low Energy）</td><td>省電力の近距離通信。通信速度は遅いが、ボタン電池で数年稼働。IoT機器向き</td></tr>
+<tr><td><strong>LPWA</strong><br/>（Low Power Wide Area）</td><td>省電力かつ広範囲（数十km）。BLEより遠く、LTEより省電力。速度は遅い</td></tr>
+<tr><td><strong>エッジ<br/>コンピューティング</strong></td><td>センサなどデータ発生源の<strong>近くにサーバ</strong>を置いて一次処理し、<strong>リアルタイム性</strong>を高める。必要なデータだけをクラウドへ送る</td></tr>
 </table>
 <div class="key-point">
-<span class="vocab">センサ</span>：温度・光・圧力などをデータとして取り込む（入力）／<span class="vocab">アクチュエータ</span>：電気信号を動き（モータ回転など）に変える（出力）<br><br>
-<span class="vocab">AI</span>（人工知能）：人間の知的な処理をコンピュータで実現する技術<br>
+<span class="vocab">センサ</span>：温度・光・圧力などをデータとして取り込む（入力）／<span class="vocab">アクチュエータ</span>：電気信号を動き（モータ回転など）に変える（出力）<br/><br/>
+<span class="vocab">AI</span>（人工知能）：人間の知的な処理をコンピュータで実現する技術<br/>
 <span class="vocab">ディープラーニング（深層学習）</span>：多層のニューラルネットワークを使い、大量データから特徴を自動で学習する機械学習の手法
 </div>
-
-<div class="key-point" style="background:#fce4ec;border-color:#e91e63">
-<strong style="color:#e91e63">第19章の最重要まとめ</strong><br><br>
-・スマートグリッド＝電力の需給量最適化を図る次世代電力網／HEMS＝家庭の電力を可視化＋制御<br>
-・ID-POSデータで購入履歴（最終購買日・購買頻度・累計購買総額）がわかる<br>
-・かんばん方式（JIT）＝必要な物を必要なときに必要な量だけ／セル生産＝多品種少量<br>
-・MRP＝生産計画から資材の手配数量を算出／コンカレント＝工程を同時並行<br>
-・BtoB／BtoC／CtoC／GtoB（電子入札）／O2O（仮想⇔実店舗の誘導）<br>
-・逆オークション＝買い手が価格提示・最安の売り手が落札／エスクロー＝決済を第三者が仲介<br>
-・ICタグ（RFID）＝汚れに強く梱包の外から読める／EDI＝規約に基づくデータ交換<br>
-・ロングテール＝売れない商品群の売上合計が無視できない／CGM・シェアリングエコノミー（遊休資産）<br>
+<div class="summary"><span class="label">最重要まとめ</span><p>・スマートグリッド＝電力の需給量最適化を図る次世代電力網／HEMS＝家庭の電力を可視化＋制御<br/>
+・ID-POSデータで購入履歴（最終購買日・購買頻度・累計購買総額）がわかる<br/>
+・かんばん方式（JIT）＝必要な物を必要なときに必要な量だけ／セル生産＝多品種少量<br/>
+・MRP＝生産計画から資材の手配数量を算出／コンカレント＝工程を同時並行<br/>
+・BtoB／BtoC／CtoC／GtoB（電子入札）／O2O（仮想⇔実店舗の誘導）<br/>
+・逆オークション＝買い手が価格提示・最安の売り手が落札／エスクロー＝決済を第三者が仲介<br/>
+・ICタグ（RFID）＝汚れに強く梱包の外から読める／EDI＝規約に基づくデータ交換<br/>
+・ロングテール＝売れない商品群の売上合計が無視できない／CGM・シェアリングエコノミー（遊休資産）<br/>
 ・IoT＝モノがネットにつながる。対象はネット又は閉域網に接続できる全て／エッジ＝発生源近くで一次処理しリアルタイム性向上
-</div>
-</div>
-</div>
+</p></div>
+    </div>
+    <div class="lesson-nav">
+      <button class="btn-next to-quiz" onclick="showSection('quiz')">
+        <span class="bn-meta"><span class="bn-label">仕上げ</span><span class="bn-title">確認テストに進む</span></span>
+        <span class="bn-arrow">→</span>
+      </button>
+    </div>
+  </section>
 
-<!-- ===== 確認テスト ===== -->
-<div id="quiz" class="section">
-<div class="quiz-area">
-<h2>確認テスト ── 第19章</h2>
-<p style="color:#666;font-size:.9em;margin-bottom:16px">全問ランダム出題・選択肢シャッフル。何度でも挑戦できます。</p>
-<div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
-<div id="quizContainer"></div>
-<div style="text-align:center;margin-top:20px"><button class="btn" id="submitBtn" onclick="submitQuiz()" style="display:none">結果を見る</button></div>
-</div>
-<div class="result-area" id="resultArea"><h2>結果</h2><div class="result-score" id="resultScore"></div><div id="resultMsg" style="font-size:1.1em;margin:10px 0"></div><button class="btn" onclick="retryQuiz()">もう一度</button><button class="btn btn-outline" onclick="showSection('lesson1')">レッスンに戻る</button></div>
-</div>
+<section id="quiz" class="section">
+    <div class="quiz-head">
+      <h2>確認テスト — 第19章</h2>
+      <p class="quiz-note">ランダム出題・選択肢シャッフル。選ぶとすぐに正誤と解説が開きます。何度でも挑戦できます。</p>
+      <div class="progress">
+        <div class="progress-bar"><div class="progress-fill"></div></div>
+        <div class="progress-count">0 / 0</div>
+      </div>
+    </div>
+    <div id="quiz-questions"></div>
+  </section>
+
+</main>
+
+<div class="result-overlay" id="resultOverlay">
+  <div class="result-area" id="resultArea">
+    <div class="result-label" id="resultLabel">RESULT</div>
+    <div class="result-score"><span id="scoreNum">0</span><span class="result-total" id="scoreTotal">/ 0</span></div>
+    <div class="result-msg" id="resultMsg"></div>
+    <div class="result-actions">
+      <button class="btn" onclick="retryQuiz()">もう一度挑戦する</button>
+      <button class="btn-outline" onclick="closeResult()">解答を見直す</button>
+    </div>
+  </div>
 </div>
 
 <script>
-const allQuestions=[
-{q:'スマートグリッドの説明はどれか。（平成26年度）',choices:['健康診断結果や投薬情報など、類似した症例に基づく分析を行い、個人ごとに最適な健康アドバイスを提供できるシステム','在宅社員やシニアワーカーなど、様々な勤務形態で働く労働者のコミュニケーションを可能にし、多様なワークスタイルを支援するシステム','自動車に設置された情報機器で飲食店・娯楽情報の検索や交通情報の受発信などを行えるシステム','通信と情報処理技術によって発電と電力消費を総合的に制御し、再生可能エネルギーの活用や安定的な電力供給、最適な需給調整を図るシステム'],answer:3,explanation:'<strong>スマートグリッド</strong>はITを使って電力の需給量の最適化を図る次世代電力網です。1は医療診断エキスパートシステム、2はテレワーク支援、3はカーナビゲーションシステムの説明です。'},
-{q:'スマートメーターを導入する目的として、適切でないものはどれか。（平成27年度）',choices:['自動検針によって、検針作業の効率を向上させる。','停電時に補助電源によって、一定時間電力を供給し続ける。','電力需要制御によって、ピーク電力を抑制する。','電力消費量の可視化によって、節電の意識を高める。'],answer:1,explanation:'スマートメーターの主な目的は<strong>自動検針・電力需要制御・電力消費量の可視化</strong>の3つです。停電時に電力を供給し続けるのは自家発電装置（補助電源）の目的であり、スマートメーターの目的ではありません。'},
-{q:'HEMSの説明として、適切なものはどれか。（平成29年度）',choices:['太陽光発電システムなどが発電した電気を、家庭などで利用できるように変換するシステム','一般家庭などから排出された家電製品の有用な部分をリサイクルするシステム','ヒートポンプを利用して、少ないエネルギーで大きな熱量を発生させる給湯システム','複数の家電製品をネットワークでつなぎ、電力の可視化及び電力消費の最適制御を行うシステム'],answer:3,explanation:'<strong>HEMS</strong>のキーワードは「可視化」と「制御」の2つです。1はパワーコンディショナ、2は家電リサイクルシステム、3は自然冷媒ヒートポンプ給湯器の説明です。'},
-{q:'コンビニで、ポイントカードなどの個人情報と結び付けられた顧客ID付きPOSデータ（ID-POSデータ）を収集・分析することで確認できるものはどれか。（平成30年度）',choices:['商品の最終的な使用者','商品の店舗までの流通経路','商品を購入する動機','同一商品の購入頻度'],answer:3,explanation:'ID-POSデータでは従来わからなかった「誰が」買ったかが把握でき、<strong>購入履歴（最終購買日・購買頻度・累計購買総額）</strong>を確認できます。よって購買頻度にあたる「同一商品の購入頻度」が正解です。'},
-{q:'"かんばん方式"を説明したものはどれか。（令和元年度）',choices:['各作業の効率を向上させるために、仕様が統一された部品や半製品を調達する。','効率よく部品調達を行うために、関連会社から部品を調達する。','中間在庫を極力減らすために、生産ラインにおいて後工程の生産に必要な部品だけを前工程から調達する。','品質が高い部品を調達するために、複数の指定業者を定め競争入札で部品を調達する。'],answer:2,explanation:'<strong>かんばん方式（JIT）</strong>は必要な物を必要なときに必要な量だけ生産する方式です。「必要な部品だけを前工程から調達し中間在庫を減らす」というキーワードがある選択肢が正解です。'},
-{q:'セル生産方式の利点が生かせる対象はどれか。（平成30年度）',choices:['生産性を上げるために、大量生産が必要なもの','製品の仕様が長期間変わらないもの','多種類かつフレキシブルな生産が求められるもの','標準化・単純化・専門化による分業が必要なもの'],answer:2,explanation:'<strong>セル生産方式</strong>の特徴は多品種・少量生産で、多種類かつフレキシブルな生産に向きます。他の選択肢はいずれもライン生産方式の特徴です。'},
-{q:'CADを説明したものはどれか。（平成26年度）',choices:['現物を利用した試作や実験を行わずに、製品の性能・機能をコンピュータで評価する。','生産計画・部品構成表・在庫量などから、資材の必要量と時期を求める。','製品の形状や構造などの属性データから、製品の設計図面を作成する。','製品設計図面を工程設計情報に変換し、機械加工などの自動化を支援する。'],answer:2,explanation:'<strong>CAD</strong>は製品の設計をコンピュータで行い設計図面を作成するシステムです。1はシミュレーター、2はMRP、4はCAMの説明です。'},
-{q:'MRPの特徴はどれか。（平成29年度）',choices:['顧客の注文を受けてから製品の生産を行う。','作業指示票（かんばん）を利用して作業指示・運搬指示をする。','製品の開発・設計・生産準備を同時並行で行う。','製品の基準生産計画を基に、部品の手配数量を算出する。'],answer:3,explanation:'<strong>MRP（資材所要量計画）</strong>は生産計画に合わせて必要な資材の量を求め手配する手法です。1は受注生産方式、2はかんばん方式（JIT）、3はコンカレントエンジニアリングの特徴です。'},
-{q:'コンカレントエンジニアリングの説明として、適切なものはどれか。（平成26年度）',choices:['機能とコストの最適な組合せを把握し、システム化された手順で価値の向上を図る手法','製品開発において、設計・生産計画などの工程を同時並行的に行う手法','設計・製造・販売などのプロセスを順に行っていく製品開発の手法','対象のシステムを解析し、その仕様を明らかにする手法'],answer:1,explanation:'コンカレント（concurrent）は「同時の」という意味で、<strong>工程を同時並行的に行う</strong>選択肢が正解です。1はバリューエンジニアリング、3はシーケンシャルな開発、4はリバースエンジニアリングの説明です。'},
-{q:'電子自治体において、GtoB（Government to Business）に該当するものはどれか。（平成27年度）',choices:['自治体内で電子決裁や電子公文書管理を行う。','自治体が利用する物品や資材の電子調達・電子入札を行う。','住民基本台帳ネットワークによって、自治体間で住民票データを送受信する。','住民票・戸籍謄本・婚姻届などを住民が電子申請する。'],answer:1,explanation:'<strong>GtoB</strong>は行政と企業の取引です。物品・資材の電子調達や電子入札がこれにあたります。1は取引ではなく、3は自治体間（GtoG）、4は行政対消費者（GtoC）に該当します。'},
-{q:'ネットビジネスでのO2O（Online to Offline）の説明はどれか。（平成30年度）',choices:['基本サービスを無料で提供し、高度な機能には課金するビジネスモデルである。','顧客仕様に応じたカスタマイズのため、注文後に最終製品の生産を始める方式である。','代金を払ったのに商品が届かないなどのトラブルを防止できる仕組みである。','モバイル端末などを利用する顧客を、仮想店舗から実店舗へ、又は実店舗から仮想店舗へ誘導し購入につなげる仕組みである。'],answer:3,explanation:'<strong>O2O</strong>は仮想店舗（Online）と実店舗（Offline）を連携させ顧客を誘導する仕組みです。1はフリーミアム、2はBTO（受注生産）、3はエスクローサービスの説明です。'},
-{q:'インターネット上で、一般消費者が買いたい品物とその購入条件を提示し、単数又は複数の売り手がそれに応じる取引形態はどれか。（平成28年度）',choices:['BtoB','CtoC','逆オークション','バーチャルモール'],answer:2,explanation:'買い手が希望価格（購入条件）を提示し、最も安い売り手が売れる取引を<strong>逆オークション</strong>といいます。通常のオークションと売り手・買い手が逆になる点がポイントです。'},
-{q:'ICタグ（RFID）の特徴はどれか。（平成27年度）',choices:['GPSを利用し、現在地の位置情報や属性情報を表示する。','専用の磁気読取り装置に挿入して使用する。','大量の情報を扱うので、情報の記憶には外部記憶装置を使用する。','汚れに強く、記録された情報を梱包の外から読み取ることができる。'],answer:3,explanation:'<strong>ICタグ（RFID）</strong>は電波で非接触通信を行うため、①汚れに強い②梱包の外から読める、という特徴があります。バーコードと違い、光学的な読み取りではない点が要点です。'},
-{q:'エスクローサービスの取引モデルにおいて、商品が売り手から買い手に届いた次に行われる行為はどれか。（平成26年度）',choices:['商品受領の通知','商品の発送','代金の支払','代金の入金通知'],answer:0,explanation:'エスクローでは、買い手が仲介会社に代金を払込み→仲介会社が売り手へ入金通知→売り手が商品発送→買い手が商品を受領→<strong>買い手が商品受領を通知</strong>→仲介会社が売り手へ代金支払、という順です。商品受領後は「商品受領の通知」が入ります。'},
-{q:'ロングテールの説明はどれか。（平成30年度）',choices:['デジタルコンテンツに統合的・体系的な管理や配信などの処理を行うこと','インターネットショッピングで、あまり売れない商品群の売上合計が無視できない割合になっていること','自分のサイトに掲載したリンク経由で商品が売れたとき、企業が紹介料を支払うこと','メーカーや卸売業者から商品を直接発送させ、在庫リスクを負わずに販売できること'],answer:1,explanation:'<strong>ロングテール</strong>は、陳列面積の制約がないECで、あまり売れない多数の商品の売上合計が無視できない割合になる法則です。1はCMS、3はアフィリエイト、4はドロップシッピングの説明です。'},
-{q:'EDIを説明したものはどれか。（平成25年度）',choices:['OSI基本参照モデルに基づく電子メールサービスの国際規格である。','ネットワーク内でデータを蓄積・変換するなど付加価値を加えた通信サービスである。','ネットワークを介して、商取引のためのデータをコンピュータ間で標準的な規約に基づいて交換することである。','発注情報を端末から入力し、本部又は仕入先に送信して発注を行うシステムである。'],answer:2,explanation:'<strong>EDI（電子データ交換）</strong>のキーワードは「規約」です。1はMHS、2はVAN、4はEOSの説明です。標準的な規約に基づくデータ交換という点が要点です。'},
-{q:'CGM（Consumer Generated Media）の例はどれか。（平成31年度）',choices:['企業が経営状況や業績動向を個人投資家向けに公開する自社のWebサイト','企業が自社商品の特徴や使用方法を一般消費者向けに発信する自社のWebサイト','行政機関が政策や行政サービスを一般市民向けに公開する自組織のWebサイト','個人が自ら使用した商品などの評価を、不特定多数に向けて発信するブログやSNSなどのWebサイト'],answer:3,explanation:'<strong>CGM</strong>は一般の消費者がインターネットを通じて自ら情報を発信するメディアの総称です。個人が商品評価を発信するブログやSNSがこれにあたります。他は企業・行政が発信する公式サイトです。'},
-{q:'IoTの構成要素に関する記述として、適切なものはどれか。（平成30年度）',choices:['アナログ式の機器を除く、デジタル式の機器が対象となる。','インターネット又は閉域網に接続できる全てのものが対象となる。','自律的にデータを収集して分析を行う機器だけが対象となる。','人や生物を除く、形のある全てのものが対象となる。'],answer:1,explanation:'<strong>IoT</strong>はモノがインターネットにつながる仕組みで、対象は<strong>インターネット又は閉域網に接続できる全てのもの</strong>です。アナログ機器も、データを送信するだけの機器も、人や生物（ペットや植物）も対象になります。'}
+/* =========================================================================
+   ロジック（全22章で流用可能な骨格）
+   - showSection(id)        : レッスン／テストのタブ切替
+   - allQuestions           : 設問データ配列（章ごとに差し替え）
+   - selectChoice(qi, ci)   : 選択肢クリック→採点→解説表示
+   ========================================================================= */
+
+/* ---- タブ切替 ---------------------------------------------------------- */
+var STORE_KEY = 'fe_ch19_section';
+function showSection(id, opts){
+  opts = opts || {};
+  document.querySelectorAll('.section').forEach(function(s){
+    s.classList.toggle('active', s.id === id);
+  });
+  document.querySelectorAll('.tabbar [data-target]').forEach(function(t){
+    t.classList.toggle('active', t.dataset.target === id);
+  });
+  // 画面上部（タブ帯）へ
+  if(opts.scroll !== false){
+    var top = document.querySelector('.header').offsetHeight;
+    window.scrollTo(0, top);
+  }
+  try{ localStorage.setItem(STORE_KEY, id); }catch(e){}
+}
+function goBack(){ location.href='it_quiz.html'; }
+
+/* ---- 設問データ（第10章 ネットワーク） -------------------------------- */
+/* answer = choices の正解インデックス（0始まり）。章ごとにこの配列を差し替え。 */
+var allQuestions = [
+{q:'スマートグリッドの説明はどれか。（平成26年度）',choices:['健康診断結果や投薬情報など、類似した症例に基づく分析を行い、個人ごとに最適な健康アドバイスを提供できるシステム','在宅社員やシニアワーカーなど、様々な勤務形態で働く労働者のコミュニケーションを可能にし、多様なワークスタイルを支援するシステム','自動車に設置された情報機器で飲食店・娯楽情報の検索や交通情報の受発信などを行えるシステム','通信と情報処理技術によって発電と電力消費を総合的に制御し、再生可能エネルギーの活用や安定的な電力供給、最適な需給調整を図るシステム'],answer:3,explain:'<strong>スマートグリッド</strong>はITを使って電力の需給量の最適化を図る次世代電力網です。1は医療診断エキスパートシステム、2はテレワーク支援、3はカーナビゲーションシステムの説明です。'},
+{q:'スマートメーターを導入する目的として、適切でないものはどれか。（平成27年度）',choices:['自動検針によって、検針作業の効率を向上させる。','停電時に補助電源によって、一定時間電力を供給し続ける。','電力需要制御によって、ピーク電力を抑制する。','電力消費量の可視化によって、節電の意識を高める。'],answer:1,explain:'スマートメーターの主な目的は<strong>自動検針・電力需要制御・電力消費量の可視化</strong>の3つです。停電時に電力を供給し続けるのは自家発電装置（補助電源）の目的であり、スマートメーターの目的ではありません。'},
+{q:'HEMSの説明として、適切なものはどれか。（平成29年度）',choices:['太陽光発電システムなどが発電した電気を、家庭などで利用できるように変換するシステム','一般家庭などから排出された家電製品の有用な部分をリサイクルするシステム','ヒートポンプを利用して、少ないエネルギーで大きな熱量を発生させる給湯システム','複数の家電製品をネットワークでつなぎ、電力の可視化及び電力消費の最適制御を行うシステム'],answer:3,explain:'<strong>HEMS</strong>のキーワードは「可視化」と「制御」の2つです。1はパワーコンディショナ、2は家電リサイクルシステム、3は自然冷媒ヒートポンプ給湯器の説明です。'},
+{q:'コンビニで、ポイントカードなどの個人情報と結び付けられた顧客ID付きPOSデータ（ID-POSデータ）を収集・分析することで確認できるものはどれか。（平成30年度）',choices:['商品の最終的な使用者','商品の店舗までの流通経路','商品を購入する動機','同一商品の購入頻度'],answer:3,explain:'ID-POSデータでは従来わからなかった「誰が」買ったかが把握でき、<strong>購入履歴（最終購買日・購買頻度・累計購買総額）</strong>を確認できます。よって購買頻度にあたる「同一商品の購入頻度」が正解です。'},
+{q:'"かんばん方式"を説明したものはどれか。（令和元年度）',choices:['各作業の効率を向上させるために、仕様が統一された部品や半製品を調達する。','効率よく部品調達を行うために、関連会社から部品を調達する。','中間在庫を極力減らすために、生産ラインにおいて後工程の生産に必要な部品だけを前工程から調達する。','品質が高い部品を調達するために、複数の指定業者を定め競争入札で部品を調達する。'],answer:2,explain:'<strong>かんばん方式（JIT）</strong>は必要な物を必要なときに必要な量だけ生産する方式です。「必要な部品だけを前工程から調達し中間在庫を減らす」というキーワードがある選択肢が正解です。'},
+{q:'セル生産方式の利点が生かせる対象はどれか。（平成30年度）',choices:['生産性を上げるために、大量生産が必要なもの','製品の仕様が長期間変わらないもの','多種類かつフレキシブルな生産が求められるもの','標準化・単純化・専門化による分業が必要なもの'],answer:2,explain:'<strong>セル生産方式</strong>の特徴は多品種・少量生産で、多種類かつフレキシブルな生産に向きます。他の選択肢はいずれもライン生産方式の特徴です。'},
+{q:'CADを説明したものはどれか。（平成26年度）',choices:['現物を利用した試作や実験を行わずに、製品の性能・機能をコンピュータで評価する。','生産計画・部品構成表・在庫量などから、資材の必要量と時期を求める。','製品の形状や構造などの属性データから、製品の設計図面を作成する。','製品設計図面を工程設計情報に変換し、機械加工などの自動化を支援する。'],answer:2,explain:'<strong>CAD</strong>は製品の設計をコンピュータで行い設計図面を作成するシステムです。1はシミュレーター、2はMRP、4はCAMの説明です。'},
+{q:'MRPの特徴はどれか。（平成29年度）',choices:['顧客の注文を受けてから製品の生産を行う。','作業指示票（かんばん）を利用して作業指示・運搬指示をする。','製品の開発・設計・生産準備を同時並行で行う。','製品の基準生産計画を基に、部品の手配数量を算出する。'],answer:3,explain:'<strong>MRP（資材所要量計画）</strong>は生産計画に合わせて必要な資材の量を求め手配する手法です。1は受注生産方式、2はかんばん方式（JIT）、3はコンカレントエンジニアリングの特徴です。'},
+{q:'コンカレントエンジニアリングの説明として、適切なものはどれか。（平成26年度）',choices:['機能とコストの最適な組合せを把握し、システム化された手順で価値の向上を図る手法','製品開発において、設計・生産計画などの工程を同時並行的に行う手法','設計・製造・販売などのプロセスを順に行っていく製品開発の手法','対象のシステムを解析し、その仕様を明らかにする手法'],answer:1,explain:'コンカレント（concurrent）は「同時の」という意味で、<strong>工程を同時並行的に行う</strong>選択肢が正解です。1はバリューエンジニアリング、3はシーケンシャルな開発、4はリバースエンジニアリングの説明です。'},
+{q:'電子自治体において、GtoB（Government to Business）に該当するものはどれか。（平成27年度）',choices:['自治体内で電子決裁や電子公文書管理を行う。','自治体が利用する物品や資材の電子調達・電子入札を行う。','住民基本台帳ネットワークによって、自治体間で住民票データを送受信する。','住民票・戸籍謄本・婚姻届などを住民が電子申請する。'],answer:1,explain:'<strong>GtoB</strong>は行政と企業の取引です。物品・資材の電子調達や電子入札がこれにあたります。1は取引ではなく、3は自治体間（GtoG）、4は行政対消費者（GtoC）に該当します。'},
+{q:'ネットビジネスでのO2O（Online to Offline）の説明はどれか。（平成30年度）',choices:['基本サービスを無料で提供し、高度な機能には課金するビジネスモデルである。','顧客仕様に応じたカスタマイズのため、注文後に最終製品の生産を始める方式である。','代金を払ったのに商品が届かないなどのトラブルを防止できる仕組みである。','モバイル端末などを利用する顧客を、仮想店舗から実店舗へ、又は実店舗から仮想店舗へ誘導し購入につなげる仕組みである。'],answer:3,explain:'<strong>O2O</strong>は仮想店舗（Online）と実店舗（Offline）を連携させ顧客を誘導する仕組みです。1はフリーミアム、2はBTO（受注生産）、3はエスクローサービスの説明です。'},
+{q:'インターネット上で、一般消費者が買いたい品物とその購入条件を提示し、単数又は複数の売り手がそれに応じる取引形態はどれか。（平成28年度）',choices:['BtoB','CtoC','逆オークション','バーチャルモール'],answer:2,explain:'買い手が希望価格（購入条件）を提示し、最も安い売り手が売れる取引を<strong>逆オークション</strong>といいます。通常のオークションと売り手・買い手が逆になる点がポイントです。'},
+{q:'ICタグ（RFID）の特徴はどれか。（平成27年度）',choices:['GPSを利用し、現在地の位置情報や属性情報を表示する。','専用の磁気読取り装置に挿入して使用する。','大量の情報を扱うので、情報の記憶には外部記憶装置を使用する。','汚れに強く、記録された情報を梱包の外から読み取ることができる。'],answer:3,explain:'<strong>ICタグ（RFID）</strong>は電波で非接触通信を行うため、①汚れに強い②梱包の外から読める、という特徴があります。バーコードと違い、光学的な読み取りではない点が要点です。'},
+{q:'エスクローサービスの取引モデルにおいて、商品が売り手から買い手に届いた次に行われる行為はどれか。（平成26年度）',choices:['商品受領の通知','商品の発送','代金の支払','代金の入金通知'],answer:0,explain:'エスクローでは、買い手が仲介会社に代金を払込み→仲介会社が売り手へ入金通知→売り手が商品発送→買い手が商品を受領→<strong>買い手が商品受領を通知</strong>→仲介会社が売り手へ代金支払、という順です。商品受領後は「商品受領の通知」が入ります。'},
+{q:'ロングテールの説明はどれか。（平成30年度）',choices:['デジタルコンテンツに統合的・体系的な管理や配信などの処理を行うこと','インターネットショッピングで、あまり売れない商品群の売上合計が無視できない割合になっていること','自分のサイトに掲載したリンク経由で商品が売れたとき、企業が紹介料を支払うこと','メーカーや卸売業者から商品を直接発送させ、在庫リスクを負わずに販売できること'],answer:1,explain:'<strong>ロングテール</strong>は、陳列面積の制約がないECで、あまり売れない多数の商品の売上合計が無視できない割合になる法則です。1はCMS、3はアフィリエイト、4はドロップシッピングの説明です。'},
+{q:'EDIを説明したものはどれか。（平成25年度）',choices:['OSI基本参照モデルに基づく電子メールサービスの国際規格である。','ネットワーク内でデータを蓄積・変換するなど付加価値を加えた通信サービスである。','ネットワークを介して、商取引のためのデータをコンピュータ間で標準的な規約に基づいて交換することである。','発注情報を端末から入力し、本部又は仕入先に送信して発注を行うシステムである。'],answer:2,explain:'<strong>EDI（電子データ交換）</strong>のキーワードは「規約」です。1はMHS、2はVAN、4はEOSの説明です。標準的な規約に基づくデータ交換という点が要点です。'},
+{q:'CGM（Consumer Generated Media）の例はどれか。（平成31年度）',choices:['企業が経営状況や業績動向を個人投資家向けに公開する自社のWebサイト','企業が自社商品の特徴や使用方法を一般消費者向けに発信する自社のWebサイト','行政機関が政策や行政サービスを一般市民向けに公開する自組織のWebサイト','個人が自ら使用した商品などの評価を、不特定多数に向けて発信するブログやSNSなどのWebサイト'],answer:3,explain:'<strong>CGM</strong>は一般の消費者がインターネットを通じて自ら情報を発信するメディアの総称です。個人が商品評価を発信するブログやSNSがこれにあたります。他は企業・行政が発信する公式サイトです。'},
+{q:'IoTの構成要素に関する記述として、適切なものはどれか。（平成30年度）',choices:['アナログ式の機器を除く、デジタル式の機器が対象となる。','インターネット又は閉域網に接続できる全てのものが対象となる。','自律的にデータを収集して分析を行う機器だけが対象となる。','人や生物を除く、形のある全てのものが対象となる。'],answer:1,explain:'<strong>IoT</strong>はモノがインターネットにつながる仕組みで、対象は<strong>インターネット又は閉域網に接続できる全てのもの</strong>です。アナログ機器も、データを送信するだけの機器も、人や生物（ペットや植物）も対象になります。'}
 ];
-let questions=[],answered=0;
-function shuffleArray(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
-function initQuiz(){questions=shuffleArray(allQuestions);answered=0;document.getElementById('submitBtn').style.display='none';document.getElementById('resultArea').style.display='none';document.getElementById('progressFill').style.width='0%';const c=document.getElementById('quizContainer');c.innerHTML='';questions.forEach((q,idx)=>{const sc=q.choices.map((c,i)=>({text:c,origIdx:i}));for(let i=sc.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[sc[i],sc[j]]=[sc[j],sc[i]]}q._shuffled=sc;q._selected=null;let h=`<div class="question-card"><div class="q-number">問題 ${idx+1} / ${questions.length}</div><div class="q-text">${q.q}</div><ul class="choices">`;sc.forEach((c,ci)=>{h+=`<li onclick="selectChoice(${idx},${ci})" id="q${idx}c${ci}">${c.text}</li>`});h+=`</ul><div class="explanation" id="exp${idx}"><div id="expText${idx}"></div></div></div>`;c.innerHTML+=h})}
-function selectChoice(qi,ci){const q=questions[qi];if(q._selected!==null)return;q._selected=ci;answered++;const corr=q.answer,sel=q._shuffled[ci].origIdx,ok=sel===corr;q._shuffled.forEach((c,i)=>{const li=document.getElementById(`q${qi}c${i}`);if(c.origIdx===corr)li.classList.add('correct');if(i===ci&&!ok)li.classList.add('wrong')});const e=document.getElementById(`exp${qi}`),t=document.getElementById(`expText${qi}`);t.innerHTML=(ok?'<span style="color:#4caf50;font-weight:bold">&#x2B55; 正解！</span>':'<span style="color:#f44336;font-weight:bold">&#x274C; 不正解</span>')+'<br>'+q.explanation;e.classList.add('show');document.getElementById('progressFill').style.width=(answered/questions.length*100)+'%';if(answered===questions.length)document.getElementById('submitBtn').style.display='inline-block'}
-function submitQuiz(){let c=0;questions.forEach(q=>{if(q._selected!==null&&q._shuffled[q._selected].origIdx===q.answer)c++});document.getElementById('resultArea').style.display='block';document.getElementById('resultScore').textContent=`${c} / ${questions.length}`;const p=c/questions.length*100;let m='';if(p===100)m='満点！完璧です！';else if(p>=80)m='よく理解できています！';else if(p>=60)m='合格ライン！もう少し復習しましょう。';else m='レッスンをもう一度確認しましょう。';document.getElementById('resultMsg').textContent=m;document.getElementById('resultArea').scrollIntoView({behavior:'smooth'})}
-function retryQuiz(){initQuiz();document.getElementById('quizContainer').scrollIntoView({behavior:'smooth'})}
-function showSection(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');const tabs=document.querySelectorAll('.nav-tab');const ids=['lesson1','lesson2','lesson3','quiz'];tabs[ids.indexOf(id)].classList.add('active');if(id==='quiz')initQuiz();window.scrollTo({top:0,behavior:'smooth'})}
-initQuiz();
+
+/* ---- 出題状態 ---------------------------------------------------------- */
+var quiz = [];   // 表示中の設問（シャッフル済み）
+function shuffle(a){ for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t;} return a; }
+var KEYS = ['A','B','C','D','E'];
+
+function buildQuiz(){
+  var order = shuffle(allQuestions.map(function(q,i){return i;}));
+  quiz = order.map(function(oi){
+    var src = allQuestions[oi];
+    var idx = shuffle(src.choices.map(function(_,i){return i;}));
+    return {
+      q: src.q,
+      choices: idx.map(function(i){return src.choices[i];}),
+      answer: idx.indexOf(src.answer),
+      explain: src.explain,
+      answered:false, correct:false
+    };
+  });
+  renderQuiz();
+}
+
+function renderQuiz(){
+  var html = '';
+  for(var qi=0; qi<quiz.length; qi++){
+    var it = quiz[qi];
+    var lis = '';
+    for(var ci=0; ci<it.choices.length; ci++){
+      lis += '<li class="choice" onclick="selectChoice('+qi+','+ci+')">'
+           +   '<span class="key"><span>'+KEYS[ci]+'</span></span>'
+           +   '<span class="txt">'+it.choices[ci]+'</span>'
+           + '</li>';
+    }
+    html += '<div class="question-card" id="q'+qi+'">'
+         +    '<div class="q-number">問題 '+(qi+1)+' / '+quiz.length+'</div>'
+         +    '<div class="q-text">'+it.q+'</div>'
+         +    '<ul class="choices">'+lis+'</ul>'
+         +    '<div class="explanation"><span class="exp-mark"></span><span class="exp-text">'+it.explain+'</span></div>'
+         +  '</div>';
+  }
+  document.getElementById('quiz-questions').innerHTML = html;
+  updateProgress();
+}
+
+function selectChoice(qi, ci){
+  var it = quiz[qi];
+  if(it.answered) return;
+  it.answered = true;
+  it.correct = (ci === it.answer);
+  var card = document.getElementById('q'+qi);
+  var lis = card.querySelectorAll('.choice');
+  for(var i=0;i<lis.length;i++){
+    if(i === it.answer) lis[i].classList.add('correct');
+    if(i === ci && ci !== it.answer) lis[i].classList.add('wrong');
+  }
+  card.querySelector('.choices').classList.add('answered');
+  var exp = card.querySelector('.explanation');
+  exp.classList.add('show', it.correct ? 'is-correct' : 'is-wrong');
+  exp.querySelector('.exp-mark').textContent = it.correct ? '◯ 正解！' : '✕ 不正解';
+  updateProgress();
+  if(quiz.every(function(x){return x.answered;})) setTimeout(showResult, 500);
+}
+
+function updateProgress(){
+  var total = quiz.length;
+  var done = quiz.filter(function(x){return x.answered;}).length;
+  document.querySelector('.progress-fill').style.width = total ? (done/total*100)+'%' : '0%';
+  document.querySelector('.progress-count').textContent = done + ' / ' + total;
+}
+
+/* ---- 結果画面 ---------------------------------------------------------- */
+function showResult(){
+  var total = quiz.length;
+  var score = quiz.filter(function(x){return x.correct;}).length;
+  var pct = total ? Math.round(score/total*100) : 0;
+  var label, msg;
+  if(pct >= 90){ label='PERFECT'; msg='文句なし。この調子なら本番でも通用します。'; }
+  else if(pct >= 70){ label='GREAT'; msg='good。あと少しで満点、間違えた所だけ復習しよう。'; }
+  else if(pct >= 50){ label='GOOD'; msg='基礎はOK。間違えた問題の解説を読み直そう。'; }
+  else { label='KEEP GOING'; msg='復習して再挑戦！解説を読めば必ず伸びます。'; }
+  document.getElementById('resultLabel').textContent = label;
+  document.getElementById('scoreTotal').textContent = '/ ' + total;
+  document.getElementById('resultMsg').textContent = msg;
+  var overlay = document.getElementById('resultOverlay');
+  overlay.classList.add('show');
+  countUp(document.getElementById('scoreNum'), score);
+  if(pct >= 50) confetti();
+}
+function countUp(el, to){
+  el.textContent = 0;
+  if(to <= 0) return;
+  var dur = 700, startT = Date.now();
+  var t = setInterval(function(){
+    var p = Math.min(1, (Date.now() - startT) / dur);
+    el.textContent = Math.round(p * to);
+    if(p >= 1){ el.textContent = to; clearInterval(t); }
+  }, 40);
+}
+function confetti(){
+  var host = document.getElementById('resultArea');
+  var colors = ['#56E1E9','#A78BFA','#4ADE80','#FBBF24'];
+  for(var i=0;i<18;i++){
+    var s = document.createElement('span');
+    s.className = 'confetti';
+    s.style.left = (Math.random()*100) + '%';
+    s.style.background = colors[i % 4];
+    s.style.animationDelay = (Math.random()*0.35) + 's';
+    s.style.setProperty('--cx', (Math.random()*160-80) + 'px');
+    host.appendChild(s);
+    (function(node){ setTimeout(function(){ if(node.parentNode) node.parentNode.removeChild(node); }, 1800); })(s);
+  }
+}
+function closeResult(){ document.getElementById('resultOverlay').classList.remove('show'); }
+function retryQuiz(){
+  closeResult();
+  buildQuiz();
+  showSection('quiz');
+}
+
+/* ---- 初期化 ------------------------------------------------------------ */
+(function init(){
+  buildQuiz();
+  var saved = null;
+  try{ saved = localStorage.getItem(STORE_KEY); }catch(e){}
+  if(saved && document.getElementById(saved)){ showSection(saved, {scroll:false}); }
+  // 結果オーバーレイの背景クリックで閉じる
+  document.getElementById('resultOverlay').addEventListener('click', function(e){
+    if(e.target === this) closeResult();
+  });
+})();
 </script>
 </body>
 </html>

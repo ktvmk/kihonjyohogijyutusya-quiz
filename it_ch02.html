@@ -4,152 +4,676 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>第2章 基礎理論② ── 論理演算・回路・AI｜基本情報技術者</title>
+<meta name="description" content="基本情報技術者試験 Web教材 — 第10章 ネットワーク。レッスンと確認テスト。">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Hiragino Sans','Noto Sans JP','Meiryo',sans-serif;background:#f5f5f0;color:#333;line-height:1.8;padding:0 0 60px 0}.header{background:linear-gradient(135deg,#e65100,#ff8f00);color:#fff;padding:24px 20px;text-align:center}.header h1{font-size:1.3em;margin-bottom:4px}.header .sub{font-size:.85em;opacity:.8}.container{max-width:720px;margin:0 auto;padding:16px}.nav-tabs{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap}.nav-tab{padding:10px 14px;border:2px solid #e65100;border-radius:8px;background:#fff;color:#e65100;font-weight:bold;font-size:.82em;cursor:pointer;transition:all .2s}.nav-tab:hover,.nav-tab.active{background:#e65100;color:#fff}.section{display:none}.section.active{display:block}.lesson-card{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.lesson-card h2{color:#e65100;font-size:1.2em;margin-bottom:16px;padding-bottom:8px;border-bottom:3px solid #ffe0b2}.lesson-card h3{color:#ff8f00;font-size:1.05em;margin:20px 0 10px 0}.key-point{background:#fff3e0;border-left:4px solid #e65100;padding:14px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-size:.95em}.key-point strong{color:#e65100}.vocab{display:inline-block;background:#e3f2fd;border:1px solid #64b5f6;border-radius:6px;padding:2px 8px;margin:2px 4px;font-weight:bold;font-size:.9em;color:#1565c0}.example{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:14px 16px;margin:12px 0;font-size:.9em}.formula{background:#fce4ec;border-left:4px solid #e91e63;padding:14px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-family:monospace;font-size:.95em}.quiz-area{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.quiz-area h2{color:#e65100;margin-bottom:16px}.question-card{background:#fafafa;border:1px solid #e0e0e0;border-radius:10px;padding:20px;margin:16px 0}.q-number{font-size:.8em;color:#999;margin-bottom:6px}.q-text{font-size:1.05em;font-weight:bold;margin-bottom:14px;line-height:1.6}.choices{list-style:none}.choices li{padding:12px 16px;margin:6px 0;border:2px solid #e0e0e0;border-radius:8px;cursor:pointer;transition:all .2s;font-size:.95em}.choices li:hover{border-color:#e65100;background:#fff3e0}.choices li.correct{border-color:#4caf50;background:#e8f5e9}.choices li.wrong{border-color:#f44336;background:#ffebee}.explanation{display:none;margin-top:12px;padding:14px;background:#f5f5f5;border-radius:8px;font-size:.9em;line-height:1.7}.explanation.show{display:block}.result-area{display:none;text-align:center;padding:30px;background:#fff;border-radius:12px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.result-score{font-size:2.5em;font-weight:bold;color:#e65100;margin:10px 0}.btn{display:inline-block;padding:12px 28px;background:#e65100;color:#fff;border:none;border-radius:8px;font-size:1em;cursor:pointer;margin:8px}.btn:hover{background:#ff8f00}.btn-outline{background:#fff;color:#e65100;border:2px solid #e65100}.progress-bar{width:100%;height:6px;background:#e0e0e0;border-radius:3px;margin:12px 0}.progress-fill{height:100%;background:#e65100;border-radius:3px;transition:width .3s}.back-link{display:inline-block;margin:16px 0;color:#e65100;text-decoration:none;font-weight:bold}
+/* =========================================================================
+   基本情報技術者 Web教材 — デザインシステム（案D：ネオ・モダン / ダーク）
+   このファイル1枚で完結。全22章はこの <style> と <script> を流用し、
+   各章の「レッスン本文」と「allQuestions 配列」を差し替えるだけで展開できます。
+   ========================================================================= */
+
+:root{
+  /* ---- 色：面 ---------------------------------------------------------- */
+  --bg:            #0A0E16;   /* ページ背景（最下層）           */
+  --bg-2:          #0D121C;   /* 一段明るい背景                 */
+  --card:          rgba(255,255,255,.045); /* ガラス質カード面   */
+  --card-solid:    #131926;   /* 不透明カード（表・数式など）   */
+  --inset:         rgba(0,0,0,.35);        /* へこみ面（数式）    */
+  --line:          rgba(255,255,255,.09);  /* 罫線・境界         */
+  --line-strong:   rgba(255,255,255,.16);  /* 強い罫線           */
+  /* ---- 色：文字 -------------------------------------------------------- */
+  --ink:           #EAEDF5;   /* 本文                          */
+  --ink-strong:    #F5F7FB;   /* 見出し・強調                  */
+  --sub:           #98A2B3;   /* サブ文字                      */
+  --faint:         #5E6779;   /* 補助・キャプション            */
+  /* ---- 色：アクセント / 意味 ------------------------------------------ */
+  --accent:        #56E1E9;   /* ネオンシアン（主アクセント）  */
+  --accent-ink:    #06222A;   /* アクセント上の文字            */
+  --accent-soft:   #7FEFF5;   /* 明るいシアン（テキスト用）    */
+  --accent-2:      #A78BFA;   /* バイオレット（副アクセント）  */
+  --success:       #4ADE80;   /* 成功・正解（緑）              */
+  --success-soft:  #7BE9A4;
+  --danger:        #FB7185;   /* 誤答（赤）                    */
+  --danger-soft:   #FDA4AF;
+  --warning:       #FBBF24;   /* 警告・注意（アンバー）        */
+  --warning-soft:  #FCD34D;
+  /* ---- 角丸 ------------------------------------------------------------ */
+  --r-xs:6px; --r-sm:10px; --r-md:14px; --r-lg:18px; --r-xl:24px; --r-pill:999px;
+  /* ---- 影・グロー ------------------------------------------------------ */
+  --shadow:        0 10px 34px rgba(0,0,0,.42);
+  --shadow-pop:    0 24px 64px rgba(0,0,0,.55);
+  --glow:          0 0 22px rgba(86,225,233,.30);
+  --glow-2:        0 0 22px rgba(167,139,250,.28);
+  /* ---- 余白（8pxベース） ---------------------------------------------- */
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:20px; --s6:24px; --s7:32px; --s8:40px;
+  --pad:20px;                 /* コンテナ左右パディング（狭幅で縮小）*/
+  --maxw:720px;               /* 本文最大幅（可読性）          */
+  /* ---- フォント（Webフォント不使用・システムフォント） --------------- */
+  --font:  -apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","Meiryo",sans-serif;
+  --mono:  ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Courier New",monospace;
+  /* ---- 文字サイズ ------------------------------------------------------ */
+  --fs-h1:24px; --fs-h2:19px; --fs-h3:15.5px; --fs-body:15px; --fs-sm:13px; --fs-xs:11.5px;
+  --lh:1.9;
+}
+
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{
+  margin:0; font-family:var(--font); color:var(--ink);
+  font-size:var(--fs-body); line-height:var(--lh);
+  background:
+    radial-gradient(680px 480px at 88% -6%, rgba(86,225,233,.16), transparent 60%),
+    radial-gradient(620px 520px at -8% 34%, rgba(167,139,250,.14), transparent 60%),
+    radial-gradient(700px 620px at 60% 108%, rgba(86,225,233,.08), transparent 60%),
+    var(--bg);
+  background-attachment:fixed;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--accent-soft); text-decoration:none;}
+a:hover{color:var(--accent);}
+::selection{background:rgba(86,225,233,.28); color:#fff;}
+.wrap{max-width:var(--maxw); margin:0 auto; padding-left:var(--pad); padding-right:var(--pad);}
+
+/* =====================  ヘッダー（章タイトル帯）  ======================= */
+.header{position:relative; overflow:hidden; border-bottom:1px solid var(--line);}
+.header::after{content:""; position:absolute; left:0; right:0; bottom:-1px; height:1px;
+  background:linear-gradient(90deg,transparent,rgba(86,225,233,.7),rgba(167,139,250,.5),transparent);}
+.header .wrap{padding-top:26px; padding-bottom:24px;}
+.back-link{display:inline-flex; align-items:center; gap:6px; font-size:var(--fs-sm);
+  font-weight:600; color:var(--accent-soft); margin-bottom:16px; cursor:pointer;
+  text-shadow:0 0 14px rgba(86,225,233,.35);}
+.back-link:hover{color:var(--accent);}
+.eyebrow{font-size:var(--fs-xs); font-weight:700; letter-spacing:.18em; color:var(--accent);}
+.header h1{margin:8px 0 0; font-size:var(--fs-h1); font-weight:800; letter-spacing:-.01em; color:var(--ink-strong);}
+.header .sub{margin:7px 0 0; font-size:var(--fs-sm); color:var(--sub);}
+
+/* =====================  レッスン切替タブ（折り返し）＋確認テストボタン  === */
+.tabbar{position:sticky; top:0; z-index:50;
+  background:rgba(10,14,22,.82); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);}
+.tabbar-inner{display:flex; flex-wrap:wrap; align-items:center; gap:10px;
+  max-width:var(--maxw); margin:0 auto; padding:11px var(--pad);}
+.nav-tabs{display:flex; flex-wrap:wrap; gap:8px; flex:1 1 auto; min-width:0;}
+.nav-tab{border:1px solid var(--line); white-space:nowrap;
+  background:var(--card); color:var(--sub); font-family:var(--font);
+  font-size:var(--fs-sm); font-weight:600; border-radius:var(--r-pill);
+  padding:8px 15px; cursor:pointer; transition:.18s ease;}
+.nav-tab:hover{border-color:rgba(86,225,233,.5); color:var(--ink);}
+.nav-tab.active{background:var(--accent); color:var(--accent-ink); border-color:transparent;
+  font-weight:700; box-shadow:var(--glow);}
+/* 確認テスト：レッスンタブと分けた独立アクセントボタン（常時表示） */
+.quiz-sep{align-self:stretch; width:1px; background:var(--line); margin:2px 0;}
+.quiz-btn{flex:0 0 auto; display:inline-flex; align-items:center; gap:7px; white-space:nowrap;
+  cursor:pointer; font-family:var(--font); font-size:var(--fs-sm); font-weight:700;
+  padding:9px 17px; border-radius:var(--r-pill); border:1px solid transparent; color:#160B2E;
+  background:linear-gradient(135deg,var(--accent),var(--accent-2)); box-shadow:var(--glow); transition:.18s ease;}
+.quiz-btn .arw{font-size:15px; transition:transform .18s ease;}
+.quiz-btn:hover{filter:brightness(1.08); transform:translateY(-1px);}
+.quiz-btn:hover .arw{transform:translateX(3px);}
+.quiz-btn.active{outline:2px solid rgba(167,139,250,.65); outline-offset:2px;}
+@media (max-width:520px){
+  .tabbar{position:static; backdrop-filter:none; background:rgba(255,255,255,.02);}
+  .quiz-sep{display:none;}
+  .quiz-btn{flex:1 1 100%; justify-content:center;}
+}
+
+/* =====================  レッスン内ナビ（次へ／確認テストへ）  =========== */
+.lesson-nav{display:flex; justify-content:flex-end; margin-top:16px;}
+.btn-next{display:inline-flex; align-items:center; gap:16px; cursor:pointer; text-align:left;
+  font-family:var(--font); border-radius:var(--r-md); padding:14px 20px;
+  background:var(--card); border:1px solid var(--line-strong); color:var(--ink);
+  box-shadow:var(--shadow); transition:.18s ease;}
+.btn-next:hover{border-color:rgba(86,225,233,.55); transform:translateY(-1px);}
+.btn-next .bn-meta{display:flex; flex-direction:column; line-height:1.35;}
+.btn-next .bn-label{font-size:var(--fs-xs); color:var(--sub); font-weight:600;}
+.btn-next .bn-title{font-size:var(--fs-body); color:var(--ink-strong); font-weight:700;}
+.btn-next .bn-arrow{font-size:20px; color:var(--accent-soft); transition:transform .18s ease;}
+.btn-next:hover .bn-arrow{transform:translateX(4px);}
+.btn-next.to-quiz{background:linear-gradient(135deg,rgba(86,225,233,.16),rgba(167,139,250,.16));
+  border-color:rgba(86,225,233,.5); box-shadow:0 0 26px rgba(86,225,233,.12);}
+.btn-next.to-quiz .bn-label{color:var(--accent-soft);}
+.btn-next.to-quiz .bn-arrow{color:var(--accent);}
+@media (max-width:480px){
+  .lesson-nav{justify-content:stretch;}
+  .btn-next{flex:1; justify-content:space-between;}
+}
+
+/* =====================  セクション切替  ================================= */
+.section{display:none; padding-top:22px; padding-bottom:64px;}
+.section.active{display:block; animation:fadeUp .34s ease both;}
+@keyframes fadeUp{from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;}}
+
+/* =====================  レッスンカード & 見出し階層  ==================== */
+.lesson-card{background:var(--card); border:1px solid var(--line); border-radius:var(--r-lg);
+  padding:24px; box-shadow:var(--shadow); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);}
+.lesson-card > h2:first-child{margin-top:0;}
+h2{margin:0 0 4px; font-size:var(--fs-h2); font-weight:800; color:var(--ink-strong); letter-spacing:-.01em;}
+.h2-rule{width:46px; height:2px; margin:10px 0 18px; border-radius:2px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2)); box-shadow:0 0 10px rgba(86,225,233,.5);}
+h3{margin:26px 0 12px; font-size:var(--fs-h3); font-weight:700; color:var(--accent-soft);
+  display:flex; align-items:center; gap:8px;}
+h3::before{content:""; width:7px; height:7px; border-radius:50%; background:var(--accent);
+  box-shadow:0 0 10px var(--accent); flex:0 0 auto;}
+p{margin:0 0 12px;} p:last-child{margin-bottom:0;}
+strong{color:var(--ink-strong); font-weight:700;}
+
+/* =====================  用語バッジ  ==================================== */
+.vocab{display:inline-flex; align-items:center; white-space:nowrap;
+  background:rgba(86,225,233,.10); border:1px solid rgba(86,225,233,.45); color:var(--accent-soft);
+  border-radius:var(--r-pill); padding:2px 10px; font-size:var(--fs-sm); font-weight:600;
+  margin:0 1px;}
+.vocab.v2{background:rgba(167,139,250,.12); border-color:rgba(167,139,250,.45); color:#C9B8FB;}
+
+/* =====================  ポイント囲み  ================================== */
+.key-point{background:rgba(86,225,233,.045); border:1px solid var(--line);
+  border-left:2px solid var(--accent); border-radius:0 var(--r-md) var(--r-md) 0;
+  padding:15px 17px; margin:14px 0; box-shadow:inset 0 0 26px rgba(86,225,233,.05);}
+.key-point .label{display:block; font-size:var(--fs-xs); font-weight:700; letter-spacing:.1em;
+  color:var(--accent); margin-bottom:8px;}
+.stack{display:flex; flex-direction:column; gap:10px;}
+
+/* =====================  具体例ブロック  ================================ */
+.example{background:rgba(251,191,36,.05); border:1px solid rgba(251,191,36,.22);
+  border-left:2px solid var(--warning); border-radius:0 var(--r-md) var(--r-md) 0;
+  padding:14px 17px; margin:14px 0; font-size:var(--fs-body); color:var(--ink);}
+.example b, .example strong{color:var(--warning-soft);}
+
+/* =====================  計算式ブロック（等幅）  ======================== */
+.formula{background:var(--inset); border:1px solid rgba(86,225,233,.20); border-radius:var(--r-md);
+  padding:15px 17px; margin:14px 0;}
+.formula .exp{font-family:var(--mono); font-size:14px; color:var(--accent-soft); line-height:1.85;}
+.formula .note{font-family:var(--mono); font-size:12px; color:var(--faint); margin-top:8px;}
+
+/* =====================  左右の対比カード  ============================== */
+.compare{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:14px 0;}
+.compare-box{border-radius:var(--r-md); padding:14px 15px; border:1px solid var(--line);}
+.compare-box h4{margin:0 0 3px; font-size:15px; font-weight:800;}
+.compare-box .en{font-size:var(--fs-xs); color:var(--faint); margin-bottom:8px;}
+.compare-box .body{font-size:var(--fs-sm); color:var(--ink); line-height:1.75;}
+.compare-box.good{background:rgba(74,222,128,.07); border-color:rgba(74,222,128,.30);}
+.compare-box.good h4{color:var(--success-soft);}
+.compare-box.bad{background:rgba(251,191,36,.07); border-color:rgba(251,191,36,.30);}
+.compare-box.bad h4{color:var(--warning-soft);}
+
+/* =====================  一覧表  ======================================== */
+.table-wrap{overflow-x:auto; border:1px solid var(--line); border-radius:var(--r-md); margin:14px 0;
+  scrollbar-width:thin;}
+.sql-table{width:100%; border-collapse:collapse; min-width:320px;}
+.sql-table th{ text-align:left; font-size:var(--fs-sm); font-weight:700; color:var(--accent-soft);
+  background:rgba(86,225,233,.07); padding:11px 14px; border-bottom:1px solid var(--line); white-space:nowrap;}
+.sql-table td{font-size:var(--fs-sm); color:var(--ink); padding:11px 14px; border-bottom:1px solid rgba(255,255,255,.055);}
+.sql-table tr:last-child td{border-bottom:none;}
+.sql-table tbody tr:hover, .sql-table tr:hover td{background:rgba(255,255,255,.02);}
+.sql-table td b{color:var(--ink-strong);}
+
+/* =====================  章末：最重要まとめ  ============================ */
+.summary{margin:20px 0 0; background:linear-gradient(135deg,rgba(86,225,233,.09),rgba(167,139,250,.09));
+  border:1px solid rgba(86,225,233,.28); border-radius:var(--r-md); padding:18px 18px 17px;
+  box-shadow:0 0 30px rgba(86,225,233,.08);}
+.summary .label{display:inline-flex; align-items:center; gap:8px; font-size:var(--fs-xs);
+  font-weight:800; letter-spacing:.1em; color:var(--accent-soft); margin-bottom:10px;}
+.summary .label::before{content:""; width:16px; height:2px; border-radius:2px;
+  background:var(--accent); box-shadow:0 0 8px var(--accent);}
+.summary p{font-size:var(--fs-body);}
+
+/* =====================  確認テスト  ==================================== */
+.quiz-head{margin-bottom:18px;}
+.quiz-head h2{margin-bottom:6px;}
+.quiz-note{font-size:var(--fs-sm); color:var(--sub); margin-bottom:16px;}
+.progress{display:flex; align-items:center; gap:12px;}
+.progress-bar{flex:1; height:10px; background:rgba(255,255,255,.06); border:1px solid var(--line);
+  border-radius:var(--r-pill); overflow:hidden;}
+.progress-fill{width:0%; height:100%; border-radius:var(--r-pill);
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  box-shadow:0 0 14px rgba(86,225,233,.5); transition:width .5s cubic-bezier(.2,.8,.2,1);}
+.progress-count{font-family:var(--mono); font-size:var(--fs-sm); color:var(--sub); min-width:52px; text-align:right;}
+
+.question-card{background:var(--card); border:1px solid var(--line); border-radius:var(--r-lg);
+  padding:20px; margin-bottom:16px; box-shadow:var(--shadow);
+  backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);}
+.q-number{font-family:var(--mono); font-size:var(--fs-xs); font-weight:700; letter-spacing:.08em;
+  color:var(--accent); margin-bottom:8px;}
+.q-text{font-size:var(--fs-body); font-weight:600; color:var(--ink-strong); line-height:1.7; margin-bottom:14px;}
+.choices{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:9px;}
+.choices li{display:flex; align-items:center; gap:12px; cursor:pointer;
+  background:rgba(255,255,255,.025); border:1px solid var(--line); border-radius:var(--r-sm);
+  padding:12px 14px; font-size:var(--fs-body); color:var(--ink); transition:.15s ease; user-select:none;}
+.choices li .key{flex:0 0 auto; width:24px; height:24px; border-radius:7px;
+  display:flex; align-items:center; justify-content:center; font-family:var(--mono);
+  font-size:12px; font-weight:700; color:var(--sub); background:rgba(255,255,255,.05);
+  border:1px solid var(--line); transition:.15s ease;}
+.choices li:hover{border-color:rgba(86,225,233,.55); background:rgba(86,225,233,.06); color:var(--ink-strong);}
+.choices li:hover .key{color:var(--accent-soft); border-color:rgba(86,225,233,.4);}
+.choices li:active{transform:scale(.99);}
+/* 回答後：クリック無効化 */
+.choices.answered li{cursor:default;}
+.choices.answered li:hover{border-color:var(--line); background:rgba(255,255,255,.025); color:var(--ink);}
+.choices.answered li:hover .key{color:var(--sub); border-color:var(--line);}
+/* 正解＝緑 */
+.choices li.correct{background:rgba(74,222,128,.12); border-color:rgba(74,222,128,.6); color:#EAFBF0;
+  box-shadow:0 0 18px rgba(74,222,128,.22); animation:pop .32s ease;}
+.choices li.correct .key{background:var(--success); border-color:transparent; color:#052E16;}
+.choices li.correct .key::after{content:"✓";}
+.choices li.correct .key span{display:none;}
+/* 誤選択＝赤 */
+.choices li.wrong{background:rgba(251,113,133,.12); border-color:rgba(251,113,133,.6); color:#FFECEF;}
+.choices li.wrong .key{background:var(--danger); border-color:transparent; color:#3B0A12;}
+.choices li.wrong .key::after{content:"✕";}
+.choices li.wrong .key span{display:none;}
+@keyframes pop{0%{transform:scale(1);}40%{transform:scale(1.02);}100%{transform:scale(1);}}
+
+/* 解説（回答後に開く） */
+.explanation{max-height:0; overflow:hidden; opacity:0; margin-top:0;
+  border-radius:var(--r-sm); transition:max-height .4s ease, opacity .3s ease, margin-top .3s ease;}
+.explanation.show{max-height:400px; opacity:1; margin-top:13px; padding:13px 15px;}
+.explanation.is-correct{background:rgba(74,222,128,.07); border:1px solid rgba(74,222,128,.28);}
+.explanation.is-wrong{background:rgba(251,113,133,.07); border:1px solid rgba(251,113,133,.28);}
+.exp-mark{display:block; font-size:var(--fs-sm); font-weight:800; margin-bottom:5px;}
+.explanation.is-correct .exp-mark{color:var(--success-soft);}
+.explanation.is-wrong .exp-mark{color:var(--danger-soft);}
+.exp-text{font-size:var(--fs-sm); color:var(--ink); line-height:1.8;}
+
+/* =====================  結果画面（オーバーレイ）  ====================== */
+.result-overlay{position:fixed; inset:0; z-index:100; display:none;
+  align-items:center; justify-content:center; padding:24px;
+  background:rgba(6,9,15,.72); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);}
+.result-overlay.show{display:flex; animation:ovFade .3s ease both;}
+@keyframes ovFade{from{opacity:0;}to{opacity:1;}}
+.result-area{position:relative; overflow:hidden; width:100%; max-width:420px; text-align:center;
+  background:linear-gradient(160deg,rgba(22,28,40,.96),rgba(13,18,28,.96));
+  border:1px solid rgba(86,225,233,.3); border-radius:var(--r-xl); padding:34px 26px 26px;
+  box-shadow:var(--shadow-pop), 0 0 60px rgba(86,225,233,.15);
+  animation:cardIn .42s cubic-bezier(.2,.9,.25,1.15) both;}
+@keyframes cardIn{from{opacity:0; transform:translateY(18px) scale(.94);}to{opacity:1; transform:none;}}
+.result-label{font-size:var(--fs-xs); font-weight:800; letter-spacing:.24em; color:var(--accent);
+  text-shadow:0 0 16px rgba(86,225,233,.5);}
+.result-score{margin:8px 0 6px; font-family:var(--mono); font-weight:800; line-height:1; color:var(--ink-strong);}
+.result-score #scoreNum{font-size:66px; background:linear-gradient(180deg,#fff,var(--accent-soft));
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+.result-total{font-size:24px; color:var(--sub); margin-left:6px;}
+.result-msg{font-size:var(--fs-body); color:var(--ink); line-height:1.7; margin:6px 4px 22px;}
+.result-actions{display:flex; flex-direction:column; gap:10px;}
+.btn{border:none; cursor:pointer; font-family:var(--font); font-size:var(--fs-body); font-weight:700;
+  padding:13px 20px; border-radius:var(--r-pill); background:var(--accent); color:var(--accent-ink);
+  box-shadow:var(--glow); transition:.18s ease;}
+.btn:hover{filter:brightness(1.08); transform:translateY(-1px);}
+.btn-outline{border:1px solid var(--line-strong); cursor:pointer; font-family:var(--font);
+  font-size:var(--fs-body); font-weight:600; padding:12px 20px; border-radius:var(--r-pill);
+  background:transparent; color:var(--ink); transition:.18s ease;}
+.btn-outline:hover{border-color:rgba(86,225,233,.55); color:var(--accent-soft);}
+.confetti{position:absolute; top:14px; width:8px; height:8px; border-radius:2px; opacity:0;
+  animation:confetti 1.35s ease-out forwards;}
+@keyframes confetti{0%{opacity:1; transform:translate(0,0) rotate(0deg);}
+  100%{opacity:0; transform:translate(var(--cx,0), 260px) rotate(400deg);}}
+
+/* =====================  レスポンシブ（〜スマホ360px）  ================= */
+@media (max-width:480px){
+  :root{--pad:15px; --fs-h1:21px; --fs-h2:17.5px; --fs-body:14.5px;}
+  .lesson-card{padding:18px;}
+  .question-card{padding:16px;}
+  .result-score #scoreNum{font-size:56px;}
+}
+@media (max-width:360px){
+  .compare{grid-template-columns:1fr;}
+}
 </style>
 </head>
 <body>
-<div class="header"><h1>第2章 基礎理論② ── 論理演算・回路・AI</h1><div class="sub">基本情報技術者試験 Web教材</div></div>
-<div class="container">
-<a href="it_quiz.html" class="back-link">← 章の一覧にもどる</a>
-<div class="nav-tabs">
-<div class="nav-tab active" onclick="showSection('lesson1')">① 論理演算</div>
-<div class="nav-tab" onclick="showSection('lesson2')">② 論理回路</div>
-<div class="nav-tab" onclick="showSection('lesson3')">③ AI（人工知能）</div>
-<div class="nav-tab" onclick="showSection('quiz')">確認テスト</div>
+
+<!-- スプラッシュ用サムネイル（オフライン展開時のプレースホルダ／JS無効時のフォールバック） -->
+<template id="__bundler_thumbnail" data-bg-color="#0A0E16">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="tbg" cx="50%" cy="40%" r="62%">
+        <stop offset="0%" stop-color="#123047"/>
+        <stop offset="100%" stop-color="#0A0E16"/>
+      </radialGradient>
+    </defs>
+    <rect width="1200" height="800" fill="url(#tbg)"/>
+    <g stroke="#56E1E9" stroke-width="4" opacity="0.45">
+      <line x1="600" y1="352" x2="378" y2="222"/>
+      <line x1="600" y1="352" x2="822" y2="222"/>
+      <line x1="600" y1="352" x2="356" y2="474"/>
+      <line x1="600" y1="352" x2="844" y2="474"/>
+    </g>
+    <circle cx="600" cy="352" r="36" fill="#56E1E9"/>
+    <circle cx="378" cy="222" r="21" fill="#A78BFA"/>
+    <circle cx="822" cy="222" r="21" fill="#A78BFA"/>
+    <circle cx="356" cy="474" r="21" fill="#4ADE80"/>
+    <circle cx="844" cy="474" r="21" fill="#56E1E9"/>
+    <text x="600" y="612" text-anchor="middle" fill="#EAEDF5" font-family="-apple-system,'Hiragino Kaku Gothic ProN',sans-serif" font-size="58" font-weight="800">第10章 ネットワーク</text>
+    <text x="600" y="668" text-anchor="middle" fill="#56E1E9" font-family="-apple-system,sans-serif" font-size="24" font-weight="700" letter-spacing="7">CHAPTER 2 · BASIC THEORY II</text>
+  </svg>
+</template>
+
+<!-- ============================ 章タイトルヘッダー ======================= -->
+<header class="header">
+  <div class="wrap">
+    <span class="back-link" onclick="goBack()">← 章の一覧にもどる</span>
+    <div class="eyebrow">CHAPTER 2 ・ BASIC THEORY II</div>
+    <h1>基礎理論② ── 論理演算・回路・AI</h1>
+    <p class="sub">基本情報技術者試験 Web教材 ・ レッスン &amp; 確認テスト</p>
+  </div>
+</header>
+
+<div class="tabbar">
+  <div class="tabbar-inner">
+    <nav class="nav-tabs" id="navTabs">
+      <button class="nav-tab active" data-target="l1" onclick="showSection('l1')">① 論理演算</button>
+      <button class="nav-tab" data-target="l2" onclick="showSection('l2')">② 論理回路</button>
+      <button class="nav-tab" data-target="l3" onclick="showSection('l3')">③ AI（人工知能）</button>
+    </nav>
+    <span class="quiz-sep"></span>
+    <button class="quiz-btn" data-target="quiz" onclick="showSection('quiz')">確認テスト<span class="arw">→</span></button>
+  </div>
 </div>
 
-<div id="lesson1" class="section active">
-<div class="lesson-card">
+<main class="wrap">
+
+  <section id="l1" class="section active">
+    <div class="lesson-card">
 <h2>① 集合と論理演算</h2>
 <h3>集合とベン図</h3>
 <p><span class="vocab">集合</span>とは、はっきりと区別できる条件でグループ分けされたものの集まりです。集合を視覚的に表した図を<span class="vocab">ベン図</span>と呼びます。</p>
-
 <h3>論理演算</h3>
 <p>コンピュータは0と1の世界なので、四則演算の代わりに<span class="vocab">論理演算</span>を使って計算します。</p>
-
-<div class="key-point"><strong>基本の論理演算子</strong><br><br>
-<span class="vocab">AND（論理積）</span>：AとBの<strong>両方が1</strong>のときだけ結果が1<br>
-<span class="vocab">OR（論理和）</span>：AとBの<strong>少なくとも一方が1</strong>なら結果が1<br>
-<span class="vocab">XOR（排他的論理和）</span>：AとBが<strong>異なる</strong>ときに結果が1<br>
+<div class="key-point"><strong>基本の論理演算子</strong><br/><br/>
+<span class="vocab">AND（論理積）</span>：AとBの<strong>両方が1</strong>のときだけ結果が1<br/>
+<span class="vocab">OR（論理和）</span>：AとBの<strong>少なくとも一方が1</strong>なら結果が1<br/>
+<span class="vocab">XOR（排他的論理和）</span>：AとBが<strong>異なる</strong>ときに結果が1<br/>
 <span class="vocab">NOT（否定）</span>：入力の<strong>反対</strong>が結果になる（0→1, 1→0）</div>
-
-<div class="key-point"><strong>追加の論理演算子</strong><br><br>
-<span class="vocab">NAND</span>：ANDの結果を反転（NOT AND）<br>
+<div class="key-point"><strong>追加の論理演算子</strong><br/><br/>
+<span class="vocab">NAND</span>：ANDの結果を反転（NOT AND）<br/>
 <span class="vocab">NOR</span>：ORの結果を反転（NOT OR）</div>
-
-<div class="formula"><strong>真理値表（覚えよう！）</strong><br><br>
-A B | AND  OR  XOR  NAND NOR<br>
-0 0 |  0    0    0    1    1<br>
-0 1 |  0    1    1    1    0<br>
-1 0 |  0    1    1    1    0<br>
+<div class="formula"><strong>真理値表（覚えよう！）</strong><br/><br/>
+A B | AND  OR  XOR  NAND NOR<br/>
+0 0 |  0    0    0    1    1<br/>
+0 1 |  0    1    1    1    0<br/>
+1 0 |  0    1    1    1    0<br/>
 1 1 |  1    1    0    0    0</div>
-
 <h3>逆ポーランド表記法</h3>
-<div class="key-point"><span class="vocab">逆ポーランド表記法（後置記法）</span>：演算子を後ろに置く書き方。コンピュータ内部で使われる。<br><br>
-通常（中置記法）：3 + 5<br>
-逆ポーランド：3 5 +<br><br>
-通常：(3 + 5) × 2<br>
+<div class="key-point"><span class="vocab">逆ポーランド表記法（後置記法）</span>：演算子を後ろに置く書き方。コンピュータ内部で使われる。<br/><br/>
+通常（中置記法）：3 + 5<br/>
+逆ポーランド：3 5 +<br/><br/>
+通常：(3 + 5) × 2<br/>
 逆ポーランド：3 5 + 2 ×</div>
-</div>
-</div>
+    </div>
+    <div class="lesson-nav">
+      <button class="btn-next" onclick="showSection('l2')">
+        <span class="bn-meta"><span class="bn-label">次のレッスン</span><span class="bn-title">② 論理回路</span></span>
+        <span class="bn-arrow">→</span>
+      </button>
+    </div>
+  </section>
 
-<div id="lesson2" class="section">
-<div class="lesson-card">
+  <section id="l2" class="section">
+    <div class="lesson-card">
 <h2>② 論理回路</h2>
 <p>論理演算を電子回路で実現したものが<span class="vocab">論理回路</span>です。回路図では<span class="vocab">MIL記号</span>で表します。</p>
-
-<div class="key-point"><strong>MIL記号の形（覚えるべき特徴）</strong><br><br>
-<strong>AND</strong>：半円に2つの直角<br>
-<strong>OR</strong>：3つの角がすべて尖っている<br>
-<strong>NOT</strong>：三角形と丸（先端の小さな丸が否定を表す）<br>
-<strong>NAND</strong>：ANDの記号＋先端に丸<br>
-<strong>NOR</strong>：ORの記号＋先端に丸<br>
+<div class="key-point"><strong>MIL記号の形（覚えるべき特徴）</strong><br/><br/>
+<strong>AND</strong>：半円に2つの直角<br/>
+<strong>OR</strong>：3つの角がすべて尖っている<br/>
+<strong>NOT</strong>：三角形と丸（先端の小さな丸が否定を表す）<br/>
+<strong>NAND</strong>：ANDの記号＋先端に丸<br/>
+<strong>NOR</strong>：ORの記号＋先端に丸<br/>
 <strong>XOR</strong>：ORの記号＋左側に縦線</div>
-
 <h3>加算回路</h3>
-<div class="key-point"><span class="vocab">半加算器</span>：桁上がりを考慮<strong>しない</strong>加算回路<br>
-→ <strong>XOR</strong>（和）＋ <strong>AND</strong>（桁上げ）で実現<br><br>
-<span class="vocab">全加算器</span>：桁上がりを考慮<strong>する</strong>加算回路<br>
-→ 2つの半加算器＋1つのORで実現<br>
+<div class="key-point"><span class="vocab">半加算器</span>：桁上がりを考慮<strong>しない</strong>加算回路<br/>
+→ <strong>XOR</strong>（和）＋ <strong>AND</strong>（桁上げ）で実現<br/><br/>
+<span class="vocab">全加算器</span>：桁上がりを考慮<strong>する</strong>加算回路<br/>
+→ 2つの半加算器＋1つのORで実現<br/>
 → 入力が3つ（A, B, 下の位からの桁上がり）</div>
 <div class="example">試験で頻出：「半加算器の素子の組み合わせは？」→ <strong>XORとAND</strong></div>
-
 <h3>オートマトン</h3>
-<div class="key-point"><span class="vocab">オートマトン</span>：システムの動作を「入力」「状態」「出力」で単純化したモデル<br><br>
-<span class="vocab">状態遷移表</span>：入力に応じて状態がどう変わるかを表で示したもの<br>
-<span class="vocab">状態遷移図</span>：状態の変化を矢印で示した図<br>
-・円 = 状態（二重丸 = 受理状態）<br>
+<div class="key-point"><span class="vocab">オートマトン</span>：システムの動作を「入力」「状態」「出力」で単純化したモデル<br/><br/>
+<span class="vocab">状態遷移表</span>：入力に応じて状態がどう変わるかを表で示したもの<br/>
+<span class="vocab">状態遷移図</span>：状態の変化を矢印で示した図<br/>
+・円 = 状態（二重丸 = 受理状態）<br/>
 ・矢印 = 遷移</div>
-<div class="example">例：自動販売機のオートマトン<br>入力＝お金 → 状態＝合計金額 → 出力＝商品</div>
-</div>
-</div>
+<div class="example">例：自動販売機のオートマトン<br/>入力＝お金 → 状態＝合計金額 → 出力＝商品</div>
+    </div>
+    <div class="lesson-nav">
+      <button class="btn-next" onclick="showSection('l3')">
+        <span class="bn-meta"><span class="bn-label">次のレッスン</span><span class="bn-title">③ AI（人工知能）</span></span>
+        <span class="bn-arrow">→</span>
+      </button>
+    </div>
+  </section>
 
-<div id="lesson3" class="section">
-<div class="lesson-card">
+  <section id="l3" class="section">
+    <div class="lesson-card">
 <h2>③ AI（人工知能）</h2>
 <p><span class="vocab">AI（Artificial Intelligence）</span>＝人間の知的な振る舞いをコンピュータ上に再現する技術です。近年の試験で非常によく出題されます。</p>
-
 <h3>AI関連の重要用語</h3>
-<div class="key-point"><span class="vocab">機械学習</span>：コンピュータにデータを与えて、自動で学習させる技術。AI技術の1つ。<br><br>
-<span class="vocab">ニューラルネットワーク</span>：人間の脳の神経回路を模したモデル。機械学習の1つ。<br><br>
-<span class="vocab">ディープラーニング（深層学習）</span>：ニューラルネットワークを多層化したモデル。画像認識等に使われる。<br><br>
+<div class="key-point"><span class="vocab">機械学習</span>：コンピュータにデータを与えて、自動で学習させる技術。AI技術の1つ。<br/><br/>
+<span class="vocab">ニューラルネットワーク</span>：人間の脳の神経回路を模したモデル。機械学習の1つ。<br/><br/>
+<span class="vocab">ディープラーニング（深層学習）</span>：ニューラルネットワークを多層化したモデル。画像認識等に使われる。<br/><br/>
 <span class="vocab">生成AI</span>：テキスト、画像、音声などのオリジナルコンテンツを生成するAI。ChatGPT等。</div>
-
 <h3>機械学習の3つの手法</h3>
-<div class="key-point"><span class="vocab">教師あり学習</span>：入力データ＋正解データをセットで与えて学習<br>
-→ 例：犬の画像に「犬」というラベルを付けて学習<br><br>
-<span class="vocab">教師なし学習</span>：入力データのみ（正解なし）で学習<br>
-→ 例：大量の画像を自動で似たグループに分類<br><br>
-<span class="vocab">強化学習</span>：試行錯誤しながら、報酬を最大化するように学習<br>
+<div class="key-point"><span class="vocab">教師あり学習</span>：入力データ＋正解データをセットで与えて学習<br/>
+→ 例：犬の画像に「犬」というラベルを付けて学習<br/><br/>
+<span class="vocab">教師なし学習</span>：入力データのみ（正解なし）で学習<br/>
+→ 例：大量の画像を自動で似たグループに分類<br/><br/>
+<span class="vocab">強化学習</span>：試行錯誤しながら、報酬を最大化するように学習<br/>
 → 例：ゲームAIが勝利を報酬として学習</div>
-
 <h3>生成AI関連の用語</h3>
-<div class="key-point"><span class="vocab">プロンプト</span>：生成AIに対して与える指示<br>
-<span class="vocab">プロンプトエンジニアリング</span>：プロンプトを最適化すること<br>
-<span class="vocab">基盤モデル</span>：膨大なデータで事前学習した汎用的なモデル（GPT等）<br>
-<span class="vocab">ファインチューニング</span>：基盤モデルに追加学習を行い、特定用途に調整すること<br>
-<span class="vocab">ハルシネーション</span>：AIが事実と異なる情報をもっともらしく生成すること<br>
+<div class="key-point"><span class="vocab">プロンプト</span>：生成AIに対して与える指示<br/>
+<span class="vocab">プロンプトエンジニアリング</span>：プロンプトを最適化すること<br/>
+<span class="vocab">基盤モデル</span>：膨大なデータで事前学習した汎用的なモデル（GPT等）<br/>
+<span class="vocab">ファインチューニング</span>：基盤モデルに追加学習を行い、特定用途に調整すること<br/>
+<span class="vocab">ハルシネーション</span>：AIが事実と異なる情報をもっともらしく生成すること<br/>
 <span class="vocab">ディープフェイク</span>：AIで生成された偽の動画や画像</div>
-</div>
-</div>
+    </div>
+    <div class="lesson-nav">
+      <button class="btn-next to-quiz" onclick="showSection('quiz')">
+        <span class="bn-meta"><span class="bn-label">仕上げ</span><span class="bn-title">確認テストに進む</span></span>
+        <span class="bn-arrow">→</span>
+      </button>
+    </div>
+  </section>
 
-<div id="quiz" class="section">
-<div class="quiz-area">
-<h2>確認テスト（第2章）</h2><p>15問出題します。</p>
-<div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
-<div id="quizContainer"></div>
-<div style="text-align:center;margin-top:20px"><button class="btn" id="submitBtn" onclick="submitQuiz()" style="display:none">結果を見る</button></div>
-</div>
-<div class="result-area" id="resultArea"><h2>結果</h2><div class="result-score" id="resultScore"></div><div id="resultMsg" style="font-size:1.1em;margin:10px 0"></div><button class="btn" onclick="retryQuiz()">もう一度</button><button class="btn btn-outline" onclick="showSection('lesson1')">レッスンに戻る</button></div>
-</div>
+<section id="quiz" class="section">
+    <div class="quiz-head">
+      <h2>確認テスト — 第2章</h2>
+      <p class="quiz-note">ランダム出題・選択肢シャッフル。選ぶとすぐに正誤と解説が開きます。何度でも挑戦できます。</p>
+      <div class="progress">
+        <div class="progress-bar"><div class="progress-fill"></div></div>
+        <div class="progress-count">0 / 0</div>
+      </div>
+    </div>
+    <div id="quiz-questions"></div>
+  </section>
+
+</main>
+
+<div class="result-overlay" id="resultOverlay">
+  <div class="result-area" id="resultArea">
+    <div class="result-label" id="resultLabel">RESULT</div>
+    <div class="result-score"><span id="scoreNum">0</span><span class="result-total" id="scoreTotal">/ 0</span></div>
+    <div class="result-msg" id="resultMsg"></div>
+    <div class="result-actions">
+      <button class="btn" onclick="retryQuiz()">もう一度挑戦する</button>
+      <button class="btn-outline" onclick="closeResult()">解答を見直す</button>
+    </div>
+  </div>
 </div>
 
 <script>
-const allQuestions=[
-{q:'AとBの両方が1のときだけ結果が1になる論理演算は何か。',choices:['OR','AND','XOR','NOT'],answer:1,explanation:'AND（論理積）は両方が1のときだけ結果が1になります。'},
-{q:'AとBが異なるときに結果が1になる論理演算は何か。',choices:['AND','OR','XOR','NAND'],answer:2,explanation:'XOR（排他的論理和）はAとBが異なるときに1、同じときに0になります。'},
-{q:'NOT演算で、入力が0のとき出力は何か。',choices:['0','1','2','不定'],answer:1,explanation:'NOT（否定）は入力の反対を出力します。0→1、1→0です。'},
-{q:'NAND演算とは何か。',choices:['ANDの結果を反転したもの','ORの結果を反転したもの','XORの結果を反転したもの','NOTを2回行ったもの'],answer:0,explanation:'NAND = NOT AND。ANDの結果を反転します。'},
-{q:'A=1, B=0のとき、A OR Bの結果は何か。',choices:['0','1','不定','エラー'],answer:1,explanation:'OR（論理和）は少なくとも一方が1なら結果が1です。A=1なので結果は1。'},
-{q:'A=1, B=1のとき、A XOR Bの結果は何か。',choices:['0','1','2','不定'],answer:0,explanation:'XORはAとBが異なるときに1。A=1, B=1で同じなので結果は0です。'},
-{q:'「3 5 + 2 ×」はどの表記法か。',choices:['中置記法','前置記法','後置記法（逆ポーランド表記法）','ハンガリー表記法'],answer:2,explanation:'演算子が後ろにあるので後置記法（逆ポーランド表記法）です。コンピュータ内部で使われます。'},
-{q:'半加算器を構成する2つの素子の組み合わせはどれか。',choices:['ANDとOR','XORとAND','NANDとNOR','XORとOR'],answer:1,explanation:'半加算器はXOR（和を計算）とAND（桁上げを計算）で構成されます。'},
-{q:'全加算器の入力は何個か。',choices:['1個','2個','3個','4個'],answer:2,explanation:'全加算器はA, B, 下の位からの桁上がりの3つが入力です。'},
-{q:'システムの動作を「入力」「状態」「出力」で単純化したモデルを何というか。',choices:['フローチャート','オートマトン','アルゴリズム','データベース'],answer:1,explanation:'オートマトンは「入力」「状態」「出力」でシステムの動作をモデル化したものです。'},
-{q:'人間の脳の神経回路を模したAI技術は何か。',choices:['機械学習','ニューラルネットワーク','データマイニング','ビッグデータ'],answer:1,explanation:'ニューラルネットワークは人間の脳の神経回路（ニューロン）を模した技術です。'},
-{q:'入力データと正解データをセットで与えて学習する手法は何か。',choices:['教師あり学習','教師なし学習','強化学習','転移学習'],answer:0,explanation:'教師あり学習は入力データ＋正解データ（ラベル）をセットで与えて学習します。'},
-{q:'試行錯誤しながら報酬を最大化するように学習する手法は何か。',choices:['教師あり学習','教師なし学習','強化学習','深層学習'],answer:2,explanation:'強化学習は報酬を最大化するように試行錯誤しながら学習する手法です。ゲームAI等に使われます。'},
-{q:'生成AIに対して与える指示を何というか。',choices:['クエリ','コマンド','プロンプト','パラメータ'],answer:2,explanation:'プロンプトは生成AIに対して与える指示です。その最適化をプロンプトエンジニアリングと呼びます。'},
-{q:'AIが事実と異なる情報をもっともらしく生成することを何というか。',choices:['ディープフェイク','ハルシネーション','オーバーフィッティング','バイアス'],answer:1,explanation:'ハルシネーション（幻覚）はAIが事実と異なる情報をもっともらしく生成する現象です。'}
+/* =========================================================================
+   ロジック（全22章で流用可能な骨格）
+   - showSection(id)        : レッスン／テストのタブ切替
+   - allQuestions           : 設問データ配列（章ごとに差し替え）
+   - selectChoice(qi, ci)   : 選択肢クリック→採点→解説表示
+   ========================================================================= */
+
+/* ---- タブ切替 ---------------------------------------------------------- */
+var STORE_KEY = 'fe_ch2_section';
+function showSection(id, opts){
+  opts = opts || {};
+  document.querySelectorAll('.section').forEach(function(s){
+    s.classList.toggle('active', s.id === id);
+  });
+  document.querySelectorAll('.tabbar [data-target]').forEach(function(t){
+    t.classList.toggle('active', t.dataset.target === id);
+  });
+  // 画面上部（タブ帯）へ
+  if(opts.scroll !== false){
+    var top = document.querySelector('.header').offsetHeight;
+    window.scrollTo(0, top);
+  }
+  try{ localStorage.setItem(STORE_KEY, id); }catch(e){}
+}
+function goBack(){ location.href='it_quiz.html'; }
+
+/* ---- 設問データ（第10章 ネットワーク） -------------------------------- */
+/* answer = choices の正解インデックス（0始まり）。章ごとにこの配列を差し替え。 */
+var allQuestions = [
+{q:'AとBの両方が1のときだけ結果が1になる論理演算は何か。',choices:['OR','AND','XOR','NOT'],answer:1,explain:'AND（論理積）は両方が1のときだけ結果が1になります。'},
+{q:'AとBが異なるときに結果が1になる論理演算は何か。',choices:['AND','OR','XOR','NAND'],answer:2,explain:'XOR（排他的論理和）はAとBが異なるときに1、同じときに0になります。'},
+{q:'NOT演算で、入力が0のとき出力は何か。',choices:['0','1','2','不定'],answer:1,explain:'NOT（否定）は入力の反対を出力します。0→1、1→0です。'},
+{q:'NAND演算とは何か。',choices:['ANDの結果を反転したもの','ORの結果を反転したもの','XORの結果を反転したもの','NOTを2回行ったもの'],answer:0,explain:'NAND = NOT AND。ANDの結果を反転します。'},
+{q:'A=1, B=0のとき、A OR Bの結果は何か。',choices:['0','1','不定','エラー'],answer:1,explain:'OR（論理和）は少なくとも一方が1なら結果が1です。A=1なので結果は1。'},
+{q:'A=1, B=1のとき、A XOR Bの結果は何か。',choices:['0','1','2','不定'],answer:0,explain:'XORはAとBが異なるときに1。A=1, B=1で同じなので結果は0です。'},
+{q:'「3 5 + 2 ×」はどの表記法か。',choices:['中置記法','前置記法','後置記法（逆ポーランド表記法）','ハンガリー表記法'],answer:2,explain:'演算子が後ろにあるので後置記法（逆ポーランド表記法）です。コンピュータ内部で使われます。'},
+{q:'半加算器を構成する2つの素子の組み合わせはどれか。',choices:['ANDとOR','XORとAND','NANDとNOR','XORとOR'],answer:1,explain:'半加算器はXOR（和を計算）とAND（桁上げを計算）で構成されます。'},
+{q:'全加算器の入力は何個か。',choices:['1個','2個','3個','4個'],answer:2,explain:'全加算器はA, B, 下の位からの桁上がりの3つが入力です。'},
+{q:'システムの動作を「入力」「状態」「出力」で単純化したモデルを何というか。',choices:['フローチャート','オートマトン','アルゴリズム','データベース'],answer:1,explain:'オートマトンは「入力」「状態」「出力」でシステムの動作をモデル化したものです。'},
+{q:'人間の脳の神経回路を模したAI技術は何か。',choices:['機械学習','ニューラルネットワーク','データマイニング','ビッグデータ'],answer:1,explain:'ニューラルネットワークは人間の脳の神経回路（ニューロン）を模した技術です。'},
+{q:'入力データと正解データをセットで与えて学習する手法は何か。',choices:['教師あり学習','教師なし学習','強化学習','転移学習'],answer:0,explain:'教師あり学習は入力データ＋正解データ（ラベル）をセットで与えて学習します。'},
+{q:'試行錯誤しながら報酬を最大化するように学習する手法は何か。',choices:['教師あり学習','教師なし学習','強化学習','深層学習'],answer:2,explain:'強化学習は報酬を最大化するように試行錯誤しながら学習する手法です。ゲームAI等に使われます。'},
+{q:'生成AIに対して与える指示を何というか。',choices:['クエリ','コマンド','プロンプト','パラメータ'],answer:2,explain:'プロンプトは生成AIに対して与える指示です。その最適化をプロンプトエンジニアリングと呼びます。'},
+{q:'AIが事実と異なる情報をもっともらしく生成することを何というか。',choices:['ディープフェイク','ハルシネーション','オーバーフィッティング','バイアス'],answer:1,explain:'ハルシネーション（幻覚）はAIが事実と異なる情報をもっともらしく生成する現象です。'}
 ];
-let questions=[],answered=0;function shuffleArray(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
-function initQuiz(){questions=shuffleArray(allQuestions);answered=0;document.getElementById('submitBtn').style.display='none';document.getElementById('resultArea').style.display='none';document.getElementById('progressFill').style.width='0%';const c=document.getElementById('quizContainer');c.innerHTML='';questions.forEach((q,idx)=>{const sc=q.choices.map((c,i)=>({text:c,origIdx:i}));for(let i=sc.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[sc[i],sc[j]]=[sc[j],sc[i]]}q._shuffled=sc;q._selected=null;let h=`<div class="question-card"><div class="q-number">問題 ${idx+1} / ${questions.length}</div><div class="q-text">${q.q}</div><ul class="choices">`;sc.forEach((c,ci)=>{h+=`<li onclick="selectChoice(${idx},${ci})" id="q${idx}c${ci}">${c.text}</li>`});h+=`</ul><div class="explanation" id="exp${idx}"><div id="expText${idx}"></div></div></div>`;c.innerHTML+=h})}
-function selectChoice(qi,ci){const q=questions[qi];if(q._selected!==null)return;q._selected=ci;answered++;const corr=q.answer,sel=q._shuffled[ci].origIdx,ok=sel===corr;q._shuffled.forEach((c,i)=>{const li=document.getElementById(`q${qi}c${i}`);if(c.origIdx===corr)li.classList.add('correct');if(i===ci&&!ok)li.classList.add('wrong')});const e=document.getElementById(`exp${qi}`),t=document.getElementById(`expText${qi}`);t.innerHTML=(ok?'<span style="color:#4caf50;font-weight:bold">⭕ 正解！</span>':'<span style="color:#f44336;font-weight:bold">❌ 不正解</span>')+'<br>'+q.explanation;e.classList.add('show');document.getElementById('progressFill').style.width=(answered/questions.length*100)+'%';if(answered===questions.length)document.getElementById('submitBtn').style.display='inline-block'}
-function submitQuiz(){let c=0;questions.forEach(q=>{if(q._selected!==null&&q._shuffled[q._selected].origIdx===q.answer)c++});document.getElementById('resultArea').style.display='block';document.getElementById('resultScore').textContent=`${c} / ${questions.length}`;const p=c/questions.length*100;let m='';if(p===100)m='満点！完璧です！';else if(p>=80)m='よく理解できています！';else if(p>=60)m='合格ライン！もう少し復習しましょう。';else m='レッスンをもう一度確認しましょう。';document.getElementById('resultMsg').textContent=m;document.getElementById('resultArea').scrollIntoView({behavior:'smooth'})}
-function retryQuiz(){initQuiz();document.getElementById('quizContainer').scrollIntoView({behavior:'smooth'})}
-function showSection(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');const tabs=document.querySelectorAll('.nav-tab');const ids=['lesson1','lesson2','lesson3','quiz'];tabs[ids.indexOf(id)].classList.add('active');if(id==='quiz')initQuiz();window.scrollTo({top:0,behavior:'smooth'})}
-initQuiz();
+
+/* ---- 出題状態 ---------------------------------------------------------- */
+var quiz = [];   // 表示中の設問（シャッフル済み）
+function shuffle(a){ for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t;} return a; }
+var KEYS = ['A','B','C','D','E'];
+
+function buildQuiz(){
+  var order = shuffle(allQuestions.map(function(q,i){return i;}));
+  quiz = order.map(function(oi){
+    var src = allQuestions[oi];
+    var idx = shuffle(src.choices.map(function(_,i){return i;}));
+    return {
+      q: src.q,
+      choices: idx.map(function(i){return src.choices[i];}),
+      answer: idx.indexOf(src.answer),
+      explain: src.explain,
+      answered:false, correct:false
+    };
+  });
+  renderQuiz();
+}
+
+function renderQuiz(){
+  var html = '';
+  for(var qi=0; qi<quiz.length; qi++){
+    var it = quiz[qi];
+    var lis = '';
+    for(var ci=0; ci<it.choices.length; ci++){
+      lis += '<li class="choice" onclick="selectChoice('+qi+','+ci+')">'
+           +   '<span class="key"><span>'+KEYS[ci]+'</span></span>'
+           +   '<span class="txt">'+it.choices[ci]+'</span>'
+           + '</li>';
+    }
+    html += '<div class="question-card" id="q'+qi+'">'
+         +    '<div class="q-number">問題 '+(qi+1)+' / '+quiz.length+'</div>'
+         +    '<div class="q-text">'+it.q+'</div>'
+         +    '<ul class="choices">'+lis+'</ul>'
+         +    '<div class="explanation"><span class="exp-mark"></span><span class="exp-text">'+it.explain+'</span></div>'
+         +  '</div>';
+  }
+  document.getElementById('quiz-questions').innerHTML = html;
+  updateProgress();
+}
+
+function selectChoice(qi, ci){
+  var it = quiz[qi];
+  if(it.answered) return;
+  it.answered = true;
+  it.correct = (ci === it.answer);
+  var card = document.getElementById('q'+qi);
+  var lis = card.querySelectorAll('.choice');
+  for(var i=0;i<lis.length;i++){
+    if(i === it.answer) lis[i].classList.add('correct');
+    if(i === ci && ci !== it.answer) lis[i].classList.add('wrong');
+  }
+  card.querySelector('.choices').classList.add('answered');
+  var exp = card.querySelector('.explanation');
+  exp.classList.add('show', it.correct ? 'is-correct' : 'is-wrong');
+  exp.querySelector('.exp-mark').textContent = it.correct ? '◯ 正解！' : '✕ 不正解';
+  updateProgress();
+  if(quiz.every(function(x){return x.answered;})) setTimeout(showResult, 500);
+}
+
+function updateProgress(){
+  var total = quiz.length;
+  var done = quiz.filter(function(x){return x.answered;}).length;
+  document.querySelector('.progress-fill').style.width = total ? (done/total*100)+'%' : '0%';
+  document.querySelector('.progress-count').textContent = done + ' / ' + total;
+}
+
+/* ---- 結果画面 ---------------------------------------------------------- */
+function showResult(){
+  var total = quiz.length;
+  var score = quiz.filter(function(x){return x.correct;}).length;
+  var pct = total ? Math.round(score/total*100) : 0;
+  var label, msg;
+  if(pct >= 90){ label='PERFECT'; msg='文句なし。この調子なら本番でも通用します。'; }
+  else if(pct >= 70){ label='GREAT'; msg='good。あと少しで満点、間違えた所だけ復習しよう。'; }
+  else if(pct >= 50){ label='GOOD'; msg='基礎はOK。間違えた問題の解説を読み直そう。'; }
+  else { label='KEEP GOING'; msg='復習して再挑戦！解説を読めば必ず伸びます。'; }
+  document.getElementById('resultLabel').textContent = label;
+  document.getElementById('scoreTotal').textContent = '/ ' + total;
+  document.getElementById('resultMsg').textContent = msg;
+  var overlay = document.getElementById('resultOverlay');
+  overlay.classList.add('show');
+  countUp(document.getElementById('scoreNum'), score);
+  if(pct >= 50) confetti();
+}
+function countUp(el, to){
+  el.textContent = 0;
+  if(to <= 0) return;
+  var dur = 700, startT = Date.now();
+  var t = setInterval(function(){
+    var p = Math.min(1, (Date.now() - startT) / dur);
+    el.textContent = Math.round(p * to);
+    if(p >= 1){ el.textContent = to; clearInterval(t); }
+  }, 40);
+}
+function confetti(){
+  var host = document.getElementById('resultArea');
+  var colors = ['#56E1E9','#A78BFA','#4ADE80','#FBBF24'];
+  for(var i=0;i<18;i++){
+    var s = document.createElement('span');
+    s.className = 'confetti';
+    s.style.left = (Math.random()*100) + '%';
+    s.style.background = colors[i % 4];
+    s.style.animationDelay = (Math.random()*0.35) + 's';
+    s.style.setProperty('--cx', (Math.random()*160-80) + 'px');
+    host.appendChild(s);
+    (function(node){ setTimeout(function(){ if(node.parentNode) node.parentNode.removeChild(node); }, 1800); })(s);
+  }
+}
+function closeResult(){ document.getElementById('resultOverlay').classList.remove('show'); }
+function retryQuiz(){
+  closeResult();
+  buildQuiz();
+  showSection('quiz');
+}
+
+/* ---- 初期化 ------------------------------------------------------------ */
+(function init(){
+  buildQuiz();
+  var saved = null;
+  try{ saved = localStorage.getItem(STORE_KEY); }catch(e){}
+  if(saved && document.getElementById(saved)){ showSection(saved, {scroll:false}); }
+  // 結果オーバーレイの背景クリックで閉じる
+  document.getElementById('resultOverlay').addEventListener('click', function(e){
+    if(e.target === this) closeResult();
+  });
+})();
 </script>
 </body>
 </html>
