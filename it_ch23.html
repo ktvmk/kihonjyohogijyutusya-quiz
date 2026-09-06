@@ -1,0 +1,1391 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第23章 擬似言語トレース演習｜基本情報技術者</title>
+<meta name="description" content="基本情報技術者試験 Web教材 — 第23章 擬似言語トレース演習（科目B 実戦）。IPA公開問題でトレースを練習する。">
+<style>
+/* =========================================================================
+   基本情報技術者 Web教材 — デザインシステム（案D：ネオ・モダン / ダーク）
+   このファイル1枚で完結。全22章はこの <style> と <script> を流用し、
+   各章の「レッスン本文」と「allQuestions 配列」を差し替えるだけで展開できます。
+   ========================================================================= */
+
+:root{
+  /* ---- 色：面 ---------------------------------------------------------- */
+  --bg:            #0A0E16;   /* ページ背景（最下層）           */
+  --bg-2:          #0D121C;   /* 一段明るい背景                 */
+  --card:          rgba(255,255,255,.045); /* ガラス質カード面   */
+  --card-solid:    #131926;   /* 不透明カード（表・数式など）   */
+  --inset:         rgba(0,0,0,.35);        /* へこみ面（数式）    */
+  --line:          rgba(255,255,255,.09);  /* 罫線・境界         */
+  --line-strong:   rgba(255,255,255,.16);  /* 強い罫線           */
+  /* ---- 色：文字 -------------------------------------------------------- */
+  --ink:           #EAEDF5;   /* 本文                          */
+  --ink-strong:    #F5F7FB;   /* 見出し・強調                  */
+  --sub:           #98A2B3;   /* サブ文字                      */
+  --faint:         #5E6779;   /* 補助・キャプション            */
+  /* ---- 色：アクセント / 意味 ------------------------------------------ */
+  --accent:        #56E1E9;   /* ネオンシアン（主アクセント）  */
+  --accent-ink:    #06222A;   /* アクセント上の文字            */
+  --accent-soft:   #7FEFF5;   /* 明るいシアン（テキスト用）    */
+  --accent-2:      #A78BFA;   /* バイオレット（副アクセント）  */
+  --success:       #4ADE80;   /* 成功・正解（緑）              */
+  --success-soft:  #7BE9A4;
+  --danger:        #FB7185;   /* 誤答（赤）                    */
+  --danger-soft:   #FDA4AF;
+  --warning:       #FBBF24;   /* 警告・注意（アンバー）        */
+  --warning-soft:  #FCD34D;
+  /* ---- 角丸 ------------------------------------------------------------ */
+  --r-xs:6px; --r-sm:10px; --r-md:14px; --r-lg:18px; --r-xl:24px; --r-pill:999px;
+  /* ---- 影・グロー ------------------------------------------------------ */
+  --shadow:        0 10px 34px rgba(0,0,0,.42);
+  --shadow-pop:    0 24px 64px rgba(0,0,0,.55);
+  --glow:          0 0 22px rgba(86,225,233,.30);
+  --glow-2:        0 0 22px rgba(167,139,250,.28);
+  /* ---- 余白（8pxベース） ---------------------------------------------- */
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:20px; --s6:24px; --s7:32px; --s8:40px;
+  --pad:20px;                 /* コンテナ左右パディング（狭幅で縮小）*/
+  --maxw:720px;               /* 本文最大幅（可読性）          */
+  /* ---- フォント（Webフォント不使用・システムフォント） --------------- */
+  --font:  -apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","Meiryo",sans-serif;
+  --mono:  ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Courier New",monospace;
+  /* ---- 文字サイズ ------------------------------------------------------ */
+  --fs-h1:24px; --fs-h2:19px; --fs-h3:15.5px; --fs-body:15px; --fs-sm:13px; --fs-xs:11.5px;
+  --lh:1.9;
+}
+
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{
+  margin:0; font-family:var(--font); color:var(--ink);
+  font-size:var(--fs-body); line-height:var(--lh);
+  background:
+    radial-gradient(680px 480px at 88% -6%, rgba(86,225,233,.16), transparent 60%),
+    radial-gradient(620px 520px at -8% 34%, rgba(167,139,250,.14), transparent 60%),
+    radial-gradient(700px 620px at 60% 108%, rgba(86,225,233,.08), transparent 60%),
+    var(--bg);
+  background-attachment:fixed;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--accent-soft); text-decoration:none;}
+a:hover{color:var(--accent);}
+::selection{background:rgba(86,225,233,.28); color:#fff;}
+.wrap{max-width:var(--maxw); margin:0 auto; padding-left:var(--pad); padding-right:var(--pad);}
+
+/* =====================  ヘッダー（章タイトル帯）  ======================= */
+.header{position:relative; overflow:hidden; border-bottom:1px solid var(--line);}
+.header::after{content:""; position:absolute; left:0; right:0; bottom:-1px; height:1px;
+  background:linear-gradient(90deg,transparent,rgba(86,225,233,.7),rgba(167,139,250,.5),transparent);}
+.header .wrap{padding-top:26px; padding-bottom:24px;}
+.back-link{display:inline-flex; align-items:center; gap:6px; font-size:var(--fs-sm);
+  font-weight:600; color:var(--accent-soft); margin-bottom:16px; cursor:pointer;
+  text-shadow:0 0 14px rgba(86,225,233,.35);}
+.back-link:hover{color:var(--accent);}
+.eyebrow{font-size:var(--fs-xs); font-weight:700; letter-spacing:.18em; color:var(--accent);}
+.header h1{margin:8px 0 0; font-size:var(--fs-h1); font-weight:800; letter-spacing:-.01em; color:var(--ink-strong);}
+.header .sub{margin:7px 0 0; font-size:var(--fs-sm); color:var(--sub);}
+
+/* =====================  レッスン切替タブ（折り返し）＋確認テストボタン  === */
+.tabbar{position:sticky; top:0; z-index:50;
+  background:rgba(10,14,22,.82); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);}
+.tabbar-inner{display:flex; flex-wrap:wrap; align-items:center; gap:10px;
+  max-width:var(--maxw); margin:0 auto; padding:11px var(--pad);}
+.nav-tabs{display:flex; flex-wrap:wrap; gap:8px; flex:1 1 auto; min-width:0;}
+.nav-tab{border:1px solid var(--line); white-space:nowrap;
+  background:var(--card); color:var(--sub); font-family:var(--font);
+  font-size:var(--fs-sm); font-weight:600; border-radius:var(--r-pill);
+  padding:8px 15px; cursor:pointer; transition:.18s ease;}
+.nav-tab:hover{border-color:rgba(86,225,233,.5); color:var(--ink);}
+.nav-tab.active{background:var(--accent); color:var(--accent-ink); border-color:transparent;
+  font-weight:700; box-shadow:var(--glow);}
+/* 確認テスト：レッスンタブと分けた独立アクセントボタン（常時表示） */
+.quiz-sep{align-self:stretch; width:1px; background:var(--line); margin:2px 0;}
+.quiz-btn{flex:0 0 auto; display:inline-flex; align-items:center; gap:7px; white-space:nowrap;
+  cursor:pointer; font-family:var(--font); font-size:var(--fs-sm); font-weight:700;
+  padding:9px 17px; border-radius:var(--r-pill); border:1px solid transparent; color:#160B2E;
+  background:linear-gradient(135deg,var(--accent),var(--accent-2)); box-shadow:var(--glow); transition:.18s ease;}
+.quiz-btn .arw{font-size:15px; transition:transform .18s ease;}
+.quiz-btn:hover{filter:brightness(1.08); transform:translateY(-1px);}
+.quiz-btn:hover .arw{transform:translateX(3px);}
+.quiz-btn.active{outline:2px solid rgba(167,139,250,.65); outline-offset:2px;}
+@media (max-width:520px){
+  .tabbar{position:static; backdrop-filter:none; background:rgba(255,255,255,.02);}
+  .quiz-sep{display:none;}
+  .quiz-btn{flex:1 1 100%; justify-content:center;}
+}
+
+/* =====================  レッスン内ナビ（次へ／確認テストへ）  =========== */
+.lesson-nav{display:flex; justify-content:flex-end; margin-top:16px;}
+.btn-next{display:inline-flex; align-items:center; gap:16px; cursor:pointer; text-align:left;
+  font-family:var(--font); border-radius:var(--r-md); padding:14px 20px;
+  background:var(--card); border:1px solid var(--line-strong); color:var(--ink);
+  box-shadow:var(--shadow); transition:.18s ease;}
+.btn-next:hover{border-color:rgba(86,225,233,.55); transform:translateY(-1px);}
+.btn-next .bn-meta{display:flex; flex-direction:column; line-height:1.35;}
+.btn-next .bn-label{font-size:var(--fs-xs); color:var(--sub); font-weight:600;}
+.btn-next .bn-title{font-size:var(--fs-body); color:var(--ink-strong); font-weight:700;}
+.btn-next .bn-arrow{font-size:20px; color:var(--accent-soft); transition:transform .18s ease;}
+.btn-next:hover .bn-arrow{transform:translateX(4px);}
+.btn-next.to-quiz{background:linear-gradient(135deg,rgba(86,225,233,.16),rgba(167,139,250,.16));
+  border-color:rgba(86,225,233,.5); box-shadow:0 0 26px rgba(86,225,233,.12);}
+.btn-next.to-quiz .bn-label{color:var(--accent-soft);}
+.btn-next.to-quiz .bn-arrow{color:var(--accent);}
+@media (max-width:480px){
+  .lesson-nav{justify-content:stretch;}
+  .btn-next{flex:1; justify-content:space-between;}
+}
+
+/* =====================  セクション切替  ================================= */
+.section{display:none; padding-top:22px; padding-bottom:64px;}
+.section.active{display:block; animation:fadeUp .34s ease both;}
+@keyframes fadeUp{from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;}}
+
+/* =====================  レッスンカード & 見出し階層  ==================== */
+.lesson-card{background:var(--card); border:1px solid var(--line); border-radius:var(--r-lg);
+  padding:24px; box-shadow:var(--shadow); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);}
+.lesson-card > h2:first-child{margin-top:0;}
+h2{margin:0 0 4px; font-size:var(--fs-h2); font-weight:800; color:var(--ink-strong); letter-spacing:-.01em;}
+.h2-rule{width:46px; height:2px; margin:10px 0 18px; border-radius:2px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2)); box-shadow:0 0 10px rgba(86,225,233,.5);}
+h3{margin:26px 0 12px; font-size:var(--fs-h3); font-weight:700; color:var(--accent-soft);
+  display:flex; align-items:center; gap:8px;}
+h3::before{content:""; width:7px; height:7px; border-radius:50%; background:var(--accent);
+  box-shadow:0 0 10px var(--accent); flex:0 0 auto;}
+p{margin:0 0 12px;} p:last-child{margin-bottom:0;}
+strong{color:var(--ink-strong); font-weight:700;}
+
+/* =====================  用語バッジ  ==================================== */
+.vocab{display:inline-flex; align-items:center; white-space:nowrap;
+  background:rgba(86,225,233,.10); border:1px solid rgba(86,225,233,.45); color:var(--accent-soft);
+  border-radius:var(--r-pill); padding:2px 10px; font-size:var(--fs-sm); font-weight:600;
+  margin:0 1px;}
+.vocab.v2{background:rgba(167,139,250,.12); border-color:rgba(167,139,250,.45); color:#C9B8FB;}
+
+/* =====================  ポイント囲み  ================================== */
+.key-point{background:rgba(86,225,233,.045); border:1px solid var(--line);
+  border-left:2px solid var(--accent); border-radius:0 var(--r-md) var(--r-md) 0;
+  padding:15px 17px; margin:14px 0; box-shadow:inset 0 0 26px rgba(86,225,233,.05);}
+.key-point .label{display:block; font-size:var(--fs-xs); font-weight:700; letter-spacing:.1em;
+  color:var(--accent); margin-bottom:8px;}
+.stack{display:flex; flex-direction:column; gap:10px;}
+
+/* =====================  具体例ブロック  ================================ */
+.example{background:rgba(251,191,36,.05); border:1px solid rgba(251,191,36,.22);
+  border-left:2px solid var(--warning); border-radius:0 var(--r-md) var(--r-md) 0;
+  padding:14px 17px; margin:14px 0; font-size:var(--fs-body); color:var(--ink);}
+.example b, .example strong{color:var(--warning-soft);}
+
+/* =====================  計算式ブロック（等幅）  ======================== */
+.formula{background:var(--inset); border:1px solid rgba(86,225,233,.20); border-radius:var(--r-md);
+  padding:15px 17px; margin:14px 0;}
+.formula .exp{font-family:var(--mono); font-size:14px; color:var(--accent-soft); line-height:1.85;}
+.formula .note{font-family:var(--mono); font-size:12px; color:var(--faint); margin-top:8px;}
+
+/* =====================  左右の対比カード  ============================== */
+.compare{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:14px 0;}
+.compare-box{border-radius:var(--r-md); padding:14px 15px; border:1px solid var(--line);}
+.compare-box h4{margin:0 0 3px; font-size:15px; font-weight:800;}
+.compare-box .en{font-size:var(--fs-xs); color:var(--faint); margin-bottom:8px;}
+.compare-box .body{font-size:var(--fs-sm); color:var(--ink); line-height:1.75;}
+.compare-box.good{background:rgba(74,222,128,.07); border-color:rgba(74,222,128,.30);}
+.compare-box.good h4{color:var(--success-soft);}
+.compare-box.bad{background:rgba(251,191,36,.07); border-color:rgba(251,191,36,.30);}
+.compare-box.bad h4{color:var(--warning-soft);}
+
+/* =====================  一覧表  ======================================== */
+.table-wrap{overflow-x:auto; border:1px solid var(--line); border-radius:var(--r-md); margin:14px 0;
+  scrollbar-width:thin;}
+.sql-table{width:100%; border-collapse:collapse; min-width:320px;}
+.sql-table th{ text-align:left; font-size:var(--fs-sm); font-weight:700; color:var(--accent-soft);
+  background:rgba(86,225,233,.07); padding:11px 14px; border-bottom:1px solid var(--line); white-space:nowrap;}
+.sql-table td{font-size:var(--fs-sm); color:var(--ink); padding:11px 14px; border-bottom:1px solid rgba(255,255,255,.055);}
+.sql-table tr:last-child td{border-bottom:none;}
+.sql-table tbody tr:hover, .sql-table tr:hover td{background:rgba(255,255,255,.02);}
+.sql-table td b{color:var(--ink-strong);}
+
+/* =====================  章末：最重要まとめ  ============================ */
+.summary{margin:20px 0 0; background:linear-gradient(135deg,rgba(86,225,233,.09),rgba(167,139,250,.09));
+  border:1px solid rgba(86,225,233,.28); border-radius:var(--r-md); padding:18px 18px 17px;
+  box-shadow:0 0 30px rgba(86,225,233,.08);}
+.summary .label{display:inline-flex; align-items:center; gap:8px; font-size:var(--fs-xs);
+  font-weight:800; letter-spacing:.1em; color:var(--accent-soft); margin-bottom:10px;}
+.summary .label::before{content:""; width:16px; height:2px; border-radius:2px;
+  background:var(--accent); box-shadow:0 0 8px var(--accent);}
+.summary p{font-size:var(--fs-body);}
+
+/* =====================  確認テスト  ==================================== */
+.quiz-head{margin-bottom:18px;}
+.quiz-head h2{margin-bottom:6px;}
+.quiz-note{font-size:var(--fs-sm); color:var(--sub); margin-bottom:16px;}
+.progress{display:flex; align-items:center; gap:12px;}
+.progress-bar{flex:1; height:10px; background:rgba(255,255,255,.06); border:1px solid var(--line);
+  border-radius:var(--r-pill); overflow:hidden;}
+.progress-fill{width:0%; height:100%; border-radius:var(--r-pill);
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  box-shadow:0 0 14px rgba(86,225,233,.5); transition:width .5s cubic-bezier(.2,.8,.2,1);}
+.progress-count{font-family:var(--mono); font-size:var(--fs-sm); color:var(--sub); min-width:52px; text-align:right;}
+
+.question-card{background:var(--card); border:1px solid var(--line); border-radius:var(--r-lg);
+  padding:20px; margin-bottom:16px; box-shadow:var(--shadow);
+  backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);}
+.q-number{font-family:var(--mono); font-size:var(--fs-xs); font-weight:700; letter-spacing:.08em;
+  color:var(--accent); margin-bottom:8px;}
+.q-text{font-size:var(--fs-body); font-weight:600; color:var(--ink-strong); line-height:1.7; margin-bottom:14px;}
+.choices{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:9px;}
+.choices li{display:flex; align-items:center; gap:12px; cursor:pointer;
+  background:rgba(255,255,255,.025); border:1px solid var(--line); border-radius:var(--r-sm);
+  padding:12px 14px; font-size:var(--fs-body); color:var(--ink); transition:.15s ease; user-select:none;}
+.choices li .key{flex:0 0 auto; width:24px; height:24px; border-radius:7px;
+  display:flex; align-items:center; justify-content:center; font-family:var(--mono);
+  font-size:12px; font-weight:700; color:var(--sub); background:rgba(255,255,255,.05);
+  border:1px solid var(--line); transition:.15s ease;}
+.choices li:hover{border-color:rgba(86,225,233,.55); background:rgba(86,225,233,.06); color:var(--ink-strong);}
+.choices li:hover .key{color:var(--accent-soft); border-color:rgba(86,225,233,.4);}
+.choices li:active{transform:scale(.99);}
+/* 回答後：クリック無効化 */
+.choices.answered li{cursor:default;}
+.choices.answered li:hover{border-color:var(--line); background:rgba(255,255,255,.025); color:var(--ink);}
+.choices.answered li:hover .key{color:var(--sub); border-color:var(--line);}
+/* 正解＝緑 */
+.choices li.correct{background:rgba(74,222,128,.12); border-color:rgba(74,222,128,.6); color:#EAFBF0;
+  box-shadow:0 0 18px rgba(74,222,128,.22); animation:pop .32s ease;}
+.choices li.correct .key{background:var(--success); border-color:transparent; color:#052E16;}
+.choices li.correct .key::after{content:"✓";}
+.choices li.correct .key span{display:none;}
+/* 誤選択＝赤 */
+.choices li.wrong{background:rgba(251,113,133,.12); border-color:rgba(251,113,133,.6); color:#FFECEF;}
+.choices li.wrong .key{background:var(--danger); border-color:transparent; color:#3B0A12;}
+.choices li.wrong .key::after{content:"✕";}
+.choices li.wrong .key span{display:none;}
+@keyframes pop{0%{transform:scale(1);}40%{transform:scale(1.02);}100%{transform:scale(1);}}
+
+/* 解説（回答後に開く） */
+.explanation{max-height:0; overflow:hidden; opacity:0; margin-top:0;
+  border-radius:var(--r-sm); transition:max-height .4s ease, opacity .3s ease, margin-top .3s ease;}
+.explanation.show{max-height:3000px; opacity:1; margin-top:13px; padding:13px 15px;}
+.explanation.is-correct{background:rgba(74,222,128,.07); border:1px solid rgba(74,222,128,.28);}
+.explanation.is-wrong{background:rgba(251,113,133,.07); border:1px solid rgba(251,113,133,.28);}
+.exp-mark{display:block; font-size:var(--fs-sm); font-weight:800; margin-bottom:5px;}
+.explanation.is-correct .exp-mark{color:var(--success-soft);}
+.explanation.is-wrong .exp-mark{color:var(--danger-soft);}
+.exp-text{font-size:var(--fs-sm); color:var(--ink); line-height:1.8;}
+
+/* 選択肢ごとの解説（正解以外が何だったのかを示す） */
+.exp-why{margin-top:12px; padding-top:11px; border-top:1px dashed var(--line-strong);}
+.exp-why-h{font-size:var(--fs-xs); font-weight:800; letter-spacing:.12em;
+  color:var(--sub); margin-bottom:8px;}
+.why-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px;}
+.why-item{display:flex; gap:9px; align-items:flex-start;
+  font-size:var(--fs-sm); line-height:1.75;}
+.why-key{flex:0 0 auto; width:21px; height:21px; margin-top:3px; border-radius:var(--r-xs);
+  display:inline-flex; align-items:center; justify-content:center;
+  font-size:var(--fs-xs); font-weight:800; color:var(--sub);
+  background:rgba(255,255,255,.06); border:1px solid var(--line);}
+.why-item.is-ans .why-key{background:var(--success); border-color:transparent; color:#062B14;}
+.why-body{flex:1 1 auto; min-width:0;}
+.why-term{display:block; font-weight:700; color:var(--ink);}
+.why-item.is-ans .why-term{color:var(--success-soft);}
+.why-txt{display:block; color:var(--sub);}
+
+/* =====================  結果画面（オーバーレイ）  ====================== */
+.result-overlay{position:fixed; inset:0; z-index:100; display:none;
+  align-items:center; justify-content:center; padding:24px;
+  background:rgba(6,9,15,.72); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);}
+.result-overlay.show{display:flex; animation:ovFade .3s ease both;}
+@keyframes ovFade{from{opacity:0;}to{opacity:1;}}
+.result-area{position:relative; overflow:hidden; width:100%; max-width:420px; text-align:center;
+  background:linear-gradient(160deg,rgba(22,28,40,.96),rgba(13,18,28,.96));
+  border:1px solid rgba(86,225,233,.3); border-radius:var(--r-xl); padding:34px 26px 26px;
+  box-shadow:var(--shadow-pop), 0 0 60px rgba(86,225,233,.15);
+  animation:cardIn .42s cubic-bezier(.2,.9,.25,1.15) both;}
+@keyframes cardIn{from{opacity:0; transform:translateY(18px) scale(.94);}to{opacity:1; transform:none;}}
+.result-label{font-size:var(--fs-xs); font-weight:800; letter-spacing:.24em; color:var(--accent);
+  text-shadow:0 0 16px rgba(86,225,233,.5);}
+.result-score{margin:8px 0 6px; font-family:var(--mono); font-weight:800; line-height:1; color:var(--ink-strong);}
+.result-score #scoreNum{font-size:66px; background:linear-gradient(180deg,#fff,var(--accent-soft));
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+.result-total{font-size:24px; color:var(--sub); margin-left:6px;}
+.result-msg{font-size:var(--fs-body); color:var(--ink); line-height:1.7; margin:6px 4px 22px;}
+.result-actions{display:flex; flex-direction:column; gap:10px;}
+.btn{border:none; cursor:pointer; font-family:var(--font); font-size:var(--fs-body); font-weight:700;
+  padding:13px 20px; border-radius:var(--r-pill); background:var(--accent); color:var(--accent-ink);
+  box-shadow:var(--glow); transition:.18s ease;}
+.btn:hover{filter:brightness(1.08); transform:translateY(-1px);}
+.btn-outline{border:1px solid var(--line-strong); cursor:pointer; font-family:var(--font);
+  font-size:var(--fs-body); font-weight:600; padding:12px 20px; border-radius:var(--r-pill);
+  background:transparent; color:var(--ink); transition:.18s ease;}
+.btn-outline:hover{border-color:rgba(86,225,233,.55); color:var(--accent-soft);}
+.confetti{position:absolute; top:14px; width:8px; height:8px; border-radius:2px; opacity:0;
+  animation:confetti 1.35s ease-out forwards;}
+@keyframes confetti{0%{opacity:1; transform:translate(0,0) rotate(0deg);}
+  100%{opacity:0; transform:translate(var(--cx,0), 260px) rotate(400deg);}}
+
+/* =====================  レスポンシブ（〜スマホ360px）  ================= */
+@media (max-width:480px){
+  :root{--pad:15px; --fs-h1:21px; --fs-h2:17.5px; --fs-body:14.5px;}
+  .lesson-card{padding:18px;}
+  .question-card{padding:16px;}
+  .result-score #scoreNum{font-size:56px;}
+}
+@media (max-width:360px){
+  .compare{grid-template-columns:1fr;}
+}
+.home-tab{flex:0 0 auto; display:inline-flex; align-items:center; gap:5px; cursor:pointer;
+  font-family:var(--font); font-size:var(--fs-sm); font-weight:600;
+  border:1px solid var(--line); background:var(--card); color:var(--sub);
+  border-radius:var(--r-pill); padding:8px 14px; transition:.18s ease;}
+.home-tab:hover{border-color:var(--accent-2); color:var(--ink); box-shadow:0 0 16px rgba(167,139,250,.25);}
+
+/* =====================  第23章：擬似言語コード・トレース表  ============ */
+.code{font-family:var(--mono); font-size:13px; line-height:1.8; font-weight:500; color:var(--accent-soft);
+  background:var(--inset); border:1px solid rgba(86,225,233,.20); border-radius:var(--r-md);
+  padding:13px 15px; margin:12px 0; white-space:pre; overflow-x:auto; -webkit-overflow-scrolling:touch;}
+.code .bl{display:inline-block; min-width:2.4em; padding:0 6px; border-bottom:2px solid var(--warning);
+  color:var(--warning-soft); font-weight:800; text-align:center;}
+.code .cm{color:var(--faint);}
+.q-text .code{margin:10px 0 4px;}
+.trace-wrap{overflow-x:auto; margin:10px 0;}
+.trace{border-collapse:collapse; font-family:var(--mono); font-size:13px; min-width:240px;}
+.trace th,.trace td{border:1px solid var(--line-strong); padding:6px 11px; text-align:center; white-space:nowrap;}
+.trace th{color:var(--accent-soft); background:rgba(86,225,233,.06); font-weight:700;}
+.trace td{color:var(--ink);}
+.trace td.hit{color:var(--warning-soft); font-weight:800;}
+.src{font-size:var(--fs-xs); color:var(--faint); margin-top:8px;}
+</style>
+</head>
+<body>
+
+<!-- スプラッシュ用サムネイル（オフライン展開時のプレースホルダ／JS無効時のフォールバック） -->
+<template id="__bundler_thumbnail" data-bg-color="#0A0E16">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="tbg" cx="50%" cy="40%" r="62%">
+        <stop offset="0%" stop-color="#123047"/>
+        <stop offset="100%" stop-color="#0A0E16"/>
+      </radialGradient>
+    </defs>
+    <rect width="1200" height="800" fill="url(#tbg)"/>
+    <g stroke="#56E1E9" stroke-width="4" opacity="0.45">
+      <line x1="600" y1="352" x2="378" y2="222"/>
+      <line x1="600" y1="352" x2="822" y2="222"/>
+      <line x1="600" y1="352" x2="356" y2="474"/>
+      <line x1="600" y1="352" x2="844" y2="474"/>
+    </g>
+    <circle cx="600" cy="352" r="36" fill="#56E1E9"/>
+    <circle cx="378" cy="222" r="21" fill="#A78BFA"/>
+    <circle cx="822" cy="222" r="21" fill="#A78BFA"/>
+    <circle cx="356" cy="474" r="21" fill="#4ADE80"/>
+    <circle cx="844" cy="474" r="21" fill="#56E1E9"/>
+    <text x="600" y="612" text-anchor="middle" fill="#EAEDF5" font-family="-apple-system,'Hiragino Kaku Gothic ProN',sans-serif" font-size="58" font-weight="800">第23章 擬似言語トレース演習</text>
+    <text x="600" y="668" text-anchor="middle" fill="#56E1E9" font-family="-apple-system,sans-serif" font-size="24" font-weight="700" letter-spacing="7">CHAPTER 23 · PSEUDO-CODE TRACE</text>
+  </svg>
+</template>
+
+<!-- ============================ 章タイトルヘッダー ======================= -->
+<header class="header">
+  <div class="wrap">
+    <span class="back-link" onclick="goBack()">← 章の一覧にもどる</span>
+    <div class="eyebrow">CHAPTER 23 ・ PSEUDO-CODE TRACE</div>
+    <h1>擬似言語トレース演習</h1>
+    <p class="sub">基本情報技術者試験 Web教材 ・ レッスン &amp; 確認テスト</p>
+  </div>
+</header>
+
+<div class="tabbar">
+  <div class="tabbar-inner">
+    <button class="home-tab" onclick="goBack()">← ホーム</button>
+    <nav class="nav-tabs" id="navTabs">
+      <button class="nav-tab active" data-target="l1" onclick="showSection('l1')">① 擬似言語の読み方</button>
+      <button class="nav-tab" data-target="l2" onclick="showSection('l2')">② トレースの手順</button>
+      <button class="nav-tab" data-target="l3" onclick="showSection('l3')">③ 頻出パターン</button>
+      <button class="nav-tab" data-target="l4" onclick="showSection('l4')">④ 本番の解き方</button>
+    </nav>
+    <span class="quiz-sep"></span>
+    <button class="quiz-btn" data-target="quiz" onclick="showSection('quiz')">確認テスト<span class="arw">→</span></button>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <section id="l1" class="section active">
+    <div class="lesson-card">
+<h2>① 擬似言語の読み方</h2>
+<h3>この章のねらい</h3>
+<div class="key-point">
+第22章で科目Bの全体像をつかんだ。この章は<strong>手を動かす章</strong>。IPA が公開している科目Bの実際の試験問題（令和5〜8年度）を素材に、擬似言語を<strong>1行ずつ追う練習</strong>をする。<br/><br/>
+科目Bの20問中<strong>約16問がこの形式</strong>。ここが読めれば合格の8割は手に入る。
+</div>
+<h3>記述形式（問題用紙の冒頭に毎回載っている）</h3>
+<table class="sql-table">
+<tr><th>書き方</th><th>意味</th></tr>
+<tr><td><b>○整数型: 関数名(整数型: x)</b></td><td>関数の宣言。「整数型:」は戻り値の型</td></tr>
+<tr><td><b>整数型: i, s ← 0</b></td><td>変数の宣言。← は代入（右の値を左に入れる）</td></tr>
+<tr><td><b>/* 注釈 */　// 注釈</b></td><td>コメント。実行されない</td></tr>
+<tr><td><b>if (条件) … elseif … else … endif</b></td><td>上から順に評価し、最初に真になった枝だけ実行</td></tr>
+<tr><td><b>while (条件) … endwhile</b></td><td>前判定。条件が真の間くり返す（最初から偽なら0回）</td></tr>
+<tr><td><b>do … while (条件)</b></td><td>後判定。必ず1回実行してから条件を見る</td></tr>
+<tr><td><b>for (i を 1 から n まで 1 ずつ増やす)</b></td><td>回数の決まったくり返し。n も含む</td></tr>
+<tr><td><b>return 値</b></td><td>関数を終えて値を返す</td></tr>
+<tr><td><b>繰返し処理を終了する</b></td><td>そのループを抜ける（break）</td></tr>
+</table>
+<h3>演算子で間違えやすいもの</h3>
+<div class="key-point">
+<span class="vocab">mod</span>：割り算の<strong>余り</strong>。7 mod 4 ＝ 3<br/>
+<span class="vocab">÷ の商</span>：割り算の<strong>整数部分</strong>。7 ÷ 4 の商 ＝ 1<br/>
+<span class="vocab">and / or</span>：論理積・論理和。and の方が先に評価される<br/>
+<span class="vocab">≠ ≦ ≧</span>：「等しくない」「以下」「以上」。<strong>≦ は境界を含む</strong>ので、ループの回数が1回変わる<br/>
+<span class="vocab">未定義の値</span>：まだ値が入っていない状態。配列の空き・リストの末尾判定に使われる
+</div>
+<div class="example"><strong>優先順位：</strong>() ＞ not ＞ 乗除・mod ＞ 加減 ＞ 比較 ＞ and ＞ or。<br/>
+「(i mod 4) が 0 と等しい」のように、試験ではカッコで明示されることが多い。</div>
+<h3>配列の読み方</h3>
+<div class="key-point">
+・<strong>data[3]</strong>：配列 data の3番目の要素<br/>
+・<strong>要素番号は 1 から始まる</strong>（問題文に必ず書いてある。0始まりの問題も稀にある）<br/>
+・<strong>data の要素数</strong>：中に入っている要素の個数<br/>
+・<strong>{ }</strong>：配列の中身。{1, 2, 3} は要素数3<br/>
+・<strong>二次元配列 m[r, c]</strong>：r 行 c 列の要素。行が先<br/>
+・<strong>data の末尾に x を追加する</strong>：要素数が1増える
+</div>
+<div class="code">整数型の配列: data ← {10, 30, 20, 40}
+整数型: len ← dataの要素数     <span class="cm">// len は 4</span>
+data[len] ← 99                 <span class="cm">// data は {10, 30, 20, 99}</span>
+dataの末尾 に 5 を追加する       <span class="cm">// data は {10, 30, 20, 99, 5}</span></div>
+<h3>for 文の「制御記述」を正確に読む</h3>
+<table class="sql-table">
+<tr><th>制御記述</th><th>i がとる値</th><th>回数</th></tr>
+<tr><td>i を 1 から 5 まで 1 ずつ増やす</td><td>1, 2, 3, 4, 5</td><td>5回</td></tr>
+<tr><td>i を 2 から len まで 1 ずつ増やす（len＝9）</td><td>2, 3, …, 9</td><td>8回</td></tr>
+<tr><td>i を len から 2 まで 1 ずつ減らす（len＝9）</td><td>9, 8, …, 2</td><td>8回</td></tr>
+<tr><td>j を 8 から始めて 20 を超えない範囲で 4 ずつ増やす</td><td>8, 12, 16, 20</td><td>4回</td></tr>
+<tr><td>i を 3 から n まで 1 ずつ増やす（n＝2）</td><td>（なし）</td><td>0回</td></tr>
+</table>
+<div class="key-point">
+<strong>「増やす」か「減らす」か</strong>は、配列を<strong>前からずらすか後ろからずらすか</strong>で結果が変わる典型ポイント（③の「配列のシフト」で扱う）。
+</div>
+    </div>
+    <div class="lesson-nav">
+      <button class="btn-next" onclick="showSection('l2')">
+        <span class="bn-meta"><span class="bn-label">次のレッスン</span><span class="bn-title">② トレースの手順</span></span>
+        <span class="bn-arrow">→</span>
+      </button>
+    </div>
+  </section>
+
+  <section id="l2" class="section">
+    <div class="lesson-card">
+<h2>② トレースの手順</h2>
+<h3>トレース表の作り方（毎回これ）</h3>
+<div class="key-point">
+<strong>① 変数名を横に並べる</strong>（登場する変数を全部。配列は中身を書く欄を作る）<br/>
+<strong>② 具体的な入力値を1つ決める</strong>（問題文に例があればそれを使う。なければ小さい値）<br/>
+<strong>③ 1行ずつ実行し、値が変わった変数だけ書く</strong><br/>
+<strong>④ くり返しは1周＝1行</strong>。条件判定の真偽も書く<br/>
+<strong>⑤ return の値（または出力）を選択肢と照合する</strong>
+</div>
+<div class="example"><strong>頭の中でやらない。</strong>科目Bで落ちる人の大半は「読めた気になって」トレースを省く。手で書けば5分、頭でやると3回読み直して7分かかる。</div>
+<h3>例1：順次と累積（合計）</h3>
+<div class="code">整数型: i ← 1, s ← 0
+while (i ≦ 10)
+  s ← s ＋ i
+  i ← i ＋ 3
+endwhile</div>
+<div class="trace-wrap"><table class="trace">
+<tr><th>周</th><th>判定 i≦10</th><th>s</th><th>i（更新後）</th></tr>
+<tr><td>開始</td><td>—</td><td>0</td><td>1</td></tr>
+<tr><td>1</td><td>1≦10 真</td><td>1</td><td>4</td></tr>
+<tr><td>2</td><td>4≦10 真</td><td>5</td><td>7</td></tr>
+<tr><td>3</td><td>7≦10 真</td><td>12</td><td>10</td></tr>
+<tr><td>4</td><td>10≦10 真</td><td class="hit">22</td><td>13</td></tr>
+<tr><td>5</td><td>13≦10 偽</td><td colspan="2">終了</td></tr>
+</table></div>
+<div class="key-point">終了時 <strong>s ＝ 22</strong>。「≦」なので i＝10 のときも実行される。「＜」なら 12 で終わる。<strong>境界の1回</strong>を必ず確かめる。</div>
+<h3>例2：後判定（do～while）</h3>
+<div class="code">整数型: n ← 5
+do
+  n ← n － 2
+while (n ＞ 5)</div>
+<div class="trace-wrap"><table class="trace">
+<tr><th>周</th><th>n（処理後）</th><th>判定 n＞5</th></tr>
+<tr><td>1</td><td class="hit">3</td><td>3＞5 偽 → 終了</td></tr>
+</table></div>
+<div class="key-point">条件は最初から偽だが、後判定なので<strong>1回は実行される</strong>。n ＝ 3。while（前判定）なら 5 のまま。</div>
+<h3>例3：二重ループの回数</h3>
+<div class="code">整数型: c ← 0
+for (i を 1 から 4 まで 1 ずつ増やす)
+  for (j を i から 4 まで 1 ずつ増やす)
+    c ← c ＋ 1
+  endfor
+endfor</div>
+<div class="trace-wrap"><table class="trace">
+<tr><th>i</th><th>j の範囲</th><th>内側の回数</th><th>c</th></tr>
+<tr><td>1</td><td>1〜4</td><td>4</td><td>4</td></tr>
+<tr><td>2</td><td>2〜4</td><td>3</td><td>7</td></tr>
+<tr><td>3</td><td>3〜4</td><td>2</td><td>9</td></tr>
+<tr><td>4</td><td>4〜4</td><td>1</td><td class="hit">10</td></tr>
+</table></div>
+<div class="key-point">内側の開始値が外側の i に依存するときは、<strong>i ごとに内側の範囲を書き出す</strong>。4＋3＋2＋1 ＝ 10。</div>
+<h3>例4：配列を書き換える処理は「配列の欄」を毎行書く</h3>
+<div class="code">整数型の配列: data ← {1, 2, 3, 4, 5}
+整数型: top ← data[5]
+for (i を 5 から 2 まで 1 ずつ減らす)
+  data[i] ← data[i － 1]
+endfor
+data[1] ← top</div>
+<div class="trace-wrap"><table class="trace">
+<tr><th>i</th><th>実行した文</th><th>data</th></tr>
+<tr><td>—</td><td>top ← data[5]</td><td>{1,2,3,4,5}　top=5</td></tr>
+<tr><td>5</td><td>data[5] ← data[4]</td><td>{1,2,3,4,4}</td></tr>
+<tr><td>4</td><td>data[4] ← data[3]</td><td>{1,2,3,3,4}</td></tr>
+<tr><td>3</td><td>data[3] ← data[2]</td><td>{1,2,2,3,4}</td></tr>
+<tr><td>2</td><td>data[2] ← data[1]</td><td>{1,1,2,3,4}</td></tr>
+<tr><td>—</td><td>data[1] ← top</td><td class="hit">{5,1,2,3,4}</td></tr>
+</table></div>
+<div class="example"><strong>もし「2 から 5 まで増やす」だったら：</strong>data[2]←data[1] で {1,1,3,4,5}、次に data[3]←data[2] で {1,1,1,4,5}…と、<strong>1 が次々コピーされて壊れる</strong>。ずらす向きと for の向きは逆になる、と覚える。</div>
+    </div>
+    <div class="lesson-nav">
+      <button class="btn-next" onclick="showSection('l3')">
+        <span class="bn-meta"><span class="bn-label">次のレッスン</span><span class="bn-title">③ 頻出パターン</span></span>
+        <span class="bn-arrow">→</span>
+      </button>
+    </div>
+  </section>
+
+  <section id="l3" class="section">
+    <div class="lesson-card">
+<h2>③ 頻出パターン 8 選</h2>
+<div class="key-point">
+IPA の公開問題（令和5〜8年度・各6問）から、アルゴリズム問題の型を8つに整理した。<strong>どの型かを最初に見抜く</strong>と、トレースの前に「何を追えばいいか」が決まる。
+</div>
+<h3>型1：配列のシフト（ずらす向き）</h3>
+<div class="key-point">
+末尾を先頭へ・先頭を末尾へ移す処理。<strong>上書きで値を失わない向き</strong>にループを回す。後ろへずらす＝後ろから、前へずらす＝前から。②の例4が実物。
+</div>
+<h3>型2：2進数と補数</h3>
+<div class="code">○8ビット型: complement(8ビット型: x)
+  8ビット型: y
+  y ← x ▽ 11111111    <span class="cm">// ▽ は排他的論理和＝全ビット反転</span>
+  y ← y ＋ 00000001
+  return y</div>
+<div class="key-point">
+「x に足すと 0 になる値」＝<strong>2の補数</strong>＝<strong>全ビット反転して 1 を足す</strong>。∧（論理積）は「マスク」、∨（論理和）は「ビットを立てる」、▽（排他的論理和）は「反転」。<br/>
+例：x＝00000011 → 反転 11111100 → ＋1 → 11111101。足すと 1 00000000、あふれた桁を捨てて 0。
+</div>
+<h3>型3：スタック（push / pop と位置変数）</h3>
+<div class="code">大域: 整数型: stackPos ← 3         <span class="cm">// 次に格納する位置</span>
+大域: 整数型の配列: stack ← {4, 3, 未定義, 未定義}
+○論理型: push(整数型: inputData)
+  if (stackPos ≦ stackの要素数)
+    stack[stackPos] ← inputData
+    stackPos ← stackPos ＋ 1
+    return true
+  endif
+  return false
+○整数型: pop()
+  整数型: popData ← 未定義の値
+  if (stackPos ＞ 1)
+    stackPos ← stackPos － 1
+    popData ← stack[stackPos]
+    stack[stackPos] ← 未定義の値
+  endif
+  return popData</div>
+<div class="key-point">
+位置変数が「<strong>次に入れる場所</strong>」なのか「<strong>最後に入れた場所</strong>」なのかを最初に確認する。この例は前者なので、push は入れてから＋1、pop は－1 してから取り出す。
+</div>
+<h3>型4：再帰と呼び出し順</h3>
+<div class="code">○proc1()
+  "A" を出力する
+  proc3()
+○proc2()
+  proc3()
+  "B" を出力する
+  proc1()
+○proc3()
+  "C" を出力する</div>
+<div class="key-point">
+proc2 を呼ぶと：proc3→<strong>C</strong>、<strong>B</strong>、proc1→<strong>A</strong>、proc1 の中の proc3→<strong>C</strong>。答え <strong>C, B, A, C</strong>。<br/>
+呼び出しが終わったら<strong>呼んだ場所の次の行に戻る</strong>。戻り先を矢印でメモしながら追う。
+</div>
+<h3>型5：併合（マージ）と「どの while が何回」</h3>
+<div class="code">○整数型の配列: merge(整数型の配列: data1, 整数型の配列: data2)
+  整数型: i ← 1, j ← 1, k ← 1
+  while ((i ≦ n1) and (j ≦ n2))
+    if (data1[i] ≦ data2[j])
+      work[k] ← data1[i];  i ← i ＋ 1
+    else
+      work[k] ← data2[j];  j ← j ＋ 1
+    endif
+    k ← k ＋ 1
+  endwhile
+  while (i ≦ n1)  work[k] ← data1[i]; i←i＋1; k←k＋1  endwhile
+  while (j ≦ n2)  work[k] ← data2[j]; j←j＋1; k←k＋1  endwhile   <span class="cm">/*** α ***/</span>
+  return work</div>
+<div class="trace-wrap"><table class="trace">
+<tr><th>比較</th><th>入れた値</th><th>i</th><th>j</th><th>work</th></tr>
+<tr><td>2≦1 偽</td><td>1</td><td>1</td><td>2</td><td>{1}</td></tr>
+<tr><td>2≦4 真</td><td>2</td><td>2</td><td>2</td><td>{1,2}</td></tr>
+<tr><td>3≦4 真</td><td>3</td><td>3</td><td>2</td><td>{1,2,3}</td></tr>
+<tr><td>i＝3＞n1 → 1つ目終了</td><td colspan="4">2つ目 while：i≦2 偽 → 0回</td></tr>
+<tr><td>3つ目 while（α）</td><td>4</td><td>3</td><td>3</td><td class="hit">{1,2,3,4}</td></tr>
+</table></div>
+<div class="key-point">merge({2,3}, {1,4}) のとき α は <strong>1回</strong>。「残った方を流し込む」後半の while は、<strong>先に使い切った配列と反対側</strong>だけが動く。</div>
+<h3>型6：ハッシュ（衝突したら第2の関数）</h3>
+<div class="code">○整数型: calcHash1(整数型: value)  return (value mod 5) ＋ 1
+○整数型: calcHash2(整数型: value)  return ((value ＋ 3) mod 5) ＋ 1
+hashArray ← {5個の －1}
+add(3);  add(18);  add(11)   <span class="cm">// 空(－1)なら格納、埋まっていれば calcHash2 で再挑戦</span></div>
+<div class="trace-wrap"><table class="trace">
+<tr><th>add</th><th>calcHash1</th><th>空き？</th><th>calcHash2</th><th>hashArray</th></tr>
+<tr><td>3</td><td>3 mod 5＋1＝4</td><td>空</td><td>—</td><td>{－1,－1,－1,3,－1}</td></tr>
+<tr><td>18</td><td>18 mod 5＋1＝4</td><td>埋</td><td>21 mod 5＋1＝2</td><td>{－1,18,－1,3,－1}</td></tr>
+<tr><td>11</td><td>11 mod 5＋1＝2</td><td>埋</td><td>14 mod 5＋1＝5</td><td class="hit">{－1,18,－1,3,11}</td></tr>
+</table></div>
+<div class="key-point">mod の計算を1つ間違えると全滅する。<strong>mod の表を先に作ってから</strong>配列を埋める。</div>
+<h3>型7：二重ループで「条件が真になった回数」</h3>
+<div class="code">for (i を 1 から (lenData － lenKey ＋ 1) まで 1 ずつ増やす)
+  for (j を 1 から lenKey まで 1 ずつ増やす)        <span class="cm">// α</span>
+    if (data[i ＋ j － 1] が key[j] と等しい)       <span class="cm">/*** β ***/</span>
+      if (j が lenKey と等しい)  resultの末尾 に i を追加する  endif
+    else
+      αの行から始まる繰返し処理を終了する
+    endif
+  endfor
+endfor</div>
+<div class="trace-wrap"><table class="trace">
+<tr><th>i</th><th>data[i..]</th><th>key と比較</th><th>β真の回数</th></tr>
+<tr><td>1</td><td>a b a</td><td>a✓ b✓ a≠c</td><td>2</td></tr>
+<tr><td>2</td><td>b …</td><td>b≠a</td><td>0</td></tr>
+<tr><td>3</td><td>a b c</td><td>a✓ b✓ c✓ → result に 3</td><td>3</td></tr>
+<tr><td>4</td><td>b …</td><td>b≠a</td><td>0</td></tr>
+<tr><td>5</td><td>c …</td><td>c≠a</td><td>0</td></tr>
+<tr><td>6</td><td>a b c</td><td>a✓ b✓ c✓ → result に 6</td><td>3</td></tr>
+<tr><td colspan="3">合計</td><td class="hit">8</td></tr>
+</table></div>
+<div class="key-point">data＝{a,b,a,b,c,a,b,c}、key＝{a,b,c} のとき β が真になるのは <strong>8回</strong>。「見つかった回数（2回）」と「比較が一致した回数（8回）」は別物。<strong>設問が何を数えているか</strong>を最初に線を引く。</div>
+<h3>型8：単方向リスト（次の番号をたどる）</h3>
+<div class="code">大域: 整数型の配列: dataList    ← {10, 30, 20, 40, 未定義}
+大域: 整数型の配列: pointerList ← {3, 4, 2, 未定義, 未定義}
+p ← 1
+for (i を 1 から dataListの要素数 まで 1 ずつ増やす)
+  linearListの末尾 に dataList[p] を追加する
+  if (pointerList[p] が 未定義)  繰返し処理を終了する  endif
+  p ← pointerList[p]
+endfor</div>
+<div class="trace-wrap"><table class="trace">
+<tr><th>p</th><th>dataList[p]</th><th>pointerList[p]</th><th>linearList</th></tr>
+<tr><td>1</td><td>10</td><td>3</td><td>{10}</td></tr>
+<tr><td>3</td><td>20</td><td>2</td><td>{10,20}</td></tr>
+<tr><td>2</td><td>30</td><td>4</td><td>{10,20,30}</td></tr>
+<tr><td>4</td><td>40</td><td>未定義 → 終了</td><td class="hit">{10,20,30,40}</td></tr>
+</table></div>
+<div class="key-point">リストは「値の配列」と「次の番号の配列」の2本で表す。<strong>末尾判定は次の番号が未定義かどうか</strong>。値の配列の順番（10,30,20,40）に惑わされない。</div>
+    </div>
+    <div class="lesson-nav">
+      <button class="btn-next" onclick="showSection('l4')">
+        <span class="bn-meta"><span class="bn-label">次のレッスン</span><span class="bn-title">④ 本番の解き方</span></span>
+        <span class="bn-arrow">→</span>
+      </button>
+    </div>
+  </section>
+
+  <section id="l4" class="section">
+    <div class="lesson-card">
+<h2>④ 本番の解き方</h2>
+<h3>アルゴリズム問題：4手順で固定する</h3>
+<div class="key-point">
+<strong>手順1　冒頭の説明文で「何をする関数か」に線を引く</strong>（例：「昇順に整列する」「素数だけを返す」）<br/>
+<strong>手順2　問われ方を確認</strong>：空欄補充か／実行結果か／回数か<br/>
+<strong>手順3　トレース</strong>：問題文の具体例（あれば）でトレース表を書く。空欄補充なら<strong>選択肢を入れて</strong>トレースし、説明文どおりになるものを残す<br/>
+<strong>手順4　照合</strong>：残った選択肢を説明文と突き合わせる。2択で迷ったら<strong>境界値（0・1・最後）</strong>で試す
+</div>
+<h3>実演：空欄補充（令和7年度 公開問題 問2）</h3>
+<div class="example"><strong>説明文：</strong>関数 change は 10 より大きい整数 n を受け取り、1円玉・5円玉・10円玉でちょうど n 円にする組合せの総数を返す。例：12円は4通り。</div>
+<div class="code">○整数型: change(整数型: n)
+  整数型: count ← 0
+  整数型: rest ← n
+  while ( <span class="bl">　　</span> )
+    count ← count ＋ (rest ÷ 5 の商) ＋ 1
+    rest ← rest － 10
+  endwhile
+  return count
+<span class="cm">解答群　ア rest ≧ 0　イ rest ≧ 5　ウ rest ≧ 10　エ rest ＞ 0　オ rest ＞ 5　カ rest ＞ 10</span></div>
+<div class="key-point"><strong>手順1</strong>：組合せの総数。<strong>手順2</strong>：空欄補充。<strong>手順3</strong>：例の n＝12 で「4通り」になる条件を探す。</div>
+<div class="trace-wrap"><table class="trace">
+<tr><th>周</th><th>rest</th><th>加える数</th><th>count</th><th>rest（更新後）</th></tr>
+<tr><td>1</td><td>12</td><td>12÷5の商 2 ＋1＝3</td><td>3</td><td>2</td></tr>
+<tr><td>2</td><td>2</td><td>2÷5の商 0 ＋1＝1</td><td class="hit">4</td><td>－8</td></tr>
+</table></div>
+<div class="key-point">
+2周目に入る条件は rest＝2 で真、rest＝－8 で偽。候補は <strong>ア（≧0）</strong> と <strong>エ（＞0）</strong>。<br/>
+<strong>手順4（境界値）</strong>：n＝20 なら 10円玉2枚で「1円玉も5円玉も0枚」の1通りがあり、これは rest＝0 のときに数える。よって rest＝0 でも回る <strong>ア</strong> が正解。
+</div>
+<h3>実演：実行結果（令和5年度 公開問題 問3）</h3>
+<div class="example"><strong>説明文：</strong>手続 sort は data の first〜last を昇順に整列する（クイックソート）。sort(1, 5) を呼んだとき、α の行を<strong>最初に</strong>実行したときの出力は？　data ＝ {2, 1, 3, 5, 4}</div>
+<div class="code">pivot ← data[(first ＋ last) ÷ 2 の商]   <span class="cm">// data[3] ＝ 3</span>
+i ← first;  j ← last
+while (true)
+  while (data[i] ＜ pivot)  i ← i ＋ 1  endwhile
+  while (pivot ＜ data[j])  j ← j － 1  endwhile
+  if (i ≧ j)  繰返し処理を終了する  endif
+  data[i]とdata[j]の値を入れ替える
+  i ← i ＋ 1;  j ← j － 1
+endwhile
+dataの全要素を出力する   <span class="cm">/*** α ***/</span></div>
+<div class="trace-wrap"><table class="trace">
+<tr><th>処理</th><th>i</th><th>j</th><th>判定</th></tr>
+<tr><td>data[1]=2＜3 → i＋1</td><td>2</td><td>5</td><td></td></tr>
+<tr><td>data[2]=1＜3 → i＋1</td><td>3</td><td>5</td><td></td></tr>
+<tr><td>data[3]=3＜3 偽 → 止まる</td><td>3</td><td>5</td><td></td></tr>
+<tr><td>3＜data[5]=4 → j－1</td><td>3</td><td>4</td><td></td></tr>
+<tr><td>3＜data[4]=5 → j－1</td><td>3</td><td>3</td><td></td></tr>
+<tr><td>3＜data[3]=3 偽 → 止まる</td><td>3</td><td>3</td><td class="hit">i≧j → 終了（交換なし）</td></tr>
+</table></div>
+<div class="key-point">交換は1回も起きずに抜けるので、出力は初期のまま <strong>2 1 3 5 4</strong>。「整列する関数だから整列済みが出る」と<strong>思い込むと落とす</strong>。設問は「最初に α を実行したとき」＝再帰に入る前。</div>
+<h3>セキュリティ問題（約4問）の読み方</h3>
+<div class="key-point">
+<strong>① 設問を先に読む</strong>：「ルール3に違反しているものは」「情報システム部に依頼した対策は」など、<strong>何を選ぶか</strong>を決めてから本文へ<br/>
+<strong>② 本文の該当箇所だけ照合</strong>：ルール番号・表の項番と、現在の運用を1対1で突き合わせる。<strong>他のルールの違反を混ぜない</strong><br/>
+<strong>③ 消去法</strong>：「守りを弱める選択肢」（機能の無効化・パスワード短縮・速度制限）はまず消える<br/>
+<strong>④ 数字は計算する</strong>：RPO（目標復旧時点）＝障害の何時間前のデータまで戻すか／RTO（目標復旧時間）＝何時間で復旧するか。バックアップの時刻表を書いて数える
+</div>
+<div class="example"><strong>例（令和7年度 問6）：</strong>土曜2時にフル（復元4時間）、火・木2時に増分（各0.25時間）。木曜正午に全消失 → 土フル＋火増分＋木増分＝<strong>4＋0.25×2＝4.5時間</strong>。RPO 72時間・金曜正午の障害 → <strong>火曜正午</strong>のデータまで復元が必要。ICT継続計画の承認は経営層＝<strong>CISO</strong>。</div>
+<h3>時間配分</h3>
+<table class="sql-table">
+<tr><th>区分</th><th>問数</th><th>目安</th></tr>
+<tr><td>アルゴリズム（短め・空欄補充）</td><td>約10問</td><td>4分×10＝40分</td></tr>
+<tr><td>アルゴリズム（長め・実行結果／回数）</td><td>約6問</td><td>6分×6＝36分</td></tr>
+<tr><td>セキュリティ</td><td>約4問</td><td>4分×4＝16分</td></tr>
+<tr><td>見直し</td><td>—</td><td>8分</td></tr>
+</table>
+<div class="key-point">6分を超えたら<strong>いったん飛ばす</strong>。CBT は問題一覧から戻れる。飛ばした問題は「あとで戻る」印だけ付けて次へ。</div>
+<h3>教材の出典</h3>
+<div class="src">本章の例題および確認テストは、IPA（独立行政法人情報処理推進機構）「基本情報技術者試験 公開問題（科目B）令和5年度・令和6年度・令和7年度・令和8年度」を基に、選択肢数の調整と解説の追加を行ったものです。IPA は試験問題の使用に許諾・使用料を不要としています。</div>
+    </div>
+    <div class="lesson-nav">
+      <button class="btn-next to-quiz" onclick="showSection('quiz')">
+        <span class="bn-meta"><span class="bn-label">仕上げ</span><span class="bn-title">確認テストに進む</span></span>
+        <span class="bn-arrow">→</span>
+      </button>
+    </div>
+  </section>
+
+<section id="quiz" class="section">
+    <div class="quiz-head">
+      <h2>確認テスト — 第23章</h2>
+      <p class="quiz-note">ランダム出題・選択肢シャッフル。紙とペンを用意し、必ずトレース表を書いてから選んでください。1問5分が本番のペースです。</p>
+      <div class="progress">
+        <div class="progress-bar"><div class="progress-fill"></div></div>
+        <div class="progress-count">0 / 0</div>
+      </div>
+    </div>
+    <div id="quiz-questions"></div>
+  </section>
+
+</main>
+
+<div class="result-overlay" id="resultOverlay">
+  <div class="result-area" id="resultArea">
+    <div class="result-label" id="resultLabel">RESULT</div>
+    <div class="result-score"><span id="scoreNum">0</span><span class="result-total" id="scoreTotal">/ 0</span></div>
+    <div class="result-msg" id="resultMsg"></div>
+    <div class="result-actions">
+      <button class="btn" onclick="retryQuiz()">もう一度挑戦する</button>
+      <button class="btn-outline" onclick="closeResult()">解答を見直す</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =========================================================================
+   ロジック（全22章で流用可能な骨格）
+   - showSection(id)        : レッスン／テストのタブ切替
+   - allQuestions           : 設問データ配列（章ごとに差し替え）
+   - selectChoice(qi, ci)   : 選択肢クリック→採点→解説表示
+   ========================================================================= */
+
+/* ---- タブ切替 ---------------------------------------------------------- */
+var STORE_KEY = 'fe_ch23_section';
+function showSection(id, opts){
+  opts = opts || {};
+  document.querySelectorAll('.section').forEach(function(s){
+    s.classList.toggle('active', s.id === id);
+  });
+  document.querySelectorAll('.tabbar [data-target]').forEach(function(t){
+    t.classList.toggle('active', t.dataset.target === id);
+  });
+  // 画面上部（タブ帯）へ
+  if(opts.scroll !== false){
+    var top = document.querySelector('.header').offsetHeight;
+    window.scrollTo(0, top);
+  }
+  try{ localStorage.setItem(STORE_KEY, id); }catch(e){}
+}
+function goBack(){ location.href='it_quiz.html'; }
+
+/* ---- 設問データ（第23章 擬似言語トレース演習） ------------------------ */
+/* answer = choices の正解インデックス（0始まり）。章ごとにこの配列を差し替え。 */
+var allQuestions = [
+{
+"q": "次のプログラムを実行したとき、終了時の s の値はどれか。<div class=\"code\">整数型: i ← 1, s ← 0\nwhile (i ≦ 10)\n  s ← s ＋ i\n  i ← i ＋ 3\nendwhile</div>",
+"choices": [
+"12",
+"22",
+"35",
+"55"
+],
+"answer": 1,
+"explain": "i は 1, 4, 7, 10 と進み、10≦10 も真なので4回実行される。s ＝ 1＋4＋7＋10 ＝ <strong>22</strong>。i＝13 で偽になり終了。",
+"why": [
+"i＝10 の回を数え落としている（≦ を ＜ と読んだ結果）。",
+"1＋4＋7＋10。境界の 10 も含む。",
+"i＝13 の回まで足している。13≦10 は偽。",
+"1〜10 を全部足した値。i は 3 ずつ増える。"
+]
+},
+{
+"q": "次のプログラムを実行したとき、終了時の n の値はどれか。<div class=\"code\">整数型: n ← 5\ndo\n  n ← n － 2\nwhile (n ＞ 5)</div>",
+"choices": [
+"5",
+"3",
+"1",
+"－1"
+],
+"answer": 1,
+"explain": "do～while は<strong>後判定</strong>。条件を見る前に処理を1回実行するので n＝3。3＞5 は偽で終了。前判定の while なら 5＞5 が偽で1回も実行されず 5 のまま。",
+"why": [
+"前判定と混同。do～while は必ず1回は実行する。",
+"1回実行して 3。判定 3＞5 は偽。",
+"2回実行した値。1回目の判定で偽になる。",
+"3回実行した値。"
+]
+},
+{
+"q": "次のプログラムを実行したとき、終了時の c の値はどれか。<div class=\"code\">整数型: c ← 0\nfor (i を 1 から 4 まで 1 ずつ増やす)\n  for (j を i から 4 まで 1 ずつ増やす)\n    c ← c ＋ 1\n  endfor\nendfor</div>",
+"choices": [
+"4",
+"8",
+"10",
+"16"
+],
+"answer": 2,
+"explain": "内側の j は i から始まるので、i＝1 のとき4回、i＝2 のとき3回、i＝3 のとき2回、i＝4 のとき1回。合計 <strong>10</strong>。",
+"why": [
+"外側の回数だけ数えている。",
+"内側を毎回2回と誤っている。",
+"4＋3＋2＋1＝10。",
+"内側が毎回 1〜4 だと思った値。j は i から始まる。"
+]
+},
+{
+"q": "次のプログラムは、整数型の配列 data の末尾の要素の値を先頭の要素に移動する。末尾以外の各要素は一つずつ後ろの要素に移動する。空欄に入る制御記述はどれか。配列の要素番号は 1 から始まる。<div class=\"code\">整数型の配列: data ← {1, 2, 3, 4, 5, 6, 7, 8, 9}\n整数型: top, i\n整数型: len ← dataの要素数\ntop ← data[len]\nfor (i を <span class=\"bl\">　　</span>)\n  data[i] ← data[i － 1]\nendfor\ndata[1] ← top</div>",
+"choices": [
+"2 から len － 1 まで 1 ずつ増やす",
+"2 から len まで 1 ずつ増やす",
+"len － 1 から 2 まで 1 ずつ減らす",
+"len から 2 まで 1 ずつ減らす"
+],
+"answer": 3,
+"explain": "後ろへずらすので<strong>後ろから</strong>回す。data[9]←data[8]、data[8]←data[7]、…、data[2]←data[1] で値が壊れない。最後に data[1]←top（＝9）で {9,1,2,…,8}。前から回すと data[2]←data[1] で 1 が次々コピーされてしまう。<div class=\"src\">出典：令和8年度 公開問題 科目B 問1</div>",
+"why": [
+"前から回すと data[2]←data[1] の時点で 2 が消え、以降すべて 1 になる。",
+"同じく前から回すため値が壊れる。",
+"data[len]←data[len－1] が実行されず、末尾に元の 9 が残る。",
+"後ろから順にずらすので値が壊れない。最後に data[1]←top で完成。"
+]
+},
+{
+"q": "関数 complement は、8ビット型の値 x について「x に加算すると 00000000 になる値」を返す（あふれた桁は無視）。∧・∨・▽はビット単位の論理積・論理和・排他的論理和である。空欄に入るものはどれか。<div class=\"code\">○8ビット型: complement(8ビット型: x)\n  8ビット型: y\n  y ← <span class=\"bl\">　　</span>\n  y ← y ＋ 00000001\n  return y</div>",
+"choices": [
+"x ∧ 11111111",
+"x ∨ 11111111",
+"x ▽ 01111111",
+"x ▽ 11111111"
+],
+"answer": 3,
+"explain": "求めるのは<strong>2の補数</strong>＝全ビットを反転して 1 を足す。11111111 との排他的論理和で全ビットが反転する。例：x＝00000011 → 11111100 → ＋1 → 11111101。x と足すと 1 00000000 となり、あふれを捨てて 0。<div class=\"src\">出典：令和8年度 公開問題 科目B 問2</div>",
+"why": [
+"11111111 との論理積は x そのもの。x＋x＋1 は 0 にならない。",
+"11111111 との論理和は常に 11111111。x に関係なく同じ値になり、x と足して 0 にはならない。",
+"最上位ビットが反転されず、補数にならない。",
+"全ビット反転＋1 ＝ 2の補数。"
+]
+},
+{
+"q": "関数 func1 と func2 は同じ引数に対して同じ値を返す。空欄に入るものはどれか。配列の要素番号は 1 から始まり、領域外を参照してはならない。<div class=\"code\">○整数型: func1(整数型: n)\n  if (nが2以下)  return 1  endif\n  return 2 × func1(n － 2) ＋ func1(n － 1)\n\n○整数型: func2(整数型: n)\n  整数型の配列: data ← {1, 1, 1}\n  整数型: i\n  for (iを3からnまで1ずつ増やす)\n    data[1] ← data[2]\n    data[2] ← data[3]\n    data[3] ← <span class=\"bl\">　　</span>\n  endfor\n  return data[3]</div>",
+"choices": [
+"2 × data[1] ＋ data[2]",
+"2 × data[2] ＋ data[1]",
+"2 × data[i － 1] ＋ data[i － 2]",
+"data[3] ＋ 2 × data[1] ＋ data[2]"
+],
+"answer": 0,
+"explain": "ずらした後、data[1] は func1(n－2) 相当、data[2] は func1(n－1) 相当。式 2×func1(n－2)＋func1(n－1) に当てはめて <strong>2×data[1]＋data[2]</strong>。トレース：n＝3 → 2×1＋1＝3（func1(3)＝2×1＋1＝3 ✓）、n＝4 → data{1,3} → 2×1＋3＝5（func1(4)＝2×1＋3＝5 ✓）。<div class=\"src\">出典：令和8年度 公開問題 科目B 問3</div>",
+"why": [
+"n＝4 で 2×1＋3＝5。func1(4) と一致する。",
+"係数が逆。n＝4 で 2×3＋1＝7 となり func1(4)＝5 と合わない。",
+"i は 3〜n と大きくなるので、i＝5 のとき data[4] を参照して領域外になる。",
+"古い data[3] を足す必要はない。n＝3 で 1＋2＋1＝4 ≠ 3。"
+]
+},
+{
+"q": "単方向リストを dataList（値）と pointerList（次の要素番号）で表す。関数 orderList は先頭からたどった順に値を並べた配列を返す。a・b の組合せとして正しいものはどれか。<div class=\"code\">大域: 整数型の配列: dataList ← {10, 30, 20, 40, 未定義の値}\n大域: 整数型の配列: pointerList ← {3, 4, 2, 未定義の値, 未定義の値}\n\n○整数型の配列: orderList()\n  整数型: i, p ← 1\n  整数型の配列: linearList ← {}\n  for (i を 1 から dataListの要素数 まで 1 ずつ増やす)\n    linearListの末尾 に dataList[p]の値 を追加する\n    if ( <span class=\"bl\">a</span> が 未定義)\n      繰返し処理を終了する\n    endif\n    p ← <span class=\"bl\">b</span>\n  endfor\n  return linearList</div>",
+"choices": [
+"a：dataList[p]　b：i",
+"a：dataList[p]　b：pointerList[p]",
+"a：pointerList[p]　b：i",
+"a：pointerList[p]　b：pointerList[p]"
+],
+"answer": 3,
+"explain": "末尾の判定は「次の要素番号 pointerList[p] が未定義か」。次へ進むには p に pointerList[p] を入れる。トレース：p＝1→10、p＝3→20、p＝2→30、p＝4→40、pointerList[4] が未定義で終了。{10,20,30,40}。<div class=\"src\">出典：令和8年度 公開問題 科目B 問4</div>",
+"why": [
+"b＝i では 1,2,3,4 の順に読むだけで {10,30,20,40} になる。",
+"a が違う。dataList[p] は値そのもので末尾判定に使えない。",
+"b＝i では配列の並び順で返してしまう。",
+"次の番号が未定義なら末尾。p を次の番号に更新してたどる。"
+]
+},
+{
+"q": "関数 oneHotEncoding は色名の配列を受け取り、各要素を One-Hot 表現（該当する色だけ 1、他は 0）に変換して返す。例：{\"Red\",\"Green\",\"Blue\",\"Red\"} → {{1,0,0},{0,1,0},{0,0,1},{1,0,0}}。a・b の組合せとして正しいものはどれか。<div class=\"code\">/* 名前一覧の作成 */\nfor (i を 1 から colorsの要素数 まで 1 ずつ増やす)\n  if (colorVector の要素のいずれにも colors[i]の値 が格納されていない)\n    colorVectorの末尾 に <span class=\"bl\">a</span> を追加する\n  endif\nendfor\n/* One-Hot表現への変換 */\nfor (j を 1 から colorsの要素数 まで 1 ずつ増やす)\n  tempVector ← {}\n  for (k を 1 から colorVectorの要素数 まで 1 ずつ増やす)\n    if ( <span class=\"bl\">b</span> )\n      tempVectorの末尾 に 1 を追加する\n    else\n      tempVectorの末尾 に 0 を追加する\n    endif\n  endfor\n  oneHotVectorの末尾 に tempVector を追加する\nendfor</div>",
+"choices": [
+"a：colors[i]の値　b：colors の要素のいずれかに colorVector[k]の値 が格納されている",
+"a：colors[i]の値　b：colors[j] が colorVector[k] と等しい",
+"a：未定義の値　b：colors[j] が colorVector[k] と等しい",
+"a：未定義の値　b：colors の要素のいずれかに colorVector[k]の値 が格納されている"
+],
+"answer": 1,
+"explain": "名前一覧には「まだ入っていない色名」を追加するので a は colors[i]。変換では、j 番目の色が一覧の k 番目と<strong>一致したときだけ</strong> 1。「colors のいずれかに格納されている」は一覧の色すべてで真になり、{1,1,1} ばかりになってしまう。<div class=\"src\">出典：令和8年度 公開問題 科目B 問5</div>",
+"why": [
+"b が常に真になり、全要素 1 の配列になる。",
+"一致した位置だけ 1 になる。",
+"未定義の値を一覧に入れても色名にならない。",
+"a・b とも誤り。"
+]
+},
+{
+"q": "クラウドサービスのログ管理ルール3「ログのアクセス管理」は次の4点：運用担当者だけがログにアクセスできる／エクスポートして保管する場合は自部署のファイルサーバに置き運用担当者だけがアクセスできるようにする／運用担当者は複数名にする／運用担当者のログインは2要素認証。営業部の Y サーバは営業部の全従業員が全ファイルを編集できる。現在の運用：(一) 空き容量が減ると古いログから上書きされる／(二) 担当者の1人が退職し現在は1名／(三) ログの日時は UTC／(四) 毎月末に全ログをエクスポートし Y サーバに保管。<strong>ルール3に違反しているもの</strong>だけを全て挙げた組合せはどれか。",
+"choices": [
+"(一)，(二)",
+"(二)，(四)",
+"(一)，(三)，(四)",
+"(三)，(四)"
+],
+"answer": 1,
+"explain": "(二) は「複数名にすること」に違反。(四) は Y サーバが全従業員に編集可能なので「運用担当者だけがアクセスできる」に違反。(一) は保存期間（別のルール）、(三) は日本標準時で記録する項目ルールの違反であり、<strong>ルール3ではない</strong>。設問が「ルール3」に限定していることに線を引く。<div class=\"src\">出典：令和8年度 公開問題 科目B 問6</div>",
+"why": [
+"(一) は保存期間のルール違反で、アクセス管理ではない。",
+"担当者1名と、全従業員が触れるサーバへの保管の2つ。",
+"(一)(三) は別のルールの違反。",
+"(三) は日時の記録項目のルール違反。"
+]
+},
+{
+"q": "function1 と function2 は同じ引数に対して同じ値を返す（m は n より 10 以上大きい正の整数）。a・b の組合せとして正しいものはどれか。<div class=\"code\">○整数型: function1(整数型: n, 整数型: m)\n  整数型: count ← 0\n  for (iをnからmまで1ずつ増やす)\n    if ((i mod 4)が0と等しい)  count ← count ＋ 1  endif\n  endfor\n  return count\n\n○整数型: function2(整数型: n, 整数型: m)\n  整数型: count ← 0, tempN ← n\n  for ( <span class=\"bl\">a</span> )\n    if ((tempN mod 4)が0と等しい)  繰返し処理を終了する  endif\n    tempN ← tempN ＋ 1\n  endfor\n  for ( <span class=\"bl\">b</span> )\n    count ← count ＋ 1\n  endfor\n  return count</div>",
+"choices": [
+"a：iを1から2まで1ずつ増やす　b：jをtempNからmまで1ずつ増やす",
+"a：iを1から2まで1ずつ増やす　b：jをtempNから始めてmを超えない範囲で4ずつ増やす",
+"a：iを1から3まで1ずつ増やす　b：jをnから始めてmを超えない範囲でtempNずつ増やす",
+"a：iを1から3まで1ずつ増やす　b：jをtempNから始めてmを超えない範囲で4ずつ増やす"
+],
+"answer": 3,
+"explain": "function1 は n〜m の「4の倍数の個数」。function2 は最初の4の倍数 tempN を見つけ、そこから<strong>4ずつ</strong>進めて数える。n, n＋1, n＋2, n＋3 のどれかが必ず4の倍数で、ループ内で確かめるのは n, n＋1, n＋2 の3回、抜けた時点で tempN＝n＋3。だから<strong>3周</strong>必要。トレース n＝5：5→6→7 と確かめて抜け、tempN＝8。<div class=\"src\">出典：令和7年度 公開問題 科目B 問1</div>",
+"why": [
+"2周だと n＝5 のとき tempN＝7 で止まり4の倍数にならない。b も1ずつでは全部数えてしまう。",
+"2周では n＋3 が4の倍数の場合に届かない。",
+"b の刻み幅 tempN では4の倍数を数えられない。",
+"3周で必ず4の倍数に届き、4ずつ数える。"
+]
+},
+{
+"q": "関数 change は 10 より大きい整数 n を受け取り、1円玉・5円玉・10円玉でちょうど n 円にする組合せの総数を返す（例：12円 → 4通り）。空欄に入るものはどれか。<div class=\"code\">○整数型: change(整数型: n)\n  整数型: count ← 0\n  整数型: rest ← n\n  while ( <span class=\"bl\">　　</span> )\n    count ← count ＋ (rest ÷ 5 の商) ＋ 1\n    rest ← rest － 10\n  endwhile\n  return count</div>",
+"choices": [
+"rest ≧ 0",
+"rest ≧ 5",
+"rest ＞ 0",
+"rest ＞ 10"
+],
+"answer": 0,
+"explain": "rest は「10円玉を使った残り」。残り 0 円も「1円玉も5円玉も 0 枚」という<strong>1通り</strong>なので、rest＝0 のときもループに入る必要がある。n＝12：rest12→count3、rest2→count4、rest－8 で終了 → 4通り ✓。n＝20 で「＞0」にすると 10円玉2枚の1通りを数え損ねる。<div class=\"src\">出典：令和7年度 公開問題 科目B 問2</div>",
+"why": [
+"rest＝0 のときも数えるので 4 通りになる。",
+"rest＝2 のとき（1円玉2枚）を数えず 3 になる。",
+"rest＝0 の1通り（例：20円＝10円玉2枚）を数え損ねる。",
+"12円で1回しか回らず 3 になる。"
+]
+},
+{
+"q": "要素数4の配列 stack と「次に値を格納する位置」stackPos でスタックを表す。push は格納できれば true、pop は取り出した値（空なら未定義）を返す。初期状態 stackPos＝3、stack＝{4, 3, 未定義, 未定義}。a・b の組合せとして正しいものはどれか。<div class=\"code\">○論理型: push(整数型: inputData)\n  if (stackPos ≦ stackの要素数)\n    stack[ <span class=\"bl\">a</span> ] ← inputData\n    stackPos ← stackPos ＋ 1\n    return true\n  else\n    return false\n  endif\n\n○整数型: pop()\n  整数型: popData ← 未定義の値\n  if (stackPos ＞ 1)\n    stackPos ← <span class=\"bl\">b</span>\n    popData ← stack[stackPos]\n    stack[stackPos] ← 未定義の値\n  endif\n  return popData</div>",
+"choices": [
+"a：stackPos　b：stackPos ＋ 1",
+"a：stackPos　b：stackPos － 1",
+"a：stackPos － 1　b：stackPos ＋ 1",
+"a：stackPos － 1　b：stackPos － 1"
+],
+"answer": 1,
+"explain": "stackPos は「<strong>次に入れる位置</strong>」。push は stack[stackPos] に入れてから＋1。pop は最後に入れた位置＝stackPos－1 に戻してから取り出す。トレース：push(7) → stack[3]＝7、stackPos＝4。pop → stackPos＝3、stack[3]＝7 を返す ✓。<div class=\"src\">出典：令和7年度 公開問題 科目B 問3</div>",
+"why": [
+"pop で＋1 すると未定義の場所を読む。",
+"入れてから＋1、－1 してから取り出す。",
+"push で stackPos－1 に入れると、すでに入っている 3 を上書きする。",
+"push が上書きしてしまう。"
+]
+},
+{
+"q": "関数 search は data から key と同じ並びを全て探し、その先頭の要素番号を配列で返す。search({\"a\",\"b\",\"a\",\"b\",\"c\",\"a\",\"b\",\"c\"}, {\"a\",\"b\",\"c\"}) と呼び出したとき、β の行の条件式が<strong>真となる回数</strong>はどれか。<div class=\"code\">for (i を 1 から (lenData － lenKey ＋ 1) まで 1 ずつ増やす)\n  for (j を 1 から lenKey まで 1 ずつ増やす)        <span class=\"cm\">// α</span>\n    if (data[i ＋ j － 1] が key[j] と等しい)       <span class=\"cm\">/*** β ***/</span>\n      if (j が lenKey と等しい)\n        resultの末尾 に iの値 を追加する\n      endif\n    else\n      αの行から始まる繰返し処理を終了する\n    endif\n  endfor\nendfor</div>",
+"choices": [
+"2",
+"6",
+"8",
+"10"
+],
+"answer": 2,
+"explain": "i は 1〜6。i＝1：a✓ b✓ a≠c で<strong>2回</strong>。i＝2：b≠a で 0。i＝3：a✓ b✓ c✓ で<strong>3回</strong>（result に 3）。i＝4、5：0。i＝6：a✓ b✓ c✓ で<strong>3回</strong>（result に 6）。合計 2＋3＋3＝<strong>8</strong>。<div class=\"src\">出典：令和7年度 公開問題 科目B 問4</div>",
+"why": [
+"result に追加された回数（2回）と取り違えている。",
+"i＝1 の途中一致（a, b の2回）を数え落としている。",
+"2＋3＋3＝8。",
+"偽になった比較まで数えている。"
+]
+},
+{
+"q": "集計結果（受けた：かからなかった 82・かかった 6、受けていない：かからなかった 58・かかった 8）から理論度数を計算する。result[r, c] ← (行 r の和) × (列 c の和) ÷ 全体の和。a（受けた×かからなかった）・b（受けていない×かかった）の組合せはどれか。",
+"choices": [
+"a：70　b：7",
+"a：75　b：2",
+"a：80　b：6",
+"a：82　b：6"
+],
+"answer": 2,
+"explain": "全体の和 t＝82＋6＋58＋8＝154。行の和：受けた 88、受けていない 66。列の和：かからなかった 140、かかった 14。a＝88×140÷154＝<strong>80</strong>、b＝66×14÷154＝<strong>6</strong>。<div class=\"src\">出典：令和7年度 公開問題 科目B 問5</div>",
+"why": [
+"行と列の和の計算が違う。",
+"行と列の和の計算が違う。",
+"88×140÷154＝80、66×14÷154＝6。",
+"82・6 は集計結果そのもの。理論度数は計算し直した値。"
+]
+},
+{
+"q": "ファイルサーバは土曜2時にフルバックアップ（リストア平均4時間）、火・木の2時に増分バックアップ（1回あたり平均0.25時間）。RPO（目標復旧時点）72時間・RTO 120時間。表2の回答：項番1「金曜正午に障害が発生した場合、少なくとも a1 の時点のデータは復元しなければならない」、項番2「木曜正午に全データが消失した場合、リストアには a2 時間掛かる」、項番3「ICT継続の計画書は a3 が承認している」。組合せはどれか。",
+"choices": [
+"a1：月曜日の正午　a2：4.25　a3：CISO",
+"a1：火曜日の正午　a2：4.25　a3：情報システム部の担当者",
+"a1：火曜日の正午　a2：4.50　a3：CISO",
+"a1：火曜日の正午　a2：4.50　a3：内部監査室長"
+],
+"answer": 2,
+"explain": "RPO 72時間＝金曜正午の72時間前＝<strong>火曜正午</strong>。木曜正午の障害では土曜のフル（4時間）＋火曜・木曜2時の増分2回（0.25×2）＝<strong>4.5時間</strong>。木曜2時の増分は正午の時点で取得済み。ICT継続計画の承認は経営層＝<strong>CISO</strong>。<div class=\"src\">出典：令和7年度 公開問題 科目B 問6</div>",
+"why": [
+"72時間前は月曜ではなく火曜正午。",
+"木曜2時の増分も含めて2回分。承認者は担当者ではなく CISO。",
+"火曜正午・4.5時間・CISO。",
+"内部監査室は監査する側で、計画の承認者ではない。"
+]
+},
+{
+"q": "関数 edgesToMatrix は無向グラフの辺の配列（例：{{1,3},{1,4},…}）を隣接行列に変換する。i 行 j 列は頂点 i と j を結ぶ辺があれば 1、対角成分は 0。空欄に入るものはどれか。<div class=\"code\">○整数型の二次元配列: edgesToMatrix(整数型配列の配列: edgeList, 整数型: nodeNum)\n  整数型の二次元配列: adjMatrix ← {nodeNum行nodeNum列の 0}\n  整数型: i, u, v\n  for (i を 1 から edgeListの要素数 まで 1 ずつ増やす)\n    u ← edgeList[i][1]\n    v ← edgeList[i][2]\n    <span class=\"bl\">　　</span>\n  endfor\n  return adjMatrix</div>",
+"choices": [
+"adjMatrix[u, u] ← 1",
+"adjMatrix[u, v] ← 1",
+"adjMatrix[u, v] ← 1 と adjMatrix[v, u] ← 1",
+"adjMatrix[v, v] ← 1"
+],
+"answer": 2,
+"explain": "無向グラフの隣接行列は<strong>対称</strong>。辺 {1,3} なら 1行3列と 3行1列の両方を 1 にする。対角成分 [u,u] は常に 0 なので触らない。<div class=\"src\">出典：令和6年度 公開問題 科目B 問3</div>",
+"why": [
+"対角成分は 0 のまま。",
+"片方だけでは対称にならない。",
+"両方向を 1 にして対称行列にする。",
+"対角成分は 0 のまま。"
+]
+},
+{
+"q": "関数 merge は昇順の配列 data1・data2 を併合して昇順の配列を返す。merge({2, 3}, {1, 4}) と呼び出したとき、α の行は何回実行されるか。<div class=\"code\">整数型: i ← 1, j ← 1, k ← 1\nwhile ((i ≦ n1) and (j ≦ n2))\n  if (data1[i] ≦ data2[j])\n    work[k] ← data1[i];  i ← i ＋ 1\n  else\n    work[k] ← data2[j];  j ← j ＋ 1\n  endif\n  k ← k ＋ 1\nendwhile\nwhile (i ≦ n1)  work[k] ← data1[i]; i ← i ＋ 1; k ← k ＋ 1  endwhile\nwhile (j ≦ n2)  work[k] ← data2[j]; j ← j ＋ 1; k ← k ＋ 1  endwhile   <span class=\"cm\">/*** α ***/</span></div>",
+"choices": [
+"実行されない",
+"1 回実行される",
+"2 回実行される",
+"3 回実行される"
+],
+"answer": 1,
+"explain": "1つ目の while：2≦1 偽→1 を入れ j＝2、2≦4 真→2 を入れ i＝2、3≦4 真→3 を入れ i＝3。i＝3＞n1 で終了。2つ目の while は i≦2 が偽で 0 回。3つ目の while（α）で残った 4 を入れる → <strong>1回</strong>。<div class=\"src\">出典：令和6年度 公開問題 科目B 問4</div>",
+"why": [
+"data2 の 4 が残っているので1回は実行される。",
+"data1 を先に使い切り、data2 の 4 だけが残る。",
+"data2 の残りは 4 の1つだけ。",
+"data2 の残りは1つ。"
+]
+},
+{
+"q": "手続 putRelatedItem は、注文データ orders から、引数の商品 item と関連度 L が最大の商品を出力する。L ＝ M × 全注文数 ÷ (Kx × Ky)。M は2商品が同一注文で買われた注文数、K は各商品が買われた注文数。a・b・c の組合せはどれか。<div class=\"code\">for (orderにordersの要素を順に代入する)\n  if (orderのいずれかの要素の値がitemの値と等しい)\n    itemCountの値を1増やす\n  endif\n  for (iを1からotherItemsの要素数まで1ずつ増やす)\n    if (orderのいずれかの要素の値がotherItems[i]の値と等しい)\n      if (orderのいずれかの要素の値がitemの値と等しい)\n        <span class=\"bl\">a</span> の値を1増やす\n      endif\n      <span class=\"bl\">b</span> の値を1増やす\n    endif\n  endfor\nendfor\nfor (iを1からotherItemsの要素数まで1ずつ増やす)\n  valueL ← (arrayM[i] × <span class=\"bl\">c</span> ) ÷ (itemCount × arrayK[i])\n  …</div>",
+"choices": [
+"a：arrayK[i]　b：arrayM[i]　c：ordersの要素数",
+"a：arrayM[i]　b：arrayK[i]　c：allItemsの要素数",
+"a：arrayM[i]　b：arrayK[i]　c：ordersの要素数",
+"a：arrayM[i]　b：arrayK[i]　c：otherItemsの要素数"
+],
+"answer": 2,
+"explain": "内側の if（item も同じ注文にある）で増やすのは<strong>同時購入数 M</strong>、その外で増やすのは<strong>商品 i の購入数 K</strong>。式の「全注文数」は <strong>orders の要素数</strong>。allItems（商品の種類数）や otherItems ではない。<div class=\"src\">出典：令和6年度 公開問題 科目B 問5</div>",
+"why": [
+"M と K が逆。内側の if は「同時に買われた」条件。",
+"c が商品の種類数になっている。",
+"M・K・全注文数の対応が正しい。",
+"c が「他の商品の種類数」になっている。"
+]
+},
+{
+"q": "関数 findPrimeNumbers は、引数以下の全ての素数を格納した配列を返す（引数は 2 以上）。a・b の組合せはどれか。<div class=\"code\">○整数型の配列: findPrimeNumbers(整数型: maxNum)\n  整数型の配列: pnList ← {}\n  整数型: i, j\n  論理型: divideFlag\n  for (i を 2 から <span class=\"bl\">a</span> まで 1 ずつ増やす)\n    divideFlag ← true\n    for (j を 2 から iの正の平方根の整数部分 まで 1 ずつ増やす)  <span class=\"cm\">// α</span>\n      if ( <span class=\"bl\">b</span> )\n        divideFlag ← false\n        αの行から始まる繰返し処理を終了する\n      endif\n    endfor\n    if (divideFlag が true と等しい)  pnListの末尾 に iの値 を追加する  endif\n  endfor\n  return pnList</div>",
+"choices": [
+"a：maxNum　b：i ÷ j の余り が 0 と等しい",
+"a：maxNum　b：i ÷ j の商 が 1 と等しくない",
+"a：maxNum ＋ 1　b：i ÷ j の余り が 0 と等しい",
+"a：maxNum ＋ 1　b：i ÷ j の商 が 1 と等しくない"
+],
+"answer": 0,
+"explain": "「引数<strong>以下</strong>」なので上限は maxNum（＋1 だと maxNum＋1 まで調べてしまう）。j で<strong>割り切れる</strong>（余り 0）約数が見つかれば素数ではない。「商が 1 と等しくない」は約数判定にならない。<div class=\"src\">出典：令和5年度 公開問題 科目B 問1</div>",
+"why": [
+"maxNum まで、余り 0 で約数判定。",
+"商が 1 でないことは割り切れる条件ではない。",
+"maxNum＋1 まで調べると範囲を超える。",
+"両方誤り。"
+]
+},
+{
+"q": "次のプログラムにおいて、手続 proc2 を呼び出すと、どの順に出力されるか。<div class=\"code\">○proc1()\n  \"A\" を出力する\n  proc3()\n○proc2()\n  proc3()\n  \"B\" を出力する\n  proc1()\n○proc3()\n  \"C\" を出力する</div>",
+"choices": [
+"\"A\", \"C\", \"B\", \"C\"",
+"\"B\", \"C\", \"B\", \"A\"",
+"\"C\", \"B\", \"A\"",
+"\"C\", \"B\", \"A\", \"C\""
+],
+"answer": 3,
+"explain": "proc2 の中を上から：proc3 → <strong>C</strong>。次に <strong>B</strong>。次に proc1 → <strong>A</strong>、proc1 の中の proc3 → <strong>C</strong>。呼び出しが終わったら呼んだ場所の次の行に戻る。<div class=\"src\">出典：令和5年度 公開問題 科目B 問2</div>",
+"why": [
+"proc2 は proc3 から始まる。",
+"proc2 は自分の \"B\" の前に proc3 を呼ぶ。",
+"proc1 の最後で proc3 が呼ばれ、もう一度 C が出る。",
+"C, B, A, C。"
+]
+},
+{
+"q": "手続 sort は大域の配列 data の first〜last を昇順に整列する。sort(1, 5) と呼び出したとき、α の行を<strong>最初に</strong>実行したときの出力はどれか。<div class=\"code\">大域: 整数型の配列: data ← {2, 1, 3, 5, 4}\n○sort(整数型: first, 整数型: last)\n  整数型: pivot, i, j\n  pivot ← data[(first ＋ last) ÷ 2 の商]\n  i ← first;  j ← last\n  while (true)\n    while (data[i] ＜ pivot)  i ← i ＋ 1  endwhile\n    while (pivot ＜ data[j])  j ← j － 1  endwhile\n    if (i ≧ j)  繰返し処理を終了する  endif\n    data[i]とdata[j]の値を入れ替える\n    i ← i ＋ 1;  j ← j － 1\n  endwhile\n  dataの全要素の値を要素番号の順に空白区切りで出力する   <span class=\"cm\">/*** α ***/</span>\n  if (first ＜ i － 1)  sort(first, i － 1)  endif\n  if (j ＋ 1 ＜ last)  sort(j ＋ 1, last)  endif</div>",
+"choices": [
+"1 2 3 4 5",
+"1 2 3 5 4",
+"2 1 3 4 5",
+"2 1 3 5 4"
+],
+"answer": 3,
+"explain": "pivot＝data[3]＝3。i：2＜3 → 2、1＜3 → 3、3＜3 偽で止まる（i＝3）。j：3＜4 → 4、3＜5 → 3、3＜3 偽で止まる（j＝3）。i≧j なので<strong>交換せずに</strong>ループを抜け、初期のまま <strong>2 1 3 5 4</strong> を出力。整列が終わるのは再帰の後。<div class=\"src\">出典：令和5年度 公開問題 科目B 問3</div>",
+"why": [
+"整列後の最終結果。設問は「最初に α を実行したとき」。",
+"交換が起きていない。",
+"交換が起きていない。",
+"交換なしで抜けるので初期のまま。"
+]
+},
+{
+"q": "関数 add は value を hashArray に格納する。calcHash1 の位置が空（－1）なら格納、埋まっていれば calcHash2 の位置に格納する。手続 test 終了直後の hashArray はどれか。<div class=\"code\">○整数型: calcHash1(整数型: value)\n  return (value mod hashArrayの要素数) ＋ 1\n○整数型: calcHash2(整数型: value)\n  return ((value ＋ 3) mod hashArrayの要素数) ＋ 1\n○test()\n  hashArray ← {5個の －1}\n  add(3)\n  add(18)\n  add(11)</div>",
+"choices": [
+"{－1, 3, －1, 18, 11}",
+"{－1, 11, －1, 3, －1}",
+"{－1, 18, －1, 3, 11}",
+"{－1, 18, 11, 3, －1}"
+],
+"answer": 2,
+"explain": "add(3)：3 mod 5＋1＝4 → 空 → [4]＝3。add(18)：18 mod 5＋1＝4 → 埋 → (21 mod 5)＋1＝2 → [2]＝18。add(11)：11 mod 5＋1＝2 → 埋 → (14 mod 5)＋1＝5 → [5]＝11。結果 <strong>{－1, 18, －1, 3, 11}</strong>。<div class=\"src\">出典：令和5年度 公開問題 科目B 問4</div>",
+"why": [
+"3 と 18 の位置が逆。3 が先に [4] を取る。",
+"18 が格納されていない。",
+"mod の表を作れば一意に決まる。",
+"11 は calcHash2 で [5] に入る。"
+]
+},
+{
+"q": "関数 calcCosineSimilarity は2つの配列のコサイン類似度（内積 ÷ (ノルム1 × ノルム2)）を返す。a・b の組合せはどれか。<div class=\"code\">numerator ← 0\nfor (i を 1 から vector1の要素数 まで 1 ずつ増やす)\n  numerator ← numerator ＋ <span class=\"bl\">a</span>\nendfor\nfor (i を 1 から vector1の要素数 まで 1 ずつ増やす)\n  temp ← temp ＋ vector1[i]の2乗\nendfor\ndenominator ← tempの正の平方根\ntemp ← 0\nfor (i を 1 から vector2の要素数 まで 1 ずつ増やす)\n  temp ← temp ＋ vector2[i]の2乗\nendfor\ndenominator ← <span class=\"bl\">b</span>\nsimilarity ← numerator ÷ denominator\nreturn similarity</div>",
+"choices": [
+"a：(vector1[i] × vector2[i])の正の平方根　b：denominator × (tempの正の平方根)",
+"a：vector1[i] × vector2[i]　b：denominator × (tempの正の平方根)",
+"a：vector1[i] × vector2[i]　b：denominator ＋ (tempの正の平方根)",
+"a：vector1[i]の2乗　b：tempの正の平方根"
+],
+"answer": 1,
+"explain": "分子は内積＝各要素の<strong>積の和</strong>（a＝vector1[i]×vector2[i]）。分母は2つのノルムの<strong>積</strong>。denominator にはすでに vector1 のノルムが入っているので、vector2 のノルム（temp の平方根）を<strong>掛ける</strong>。<div class=\"src\">出典：令和5年度 公開問題 科目B 問5</div>",
+"why": [
+"積の平方根を足しても内積にならない。",
+"内積 ÷ (ノルム × ノルム)。",
+"ノルムは掛ける。足すのではない。",
+"a は自分自身の2乗になっており内積でない。"
+]
+},
+{
+"q": "A社は人事書類のスキャン業務をC社に委託する。C社の複合機はスキャンした PDF を従業員ごとに異なる鍵で暗号化して本人宛にメール送信し、大きい場合は社内の B サーバ（要 ID・パスワード）に保存して URL を本文に記載する。リスク評価で「複合機のメールの差出人アドレス・件名・本文・添付ファイル名が<strong>初期設定のまま</strong>で誰がスキャンしても同じ」「初期設定情報はベンダーの Web で公開されている」ことが分かり、初期設定から変更する対策が必要と評価した。この対策が必要と評価した<strong>リスク</strong>はどれか。",
+"choices": [
+"B業務の従業員が、攻撃者からの電子メールを複合機からのものと信じて本文中の URL をクリックし、フィッシングサイトに誘導される。その結果、採用予定者の個人情報が漏えいする。",
+"B業務の従業員が、複合機から送信されるメールをスパムと誤認して削除する。その結果、再スキャンが必要となり業務が遅延する。",
+"攻撃者が複合機のメールを盗聴し、添付ファイルを暗号化して身代金を要求する。",
+"攻撃者が複合機のメールを盗聴し、本文の URL を使って B サーバにアクセスする。その結果、個人情報が漏えいする。"
+],
+"answer": 0,
+"explain": "差出人・件名・本文の書式が<strong>公開されている初期設定</strong>なので、攻撃者は「複合機からのメール」を完全にまねできる。偽メールの URL で ID・パスワードを盗めば B サーバの個人情報に届く。初期設定を変えれば偽装しにくくなる。他の選択肢は初期設定を変えても防げない（盗聴・暗号化・誤削除）。<div class=\"src\">出典：令和5年度 公開問題 科目B 問6</div>",
+"why": [
+"初期設定が公開されている＝偽装が容易、という発見事項と直結する。",
+"スパム誤認は情報セキュリティリスクとしての評価対象ではなく、初期設定の変更で解決もしない。",
+"添付はすでに暗号化されており、盗聴は初期設定と関係ない。",
+"B サーバは ID・パスワードが必要で、URL だけでは入れない。"
+]
+}
+];
+
+/* ---- 出題状態 ---------------------------------------------------------- */
+var quiz = [];   // 表示中の設問（シャッフル済み）
+function shuffle(a){ for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t;} return a; }
+var KEYS = ['A','B','C','D','E'];
+
+function buildQuiz(){
+  var order = shuffle(allQuestions.map(function(q,i){return i;}));
+  quiz = order.map(function(oi){
+    var src = allQuestions[oi];
+    var idx = shuffle(src.choices.map(function(_,i){return i;}));
+    return {
+      q: src.q,
+      choices: idx.map(function(i){return src.choices[i];}),
+      answer: idx.indexOf(src.answer),
+      explain: src.explain,
+      why: src.why ? idx.map(function(i){return src.why[i];}) : null,
+      answered:false, correct:false
+    };
+  });
+  renderQuiz();
+}
+
+/* 選択肢ごとの解説（why）を組み立てる。
+   選択肢は毎回シャッフルされるため、記号（A/B/C/D）は表示時に動的に振り直す。 */
+function whyHtml(it){
+  if(!it.why) return '';
+  var h = '<div class="exp-why"><div class="exp-why-h">選択肢の解説</div><ul class="why-list">';
+  for(var wi=0; wi<it.choices.length; wi++){
+    var isAns = (wi === it.answer);
+    h += '<li class="why-item'+(isAns?' is-ans':'')+'">'
+      +    '<span class="why-key">'+KEYS[wi]+'</span>'
+      +    '<span class="why-body">'
+      +      '<span class="why-term">'+(isAns?'◯ ':'')+it.choices[wi]+'</span>'
+      +      '<span class="why-txt">'+(it.why[wi]||'')+'</span>'
+      +    '</span>'
+      +  '</li>';
+  }
+  return h + '</ul></div>';
+}
+
+function renderQuiz(){
+  var html = '';
+  for(var qi=0; qi<quiz.length; qi++){
+    var it = quiz[qi];
+    var lis = '';
+    for(var ci=0; ci<it.choices.length; ci++){
+      lis += '<li class="choice" onclick="selectChoice('+qi+','+ci+')">'
+           +   '<span class="key"><span>'+KEYS[ci]+'</span></span>'
+           +   '<span class="txt">'+it.choices[ci]+'</span>'
+           + '</li>';
+    }
+    html += '<div class="question-card" id="q'+qi+'">'
+         +    '<div class="q-number">問題 '+(qi+1)+' / '+quiz.length+'</div>'
+         +    '<div class="q-text">'+it.q+'</div>'
+         +    '<ul class="choices">'+lis+'</ul>'
+         +    '<div class="explanation"><span class="exp-mark"></span><span class="exp-text">'+it.explain+'</span>'+whyHtml(it)+'</div>'
+         +  '</div>';
+  }
+  document.getElementById('quiz-questions').innerHTML = html;
+  updateProgress();
+}
+
+function selectChoice(qi, ci){
+  var it = quiz[qi];
+  if(it.answered) return;
+  it.answered = true;
+  it.correct = (ci === it.answer);
+  var card = document.getElementById('q'+qi);
+  var lis = card.querySelectorAll('.choice');
+  for(var i=0;i<lis.length;i++){
+    if(i === it.answer) lis[i].classList.add('correct');
+    if(i === ci && ci !== it.answer) lis[i].classList.add('wrong');
+  }
+  card.querySelector('.choices').classList.add('answered');
+  var exp = card.querySelector('.explanation');
+  exp.classList.add('show', it.correct ? 'is-correct' : 'is-wrong');
+  exp.querySelector('.exp-mark').textContent = it.correct ? '◯ 正解！' : '✕ 不正解';
+  updateProgress();
+  if(quiz.every(function(x){return x.answered;})) setTimeout(showResult, 500);
+}
+
+function updateProgress(){
+  var total = quiz.length;
+  var done = quiz.filter(function(x){return x.answered;}).length;
+  document.querySelector('.progress-fill').style.width = total ? (done/total*100)+'%' : '0%';
+  document.querySelector('.progress-count').textContent = done + ' / ' + total;
+}
+
+/* ---- 結果画面 ---------------------------------------------------------- */
+function showResult(){
+  var total = quiz.length;
+  var score = quiz.filter(function(x){return x.correct;}).length;
+  var pct = total ? Math.round(score/total*100) : 0;
+  var label, msg;
+  if(pct >= 90){ label='PERFECT'; msg='文句なし。この調子なら本番でも通用します。'; }
+  else if(pct >= 70){ label='GREAT'; msg='good。あと少しで満点、間違えた所だけ復習しよう。'; }
+  else if(pct >= 50){ label='GOOD'; msg='基礎はOK。間違えた問題の解説を読み直そう。'; }
+  else { label='KEEP GOING'; msg='復習して再挑戦！解説を読めば必ず伸びます。'; }
+  document.getElementById('resultLabel').textContent = label;
+  document.getElementById('scoreTotal').textContent = '/ ' + total;
+  document.getElementById('resultMsg').textContent = msg;
+  var overlay = document.getElementById('resultOverlay');
+  overlay.classList.add('show');
+  countUp(document.getElementById('scoreNum'), score);
+  if(pct >= 50) confetti();
+}
+function countUp(el, to){
+  el.textContent = 0;
+  if(to <= 0) return;
+  var dur = 700, startT = Date.now();
+  var t = setInterval(function(){
+    var p = Math.min(1, (Date.now() - startT) / dur);
+    el.textContent = Math.round(p * to);
+    if(p >= 1){ el.textContent = to; clearInterval(t); }
+  }, 40);
+}
+function confetti(){
+  var host = document.getElementById('resultArea');
+  var colors = ['#56E1E9','#A78BFA','#4ADE80','#FBBF24'];
+  for(var i=0;i<18;i++){
+    var s = document.createElement('span');
+    s.className = 'confetti';
+    s.style.left = (Math.random()*100) + '%';
+    s.style.background = colors[i % 4];
+    s.style.animationDelay = (Math.random()*0.35) + 's';
+    s.style.setProperty('--cx', (Math.random()*160-80) + 'px');
+    host.appendChild(s);
+    (function(node){ setTimeout(function(){ if(node.parentNode) node.parentNode.removeChild(node); }, 1800); })(s);
+  }
+}
+function closeResult(){ document.getElementById('resultOverlay').classList.remove('show'); }
+function retryQuiz(){
+  closeResult();
+  buildQuiz();
+  showSection('quiz');
+}
+
+/* ---- 初期化 ------------------------------------------------------------ */
+(function init(){
+  buildQuiz();
+  var saved = null;
+  try{ saved = localStorage.getItem(STORE_KEY); }catch(e){}
+  if(saved && document.getElementById(saved)){ showSection(saved, {scroll:false}); }
+  // 結果オーバーレイの背景クリックで閉じる
+  document.getElementById('resultOverlay').addEventListener('click', function(e){
+    if(e.target === this) closeResult();
+  });
+})();
+</script>
+</body>
+</html>

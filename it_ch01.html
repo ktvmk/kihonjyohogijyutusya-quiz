@@ -265,13 +265,30 @@ strong{color:var(--ink-strong); font-weight:700;}
 /* 解説（回答後に開く） */
 .explanation{max-height:0; overflow:hidden; opacity:0; margin-top:0;
   border-radius:var(--r-sm); transition:max-height .4s ease, opacity .3s ease, margin-top .3s ease;}
-.explanation.show{max-height:400px; opacity:1; margin-top:13px; padding:13px 15px;}
+.explanation.show{max-height:3000px; opacity:1; margin-top:13px; padding:13px 15px;}
 .explanation.is-correct{background:rgba(74,222,128,.07); border:1px solid rgba(74,222,128,.28);}
 .explanation.is-wrong{background:rgba(251,113,133,.07); border:1px solid rgba(251,113,133,.28);}
 .exp-mark{display:block; font-size:var(--fs-sm); font-weight:800; margin-bottom:5px;}
 .explanation.is-correct .exp-mark{color:var(--success-soft);}
 .explanation.is-wrong .exp-mark{color:var(--danger-soft);}
 .exp-text{font-size:var(--fs-sm); color:var(--ink); line-height:1.8;}
+
+/* 選択肢ごとの解説（正解以外が何だったのかを示す） */
+.exp-why{margin-top:12px; padding-top:11px; border-top:1px dashed var(--line-strong);}
+.exp-why-h{font-size:var(--fs-xs); font-weight:800; letter-spacing:.12em;
+  color:var(--sub); margin-bottom:8px;}
+.why-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px;}
+.why-item{display:flex; gap:9px; align-items:flex-start;
+  font-size:var(--fs-sm); line-height:1.75;}
+.why-key{flex:0 0 auto; width:21px; height:21px; margin-top:3px; border-radius:var(--r-xs);
+  display:inline-flex; align-items:center; justify-content:center;
+  font-size:var(--fs-xs); font-weight:800; color:var(--sub);
+  background:rgba(255,255,255,.06); border:1px solid var(--line);}
+.why-item.is-ans .why-key{background:var(--success); border-color:transparent; color:#062B14;}
+.why-body{flex:1 1 auto; min-width:0;}
+.why-term{display:block; font-weight:700; color:var(--ink);}
+.why-item.is-ans .why-term{color:var(--success-soft);}
+.why-txt{display:block; color:var(--sub);}
 
 /* =====================  結果画面（オーバーレイ）  ====================== */
 .result-overlay{position:fixed; inset:0; z-index:100; display:none;
@@ -500,18 +517,18 @@ function goBack(){ location.href='it_quiz.html'; }
 /* ---- 設問データ（第10章 ネットワーク） -------------------------------- */
 /* answer = choices の正解インデックス（0始まり）。章ごとにこの配列を差し替え。 */
 var allQuestions = [
-{q:'情報の最小単位は何か。',choices:['バイト','ビット','キロバイト','ワード'],answer:1,explain:'ビット（bit）は0か1の1桁分で、情報の最小単位です。8ビットで1バイトになります。'},
-{q:'1バイトは何ビットか。',choices:['4ビット','8ビット','16ビット','32ビット'],answer:1,explain:'1バイト = 8ビットです。半角英数字1文字分に相当します。'},
-{q:'8ビットで表現できる状態の数はいくつか。',choices:['8通り','64通り','128通り','256通り'],answer:3,explain:'nビットで表せる状態数 = 2^n なので、2^8 = 256通りです。'},
-{q:'32ビットで表現できるパターン数は24ビットの何倍か。',choices:['8倍','32倍','128倍','256倍'],answer:3,explain:'2^32 ÷ 2^24 = 2^(32-24) = 2^8 = 256倍です。'},
-{q:'2進数「1011」を10進数に変換するといくつか。',choices:['9','10','11','13'],answer:2,explain:'1×2³ + 0×2² + 1×2¹ + 1×2⁰ = 8 + 0 + 2 + 1 = 11です。'},
-{q:'10進数「13」を2進数に変換するとどれか。',choices:['1011','1101','1110','1001'],answer:1,explain:'13÷2=6余り1, 6÷2=3余り0, 3÷2=1余り1, 1÷2=0余り1 → 下から読んで1101です。'},
-{q:'16進数で使われるアルファベットの「A」は10進数でいくつか。',choices:['9','10','11','16'],answer:1,explain:'16進数では0〜9の次にA=10, B=11, C=12, D=13, E=14, F=15を使います。'},
-{q:'2進数「10110100」を16進数に変換するとどれか。',choices:['A4','B4','C4','D4'],answer:1,explain:'4桁ずつ区切ると「1011 | 0100」。1011=B, 0100=4 なので「B4」です。'},
-{q:'2の補数で負の数を作るとき、最初にすることは何か。',choices:['2を足す','すべてのビットを反転する','先頭に1を付ける','2で割る'],answer:1,explain:'2の補数は「すべてのビットを反転して1を加える」ことで作ります。'},
-{q:'8ビットの2進数で、先頭ビットが1の場合、その数は何を意味するか。',choices:['正の数','負の数','小数','エラー'],answer:1,explain:'先頭のビット（符号ビット）が1なら負の数、0なら正の数を表します。'},
-{q:'ビット列を左に1つシフトすると、値は何倍になるか。',choices:['1/2倍','2倍','4倍','8倍'],answer:1,explain:'左に1つシフト = ×2（2倍）です。左に2つなら4倍、3つなら8倍になります。'},
-{q:'正の整数xを2ビット左にシフトしてxを加えると、結果はxの何倍か。',choices:['3倍','4倍','5倍','6倍'],answer:2,explain:'2ビット左シフト = x×4。そこにxを加えると x×4 + x = 5xです。'}
+{q:'情報の最小単位は何か。',choices:['バイト','ビット','キロバイト','ワード'],answer:1,explain:'ビット（bit）は0か1の1桁分で、情報の最小単位です。8ビットで1バイトになります。',why:['8ビットをまとめた単位。半角英数字1文字分にあたり、最小単位ではありません。','0か1の1桁分。これ以上分けられない情報の最小単位です。','1024バイト分の大きさ。ファイルサイズなどを表すときの単位です。','CPUが一度に扱うデータのまとまり。大きさは機種によって異なります。']},
+{q:'1バイトは何ビットか。',choices:['4ビット','8ビット','16ビット','32ビット'],answer:1,explain:'1バイト = 8ビットです。半角英数字1文字分に相当します。',why:['16進数1桁分（ニブル）の大きさで、1バイトの半分です。','1バイト＝8ビット。256通りの状態を表せます。','2バイト分の長さです。','4バイト分の長さで、IPv4アドレスなどがこの長さです。']},
+{q:'8ビットで表現できる状態の数はいくつか。',choices:['8通り','64通り','128通り','256通り'],answer:3,explain:'nビットで表せる状態数 = 2^n なので、2^8 = 256通りです。',why:['2の3乗。3ビットで表せる状態数です。','2の6乗。6ビットで表せる状態数です。','2の7乗。7ビットで表せる状態数です。','2の8乗＝256。8ビットで表せる状態数です。']},
+{q:'32ビットで表現できるパターン数は24ビットの何倍か。',choices:['8倍','32倍','128倍','256倍'],answer:3,explain:'2^32 ÷ 2^24 = 2^(32-24) = 2^8 = 256倍です。',why:['2の3乗。ビット数の差が3のときの倍率です。','「32ビット」の数字につられやすい誤答。倍率はビット数の差で決まります。','2の7乗。ビット数の差が7のときの倍率です。','2の32乗÷2の24乗＝2の8乗＝256倍。差の8ビット分だけ増えます。']},
+{q:'2進数「1011」を10進数に変換するといくつか。',choices:['9','10','11','13'],answer:2,explain:'1×2³ + 0×2² + 1×2¹ + 1×2⁰ = 8 + 0 + 2 + 1 = 11です。',why:['2進数では1001にあたる値です。','2進数では1010にあたる値です。','8＋0＋2＋1＝11。各桁の重み（8・4・2・1）を足した値です。','2進数では1101にあたる値です。']},
+{q:'10進数「13」を2進数に変換するとどれか。',choices:['1011','1101','1110','1001'],answer:1,explain:'13÷2=6余り1, 6÷2=3余り0, 3÷2=1余り1, 1÷2=0余り1 → 下から読んで1101です。',why:['10進数では11にあたります。','8＋4＋0＋1＝13。これが正解です。','8＋4＋2＝14にあたります。','8＋1＝9にあたります。']},
+{q:'16進数で使われるアルファベットの「A」は10進数でいくつか。',choices:['9','10','11','16'],answer:1,explain:'16進数では0〜9の次にA=10, B=11, C=12, D=13, E=14, F=15を使います。',why:['9は16進数でも9のまま。Aの一つ手前の数字です。','0〜9の次がAなので、A＝10です。','11は16進数ではBにあたります。','16は16進数では「10」と表記します。']},
+{q:'2進数「10110100」を16進数に変換するとどれか。',choices:['A4','B4','C4','D4'],answer:1,explain:'4桁ずつ区切ると「1011 | 0100」。1011=B, 0100=4 なので「B4」です。',why:['16進数のAは2進数で1010。よってA4は10100100です。','2進数を4桁ずつ区切ると1011と0100。1011は16進数のB、0100は4なのでB4です。','16進数のCは2進数で1100。よってC4は11000100です。','16進数のDは2進数で1101。よってD4は11010100です。']},
+{q:'2の補数で負の数を作るとき、最初にすることは何か。',choices:['2を足す','すべてのビットを反転する','先頭に1を付ける','2で割る'],answer:1,explain:'2の補数は「すべてのビットを反転して1を加える」ことで作ります。',why:['補数を作る手順にはない操作です。反転したあとに加えるのは1です。','まず全ビットを反転（1の補数）し、そこに1を加えて2の補数を作ります。','桁数が変わってしまい、2の補数にはなりません。','右シフトと同じで、値を半分にする操作です。']},
+{q:'8ビットの2進数で、先頭ビットが1の場合、その数は何を意味するか。',choices:['正の数','負の数','小数','エラー'],answer:1,explain:'先頭のビット（符号ビット）が1なら負の数、0なら正の数を表します。',why:['先頭（符号）ビットが0のときが正の数です。','先頭の符号ビットが1なら負の数を表します。','小数は固定小数点・浮動小数点という別の形式で表します。','符号ビットにエラーを示す意味はありません。']},
+{q:'ビット列を左に1つシフトすると、値は何倍になるか。',choices:['1/2倍','2倍','4倍','8倍'],answer:1,explain:'左に1つシフト = ×2（2倍）です。左に2つなら4倍、3つなら8倍になります。',why:['右に1つシフトしたときの倍率です。','左に1つシフトすると桁の重みが2倍になります。','左に2つシフトしたときの倍率です。','左に3つシフトしたときの倍率です。']},
+{q:'正の整数xを2ビット左にシフトしてxを加えると、結果はxの何倍か。',choices:['3倍','4倍','5倍','6倍'],answer:2,explain:'2ビット左シフト = x×4。そこにxを加えると x×4 + x = 5xです。',why:['1ビット左シフト（2x）にxを加えた場合の倍率です。','2ビット左シフトだけ（xを加える前）の値です。','x×4＋x＝5x。2ビットシフトで4倍にしてから1つ分足します。','4xにxを2回加えれば6xですが、加えるのは1回だけです。']}
 ];
 
 /* ---- 出題状態 ---------------------------------------------------------- */
@@ -529,10 +546,29 @@ function buildQuiz(){
       choices: idx.map(function(i){return src.choices[i];}),
       answer: idx.indexOf(src.answer),
       explain: src.explain,
+      why: src.why ? idx.map(function(i){return src.why[i];}) : null,
       answered:false, correct:false
     };
   });
   renderQuiz();
+}
+
+/* 選択肢ごとの解説（why）を組み立てる。
+   選択肢は毎回シャッフルされるため、記号（A/B/C/D）は表示時に動的に振り直す。 */
+function whyHtml(it){
+  if(!it.why) return '';
+  var h = '<div class="exp-why"><div class="exp-why-h">選択肢の解説</div><ul class="why-list">';
+  for(var wi=0; wi<it.choices.length; wi++){
+    var isAns = (wi === it.answer);
+    h += '<li class="why-item'+(isAns?' is-ans':'')+'">'
+      +    '<span class="why-key">'+KEYS[wi]+'</span>'
+      +    '<span class="why-body">'
+      +      '<span class="why-term">'+(isAns?'◯ ':'')+it.choices[wi]+'</span>'
+      +      '<span class="why-txt">'+(it.why[wi]||'')+'</span>'
+      +    '</span>'
+      +  '</li>';
+  }
+  return h + '</ul></div>';
 }
 
 function renderQuiz(){
@@ -550,7 +586,7 @@ function renderQuiz(){
          +    '<div class="q-number">問題 '+(qi+1)+' / '+quiz.length+'</div>'
          +    '<div class="q-text">'+it.q+'</div>'
          +    '<ul class="choices">'+lis+'</ul>'
-         +    '<div class="explanation"><span class="exp-mark"></span><span class="exp-text">'+it.explain+'</span></div>'
+         +    '<div class="explanation"><span class="exp-mark"></span><span class="exp-text">'+it.explain+'</span>'+whyHtml(it)+'</div>'
          +  '</div>';
   }
   document.getElementById('quiz-questions').innerHTML = html;

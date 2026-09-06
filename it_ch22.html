@@ -265,13 +265,30 @@ strong{color:var(--ink-strong); font-weight:700;}
 /* 解説（回答後に開く） */
 .explanation{max-height:0; overflow:hidden; opacity:0; margin-top:0;
   border-radius:var(--r-sm); transition:max-height .4s ease, opacity .3s ease, margin-top .3s ease;}
-.explanation.show{max-height:400px; opacity:1; margin-top:13px; padding:13px 15px;}
+.explanation.show{max-height:3000px; opacity:1; margin-top:13px; padding:13px 15px;}
 .explanation.is-correct{background:rgba(74,222,128,.07); border:1px solid rgba(74,222,128,.28);}
 .explanation.is-wrong{background:rgba(251,113,133,.07); border:1px solid rgba(251,113,133,.28);}
 .exp-mark{display:block; font-size:var(--fs-sm); font-weight:800; margin-bottom:5px;}
 .explanation.is-correct .exp-mark{color:var(--success-soft);}
 .explanation.is-wrong .exp-mark{color:var(--danger-soft);}
 .exp-text{font-size:var(--fs-sm); color:var(--ink); line-height:1.8;}
+
+/* 選択肢ごとの解説（正解以外が何だったのかを示す） */
+.exp-why{margin-top:12px; padding-top:11px; border-top:1px dashed var(--line-strong);}
+.exp-why-h{font-size:var(--fs-xs); font-weight:800; letter-spacing:.12em;
+  color:var(--sub); margin-bottom:8px;}
+.why-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px;}
+.why-item{display:flex; gap:9px; align-items:flex-start;
+  font-size:var(--fs-sm); line-height:1.75;}
+.why-key{flex:0 0 auto; width:21px; height:21px; margin-top:3px; border-radius:var(--r-xs);
+  display:inline-flex; align-items:center; justify-content:center;
+  font-size:var(--fs-xs); font-weight:800; color:var(--sub);
+  background:rgba(255,255,255,.06); border:1px solid var(--line);}
+.why-item.is-ans .why-key{background:var(--success); border-color:transparent; color:#062B14;}
+.why-body{flex:1 1 auto; min-width:0;}
+.why-term{display:block; font-weight:700; color:var(--ink);}
+.why-item.is-ans .why-term{color:var(--success-soft);}
+.why-txt{display:block; color:var(--sub);}
 
 /* =====================  結果画面（オーバーレイ）  ====================== */
 .result-overlay{position:fixed; inset:0; z-index:100; display:none;
@@ -674,23 +691,23 @@ function goBack(){ location.href='it_quiz.html'; }
 /* ---- 設問データ（第10章 ネットワーク） -------------------------------- */
 /* answer = choices の正解インデックス（0始まり）。章ごとにこの配列を差し替え。 */
 var allQuestions = [
-{q:'基本情報技術者試験 科目Bの出題数と試験時間の組合せとして正しいものはどれか。',choices:['10問・60分','20問・100分','40問・150分','80問・120分'],answer:1,explain:'科目Bは<strong>20問・100分</strong>のCBT方式です。全問必須で、選択問題はありません。1問あたり平均5分が目安です。'},
-{q:'科目Bの合格ライン（合格基準点）として正しいものはどれか。',choices:['1000点満点中400点以上','1000点満点中600点以上','1000点満点中800点以上','100点満点中60点以上'],answer:1,explain:'科目Bは1000点満点で、<strong>600点以上</strong>（おおむね6割）で合格です。科目Aも同じく600点以上が基準です。'},
-{q:'科目Bの出題内訳として最も適切なものはどれか。',choices:['アルゴリズムとプログラミングが約4問、情報セキュリティが約16問','アルゴリズムとプログラミングが約16問、情報セキュリティが約4問','すべて情報セキュリティ','すべてネットワーク'],answer:1,explain:'科目Bは20問中、<strong>アルゴリズムとプログラミングが約16問（8割）</strong>、<strong>情報セキュリティが約4問（2割）</strong>です。合格の鍵はアルゴリズム対策です。'},
-{q:'科目Bで出題されるプログラム言語に関する説明として正しいものはどれか。',choices:['Java言語の文法が出題される','C言語の文法が出題される','特定言語に依存しない擬似言語が出題され、文法は問題に記載される','受験者が好きな言語を選んで解答する'],answer:2,explain:'科目Bでは特定言語に依存しない<strong>擬似言語</strong>が出題されます。文法（書き方）はすべて問題用紙に記載されるため、事前に暗記する必要はありません。'},
-{q:'基本情報技術者試験がパソコンを使って通年で受験できる方式を何というか。',choices:['CBT方式','マークシート方式','記述式','口述試験'],answer:0,explain:'<strong>CBT方式</strong>（Computer Based Testing）は、テストセンターのパソコンで受験する方式です。通年で受験でき、試験終了直後にスコアがわかります。'},
-{q:'擬似言語のプログラムを1行ずつ手で追い、変数の値の変化を紙に書き出して確認する作業を何というか。',choices:['コンパイル','トレース（机上デバッグ）','リファクタリング','デプロイ'],answer:1,explain:'<strong>トレース（机上デバッグ）</strong>は、プログラムを手で追って変数の値の変化を書き出す作業で、擬似言語問題を解く最強の武器です。'},
-{q:'関数maximum(x, y, z) は異なる3つの整数のうち最大値を返す。「return x」を実行すべきなのは、if の条件式が次のどれのときか。（令和6年度）',choices:['x > y または x > z','x > y かつ x > z','y > z','z > x'],answer:1,explain:'xが最大値である条件は<strong>「x > y かつ x > z」</strong>です。「または」だと片方だけ大きくてもxを返してしまい、誤った最大値になります。'},
-{q:'result←0 から始め、2進数の各桁について「result ← result×2 ＋ その桁の値」を先頭から繰り返す。"10010"（5桁）を処理した最終値はどれか。（令和6年度）',choices:['2','9','18','25'],answer:2,explain:'0→(×2+1)1→(×2+0)2→(×2+0)4→(×2+1)9→(×2+0)<strong>18</strong>。桁ごとに前の値を2倍して足すこの手順は、2進数を10進数に変換する処理そのものです。'},
-{q:'スタック（Stack）のデータの出し入れ方式として正しいものはどれか。',choices:['FIFO（先入れ先出し）','LIFO（後入れ先出し）','ランダムアクセス','優先度順'],answer:1,explain:'スタックは<strong>LIFO（後入れ先出し）</strong>です。最後に積んだ（push）ものを最初に取り出し（pop）ます。積み重ねた本を上から取るイメージです。'},
-{q:'キュー（Queue）のデータの出し入れ方式として正しいものはどれか。',choices:['FIFO（先入れ先出し）','LIFO（後入れ先出し）','後ろから両方向に取り出す','鍵で暗号化して取り出す'],answer:0,explain:'キューは<strong>FIFO（先入れ先出し）</strong>です。最初に入れた（enqueue）ものを最初に取り出し（dequeue）ます。行列に並ぶ順番のイメージです。'},
-{q:'空のスタックに 1, 2, 3 の順にpushした後、pop を1回行うと取り出される値はどれか。',choices:['1','2','3','取り出せない'],answer:2,explain:'スタックはLIFO（後入れ先出し）なので、最後にpushした<strong>3</strong>が最初に取り出されます。キューであれば最初に入れた1が出ます。'},
-{q:'空のキューに A, B, C の順にenqueueした後、dequeue を1回行うと取り出される値はどれか。',choices:['A','B','C','空なので取り出せない'],answer:0,explain:'キューはFIFO（先入れ先出し）なので、最初にenqueueした<strong>A</strong>が最初に取り出されます。スタックであれば最後のCが出ます。'},
-{q:'前判定繰返し「while(条件)」の性質として正しいものはどれか。',choices:['条件が偽でも必ず1回は処理を実行する','条件を先に判定し、最初から偽なら1回も実行しない','無限に繰り返して止まらない','配列専用の繰返しである'],answer:1,explain:'while は<strong>前判定</strong>で、条件を先に評価します。最初から偽なら処理は<strong>1回も実行されません</strong>。必ず1回実行するのは後判定の do～while です。'},
-{q:'情報セキュリティの3要素（CIA）の組合せとして正しいものはどれか。',choices:['機密性・完全性・可用性','正確性・速度・容量','認証・暗号・監視','入力・処理・出力'],answer:0,explain:'情報セキュリティの3要素は<strong>機密性・完全性・可用性</strong>（Confidentiality, Integrity, Availability＝CIA）です。事例問題では「どの要素が損なわれるか」で整理すると考えやすくなります。'},
-{q:'許可された人だけが情報にアクセスでき、他人には読めない状態を保つ性質はどれか。',choices:['完全性','可用性','機密性','冗長性'],answer:2,explain:'許可された人だけがアクセスできる性質は<strong>機密性</strong>です。改ざんされていない性質は完全性、必要なときに使える性質は可用性です。'},
-{q:'クラウドサービスに社外から直接接続できるよう変更した結果、不正アクセスのリスクが増加した。リスク低減策として最も適切なものはどれか。（令和6年度）',choices:['社外から接続する際の認証に二要素認証を導入する','専用アプリの保存禁止機能を無効にする','通信速度を制限する','パスワードの桁数を減らして入力しやすくする'],answer:0,explain:'社外からの不正アクセスに対しては<strong>二要素認証の導入</strong>が有効です。パスワードが漏れても第2の要素がないと侵入できません。守りを弱める（保存禁止を無効化・パスワードを短くする）選択肢は誤りです。'},
-{q:'科目Bの情報セキュリティ対策として、最も効率的とされる学習方法はどれか。',choices:['擬似言語の文法をすべて暗記する','科目A（テクノロジ分野）の過去問を数多く解く','ネットワーク機器を自作する','英単語を暗記する'],answer:1,explain:'科目Bのセキュリティは科目Aのテクノロジ分野と内容が重複します。そのため<strong>科目Aの過去問を数多く解く</strong>ことが最も効率的な対策とされています。'}
+{q:'基本情報技術者試験 科目Bの出題数と試験時間の組合せとして正しいものはどれか。',choices:['10問・60分','20問・100分','40問・150分','80問・120分'],answer:1,explain:'科目Bは<strong>20問・100分</strong>のCBT方式です。全問必須で、選択問題はありません。1問あたり平均5分が目安です。',why:['どちらの数字も科目Bの実際の出題数・試験時間ではありません。','科目Bは20問・100分。1問あたり平均5分が目安です。','科目Aに近い分量で、科目Bの数字ではありません。','旧制度の午前試験に近い分量で、科目Bの数字ではありません。']},
+{q:'科目Bの合格ライン（合格基準点）として正しいものはどれか。',choices:['1000点満点中400点以上','1000点満点中600点以上','1000点満点中800点以上','100点満点中60点以上'],answer:1,explain:'科目Bは1000点満点で、<strong>600点以上</strong>（おおむね6割）で合格です。科目Aも同じく600点以上が基準です。',why:['4割では合格に届きません。','1000点満点中600点以上（おおむね6割）。科目Aも同じ基準です。','8割は必要な水準より高すぎます。','科目Bは100点満点ではなく1000点満点です。']},
+{q:'科目Bの出題内訳として最も適切なものはどれか。',choices:['アルゴリズムとプログラミングが約4問、情報セキュリティが約16問','アルゴリズムとプログラミングが約16問、情報セキュリティが約4問','すべて情報セキュリティ','すべてネットワーク'],answer:1,explain:'科目Bは20問中、<strong>アルゴリズムとプログラミングが約16問（8割）</strong>、<strong>情報セキュリティが約4問（2割）</strong>です。合格の鍵はアルゴリズム対策です。',why:['アルゴリズムと情報セキュリティの問数が逆になっています。','アルゴリズムとプログラミングが約16問、情報セキュリティが約4問です。','情報セキュリティだけではなく、アルゴリズムが大半を占めます。','ネットワーク単独の区分は科目Bにはありません。']},
+{q:'科目Bで出題されるプログラム言語に関する説明として正しいものはどれか。',choices:['Java言語の文法が出題される','C言語の文法が出題される','特定言語に依存しない擬似言語が出題され、文法は問題に記載される','受験者が好きな言語を選んで解答する'],answer:2,explain:'科目Bでは特定言語に依存しない<strong>擬似言語</strong>が出題されます。文法（書き方）はすべて問題用紙に記載されるため、事前に暗記する必要はありません。',why:['特定の言語の文法は出題されません。','特定の言語の文法は出題されません。','特定言語に依存しない擬似言語が出題され、文法は問題に記載されます。','言語を選んで解答する形式ではありません。']},
+{q:'基本情報技術者試験がパソコンを使って通年で受験できる方式を何というか。',choices:['CBT方式','マークシート方式','記述式','口述試験'],answer:0,explain:'<strong>CBT方式</strong>（Computer Based Testing）は、テストセンターのパソコンで受験する方式です。通年で受験でき、試験終了直後にスコアがわかります。',why:['テストセンターのパソコンで受験する方式。通年で受験できます。','以前の紙の試験で使われていた方式です。','基本情報技術者試験に記述式の出題はありません。','口述による試験は行われません。']},
+{q:'擬似言語のプログラムを1行ずつ手で追い、変数の値の変化を紙に書き出して確認する作業を何というか。',choices:['コンパイル','トレース（机上デバッグ）','リファクタリング','デプロイ'],answer:1,explain:'<strong>トレース（机上デバッグ）</strong>は、プログラムを手で追って変数の値の変化を書き出す作業で、擬似言語問題を解く最強の武器です。',why:['ソースコードを機械語に翻訳することです。','プログラムを1行ずつ手で追い、変数の変化を書き出す作業です。','動作を変えずに内部構造を整理する作業です。','作ったものを実行環境に配置することです。']},
+{q:'関数maximum(x, y, z) は異なる3つの整数のうち最大値を返す。「return x」を実行すべきなのは、if の条件式が次のどれのときか。（令和6年度）',choices:['x > y または x > z','x > y かつ x > z','y > z','z > x'],answer:1,explain:'xが最大値である条件は<strong>「x > y かつ x > z」</strong>です。「または」だと片方だけ大きくてもxを返してしまい、誤った最大値になります。',why:['「または」では片方だけ大きい場合にもxを返してしまいます。','xがyより大きく、かつzより大きい。このときだけxが最大です。','yとzの比較だけでは、xが最大かどうか判断できません。','zとxの比較だけでは、yとの関係が分かりません。']},
+{q:'result←0 から始め、2進数の各桁について「result ← result×2 ＋ その桁の値」を先頭から繰り返す。"10010"（5桁）を処理した最終値はどれか。（令和6年度）',choices:['2','9','18','25'],answer:2,explain:'0→(×2+1)1→(×2+0)2→(×2+0)4→(×2+1)9→(×2+0)<strong>18</strong>。桁ごとに前の値を2倍して足すこの手順は、2進数を10進数に変換する処理そのものです。',why:['2桁目まで処理した段階の値です。','4桁目まで処理した段階の値です。','0→1→2→4→9→18。5桁すべて処理した最終値です。','どの段階にも現れない値です。']},
+{q:'スタック（Stack）のデータの出し入れ方式として正しいものはどれか。',choices:['FIFO（先入れ先出し）','LIFO（後入れ先出し）','ランダムアクセス','優先度順'],answer:1,explain:'スタックは<strong>LIFO（後入れ先出し）</strong>です。最後に積んだ（push）ものを最初に取り出し（pop）ます。積み重ねた本を上から取るイメージです。',why:['先入れ先出しはキューの方式です。','後入れ先出し。最後にpushしたものを最初にpopします。','位置を指定して自由に読み書きするのは配列の性質です。','優先度順に取り出すのは優先度付きキューの性質です。']},
+{q:'キュー（Queue）のデータの出し入れ方式として正しいものはどれか。',choices:['FIFO（先入れ先出し）','LIFO（後入れ先出し）','後ろから両方向に取り出す','鍵で暗号化して取り出す'],answer:0,explain:'キューは<strong>FIFO（先入れ先出し）</strong>です。最初に入れた（enqueue）ものを最初に取り出し（dequeue）ます。行列に並ぶ順番のイメージです。',why:['先入れ先出し。最初にenqueueしたものを最初にdequeueします。','後入れ先出しはスタックの方式です。','両端から出し入れするのはデック（両端キュー）です。','暗号化はデータ構造の出し入れ方式とは関係ありません。']},
+{q:'空のスタックに 1, 2, 3 の順にpushした後、pop を1回行うと取り出される値はどれか。',choices:['1','2','3','取り出せない'],answer:2,explain:'スタックはLIFO（後入れ先出し）なので、最後にpushした<strong>3</strong>が最初に取り出されます。キューであれば最初に入れた1が出ます。',why:['1は最初にpushしたので、いちばん下に残ります。','2は真ん中にあり、3を取り出した後に出てきます。','最後にpushした3が最初に取り出されます。','3つ積んであるので、問題なく取り出せます。']},
+{q:'空のキューに A, B, C の順にenqueueした後、dequeue を1回行うと取り出される値はどれか。',choices:['A','B','C','空なので取り出せない'],answer:0,explain:'キューはFIFO（先入れ先出し）なので、最初にenqueueした<strong>A</strong>が最初に取り出されます。スタックであれば最後のCが出ます。',why:['最初にenqueueしたAが最初に取り出されます。','Bが出るのは、Aを取り出した後です。','Cは最後にenqueueしたので、いちばん後ろです。','3つ入っているので、問題なく取り出せます。']},
+{q:'前判定繰返し「while(条件)」の性質として正しいものはどれか。',choices:['条件が偽でも必ず1回は処理を実行する','条件を先に判定し、最初から偽なら1回も実行しない','無限に繰り返して止まらない','配列専用の繰返しである'],answer:1,explain:'while は<strong>前判定</strong>で、条件を先に評価します。最初から偽なら処理は<strong>1回も実行されません</strong>。必ず1回実行するのは後判定の do～while です。',why:['必ず1回は実行するのは、後判定のdo〜whileです。','条件を先に判定するので、最初から偽なら1回も実行しません。','条件が偽になれば終了します。無限ループになるとは限りません。','配列に限らず、どんな繰返しにも使えます。']},
+{q:'情報セキュリティの3要素（CIA）の組合せとして正しいものはどれか。',choices:['機密性・完全性・可用性','正確性・速度・容量','認証・暗号・監視','入力・処理・出力'],answer:0,explain:'情報セキュリティの3要素は<strong>機密性・完全性・可用性</strong>（Confidentiality, Integrity, Availability＝CIA）です。事例問題では「どの要素が損なわれるか」で整理すると考えやすくなります。',why:['Confidentiality（機密性）・Integrity（完全性）・Availability（可用性）の3つです。','性能に関する指標で、セキュリティの3要素ではありません。','どれも対策の手段であって、守るべき性質の分類ではありません。','処理の流れの区分で、セキュリティの3要素ではありません。']},
+{q:'許可された人だけが情報にアクセスでき、他人には読めない状態を保つ性質はどれか。',choices:['完全性','可用性','機密性','冗長性'],answer:2,explain:'許可された人だけがアクセスできる性質は<strong>機密性</strong>です。改ざんされていない性質は完全性、必要なときに使える性質は可用性です。',why:['完全性は、情報が改ざんされず正確に保たれている性質です。','可用性は、必要なときに使える性質です。','機密性は、許可された人だけがアクセスできる性質です。','冗長性は予備を持たせることで、CIAの3要素には含まれません。']},
+{q:'クラウドサービスに社外から直接接続できるよう変更した結果、不正アクセスのリスクが増加した。リスク低減策として最も適切なものはどれか。（令和6年度）',choices:['社外から接続する際の認証に二要素認証を導入する','専用アプリの保存禁止機能を無効にする','通信速度を制限する','パスワードの桁数を減らして入力しやすくする'],answer:0,explain:'社外からの不正アクセスに対しては<strong>二要素認証の導入</strong>が有効です。パスワードが漏れても第2の要素がないと侵入できません。守りを弱める（保存禁止を無効化・パスワードを短くする）選択肢は誤りです。',why:['パスワードが漏れても第2の要素がないと侵入できず、リスクを下げられます。','保存禁止機能を無効にすると、情報が端末に残りリスクが上がります。','通信速度の制限は、不正アクセス自体を防ぐ対策になりません。','桁数を減らすとパスワードが破られやすくなり、リスクが上がります。']},
+{q:'科目Bの情報セキュリティ対策として、最も効率的とされる学習方法はどれか。',choices:['擬似言語の文法をすべて暗記する','科目A（テクノロジ分野）の過去問を数多く解く','ネットワーク機器を自作する','英単語を暗記する'],answer:1,explain:'科目Bのセキュリティは科目Aのテクノロジ分野と内容が重複します。そのため<strong>科目Aの過去問を数多く解く</strong>ことが最も効率的な対策とされています。',why:['擬似言語の文法は問題に記載されるため、暗記は不要です。','科目Bのセキュリティは科目Aと内容が重なるので、過去問演習が最も効率的です。','機器の自作は試験対策には直結しません。','英単語の暗記は試験対策には直結しません。']}
 ];
 
 /* ---- 出題状態 ---------------------------------------------------------- */
@@ -708,10 +725,29 @@ function buildQuiz(){
       choices: idx.map(function(i){return src.choices[i];}),
       answer: idx.indexOf(src.answer),
       explain: src.explain,
+      why: src.why ? idx.map(function(i){return src.why[i];}) : null,
       answered:false, correct:false
     };
   });
   renderQuiz();
+}
+
+/* 選択肢ごとの解説（why）を組み立てる。
+   選択肢は毎回シャッフルされるため、記号（A/B/C/D）は表示時に動的に振り直す。 */
+function whyHtml(it){
+  if(!it.why) return '';
+  var h = '<div class="exp-why"><div class="exp-why-h">選択肢の解説</div><ul class="why-list">';
+  for(var wi=0; wi<it.choices.length; wi++){
+    var isAns = (wi === it.answer);
+    h += '<li class="why-item'+(isAns?' is-ans':'')+'">'
+      +    '<span class="why-key">'+KEYS[wi]+'</span>'
+      +    '<span class="why-body">'
+      +      '<span class="why-term">'+(isAns?'◯ ':'')+it.choices[wi]+'</span>'
+      +      '<span class="why-txt">'+(it.why[wi]||'')+'</span>'
+      +    '</span>'
+      +  '</li>';
+  }
+  return h + '</ul></div>';
 }
 
 function renderQuiz(){
@@ -729,7 +765,7 @@ function renderQuiz(){
          +    '<div class="q-number">問題 '+(qi+1)+' / '+quiz.length+'</div>'
          +    '<div class="q-text">'+it.q+'</div>'
          +    '<ul class="choices">'+lis+'</ul>'
-         +    '<div class="explanation"><span class="exp-mark"></span><span class="exp-text">'+it.explain+'</span></div>'
+         +    '<div class="explanation"><span class="exp-mark"></span><span class="exp-text">'+it.explain+'</span>'+whyHtml(it)+'</div>'
          +  '</div>';
   }
   document.getElementById('quiz-questions').innerHTML = html;

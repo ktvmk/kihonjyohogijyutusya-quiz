@@ -265,13 +265,30 @@ strong{color:var(--ink-strong); font-weight:700;}
 /* 解説（回答後に開く） */
 .explanation{max-height:0; overflow:hidden; opacity:0; margin-top:0;
   border-radius:var(--r-sm); transition:max-height .4s ease, opacity .3s ease, margin-top .3s ease;}
-.explanation.show{max-height:400px; opacity:1; margin-top:13px; padding:13px 15px;}
+.explanation.show{max-height:3000px; opacity:1; margin-top:13px; padding:13px 15px;}
 .explanation.is-correct{background:rgba(74,222,128,.07); border:1px solid rgba(74,222,128,.28);}
 .explanation.is-wrong{background:rgba(251,113,133,.07); border:1px solid rgba(251,113,133,.28);}
 .exp-mark{display:block; font-size:var(--fs-sm); font-weight:800; margin-bottom:5px;}
 .explanation.is-correct .exp-mark{color:var(--success-soft);}
 .explanation.is-wrong .exp-mark{color:var(--danger-soft);}
 .exp-text{font-size:var(--fs-sm); color:var(--ink); line-height:1.8;}
+
+/* 選択肢ごとの解説（正解以外が何だったのかを示す） */
+.exp-why{margin-top:12px; padding-top:11px; border-top:1px dashed var(--line-strong);}
+.exp-why-h{font-size:var(--fs-xs); font-weight:800; letter-spacing:.12em;
+  color:var(--sub); margin-bottom:8px;}
+.why-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px;}
+.why-item{display:flex; gap:9px; align-items:flex-start;
+  font-size:var(--fs-sm); line-height:1.75;}
+.why-key{flex:0 0 auto; width:21px; height:21px; margin-top:3px; border-radius:var(--r-xs);
+  display:inline-flex; align-items:center; justify-content:center;
+  font-size:var(--fs-xs); font-weight:800; color:var(--sub);
+  background:rgba(255,255,255,.06); border:1px solid var(--line);}
+.why-item.is-ans .why-key{background:var(--success); border-color:transparent; color:#062B14;}
+.why-body{flex:1 1 auto; min-width:0;}
+.why-term{display:block; font-weight:700; color:var(--ink);}
+.why-item.is-ans .why-term{color:var(--success-soft);}
+.why-txt{display:block; color:var(--sub);}
 
 /* =====================  結果画面（オーバーレイ）  ====================== */
 .result-overlay{position:fixed; inset:0; z-index:100; display:none;
@@ -534,21 +551,21 @@ function goBack(){ location.href='it_quiz.html'; }
 /* ---- 設問データ（第10章 ネットワーク） -------------------------------- */
 /* answer = choices の正解インデックス（0始まり）。章ごとにこの配列を差し替え。 */
 var allQuestions = [
-{q:'AとBの両方が1のときだけ結果が1になる論理演算は何か。',choices:['OR','AND','XOR','NOT'],answer:1,explain:'AND（論理積）は両方が1のときだけ結果が1になります。'},
-{q:'AとBが異なるときに結果が1になる論理演算は何か。',choices:['AND','OR','XOR','NAND'],answer:2,explain:'XOR（排他的論理和）はAとBが異なるときに1、同じときに0になります。'},
-{q:'NOT演算で、入力が0のとき出力は何か。',choices:['0','1','2','不定'],answer:1,explain:'NOT（否定）は入力の反対を出力します。0→1、1→0です。'},
-{q:'NAND演算とは何か。',choices:['ANDの結果を反転したもの','ORの結果を反転したもの','XORの結果を反転したもの','NOTを2回行ったもの'],answer:0,explain:'NAND = NOT AND。ANDの結果を反転します。'},
-{q:'A=1, B=0のとき、A OR Bの結果は何か。',choices:['0','1','不定','エラー'],answer:1,explain:'OR（論理和）は少なくとも一方が1なら結果が1です。A=1なので結果は1。'},
-{q:'A=1, B=1のとき、A XOR Bの結果は何か。',choices:['0','1','2','不定'],answer:0,explain:'XORはAとBが異なるときに1。A=1, B=1で同じなので結果は0です。'},
-{q:'「3 5 + 2 ×」はどの表記法か。',choices:['中置記法','前置記法','後置記法（逆ポーランド表記法）','ハンガリー表記法'],answer:2,explain:'演算子が後ろにあるので後置記法（逆ポーランド表記法）です。コンピュータ内部で使われます。'},
-{q:'半加算器を構成する2つの素子の組み合わせはどれか。',choices:['ANDとOR','XORとAND','NANDとNOR','XORとOR'],answer:1,explain:'半加算器はXOR（和を計算）とAND（桁上げを計算）で構成されます。'},
-{q:'全加算器の入力は何個か。',choices:['1個','2個','3個','4個'],answer:2,explain:'全加算器はA, B, 下の位からの桁上がりの3つが入力です。'},
-{q:'システムの動作を「入力」「状態」「出力」で単純化したモデルを何というか。',choices:['フローチャート','オートマトン','アルゴリズム','データベース'],answer:1,explain:'オートマトンは「入力」「状態」「出力」でシステムの動作をモデル化したものです。'},
-{q:'人間の脳の神経回路を模したAI技術は何か。',choices:['機械学習','ニューラルネットワーク','データマイニング','ビッグデータ'],answer:1,explain:'ニューラルネットワークは人間の脳の神経回路（ニューロン）を模した技術です。'},
-{q:'入力データと正解データをセットで与えて学習する手法は何か。',choices:['教師あり学習','教師なし学習','強化学習','転移学習'],answer:0,explain:'教師あり学習は入力データ＋正解データ（ラベル）をセットで与えて学習します。'},
-{q:'試行錯誤しながら報酬を最大化するように学習する手法は何か。',choices:['教師あり学習','教師なし学習','強化学習','深層学習'],answer:2,explain:'強化学習は報酬を最大化するように試行錯誤しながら学習する手法です。ゲームAI等に使われます。'},
-{q:'生成AIに対して与える指示を何というか。',choices:['クエリ','コマンド','プロンプト','パラメータ'],answer:2,explain:'プロンプトは生成AIに対して与える指示です。その最適化をプロンプトエンジニアリングと呼びます。'},
-{q:'AIが事実と異なる情報をもっともらしく生成することを何というか。',choices:['ディープフェイク','ハルシネーション','オーバーフィッティング','バイアス'],answer:1,explain:'ハルシネーション（幻覚）はAIが事実と異なる情報をもっともらしく生成する現象です。'}
+{q:'AとBの両方が1のときだけ結果が1になる論理演算は何か。',choices:['OR','AND','XOR','NOT'],answer:1,explain:'AND（論理積）は両方が1のときだけ結果が1になります。',why:['論理和。どちらか一方でも1なら1になります。','論理積。両方が1のときだけ1になります。','排他的論理和。2つが異なるときだけ1になります。','否定。入力1つを反転するだけの演算です。']},
+{q:'AとBが異なるときに結果が1になる論理演算は何か。',choices:['AND','OR','XOR','NAND'],answer:2,explain:'XOR（排他的論理和）はAとBが異なるときに1、同じときに0になります。',why:['論理積。両方が1のときだけ1で、「異なるとき」の判定はできません。','論理和。どちらかが1なら1なので、両方1でも1になります。','排他的論理和。AとBが異なるときだけ1になります。','ANDの結果を反転した演算。両方1のときだけ0になります。']},
+{q:'NOT演算で、入力が0のとき出力は何か。',choices:['0','1','2','不定'],answer:1,explain:'NOT（否定）は入力の反対を出力します。0→1、1→0です。',why:['入力が1のときの出力です。','NOTは入力を反転するので、0の反対の1が出力されます。','論理演算の出力は0か1だけで、2にはなりません。','NOTの出力は入力で必ず決まるので、不定にはなりません。']},
+{q:'NAND演算とは何か。',choices:['ANDの結果を反転したもの','ORの結果を反転したもの','XORの結果を反転したもの','NOTを2回行ったもの'],answer:0,explain:'NAND = NOT AND。ANDの結果を反転します。',why:['NAND＝NOT AND。ANDの結果をNOTで反転した演算です。','ORを反転したものはNOR（否定論理和）です。','XORを反転したものはXNOR（一致回路）です。','NOTを2回行うと元に戻るだけで、入力と同じ値になります。']},
+{q:'A=1, B=0のとき、A OR Bの結果は何か。',choices:['0','1','不定','エラー'],answer:1,explain:'OR（論理和）は少なくとも一方が1なら結果が1です。A=1なので結果は1。',why:['両方が0のときの結果です。ここはA＝1なので当てはまりません。','ORは少なくとも一方が1なら1。A＝1なので結果は1です。','論理演算は入力が決まれば出力も決まるため、不定にはなりません。','0と1の組合せは正しい入力なので、エラーにはなりません。']},
+{q:'A=1, B=1のとき、A XOR Bの結果は何か。',choices:['0','1','2','不定'],answer:0,explain:'XORはAとBが異なるときに1。A=1, B=1で同じなので結果は0です。',why:['XORは同じ値どうしなら0。A＝B＝1なので0です。','AとBが異なるときの結果です。ここは両方1で同じです。','論理演算の出力は0か1だけで、2にはなりません。','入力が定まっているので不定にはなりません。']},
+{q:'「3 5 + 2 ×」はどの表記法か。',choices:['中置記法','前置記法','後置記法（逆ポーランド表記法）','ハンガリー表記法'],answer:2,explain:'演算子が後ろにあるので後置記法（逆ポーランド表記法）です。コンピュータ内部で使われます。',why:['「3 ＋ 5」のように演算子を数の間に置く、人が普段使う書き方です。','「＋ 3 5」のように演算子を先に置く書き方（ポーランド表記法）です。','「3 5 ＋」のように演算子を後ろに置く書き方。スタックで計算しやすく、コンピュータ内部で使われます。','変数名の先頭に型を示す文字を付ける命名規則で、計算式の表記法ではありません。']},
+{q:'半加算器を構成する2つの素子の組み合わせはどれか。',choices:['ANDとOR','XORとAND','NANDとNOR','XORとOR'],answer:1,explain:'半加算器はXOR（和を計算）とAND（桁上げを計算）で構成されます。',why:['ANDだけでは和の桁（0と0で0、1と1で0）を作れません。','XORで和の桁、ANDで桁上げを作ります。この2つが半加算器の構成です。','NANDとNORはどちらも万能素子ですが、半加算器の基本構成としては挙げません。','ORでは1と1のときに桁上げを正しく区別できません。']},
+{q:'全加算器の入力は何個か。',choices:['1個','2個','3個','4個'],answer:2,explain:'全加算器はA, B, 下の位からの桁上がりの3つが入力です。',why:['入力1つで動くのはNOTのような否定回路です。','入力2つは半加算器。下の位からの桁上がりを受け取れません。','A・B・下の位からの桁上がりの3つが入力です。','全加算器の出力（和と桁上げ）は2つで、入力は3つです。']},
+{q:'システムの動作を「入力」「状態」「出力」で単純化したモデルを何というか。',choices:['フローチャート','オートマトン','アルゴリズム','データベース'],answer:1,explain:'オートマトンは「入力」「状態」「出力」でシステムの動作をモデル化したものです。',why:['処理の流れを図記号でつないだ図で、状態遷移を扱うモデルではありません。','「入力」「状態」「出力」でシステムの動きをモデル化したものです。','問題を解く手順そのもので、状態遷移のモデルではありません。','データを整理して蓄積・検索する仕組みです。']},
+{q:'人間の脳の神経回路を模したAI技術は何か。',choices:['機械学習','ニューラルネットワーク','データマイニング','ビッグデータ'],answer:1,explain:'ニューラルネットワークは人間の脳の神経回路（ニューロン）を模した技術です。',why:['データから規則性を学ぶ技術の総称で、脳の模倣に限りません。','脳の神経細胞（ニューロン）のつながりを模した構造のモデルです。','大量のデータから有用な規則や傾向を掘り出す手法です。','従来の方法では扱いきれない巨大で多様なデータそのものを指します。']},
+{q:'入力データと正解データをセットで与えて学習する手法は何か。',choices:['教師あり学習','教師なし学習','強化学習','転移学習'],answer:0,explain:'教師あり学習は入力データ＋正解データ（ラベル）をセットで与えて学習します。',why:['入力と正解（ラベル）をセットで与えて学習します。分類や予測に使います。','正解を与えず、データの似たもの同士をまとめる（クラスタリング等）手法です。','正解ではなく報酬を手がかりに、試行錯誤で学習する手法です。','あるタスクで学んだ結果を、別のタスクの学習に流用する手法です。']},
+{q:'試行錯誤しながら報酬を最大化するように学習する手法は何か。',choices:['教師あり学習','教師なし学習','強化学習','深層学習'],answer:2,explain:'強化学習は報酬を最大化するように試行錯誤しながら学習する手法です。ゲームAI等に使われます。',why:['正解データを与えて学ぶ手法で、試行錯誤はしません。','正解も報酬もなく、データの構造そのものを見つける手法です。','行動の結果に与えられる報酬が最大になるよう、試行錯誤で学習します。','ニューラルネットワークを多層にした手法の名前で、学習の枠組みの分類ではありません。']},
+{q:'生成AIに対して与える指示を何というか。',choices:['クエリ','コマンド','プロンプト','パラメータ'],answer:2,explain:'プロンプトは生成AIに対して与える指示です。その最適化をプロンプトエンジニアリングと呼びます。',why:['データベースへの問合せ文のことです。','コンピュータへの命令語のことで、生成AIへの指示を指す語ではありません。','生成AIに与える指示のこと。その工夫をプロンプトエンジニアリングと呼びます。','モデルの動作を決める設定値で、利用者が与える指示文のことではありません。']},
+{q:'AIが事実と異なる情報をもっともらしく生成することを何というか。',choices:['ディープフェイク','ハルシネーション','オーバーフィッティング','バイアス'],answer:1,explain:'ハルシネーション（幻覚）はAIが事実と異なる情報をもっともらしく生成する現象です。',why:['AIで作った偽の映像や音声のことです。','事実と異なる内容を、もっともらしい文章で作ってしまう現象です。','学習データに合わせすぎて、未知のデータに対応できなくなる過学習のことです。','学習データの偏りが結果の偏りとして出てしまうことです。']}
 ];
 
 /* ---- 出題状態 ---------------------------------------------------------- */
@@ -566,10 +583,29 @@ function buildQuiz(){
       choices: idx.map(function(i){return src.choices[i];}),
       answer: idx.indexOf(src.answer),
       explain: src.explain,
+      why: src.why ? idx.map(function(i){return src.why[i];}) : null,
       answered:false, correct:false
     };
   });
   renderQuiz();
+}
+
+/* 選択肢ごとの解説（why）を組み立てる。
+   選択肢は毎回シャッフルされるため、記号（A/B/C/D）は表示時に動的に振り直す。 */
+function whyHtml(it){
+  if(!it.why) return '';
+  var h = '<div class="exp-why"><div class="exp-why-h">選択肢の解説</div><ul class="why-list">';
+  for(var wi=0; wi<it.choices.length; wi++){
+    var isAns = (wi === it.answer);
+    h += '<li class="why-item'+(isAns?' is-ans':'')+'">'
+      +    '<span class="why-key">'+KEYS[wi]+'</span>'
+      +    '<span class="why-body">'
+      +      '<span class="why-term">'+(isAns?'◯ ':'')+it.choices[wi]+'</span>'
+      +      '<span class="why-txt">'+(it.why[wi]||'')+'</span>'
+      +    '</span>'
+      +  '</li>';
+  }
+  return h + '</ul></div>';
 }
 
 function renderQuiz(){
@@ -587,7 +623,7 @@ function renderQuiz(){
          +    '<div class="q-number">問題 '+(qi+1)+' / '+quiz.length+'</div>'
          +    '<div class="q-text">'+it.q+'</div>'
          +    '<ul class="choices">'+lis+'</ul>'
-         +    '<div class="explanation"><span class="exp-mark"></span><span class="exp-text">'+it.explain+'</span></div>'
+         +    '<div class="explanation"><span class="exp-mark"></span><span class="exp-text">'+it.explain+'</span>'+whyHtml(it)+'</div>'
          +  '</div>';
   }
   document.getElementById('quiz-questions').innerHTML = html;

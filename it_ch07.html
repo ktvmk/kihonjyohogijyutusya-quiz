@@ -265,13 +265,30 @@ strong{color:var(--ink-strong); font-weight:700;}
 /* 解説（回答後に開く） */
 .explanation{max-height:0; overflow:hidden; opacity:0; margin-top:0;
   border-radius:var(--r-sm); transition:max-height .4s ease, opacity .3s ease, margin-top .3s ease;}
-.explanation.show{max-height:400px; opacity:1; margin-top:13px; padding:13px 15px;}
+.explanation.show{max-height:3000px; opacity:1; margin-top:13px; padding:13px 15px;}
 .explanation.is-correct{background:rgba(74,222,128,.07); border:1px solid rgba(74,222,128,.28);}
 .explanation.is-wrong{background:rgba(251,113,133,.07); border:1px solid rgba(251,113,133,.28);}
 .exp-mark{display:block; font-size:var(--fs-sm); font-weight:800; margin-bottom:5px;}
 .explanation.is-correct .exp-mark{color:var(--success-soft);}
 .explanation.is-wrong .exp-mark{color:var(--danger-soft);}
 .exp-text{font-size:var(--fs-sm); color:var(--ink); line-height:1.8;}
+
+/* 選択肢ごとの解説（正解以外が何だったのかを示す） */
+.exp-why{margin-top:12px; padding-top:11px; border-top:1px dashed var(--line-strong);}
+.exp-why-h{font-size:var(--fs-xs); font-weight:800; letter-spacing:.12em;
+  color:var(--sub); margin-bottom:8px;}
+.why-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px;}
+.why-item{display:flex; gap:9px; align-items:flex-start;
+  font-size:var(--fs-sm); line-height:1.75;}
+.why-key{flex:0 0 auto; width:21px; height:21px; margin-top:3px; border-radius:var(--r-xs);
+  display:inline-flex; align-items:center; justify-content:center;
+  font-size:var(--fs-xs); font-weight:800; color:var(--sub);
+  background:rgba(255,255,255,.06); border:1px solid var(--line);}
+.why-item.is-ans .why-key{background:var(--success); border-color:transparent; color:#062B14;}
+.why-body{flex:1 1 auto; min-width:0;}
+.why-term{display:block; font-weight:700; color:var(--ink);}
+.why-item.is-ans .why-term{color:var(--success-soft);}
+.why-txt{display:block; color:var(--sub);}
 
 /* =====================  結果画面（オーバーレイ）  ====================== */
 .result-overlay{position:fixed; inset:0; z-index:100; display:none;
@@ -549,18 +566,18 @@ function goBack(){ location.href='it_quiz.html'; }
 /* ---- 設問データ（第10章 ネットワーク） -------------------------------- */
 /* answer = choices の正解インデックス（0始まり）。章ごとにこの配列を差し替え。 */
 var allQuestions = [
-{q:'電源を切るとデータが消える半導体メモリ（揮発性メモリ）はどれか。',choices:['RAM','ROM','フラッシュメモリ','EEPROM'],answer:0,explain:'<strong>RAM（Random Access Memory）</strong>は揮発性メモリで、電源を切るとデータが消えます。ROM（Read Only Memory）は不揮発性メモリで、電源を切ってもデータが保持されます。'},
-{q:'電源を切ってもデータが保持される半導体メモリ（不揮発性メモリ）はどれか。',choices:['RAM','DRAM','SRAM','ROM'],answer:3,explain:'<strong>ROM（Read Only Memory）</strong>は不揮発性メモリで、電源を切ってもデータが保持されます。DRAM、SRAMはいずれもRAMの一種で揮発性です。'},
-{q:'リフレッシュ操作が必要で、主記憶装置（メインメモリ）に使われるメモリはどれか。',choices:['DRAM','SRAM','ROM','フラッシュメモリ'],answer:0,explain:'<strong>DRAM（Dynamic RAM）</strong>は絶えずリフレッシュ（電荷の再書込み）が必要ですが、回路が単純で大容量を安く作れるため、主記憶装置に使われます。'},
-{q:'リフレッシュが不要で高速に動作し、キャッシュメモリに使われるメモリはどれか。',choices:['DRAM','SRAM','SDRAM','フラッシュメモリ'],answer:1,explain:'<strong>SRAM（Static RAM）</strong>はリフレッシュ不要で非常に高速に動作します。ただし高価なため、主にキャッシュメモリで使われます。'},
-{q:'DRAMの特徴として正しいものはどれか。',choices:['リフレッシュが不要で高速に動作する','メモリセル構造が単純で高集積化でき、ビット単価が安い','電源を切ってもデータが保持される','ブロック単位でデータの消去ができる'],answer:1,explain:'<strong>DRAM</strong>はメモリセル構造（コンデンサ）が単純で高集積化しやすく、ビット単価を安くできます。リフレッシュが必要で、電源を切るとデータが消える揮発性メモリです。'},
-{q:'クロックと同期して動作するDRAMの種類はどれか。',choices:['SRAM','SDRAM','EEPROM','フラッシュメモリ'],answer:1,explain:'<strong>SDRAM（Synchronous DRAM）</strong>はクロック信号と同期して動作するDRAMです。Synchronous＝「同期」の意味で、クロックに合わせてデータの読み書きを行います。'},
-{q:'ブロック単位で電気的にデータの消去ができるメモリはどれか。',choices:['DRAM','SRAM','SDRAM','フラッシュメモリ'],answer:3,explain:'<strong>フラッシュメモリ</strong>は電気的にデータの書き換えができるROM（不揮発性メモリ）で、データの消去はブロック単位で行います。SSDやUSBメモリの中身です。'},
-{q:'SSDやUSBメモリの内部に使われている半導体メモリはどれか。',choices:['DRAM','SRAM','SDRAM','フラッシュメモリ'],answer:3,explain:'SSDやUSBメモリの内部には<strong>フラッシュメモリ</strong>が使われています。フラッシュメモリは不揮発性（ROM）なので、電源を切ってもデータが残ります。'},
-{q:'コンデンサに蓄えた電荷の有無で情報を記憶するメモリはどれか。',choices:['SRAM','DRAM（SDRAM）','EEPROM','フラッシュメモリ'],answer:1,explain:'<strong>DRAM</strong>のメモリセルには<strong>コンデンサ</strong>が使われており、電荷の有無で0/1を記憶します。電荷はすぐに放電してしまうため、定期的なリフレッシュが必要です。SDRAMもDRAMの一種です。'},
-{q:'メモリセルにフリップフロップ回路を利用したものはどれか。',choices:['DRAM','SDRAM','SRAM','EEPROM'],answer:2,explain:'<strong>SRAM</strong>のメモリセルには<strong>フリップフロップ回路</strong>が使われています。フリップフロップ回路は2つの安定状態を持ち、電流が流れ続ける限り状態を保持するため、リフレッシュが不要です。'},
-{q:'二つの安定状態をもつ順序回路はどれか。',choices:['カウンタ回路','コンデンサ','フリップフロップ回路','論理回路'],answer:2,explain:'<strong>フリップフロップ回路</strong>は「2つの安定状態」を持つ順序回路で、SRAMのメモリセルに使われています。電流が流れている間、一方の状態を保持し続けます。'},
-{q:'機械式スイッチのON/OFFが切り替わる短い間に、意図しないON/OFFが繰り返される現象は何か。',choices:['チャタリング','フリッカリング','ジッタリング','バッファリング'],answer:0,explain:'<strong>チャタリング</strong>は、機械式スイッチの接点が振動し、短時間に意図しないON/OFFが繰り返される現象です。マウスの1回クリックがダブルクリックと認識されるのが典型例です。'}
+{q:'電源を切るとデータが消える半導体メモリ（揮発性メモリ）はどれか。',choices:['RAM','ROM','フラッシュメモリ','EEPROM'],answer:0,explain:'<strong>RAM（Random Access Memory）</strong>は揮発性メモリで、電源を切るとデータが消えます。ROM（Read Only Memory）は不揮発性メモリで、電源を切ってもデータが保持されます。',why:['読み書きできる揮発性メモリ。電源を切るとデータが消えます。','読み出し専用の不揮発性メモリで、電源を切っても残ります。','電気的に書き換えできる不揮発性メモリ（ROMの一種）です。','電気的に消去・書き換えできる不揮発性のROMです。']},
+{q:'電源を切ってもデータが保持される半導体メモリ（不揮発性メモリ）はどれか。',choices:['RAM','DRAM','SRAM','ROM'],answer:3,explain:'<strong>ROM（Read Only Memory）</strong>は不揮発性メモリで、電源を切ってもデータが保持されます。DRAM、SRAMはいずれもRAMの一種で揮発性です。',why:['読み書きできる揮発性メモリの総称で、電源を切ると消えます。','RAMの一種。リフレッシュが必要な揮発性メモリです。','RAMの一種。リフレッシュ不要ですが揮発性です。','不揮発性メモリ。電源を切ってもデータが保持されます。']},
+{q:'リフレッシュ操作が必要で、主記憶装置（メインメモリ）に使われるメモリはどれか。',choices:['DRAM','SRAM','ROM','フラッシュメモリ'],answer:0,explain:'<strong>DRAM（Dynamic RAM）</strong>は絶えずリフレッシュ（電荷の再書込み）が必要ですが、回路が単純で大容量を安く作れるため、主記憶装置に使われます。',why:['コンデンサを使うためリフレッシュが必要。安価で大容量にでき、主記憶に使われます。','フリップフロップを使うためリフレッシュ不要。高速ですが高価でキャッシュ向けです。','読み出し専用の不揮発性メモリで、主記憶には使いません。','不揮発性のROMの一種で、SSDやUSBメモリに使われます。']},
+{q:'リフレッシュが不要で高速に動作し、キャッシュメモリに使われるメモリはどれか。',choices:['DRAM','SRAM','SDRAM','フラッシュメモリ'],answer:1,explain:'<strong>SRAM（Static RAM）</strong>はリフレッシュ不要で非常に高速に動作します。ただし高価なため、主にキャッシュメモリで使われます。',why:['リフレッシュが必要で、キャッシュには速度が足りません。','リフレッシュ不要で高速。高価なためキャッシュメモリに使われます。','クロックに同期して動くDRAMの一種で、リフレッシュは必要です。','不揮発性のROMで、キャッシュ用途ではありません。']},
+{q:'DRAMの特徴として正しいものはどれか。',choices:['リフレッシュが不要で高速に動作する','メモリセル構造が単純で高集積化でき、ビット単価が安い','電源を切ってもデータが保持される','ブロック単位でデータの消去ができる'],answer:1,explain:'<strong>DRAM</strong>はメモリセル構造（コンデンサ）が単純で高集積化しやすく、ビット単価を安くできます。リフレッシュが必要で、電源を切るとデータが消える揮発性メモリです。',why:['リフレッシュ不要で高速なのはSRAMの特徴です。','コンデンサを使う単純な構造なので高集積化でき、ビット単価が安いのがDRAMの特徴です。','電源を切っても保持されるのはROM（不揮発性）の特徴です。','ブロック単位で消去するのはフラッシュメモリの特徴です。']},
+{q:'クロックと同期して動作するDRAMの種類はどれか。',choices:['SRAM','SDRAM','EEPROM','フラッシュメモリ'],answer:1,explain:'<strong>SDRAM（Synchronous DRAM）</strong>はクロック信号と同期して動作するDRAMです。Synchronous＝「同期」の意味で、クロックに合わせてデータの読み書きを行います。',why:['リフレッシュ不要の高速RAMですが、クロック同期を名前に持つ種類ではありません。','Synchronous＝同期。クロック信号に合わせて読み書きするDRAMです。','電気的に消去・書き換えできるROMです。','ブロック単位で消去できる不揮発性のROMです。']},
+{q:'ブロック単位で電気的にデータの消去ができるメモリはどれか。',choices:['DRAM','SRAM','SDRAM','フラッシュメモリ'],answer:3,explain:'<strong>フラッシュメモリ</strong>は電気的にデータの書き換えができるROM（不揮発性メモリ）で、データの消去はブロック単位で行います。SSDやUSBメモリの中身です。',why:['揮発性のRAMで、ブロック単位の消去という概念はありません。','揮発性のRAMで、電源を切れば内容は消えます。','クロック同期型のDRAMで、やはり揮発性です。','電気的に書き換えできる不揮発性メモリで、消去はブロック単位で行います。']},
+{q:'SSDやUSBメモリの内部に使われている半導体メモリはどれか。',choices:['DRAM','SRAM','SDRAM','フラッシュメモリ'],answer:3,explain:'SSDやUSBメモリの内部には<strong>フラッシュメモリ</strong>が使われています。フラッシュメモリは不揮発性（ROM）なので、電源を切ってもデータが残ります。',why:['主記憶に使う揮発性メモリで、電源を切ると消えてしまいます。','キャッシュに使う揮発性メモリです。','DRAMの一種で、やはり揮発性です。','不揮発性なので電源を切っても残る。SSDやUSBメモリの中身です。']},
+{q:'コンデンサに蓄えた電荷の有無で情報を記憶するメモリはどれか。',choices:['SRAM','DRAM（SDRAM）','EEPROM','フラッシュメモリ'],answer:1,explain:'<strong>DRAM</strong>のメモリセルには<strong>コンデンサ</strong>が使われており、電荷の有無で0/1を記憶します。電荷はすぐに放電してしまうため、定期的なリフレッシュが必要です。SDRAMもDRAMの一種です。',why:['フリップフロップ回路で記憶する方式です。','コンデンサに蓄えた電荷の有無で0と1を記憶します。電荷が抜けるためリフレッシュが必要です。','電気的に消去・書き換えできるROMで、コンデンサ方式ではありません。','不揮発性のROMで、コンデンサの電荷で記憶する方式ではありません。']},
+{q:'メモリセルにフリップフロップ回路を利用したものはどれか。',choices:['DRAM','SDRAM','SRAM','EEPROM'],answer:2,explain:'<strong>SRAM</strong>のメモリセルには<strong>フリップフロップ回路</strong>が使われています。フリップフロップ回路は2つの安定状態を持ち、電流が流れ続ける限り状態を保持するため、リフレッシュが不要です。',why:['コンデンサの電荷で記憶する方式です。','DRAMの一種で、やはりコンデンサ方式です。','フリップフロップ回路を使うのでリフレッシュが不要です。','不揮発性のROMで、フリップフロップは使いません。']},
+{q:'二つの安定状態をもつ順序回路はどれか。',choices:['カウンタ回路','コンデンサ','フリップフロップ回路','論理回路'],answer:2,explain:'<strong>フリップフロップ回路</strong>は「2つの安定状態」を持つ順序回路で、SRAMのメモリセルに使われています。電流が流れている間、一方の状態を保持し続けます。',why:['数を数える回路で、2つの安定状態を持つ基本素子ではありません。','電荷をためる部品で、回路の種類ではありません。','2つの安定状態を持つ順序回路。SRAMのメモリセルに使われます。','論理演算を行う回路の総称で、状態を保持する順序回路ではありません。']},
+{q:'機械式スイッチのON/OFFが切り替わる短い間に、意図しないON/OFFが繰り返される現象は何か。',choices:['チャタリング','フリッカリング','ジッタリング','バッファリング'],answer:0,explain:'<strong>チャタリング</strong>は、機械式スイッチの接点が振動し、短時間に意図しないON/OFFが繰り返される現象です。マウスの1回クリックがダブルクリックと認識されるのが典型例です。',why:['接点の振動で、短時間に意図しないON/OFFが繰り返される現象です。','画面がちらつく現象を指す言葉です。','信号のタイミングが揺らぐ現象を指す言葉です。','速度差を埋めるために一時的な置き場を使う技術で、現象名ではありません。']}
 ];
 
 /* ---- 出題状態 ---------------------------------------------------------- */
@@ -578,10 +595,29 @@ function buildQuiz(){
       choices: idx.map(function(i){return src.choices[i];}),
       answer: idx.indexOf(src.answer),
       explain: src.explain,
+      why: src.why ? idx.map(function(i){return src.why[i];}) : null,
       answered:false, correct:false
     };
   });
   renderQuiz();
+}
+
+/* 選択肢ごとの解説（why）を組み立てる。
+   選択肢は毎回シャッフルされるため、記号（A/B/C/D）は表示時に動的に振り直す。 */
+function whyHtml(it){
+  if(!it.why) return '';
+  var h = '<div class="exp-why"><div class="exp-why-h">選択肢の解説</div><ul class="why-list">';
+  for(var wi=0; wi<it.choices.length; wi++){
+    var isAns = (wi === it.answer);
+    h += '<li class="why-item'+(isAns?' is-ans':'')+'">'
+      +    '<span class="why-key">'+KEYS[wi]+'</span>'
+      +    '<span class="why-body">'
+      +      '<span class="why-term">'+(isAns?'◯ ':'')+it.choices[wi]+'</span>'
+      +      '<span class="why-txt">'+(it.why[wi]||'')+'</span>'
+      +    '</span>'
+      +  '</li>';
+  }
+  return h + '</ul></div>';
 }
 
 function renderQuiz(){
@@ -599,7 +635,7 @@ function renderQuiz(){
          +    '<div class="q-number">問題 '+(qi+1)+' / '+quiz.length+'</div>'
          +    '<div class="q-text">'+it.q+'</div>'
          +    '<ul class="choices">'+lis+'</ul>'
-         +    '<div class="explanation"><span class="exp-mark"></span><span class="exp-text">'+it.explain+'</span></div>'
+         +    '<div class="explanation"><span class="exp-mark"></span><span class="exp-text">'+it.explain+'</span>'+whyHtml(it)+'</div>'
          +  '</div>';
   }
   document.getElementById('quiz-questions').innerHTML = html;
