@@ -327,6 +327,8 @@ strong{color:var(--ink-strong); font-weight:700;}
 @media (max-width:480px){
   :root{--pad:15px; --fs-h1:21px; --fs-h2:17.5px; --fs-body:14.5px;}
   .lesson-card{padding:18px;}
+  .code{font-size:12px; padding:12px 13px;}
+  .say-code{font-size:12.5px;}
   .question-card{padding:16px;}
   .result-score #scoreNum{font-size:56px;}
 }
@@ -354,6 +356,44 @@ strong{color:var(--ink-strong); font-weight:700;}
 .trace td{color:var(--ink);}
 .trace td.hit{color:var(--warning-soft); font-weight:800;}
 .src{font-size:var(--fs-xs); color:var(--faint); margin-top:8px;}
+
+/* =====================  ステップ送りトレース（1行ずつ追う）  =========== */
+.steps{display:flex; flex-direction:column; gap:6px; margin:13px 0;}
+.step{display:flex; flex-wrap:wrap; align-items:baseline; gap:3px 10px;
+  background:rgba(255,255,255,.03); border:1px solid var(--line);
+  border-left:2px solid rgba(167,139,250,.55);
+  border-radius:0 var(--r-sm) var(--r-sm) 0; padding:8px 12px;}
+.step-lbl{flex:0 0 auto; min-width:48px; font-family:var(--mono); font-size:11px;
+  font-weight:800; color:#C9B8FB; line-height:1.9;}
+.step-body{flex:1 1 150px; font-size:var(--fs-sm); color:var(--ink); line-height:1.75;}
+.step-body b{color:var(--ink-strong); font-weight:700;}
+.step-val{flex:0 0 auto; margin-left:auto; font-family:var(--mono); font-size:13px;
+  font-weight:800; color:var(--warning-soft); white-space:nowrap;}
+.step.is-head{background:rgba(86,225,233,.07); border-left-color:var(--accent);}
+.step.is-head .step-lbl{color:var(--accent-soft);}
+.step.is-out{border-left-color:rgba(251,113,133,.5);}
+.step.is-out .step-lbl{color:var(--danger-soft);}
+.step.is-ans{background:rgba(74,222,128,.09); border-color:rgba(74,222,128,.30);
+  border-left-color:var(--success);}
+.step.is-ans .step-lbl{color:var(--success-soft);}
+.step.is-ans .step-val{color:var(--success-soft); font-size:15px;}
+.step-note{flex:1 1 100%; margin-top:2px; font-size:var(--fs-xs); color:var(--faint); line-height:1.7;}
+
+/* =====================  言い換え（擬似言語→日本語）  =================== */
+.say{display:flex; flex-direction:column; gap:8px; margin:13px 0;}
+.say-row{display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 12px;
+  padding:10px 13px; background:var(--inset); border:1px solid var(--line);
+  border-radius:var(--r-md);}
+.say-code{flex:0 0 auto; font-family:var(--mono); font-size:13px; font-weight:600;
+  color:var(--accent-soft); white-space:nowrap;}
+.say-jp{flex:1 1 170px; font-size:var(--fs-sm); color:var(--ink); line-height:1.7;}
+.say-jp b{color:var(--ink-strong);}
+
+/* =====================  小見出し（例のラベル）  ======================== */
+.ex-label{display:inline-block; margin:20px 0 2px; padding:3px 12px;
+  background:rgba(167,139,250,.13); border:1px solid rgba(167,139,250,.4);
+  border-radius:var(--r-pill); font-size:var(--fs-xs); font-weight:800;
+  letter-spacing:.06em; color:#C9B8FB;}
 </style>
 </head>
 <body>
@@ -398,10 +438,11 @@ strong{color:var(--ink-strong); font-weight:700;}
   <div class="tabbar-inner">
     <button class="home-tab" onclick="goBack()">← ホーム</button>
     <nav class="nav-tabs" id="navTabs">
-      <button class="nav-tab active" data-target="l1" onclick="showSection('l1')">① 擬似言語の読み方</button>
-      <button class="nav-tab" data-target="l2" onclick="showSection('l2')">② トレースの手順</button>
-      <button class="nav-tab" data-target="l3" onclick="showSection('l3')">③ 頻出パターン</button>
-      <button class="nav-tab" data-target="l4" onclick="showSection('l4')">④ 本番の解き方</button>
+      <button class="nav-tab active" data-target="l1" onclick="showSection('l1')">① はじめの一歩</button>
+      <button class="nav-tab" data-target="l2" onclick="showSection('l2')">② 擬似言語の読み方</button>
+      <button class="nav-tab" data-target="l3" onclick="showSection('l3')">③ トレースの手順</button>
+      <button class="nav-tab" data-target="l4" onclick="showSection('l4')">④ 頻出パターン</button>
+      <button class="nav-tab" data-target="l5" onclick="showSection('l5')">⑤ 本番の解き方</button>
     </nav>
     <span class="quiz-sep"></span>
     <button class="quiz-btn" data-target="quiz" onclick="showSection('quiz')">確認テスト<span class="arw">→</span></button>
@@ -409,28 +450,103 @@ strong{color:var(--ink-strong); font-weight:700;}
 </div>
 
 <main class="wrap">
-
   <section id="l1" class="section active">
     <div class="lesson-card">
-<h2>① 擬似言語の読み方</h2>
+<h2>① はじめの一歩 ── 箱と ←</h2>
 <h3>この章のねらい</h3>
 <div class="key-point">
 第22章で科目Bの全体像をつかんだ。この章は<strong>手を動かす章</strong>。IPA が公開している科目Bの実際の試験問題（令和5〜8年度）を素材に、擬似言語を<strong>1行ずつ追う練習</strong>をする。<br/><br/>
-科目Bの20問中<strong>約16問がこの形式</strong>。ここが読めれば合格の8割は手に入る。
+科目Bの20問中<strong>約16問がこの形式</strong>。ここが読めれば合格の8割は手に入る。<br/><br/>
+プログラムを書いたことがなくてもいい。この①で<strong>たった2つのこと</strong>（← の意味と、くり返しの決まり方）を押さえれば、あとは全部その組合せになる。
+</div>
+
+<h3>← は「＝」ではない</h3>
+<div class="key-point">
+擬似言語の <strong>←</strong> は、数学のイコールではない。<br/><br/>
+<strong>「右側を計算して、その答えを左の箱に入れる」</strong>という<strong>作業の命令</strong>である。
+</div>
+<div class="example"><strong>ここでつまずく人がいちばん多い。</strong><br/>
+<b>s ← s ＋ i</b> を数学の式として読むと「s は s に i を足したものと等しい」となり、i が 0 でない限り成り立たない式になってしまう。<br/>
+式ではなく<strong>命令</strong>だと思って読む。「今の s と今の i を足して、その答えを s に入れ直せ」という指示である。</div>
+
+<h3>変数は「名前のついた箱」</h3>
+<div class="key-point">
+<span class="vocab">変数</span>は、値を1つ入れておく<strong>名前のついた箱</strong>。<br/><br/>
+<b>整数型: i ← 1, s ← 0</b> は、i という箱と s という箱を用意して、i に 1、s に 0 を入れた状態を作る、という意味。<br/><br/>
+箱の中身は<strong>上書き</strong>される。新しい値を入れると前の値は消える。
+</div>
+
+<h3>擬似言語を日本語に直す</h3>
+<div class="say"><div class="say-row"><span class="say-code">i ← 1</span><span class="say-jp">i の箱に <b>1</b> を入れる</span></div><div class="say-row"><span class="say-code">s ← s ＋ i</span><span class="say-jp">今の s と今の i を足して、その答えを <b>s に入れ直す</b></span></div><div class="say-row"><span class="say-code">i ← i ＋ 3</span><span class="say-jp">今の i に 3 を足して、その答えを <b>i に入れ直す</b></span></div><div class="say-row"><span class="say-code">c ← c ＋ 1</span><span class="say-jp">c を <b>1つ増やす</b>。つまり「数える」</span></div><div class="say-row"><span class="say-code">top ← data[5]</span><span class="say-jp">配列 data の <b>5番目の値</b>を top に入れる</span></div><div class="say-row"><span class="say-code">data[1] ← top</span><span class="say-jp">配列 data の <b>1番目の場所に</b> top の値を入れる</span></div></div>
+<div class="key-point">
+コツは <strong>右を先に計算してから、左に入れる</strong>。右側に出てくる s や i は、<strong>その行を実行する直前の値</strong>である。この順番さえ守れば混乱しない。
+</div>
+
+<h3>くり返しを決める3つのダイヤル</h3>
+<div class="key-point">
+<b>for</b> や <b>while</b> を見たら、まずこの3つに印を付ける。変数がとる値の並びは、<strong>この3つだけ</strong>で決まる。<br/><br/>
+<strong>① どこから始めるか</strong>（スタート）<br/>
+<strong>② いくつずつ進むか</strong>（刻み幅）<br/>
+<strong>③ どこで止めるか</strong>（続ける条件）
+</div>
+<div class="code">整数型: i ← 1, s ← 0   <span class="cm">①</span>
+while (i ≦ 10)         <span class="cm">③</span>
+  s ← s ＋ i
+  i ← i ＋ 3           <span class="cm">②</span>
+endwhile</div>
+<div class="key-point">
+<strong>①</strong> スタートは <b>1</b>　　<strong>②</strong> 刻み幅は <b>＋3</b>　　<strong>③</strong> <b>10 以下</b>の間つづける
+</div>
+<div class="key-point">
+この3つを変えると、i がとる値の並びは<strong>全部変わる</strong>。
+</div>
+<table class="sql-table">
+<tr><th>3つのダイヤルの設定</th><th>i がとる値</th><th>合計</th></tr>
+<tr><td>1 から ／ ＋3 ずつ ／ 10以下</td><td><b>1, 4, 7, 10</b></td><td><b>22</b></td></tr>
+<tr><td>1 から ／ ＋1 ずつ ／ 10以下</td><td>1, 2, 3 … 10</td><td>55</td></tr>
+<tr><td>2 から ／ ＋3 ずつ ／ 10以下</td><td>2, 5, 8</td><td>15</td></tr>
+<tr><td>1 から ／ ＋5 ずつ ／ 10以下</td><td>1, 6</td><td>7</td></tr>
+</table>
+<div class="example"><strong>3行目を見てほしい。</strong>2, 5, 8 と来て次は 11 になるが、11 は10以下ではないので<strong>中に入らずに終わる</strong>。だから 8 で止まる。<br/>
+つまり <b>1, 4, 7, 10</b> は<strong>この問題だけの並び</strong>であって、覚えるものではない。3つのダイヤルから毎回その場で出てくる。</div>
+
+<h3>条件は「続ける条件」</h3>
+<div class="key-point">
+<b>while (i ≦ 10)</b> は「i が 10 以下の<strong>間</strong>くり返す」。<br/><br/>
+判定が<strong>真ならもう1周戻る</strong>。<strong>偽ならそこで出る</strong>。この2つだけ。
+</div>
+<div class="example"><strong>1文字で回数が変わる。</strong><br/>
+<b>≦</b> は 10 を<strong>含む</strong>。<b>＜</b> は 10 を<strong>含まない</strong>。<br/>
+上の表の1行目は、≦ なら 1, 4, 7, 10 で合計 22。＜ なら 1, 4, 7 で合計 12 になる。<strong>境界の1回</strong>は必ず確かめる。</div>
+    </div>
+    <div class="lesson-nav">
+      <button class="btn-next" onclick="showSection('l2')">
+        <span class="bn-meta"><span class="bn-label">次のレッスン</span><span class="bn-title">② 擬似言語の読み方</span></span>
+        <span class="bn-arrow">→</span>
+      </button>
+    </div>
+  </section>
+
+  <section id="l2" class="section">
+    <div class="lesson-card">
+<h2>② 擬似言語の読み方</h2>
+<div class="key-point">
+①の「箱と ←」が分かったら、あとは<strong>書き方の一覧</strong>を眺めるだけでよい。この一覧は<strong>本番の問題用紙にも毎回そのまま載っている</strong>ので、暗記する必要はない。「そういう書き方をするのか」と確認できれば十分。
 </div>
 <h3>記述形式（問題用紙の冒頭に毎回載っている）</h3>
 <table class="sql-table">
 <tr><th>書き方</th><th>意味</th></tr>
-<tr><td><b>○整数型: 関数名(整数型: x)</b></td><td>関数の宣言。「整数型:」は戻り値の型</td></tr>
-<tr><td><b>整数型: i, s ← 0</b></td><td>変数の宣言。← は代入（右の値を左に入れる）</td></tr>
-<tr><td><b>/* 注釈 */　// 注釈</b></td><td>コメント。実行されない</td></tr>
-<tr><td><b>if (条件) … elseif … else … endif</b></td><td>上から順に評価し、最初に真になった枝だけ実行</td></tr>
+<tr><td><b>○整数型: 関数名(整数型: x)</b></td><td>関数の宣言。頭の「整数型:」は戻り値の型</td></tr>
+<tr><td><b>整数型: i, s ← 0</b></td><td>変数の宣言。← は代入（右の値を左の箱に入れる）</td></tr>
+<tr><td><b>/* 注釈 */　// 注釈</b></td><td>コメント。実行されない。ヒントが書いてあることが多い</td></tr>
+<tr><td><b>if (条件) … elseif … else … endif</b></td><td>上から順に評価し、最初に真になった枝<strong>だけ</strong>実行</td></tr>
 <tr><td><b>while (条件) … endwhile</b></td><td>前判定。条件が真の間くり返す（最初から偽なら0回）</td></tr>
 <tr><td><b>do … while (条件)</b></td><td>後判定。必ず1回実行してから条件を見る</td></tr>
 <tr><td><b>for (i を 1 から n まで 1 ずつ増やす)</b></td><td>回数の決まったくり返し。n も含む</td></tr>
-<tr><td><b>return 値</b></td><td>関数を終えて値を返す</td></tr>
-<tr><td><b>繰返し処理を終了する</b></td><td>そのループを抜ける（break）</td></tr>
+<tr><td><b>return 値</b></td><td>関数を終えて値を返す。ここで処理は止まる</td></tr>
+<tr><td><b>繰返し処理を終了する</b></td><td>そのループを抜ける</td></tr>
 </table>
+
 <h3>演算子で間違えやすいもの</h3>
 <div class="key-point">
 <span class="vocab">mod</span>：割り算の<strong>余り</strong>。7 mod 4 ＝ 3<br/>
@@ -440,59 +556,79 @@ strong{color:var(--ink-strong); font-weight:700;}
 <span class="vocab">未定義の値</span>：まだ値が入っていない状態。配列の空き・リストの末尾判定に使われる
 </div>
 <div class="example"><strong>優先順位：</strong>() ＞ not ＞ 乗除・mod ＞ 加減 ＞ 比較 ＞ and ＞ or。<br/>
-「(i mod 4) が 0 と等しい」のように、試験ではカッコで明示されることが多い。</div>
+「(i mod 4) が 0 と等しい」のように、試験ではカッコで明示されることが多いので、まずカッコの中から計算する。</div>
+
 <h3>配列の読み方</h3>
 <div class="key-point">
 ・<strong>data[3]</strong>：配列 data の3番目の要素<br/>
 ・<strong>要素番号は 1 から始まる</strong>（問題文に必ず書いてある。0始まりの問題も稀にある）<br/>
 ・<strong>data の要素数</strong>：中に入っている要素の個数<br/>
 ・<strong>{ }</strong>：配列の中身。{1, 2, 3} は要素数3<br/>
-・<strong>二次元配列 m[r, c]</strong>：r 行 c 列の要素。行が先<br/>
+・<strong>二次元配列 m[r, c]</strong>：r 行 c 列の要素。<strong>行が先</strong><br/>
 ・<strong>data の末尾に x を追加する</strong>：要素数が1増える
 </div>
 <div class="code">整数型の配列: data ← {10, 30, 20, 40}
 整数型: len ← dataの要素数     <span class="cm">// len は 4</span>
 data[len] ← 99                 <span class="cm">// data は {10, 30, 20, 99}</span>
 dataの末尾 に 5 を追加する       <span class="cm">// data は {10, 30, 20, 99, 5}</span></div>
+
 <h3>for 文の「制御記述」を正確に読む</h3>
+<div class="key-point">
+①の<strong>3つのダイヤル</strong>（スタート・刻み幅・続ける条件）を、for 文の書き方に当てはめると次のようになる。
+</div>
 <table class="sql-table">
 <tr><th>制御記述</th><th>i がとる値</th><th>回数</th></tr>
 <tr><td>i を 1 から 5 まで 1 ずつ増やす</td><td>1, 2, 3, 4, 5</td><td>5回</td></tr>
 <tr><td>i を 2 から len まで 1 ずつ増やす（len＝9）</td><td>2, 3, …, 9</td><td>8回</td></tr>
 <tr><td>i を len から 2 まで 1 ずつ減らす（len＝9）</td><td>9, 8, …, 2</td><td>8回</td></tr>
 <tr><td>j を 8 から始めて 20 を超えない範囲で 4 ずつ増やす</td><td>8, 12, 16, 20</td><td>4回</td></tr>
-<tr><td>i を 3 から n まで 1 ずつ増やす（n＝2）</td><td>（なし）</td><td>0回</td></tr>
+<tr><td>i を 3 から n まで 1 ずつ増やす（n＝2）</td><td>（なし）</td><td><b>0回</b></td></tr>
 </table>
-<div class="key-point">
-<strong>「増やす」か「減らす」か</strong>は、配列を<strong>前からずらすか後ろからずらすか</strong>で結果が変わる典型ポイント（③の「配列のシフト」で扱う）。
-</div>
+<div class="example"><strong>最後の行に注意。</strong>スタートがゴールを追い越していると、<strong>1回も実行されない</strong>。「0回」は試験がよく狙う答えである。</div>
     </div>
     <div class="lesson-nav">
-      <button class="btn-next" onclick="showSection('l2')">
-        <span class="bn-meta"><span class="bn-label">次のレッスン</span><span class="bn-title">② トレースの手順</span></span>
+      <button class="btn-next" onclick="showSection('l3')">
+        <span class="bn-meta"><span class="bn-label">次のレッスン</span><span class="bn-title">③ トレースの手順</span></span>
         <span class="bn-arrow">→</span>
       </button>
     </div>
   </section>
 
-  <section id="l2" class="section">
+  <section id="l3" class="section">
     <div class="lesson-card">
-<h2>② トレースの手順</h2>
-<h3>トレース表の作り方（毎回これ）</h3>
+<h2>③ トレースの手順</h2>
+<h3>トレースとは</h3>
+<div class="key-point">
+<span class="vocab">トレース</span>（机上デバッグ）とは、プログラムを<strong>1行ずつ手で追いかけて、箱の中身の変化を紙に書き出す</strong>こと。擬似言語問題を解く最強の武器であり、これ以外の解き方はない。
+</div>
+<div class="example"><strong>頭の中でやらない。</strong>科目Bで落ちる人の大半は「読めた気になって」トレースを省く。手で書けば5分、頭でやると3回読み直して7分かかる。</div>
+
+<h3>書き方の手順</h3>
 <div class="key-point">
 <strong>① 変数名を横に並べる</strong>（登場する変数を全部。配列は中身を書く欄を作る）<br/>
 <strong>② 具体的な入力値を1つ決める</strong>（問題文に例があればそれを使う。なければ小さい値）<br/>
-<strong>③ 1行ずつ実行し、値が変わった変数だけ書く</strong><br/>
-<strong>④ くり返しは1周＝1行</strong>。条件判定の真偽も書く<br/>
-<strong>⑤ return の値（または出力）を選択肢と照合する</strong>
+<strong>③ 1行ずつ実行し、値が変わった箱だけ書く</strong><br/>
+<strong>④ くり返しは1周ごとに書き足す</strong>。条件判定の真偽も書く<br/>
+<strong>⑤ return される値（または出力）を選択肢と照合する</strong>
 </div>
-<div class="example"><strong>頭の中でやらない。</strong>科目Bで落ちる人の大半は「読めた気になって」トレースを省く。手で書けば5分、頭でやると3回読み直して7分かかる。</div>
-<h3>例1：順次と累積（合計）</h3>
+
+<span class="ex-label">例1</span>
+<h3>順次と累積（合計）</h3>
 <div class="code">整数型: i ← 1, s ← 0
 while (i ≦ 10)
   s ← s ＋ i
   i ← i ＋ 3
 endwhile</div>
+<div class="key-point">
+まず①の3つのダイヤルを読む。<strong>スタート 1</strong>／<strong>刻み幅 ＋3</strong>／<strong>10 以下の間つづける</strong>。だから i は <b>1, 4, 7, 10</b> と進む。<br/>
+では、1行ずつ全部書き出してみる。
+</div>
+<div class="steps"><div class="step is-head"><span class="step-lbl">はじめ</span><span class="step-body">i の箱に 1、s の箱に 0 を入れる</span><span class="step-val">s=0　i=1</span></div><div class="step"><span class="step-lbl">1周目</span><span class="step-body">判定 <b>1 ≦ 10</b> → 真。中に入る</span></div><div class="step"><span class="step-lbl"></span><span class="step-body">s に 0＋1 を入れる</span><span class="step-val">s=1</span></div><div class="step"><span class="step-lbl"></span><span class="step-body">i に 1＋3 を入れる</span><span class="step-val">i=4</span></div><div class="step"><span class="step-lbl">2周目</span><span class="step-body">判定 <b>4 ≦ 10</b> → 真</span></div><div class="step"><span class="step-lbl"></span><span class="step-body">s に 1＋4 を入れる</span><span class="step-val">s=5</span></div><div class="step"><span class="step-lbl"></span><span class="step-body">i に 4＋3 を入れる</span><span class="step-val">i=7</span></div><div class="step"><span class="step-lbl">3周目</span><span class="step-body">判定 <b>7 ≦ 10</b> → 真</span></div><div class="step"><span class="step-lbl"></span><span class="step-body">s に 5＋7 を入れる</span><span class="step-val">s=12</span></div><div class="step"><span class="step-lbl"></span><span class="step-body">i に 7＋3 を入れる</span><span class="step-val">i=10</span></div><div class="step"><span class="step-lbl">4周目</span><span class="step-body">判定 <b>10 ≦ 10</b> → 真。<b>ここが境界</b></span></div><div class="step"><span class="step-lbl"></span><span class="step-body">s に 12＋10 を入れる</span><span class="step-val">s=22</span></div><div class="step"><span class="step-lbl"></span><span class="step-body">i に 10＋3 を入れる</span><span class="step-val">i=13</span></div><div class="step is-out"><span class="step-lbl">5周目</span><span class="step-body">判定 <b>13 ≦ 10</b> → 偽。ループから出る</span></div><div class="step is-ans"><span class="step-lbl">答え</span><span class="step-body">s の箱に残っている値</span><span class="step-val">s=22</span></div></div>
+<div class="key-point">
+s は<strong>足し算の答えをためておく箱</strong>、i は<strong>3つ飛びに進むカウンター</strong>。やっているのは <b>1＋4＋7＋10 ＝ 22</b> という計算だけである。<br/><br/>
+<strong>4周目に注目</strong>。<b>10 ≦ 10</b> は真なので、i＝10 のときも実行される。ここが <b>＜</b> なら 12 で終わっていた。境界の1回は必ず確かめる。
+</div>
+<div class="example"><strong>慣れたら表に圧縮できる。</strong>1周を1行にまとめた書き方。本番ではこちらの方が速い。ただし s の欄は<strong>更新前の i</strong> を使った結果、i の欄は<strong>更新後</strong>の値である点に注意。</div>
 <div class="trace-wrap"><table class="trace">
 <tr><th>周</th><th>判定 i≦10</th><th>s</th><th>i（更新後）</th></tr>
 <tr><td>開始</td><td>—</td><td>0</td><td>1</td></tr>
@@ -502,67 +638,112 @@ endwhile</div>
 <tr><td>4</td><td>10≦10 真</td><td class="hit">22</td><td>13</td></tr>
 <tr><td>5</td><td>13≦10 偽</td><td colspan="2">終了</td></tr>
 </table></div>
-<div class="key-point">終了時 <strong>s ＝ 22</strong>。「≦」なので i＝10 のときも実行される。「＜」なら 12 で終わる。<strong>境界の1回</strong>を必ず確かめる。</div>
-<h3>例2：後判定（do～while）</h3>
+
+<span class="ex-label">例2</span>
+<h3>前判定と後判定 ── 判定の位置だけが違う</h3>
+<div class="key-point">
+<strong>前判定（while）＝ 見てからやる</strong><br/>
+<strong>後判定（do～while）＝ やってから見る</strong><br/><br/>
+違いはこれだけ。ところが答えは変わる。<strong>数字も中身も条件も全部同じ</strong>2つを並べてみる。
+</div>
+<div class="ex-label">前判定（while）</div>
+<div class="code">整数型: n ← 5
+while (n ＞ 5)
+  n ← n － 2
+endwhile</div><div class="steps"><div class="step is-head"><span class="step-lbl">はじめ</span><span class="step-body">n の箱に 5 を入れる</span><span class="step-val">n=5</span></div><div class="step is-out"><span class="step-lbl">判定</span><span class="step-body"><b>5 ＞ 5</b> → 偽。1回も中に入らない</span></div><div class="step is-ans"><span class="step-lbl">答え</span><span class="step-body">n はそのまま</span><span class="step-val">n=5</span></div></div>
+<div class="ex-label">後判定（do～while）</div>
 <div class="code">整数型: n ← 5
 do
   n ← n － 2
-while (n ＞ 5)</div>
-<div class="trace-wrap"><table class="trace">
-<tr><th>周</th><th>n（処理後）</th><th>判定 n＞5</th></tr>
-<tr><td>1</td><td class="hit">3</td><td>3＞5 偽 → 終了</td></tr>
-</table></div>
-<div class="key-point">条件は最初から偽だが、後判定なので<strong>1回は実行される</strong>。n ＝ 3。while（前判定）なら 5 のまま。</div>
-<h3>例3：二重ループの回数</h3>
+while (n ＞ 5)</div><div class="steps"><div class="step is-head"><span class="step-lbl">はじめ</span><span class="step-body">n の箱に 5 を入れる</span><span class="step-val">n=5</span></div><div class="step"><span class="step-lbl">1周目</span><span class="step-body"><b>判定より先に</b>実行する。n に 5－2 を入れる</span><span class="step-val">n=3</span></div><div class="step is-out"><span class="step-lbl">判定</span><span class="step-body"><b>3 ＞ 5</b> → 偽。ここで終わり</span></div><div class="step is-ans"><span class="step-lbl">答え</span><span class="step-body">n の箱に残っている値</span><span class="step-val">n=3</span></div></div>
+<div class="key-point">
+まったく同じ数字なのに、答えが <b>5</b> と <b>3</b> に分かれた。違うのは<strong>判定の位置だけ</strong>である。<br/><br/>
+ここから言えることが1つ。<strong>後判定は必ず1回は実行される</strong>。条件が最初から成り立っていなくても、1回やってから気づくからである。前判定は<strong>0回</strong>で終わることがある。試験はこの「0回か1回か」を狙って出す。
+</div>
+<div class="example"><strong>書き方の注意：</strong>do～while には endwhile にあたる行がない。最後の <b>while (条件式)</b> の行が、くり返しの終わりの合図を兼ねている。</div>
+<div class="example"><strong>境界の話：</strong><b>5 ＞ 5</b> は<strong>偽</strong>。＞ は「より大きい」で、同じ数を含まない。もしここが <b>≧</b> なら、前判定版も1回まわって n＝3 になる。</div>
+<div class="key-point">条件が<strong>真のときは戻る</strong>ことも確かめておく。同じプログラムで n を 11 から始めた場合。</div>
+<div class="steps"><div class="step is-head"><span class="step-lbl">はじめ</span><span class="step-body">n の箱に 11 を入れる</span><span class="step-val">n=11</span></div><div class="step"><span class="step-lbl">1周目</span><span class="step-body">n に 11－2 を入れる</span><span class="step-val">n=9</span></div><div class="step"><span class="step-lbl"></span><span class="step-body">判定 <b>9 ＞ 5</b> → 真。戻る</span></div><div class="step"><span class="step-lbl">2周目</span><span class="step-body">n に 9－2 を入れる</span><span class="step-val">n=7</span></div><div class="step"><span class="step-lbl"></span><span class="step-body">判定 <b>7 ＞ 5</b> → 真。戻る</span></div><div class="step"><span class="step-lbl">3周目</span><span class="step-body">n に 7－2 を入れる</span><span class="step-val">n=5</span></div><div class="step is-out"><span class="step-lbl"></span><span class="step-body">判定 <b>5 ＞ 5</b> → 偽。出る</span></div><div class="step is-ans"><span class="step-lbl">答え</span><span class="step-body"></span><span class="step-val">n=5</span></div></div>
+
+<span class="ex-label">例3</span>
+<h3>二重ループ ── 外側が1歩進むたびに内側は全部走る</h3>
+<div class="key-point">
+<strong>二重ループ＝ループの中にループ</strong>。覚えることは1つだけ。<br/><br/>
+<strong>外側が1歩進むたびに、内側は最初から最後まで全部走り切る。</strong>
+</div>
+<div class="example"><strong>まず、やさしい形から。</strong>内側の範囲が固定されている場合。</div>
 <div class="code">整数型: c ← 0
-for (i を 1 から 4 まで 1 ずつ増やす)
-  for (j を i から 4 まで 1 ずつ増やす)
+for (i を 1 から 3 まで 1 ずつ増やす)
+  for (j を 1 から 2 まで 1 ずつ増やす)
     c ← c ＋ 1
   endfor
 endfor</div>
 <div class="trace-wrap"><table class="trace">
-<tr><th>i</th><th>j の範囲</th><th>内側の回数</th><th>c</th></tr>
+<tr><th>外側</th><th>内側の j</th><th>内側の回数</th></tr>
+<tr><td>i=1</td><td>1, 2</td><td>2</td></tr>
+<tr><td>i=2</td><td>1, 2</td><td>2</td></tr>
+<tr><td>i=3</td><td>1, 2</td><td>2</td></tr>
+<tr><td colspan="2">合計</td><td class="hit">6</td></tr>
+</table></div>
+<div class="key-point">外側が3歩、そのたびに内側が2回。<strong>3 × 2 ＝ 6</strong>。ここまではただの掛け算である。</div>
+<div class="example"><strong>本番の問題が難しいのは、内側のスタートが数字ではなく <b>i</b> になっているから。</strong>①の3つのダイヤルで言うと、内側の「どこから始めるか」が<strong>毎回変わる</strong>。「どこで止めるか」は 4 のまま固定である。</div>
+<div class="code">整数型: c ← 0
+for (i を 1 から 4 まで 1 ずつ増やす)
+  for (j を <span class="bl">i</span> から 4 まで 1 ずつ増やす)
+    c ← c ＋ 1
+  endfor
+endfor</div><div class="steps"><div class="step is-head"><span class="step-lbl">外側</span><span class="step-body"><b>i=1</b>　内側のスタートは 1。j は 1, 2, 3, 4</span></div><div class="step"><span class="step-lbl">j=1</span><span class="step-body">c を1つ増やす</span><span class="step-val">c=1</span></div><div class="step"><span class="step-lbl">j=2</span><span class="step-body">c を1つ増やす</span><span class="step-val">c=2</span></div><div class="step"><span class="step-lbl">j=3</span><span class="step-body">c を1つ増やす</span><span class="step-val">c=3</span></div><div class="step"><span class="step-lbl">j=4</span><span class="step-body">c を1つ増やす</span><span class="step-val">c=4</span></div><div class="step is-out"><span class="step-lbl"></span><span class="step-body">次は j=5。4 を超えたので<b>内側おわり</b></span></div><div class="step is-head"><span class="step-lbl">外側</span><span class="step-body"><b>i=2</b>　内側のスタートは 2。j は 2, 3, 4</span></div><div class="step"><span class="step-lbl">j=2</span><span class="step-body">c を1つ増やす</span><span class="step-val">c=5</span></div><div class="step"><span class="step-lbl">j=3</span><span class="step-body">c を1つ増やす</span><span class="step-val">c=6</span></div><div class="step"><span class="step-lbl">j=4</span><span class="step-body">c を1つ増やす</span><span class="step-val">c=7</span></div><div class="step is-head"><span class="step-lbl">外側</span><span class="step-body"><b>i=3</b>　内側のスタートは 3。j は 3, 4</span></div><div class="step"><span class="step-lbl">j=3</span><span class="step-body">c を1つ増やす</span><span class="step-val">c=8</span></div><div class="step"><span class="step-lbl">j=4</span><span class="step-body">c を1つ増やす</span><span class="step-val">c=9</span></div><div class="step is-head"><span class="step-lbl">外側</span><span class="step-body"><b>i=4</b>　内側のスタートは 4。j は 4 だけ</span></div><div class="step"><span class="step-lbl">j=4</span><span class="step-body">c を1つ増やす</span><span class="step-val">c=10</span></div><div class="step is-out"><span class="step-lbl">外側</span><span class="step-body">次は i=5。4 を超えたので<b>全部おわり</b></span></div><div class="step is-ans"><span class="step-lbl">答え</span><span class="step-body">内側が回った回数</span><span class="step-val">c=10</span></div></div>
+<div class="key-point">
+<strong>なぜ 4, 3, 2, 1 と減るのか。</strong><br/>
+内側のゴールは毎回 <b>4</b> で動かない。スタートだけが <b>1, 2, 3, 4</b> と後ろにずれていく。<strong>ゴールが同じでスタートが遅くなれば、走る距離は短くなる</strong>。それだけである。<br/><br/>
+<b>c ← c ＋ 1</b> は例1の <b>s ← s ＋ i</b> と同じ形で、「c を1つ増やす」＝数えるという意味。これが<strong>内側のいちばん奥</strong>にあるので、<strong>内側が回った回数</strong>が c にたまる。
+</div>
+<div class="example"><strong>慣れたら表に圧縮できる。</strong>ただし c の欄は<strong>その外側1周が終わった時点の累計</strong>なので、4 の次が 7 に飛ぶ。途中は見えない。</div>
+<div class="trace-wrap"><table class="trace">
+<tr><th>i</th><th>j の範囲</th><th>内側の回数</th><th>c（累計）</th></tr>
 <tr><td>1</td><td>1〜4</td><td>4</td><td>4</td></tr>
 <tr><td>2</td><td>2〜4</td><td>3</td><td>7</td></tr>
 <tr><td>3</td><td>3〜4</td><td>2</td><td>9</td></tr>
 <tr><td>4</td><td>4〜4</td><td>1</td><td class="hit">10</td></tr>
 </table></div>
-<div class="key-point">内側の開始値が外側の i に依存するときは、<strong>i ごとに内側の範囲を書き出す</strong>。4＋3＋2＋1 ＝ 10。</div>
-<h3>例4：配列を書き換える処理は「配列の欄」を毎行書く</h3>
+
+<span class="ex-label">例4</span>
+<h3>配列を書き換える ── ずらす向きに注意</h3>
 <div class="code">整数型の配列: data ← {1, 2, 3, 4, 5}
 整数型: top ← data[5]
 for (i を 5 から 2 まで 1 ずつ減らす)
   data[i] ← data[i － 1]
 endfor
 data[1] ← top</div>
-<div class="trace-wrap"><table class="trace">
-<tr><th>i</th><th>実行した文</th><th>data</th></tr>
-<tr><td>—</td><td>top ← data[5]</td><td>{1,2,3,4,5}　top=5</td></tr>
-<tr><td>5</td><td>data[5] ← data[4]</td><td>{1,2,3,4,4}</td></tr>
-<tr><td>4</td><td>data[4] ← data[3]</td><td>{1,2,3,3,4}</td></tr>
-<tr><td>3</td><td>data[3] ← data[2]</td><td>{1,2,2,3,4}</td></tr>
-<tr><td>2</td><td>data[2] ← data[1]</td><td>{1,1,2,3,4}</td></tr>
-<tr><td>—</td><td>data[1] ← top</td><td class="hit">{5,1,2,3,4}</td></tr>
-</table></div>
-<div class="example"><strong>もし「2 から 5 まで増やす」だったら：</strong>data[2]←data[1] で {1,1,3,4,5}、次に data[3]←data[2] で {1,1,1,4,5}…と、<strong>1 が次々コピーされて壊れる</strong>。ずらす向きと for の向きは逆になる、と覚える。</div>
+<div class="key-point">配列を書き換える処理は、<strong>1行ごとに配列全体を書き写す</strong>。これをやらないと必ず間違える。</div>
+<div class="steps"><div class="step is-head"><span class="step-lbl">はじめ</span><span class="step-body">data は {1, 2, 3, 4, 5}。top に data[5] を入れる</span><span class="step-val">top=5</span></div><div class="step"><span class="step-lbl">i=5</span><span class="step-body">data[5] に data[4] を入れる</span><span class="step-val">{1,2,3,4,<b>4</b>}</span></div><div class="step"><span class="step-lbl">i=4</span><span class="step-body">data[4] に data[3] を入れる</span><span class="step-val">{1,2,3,<b>3</b>,4}</span></div><div class="step"><span class="step-lbl">i=3</span><span class="step-body">data[3] に data[2] を入れる</span><span class="step-val">{1,2,<b>2</b>,3,4}</span></div><div class="step"><span class="step-lbl">i=2</span><span class="step-body">data[2] に data[1] を入れる</span><span class="step-val">{1,<b>1</b>,2,3,4}</span></div><div class="step is-ans"><span class="step-lbl">最後</span><span class="step-body">data[1] に top を入れる</span><span class="step-val">{<b>5</b>,1,2,3,4}</span></div></div>
+<div class="key-point">
+末尾の 5 が先頭に移り、他が1つずつ後ろにずれた。<br/><br/>
+<strong>なぜ後ろから回すのか。</strong>前から回すと、まだ使っていない値を上書きしてしまうからである。同じ処理を「2 から 5 まで増やす」に変えると、こうなる。
+</div>
+<div class="steps"><div class="step is-head"><span class="step-lbl">はじめ</span><span class="step-body">もし「2 から 5 まで<b>増やす</b>」だったら</span><span class="step-val">{1,2,3,4,5}</span></div><div class="step"><span class="step-lbl">i=2</span><span class="step-body">data[2] に data[1] を入れる</span><span class="step-val">{1,<b>1</b>,3,4,5}</span></div><div class="step"><span class="step-lbl">i=3</span><span class="step-body">data[3] に data[2] を入れる</span><span class="step-val">{1,1,<b>1</b>,4,5}</span></div><div class="step"><span class="step-lbl">i=4</span><span class="step-body">data[4] に data[3] を入れる</span><span class="step-val">{1,1,1,<b>1</b>,5}</span></div><div class="step is-out"><span class="step-lbl">i=5</span><span class="step-body">data[5] に data[4] を入れる</span><span class="step-val">{1,1,1,1,<b>1</b>}</span></div></div>
+<div class="key-point">
+<strong>1 が次々コピーされて全部 1 になった。</strong>data[2] を書き換えた後で data[3]←data[2] を実行すると、元の 2 ではなく<strong>さっき入れた 1</strong> を読んでしまう。<br/><br/>
+覚え方は1つ。<strong>後ろへずらすときは後ろから、前へずらすときは前から</strong>。for の向きとずらす向きは逆になる。
+</div>
     </div>
     <div class="lesson-nav">
-      <button class="btn-next" onclick="showSection('l3')">
-        <span class="bn-meta"><span class="bn-label">次のレッスン</span><span class="bn-title">③ 頻出パターン</span></span>
+      <button class="btn-next" onclick="showSection('l4')">
+        <span class="bn-meta"><span class="bn-label">次のレッスン</span><span class="bn-title">④ 頻出パターン 8選</span></span>
         <span class="bn-arrow">→</span>
       </button>
     </div>
   </section>
 
-  <section id="l3" class="section">
+<section id="l4" class="section">
     <div class="lesson-card">
-<h2>③ 頻出パターン 8 選</h2>
+<h2>④ 頻出パターン 8 選</h2>
 <div class="key-point">
 IPA の公開問題（令和5〜8年度・各6問）から、アルゴリズム問題の型を8つに整理した。<strong>どの型かを最初に見抜く</strong>と、トレースの前に「何を追えばいいか」が決まる。
 </div>
 <h3>型1：配列のシフト（ずらす向き）</h3>
 <div class="key-point">
-末尾を先頭へ・先頭を末尾へ移す処理。<strong>上書きで値を失わない向き</strong>にループを回す。後ろへずらす＝後ろから、前へずらす＝前から。②の例4が実物。
+末尾を先頭へ・先頭を末尾へ移す処理。<strong>上書きで値を失わない向き</strong>にループを回す。後ろへずらす＝後ろから、前へずらす＝前から。③の例4が実物。
 </div>
 <h3>型2：2進数と補数</h3>
 <div class="code">○8ビット型: complement(8ビット型: x)
@@ -684,16 +865,16 @@ endfor</div>
 <div class="key-point">リストは「値の配列」と「次の番号の配列」の2本で表す。<strong>末尾判定は次の番号が未定義かどうか</strong>。値の配列の順番（10,30,20,40）に惑わされない。</div>
     </div>
     <div class="lesson-nav">
-      <button class="btn-next" onclick="showSection('l4')">
-        <span class="bn-meta"><span class="bn-label">次のレッスン</span><span class="bn-title">④ 本番の解き方</span></span>
+      <button class="btn-next" onclick="showSection('l5')">
+        <span class="bn-meta"><span class="bn-label">次のレッスン</span><span class="bn-title">⑤ 本番の解き方</span></span>
         <span class="bn-arrow">→</span>
       </button>
     </div>
   </section>
 
-  <section id="l4" class="section">
+  <section id="l5" class="section">
     <div class="lesson-card">
-<h2>④ 本番の解き方</h2>
+<h2>⑤ 本番の解き方</h2>
 <h3>アルゴリズム問題：4手順で固定する</h3>
 <div class="key-point">
 <strong>手順1　冒頭の説明文で「何をする関数か」に線を引く</strong>（例：「昇順に整列する」「素数だけを返す」）<br/>
@@ -710,8 +891,8 @@ endfor</div>
     count ← count ＋ (rest ÷ 5 の商) ＋ 1
     rest ← rest － 10
   endwhile
-  return count
-<span class="cm">解答群　ア rest ≧ 0　イ rest ≧ 5　ウ rest ≧ 10　エ rest ＞ 0　オ rest ＞ 5　カ rest ＞ 10</span></div>
+  return count</div>
+<div class="example"><strong>解答群：</strong>　ア rest ≧ 0　／　イ rest ≧ 5　／　ウ rest ≧ 10　／　エ rest ＞ 0　／　オ rest ＞ 5　／　カ rest ＞ 10</div>
 <div class="key-point"><strong>手順1</strong>：組合せの総数。<strong>手順2</strong>：空欄補充。<strong>手順3</strong>：例の n＝12 で「4通り」になる条件を探す。</div>
 <div class="trace-wrap"><table class="trace">
 <tr><th>周</th><th>rest</th><th>加える数</th><th>count</th><th>rest（更新後）</th></tr>
