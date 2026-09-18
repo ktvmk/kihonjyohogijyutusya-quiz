@@ -75,6 +75,29 @@ table.tr tr.out td{background:#fff8e1}
 footer{margin-top:60px;color:var(--faint);font-size:12px;border-top:1px solid var(--line);padding-top:12px}
 @media (max-width:520px){body{font-size:15px}pre.code{font-size:12.5px}.prob{padding:14px}.say{grid-template-columns:1fr;gap:0}.say .ar{display:none}}
 @media print{.toolbar{display:none}.ans{display:block}body{background:#fff}.prob{break-inside:avoid;box-shadow:none}section{break-before:auto}}
+
+.af{margin-top:12px;border-top:1px dashed var(--line);padding-top:10px}
+.af-row{display:flex;align-items:center;gap:8px;margin:6px 0;flex-wrap:wrap}
+.af-row label{font-weight:700;min-width:5.5em;font-family:var(--mono);font-size:14px}
+.af-row input[type=text]{font-family:var(--mono);font-size:16px;padding:7px 10px;border:1.5px solid var(--line);border-radius:8px;width:11em;max-width:100%}
+.af-row input[type=text]:focus{outline:none;border-color:var(--accent)}
+.af-row input.ok{border-color:var(--ok);background:var(--ok-bg)}
+.af-row input.ng{border-color:var(--ng);background:var(--ng-bg)}
+.af-choice label{min-width:0;font-family:var(--font);font-size:15px;padding:6px 14px;border:1.5px solid var(--line);border-radius:999px;cursor:pointer;background:#fff}
+.af-choice label:has(input:checked){border-color:var(--accent);background:var(--accent-bg)}
+.af-choice.ok label:has(input:checked){border-color:var(--ok);background:var(--ok-bg)}
+.af-choice.ng label:has(input:checked){border-color:var(--ng);background:var(--ng-bg)}
+.af-choice input{margin:0 4px 0 0}
+.af-mark{font-weight:700;font-size:18px;min-width:1.2em}
+.af-mark.ok{color:var(--ok)}.af-mark.ng{color:var(--ng)}
+.af-btns{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:8px}
+.btn-check{font-family:var(--font);font-size:14px;font-weight:700;color:#fff;background:var(--accent);border:1.5px solid var(--accent);border-radius:999px;padding:8px 20px;cursor:pointer}
+.btn-check:hover{filter:brightness(1.08)}
+.af .btn-ans{margin-top:0;font-weight:500;border-color:var(--line);color:var(--sub)}
+.af-result{font-weight:700;font-size:14px}
+.af-result.ok{color:var(--ok)}.af-result.ng{color:var(--ng)}
+.score{margin-left:auto;font-weight:700;color:var(--accent)}
+@media print{.af-btns{display:none}}
 </style>
 </head>
 <body>
@@ -83,14 +106,14 @@ footer{margin-top:60px;color:var(--faint);font-size:12px;border-top:1px solid va
 <header>
   <div class="eyebrow">基本情報技術者 科目B</div>
   <h1>擬似言語トレース練習 — 基礎から本番まで</h1>
-  <p>1行ずつ紙に書いて追う練習。見本 → 練習の順に、上から順番にやる。答えは「答えを見る」を押すまで隠れています。</p>
+  <p>1行ずつ紙に書いて追う練習。見本 → 練習の順に、上から順番にやる。練習問題は答えを入力して「答え合わせ」。正解すると解説が開きます。入力した答えはこの端末に保存されます。</p>
 </header>
 
 <div class="toolbar">
   <button onclick="toggleAll(true)">全部の答えを表示</button>
   <button onclick="toggleAll(false)">全部の答えを隠す</button>
   <button onclick="window.print()">印刷</button>
-  <span style="color:var(--faint)">印刷すると答えも一緒に出ます</span>
+  <span style="color:var(--faint)">印刷すると答えも一緒に出ます</span><span class="score" id="score"></span>
 </div>
 
 <div class="toc">
@@ -168,7 +191,12 @@ c ← a × b
 a ← c － b
 b ← a ＋ c</pre>
 <div class="q">問：最後の a、b、c は？</div>
-<button class="btn-ans" onclick="tg(this)">答えを見る</button>
+<div class="af" data-id="1-1">
+<div class="af-row"><label>a ＝</label><input type="text" data-key="7" placeholder="" autocomplete="off"><span class="af-mark"></span></div>
+<div class="af-row"><label>b ＝</label><input type="text" data-key="21" placeholder="" autocomplete="off"><span class="af-mark"></span></div>
+<div class="af-row"><label>c ＝</label><input type="text" data-key="14" placeholder="" autocomplete="off"><span class="af-mark"></span></div>
+<div class="af-btns"><button class="btn-check" onclick="check(this)">答え合わせ</button><button class="btn-ans" onclick="tg(this)">答えを見る</button><span class="af-result"></span></div>
+</div>
 <div class="ans">
 <div class="answer">答：a ＝ 7、b ＝ 21、c ＝ 14</div>
 <div class="tblwrap"><table class="tr">
@@ -190,7 +218,11 @@ t ← a
 a ← b
 b ← t</pre>
 <div class="q">問：最後の a と b は？</div>
-<button class="btn-ans" onclick="tg(this)">答えを見る</button>
+<div class="af" data-id="1-2">
+<div class="af-row"><label>a ＝</label><input type="text" data-key="3" placeholder="" autocomplete="off"><span class="af-mark"></span></div>
+<div class="af-row"><label>b ＝</label><input type="text" data-key="10" placeholder="" autocomplete="off"><span class="af-mark"></span></div>
+<div class="af-btns"><button class="btn-check" onclick="check(this)">答え合わせ</button><button class="btn-ans" onclick="tg(this)">答えを見る</button><span class="af-result"></span></div>
+</div>
 <div class="ans">
 <div class="answer">答：a ＝ 3、b ＝ 10（中身が入れ替わった）</div>
 <div class="tblwrap"><table class="tr">
@@ -263,7 +295,10 @@ endif
 c ← c × 2</pre>
 <div class="q">問：最後の c は？</div>
 <p class="hint">2行目の判定「6≧9 は真か偽か」を声に出してから進む。</p>
-<button class="btn-ans" onclick="tg(this)">答えを見る</button>
+<div class="af" data-id="2-1">
+<div class="af-row"><label>c ＝</label><input type="text" data-key="6" placeholder="" autocomplete="off"><span class="af-mark"></span></div>
+<div class="af-btns"><button class="btn-check" onclick="check(this)">答え合わせ</button><button class="btn-ans" onclick="tg(this)">答えを見る</button><span class="af-result"></span></div>
+</div>
 <div class="ans">
 <div class="answer">答：c ＝ 6</div>
 <div class="tblwrap"><table class="tr">
@@ -288,7 +323,10 @@ else
   r ← "C"
 endif</pre>
 <div class="q">問：最後の r は？</div>
-<button class="btn-ans" onclick="tg(this)">答えを見る</button>
+<div class="af" data-id="2-2">
+<div class="af-row"><label>r ＝</label><input type="text" data-key="B" placeholder="" autocomplete="off"><span class="af-mark"></span></div>
+<div class="af-btns"><button class="btn-check" onclick="check(this)">答え合わせ</button><button class="btn-ans" onclick="tg(this)">答えを見る</button><span class="af-result"></span></div>
+</div>
 <div class="ans">
 <div class="answer">答：r ＝ "B"</div>
 <div class="tblwrap"><table class="tr">
@@ -312,7 +350,10 @@ else
 endif</pre>
 <div class="q">問：最後の m は？</div>
 <p class="hint">「n mod 2 が 0 と等しい」＝「n は偶数か？」という意味。</p>
-<button class="btn-ans" onclick="tg(this)">答えを見る</button>
+<div class="af" data-id="2-3">
+<div class="af-row"><label>m ＝</label><input type="text" data-key="52" placeholder="" autocomplete="off"><span class="af-mark"></span></div>
+<div class="af-btns"><button class="btn-check" onclick="check(this)">答え合わせ</button><button class="btn-ans" onclick="tg(this)">答えを見る</button><span class="af-result"></span></div>
+</div>
 <div class="ans">
 <div class="answer">答：m ＝ 52</div>
 <div class="tblwrap"><table class="tr">
@@ -374,7 +415,11 @@ for (i を 2 から 10 まで 2 ずつ増やす)
 endfor</pre>
 <div class="q">問：最後の s と c は？</div>
 <p class="hint">まず「i はどんな値を取るか」を書き出す。刻み幅が 2 なので 1,2,3… ではない。</p>
-<button class="btn-ans" onclick="tg(this)">答えを見る</button>
+<div class="af" data-id="3-1">
+<div class="af-row"><label>s ＝</label><input type="text" data-key="30" placeholder="" autocomplete="off"><span class="af-mark"></span></div>
+<div class="af-row"><label>c ＝</label><input type="text" data-key="5" placeholder="" autocomplete="off"><span class="af-mark"></span></div>
+<div class="af-btns"><button class="btn-check" onclick="check(this)">答え合わせ</button><button class="btn-ans" onclick="tg(this)">答えを見る</button><span class="af-result"></span></div>
+</div>
 <div class="ans">
 <div class="answer">答：s ＝ 30、c ＝ 5</div>
 <div class="tblwrap"><table class="tr">
@@ -398,7 +443,10 @@ for (i を 5 から 1 まで 1 ずつ減らす)
 endfor</pre>
 <div class="q">問：最後の p は？</div>
 <p class="hint">p のスタートが 0 ではなく 1 なのはなぜか、考えてみる。</p>
-<button class="btn-ans" onclick="tg(this)">答えを見る</button>
+<div class="af" data-id="3-2">
+<div class="af-row"><label>p ＝</label><input type="text" data-key="120" placeholder="" autocomplete="off"><span class="af-mark"></span></div>
+<div class="af-btns"><button class="btn-check" onclick="check(this)">答え合わせ</button><button class="btn-ans" onclick="tg(this)">答えを見る</button><span class="af-result"></span></div>
+</div>
 <div class="ans">
 <div class="answer">答：p ＝ 120（＝5×4×3×2×1）</div>
 <div class="tblwrap"><table class="tr">
@@ -424,7 +472,10 @@ for (i を 1 から 10 まで 1 ずつ増やす)
   endif
 endfor</pre>
 <div class="q">問：最後の s は？</div>
-<button class="btn-ans" onclick="tg(this)">答えを見る</button>
+<div class="af" data-id="3-3">
+<div class="af-row"><label>s ＝</label><input type="text" data-key="18" placeholder="" autocomplete="off"><span class="af-mark"></span></div>
+<div class="af-btns"><button class="btn-check" onclick="check(this)">答え合わせ</button><button class="btn-ans" onclick="tg(this)">答えを見る</button><span class="af-result"></span></div>
+</div>
 <div class="ans">
 <div class="answer">答：s ＝ 18（＝3＋6＋9）</div>
 <div class="tblwrap"><table class="tr">
@@ -495,7 +546,10 @@ for (i を 2 から 4 まで 1 ずつ増やす)
 endfor</pre>
 <div class="q">問：最後の max は？</div>
 <p class="hint">表に「data[i]」「data[i]＞max は真か偽か」の列を作る。偽のときは max は変わらない。</p>
-<button class="btn-ans" onclick="tg(this)">答えを見る</button>
+<div class="af" data-id="4-1">
+<div class="af-row"><label>max ＝</label><input type="text" data-key="9" placeholder="" autocomplete="off"><span class="af-mark"></span></div>
+<div class="af-btns"><button class="btn-check" onclick="check(this)">答え合わせ</button><button class="btn-ans" onclick="tg(this)">答えを見る</button><span class="af-result"></span></div>
+</div>
 <div class="ans">
 <div class="answer">答：max ＝ 9</div>
 <div class="tblwrap"><table class="tr">
@@ -520,7 +574,10 @@ for (i を 1 から 5 まで 1 ずつ増やす)
   endif
 endfor</pre>
 <div class="q">問：最後の c は？</div>
-<button class="btn-ans" onclick="tg(this)">答えを見る</button>
+<div class="af" data-id="4-2">
+<div class="af-row"><label>c ＝</label><input type="text" data-key="3" placeholder="" autocomplete="off"><span class="af-mark"></span></div>
+<div class="af-btns"><button class="btn-check" onclick="check(this)">答え合わせ</button><button class="btn-ans" onclick="tg(this)">答えを見る</button><span class="af-result"></span></div>
+</div>
 <div class="ans">
 <div class="answer">答：c ＝ 3（8、12、7 の3つ）</div>
 <div class="tblwrap"><table class="tr">
@@ -542,7 +599,10 @@ for (i を 1 から 4 まで 1 ずつ増やす)
 endfor</pre>
 <div class="q">問：最後の data は？</div>
 <p class="hint">今度は配列そのものが変わる。表は「data[1] data[2] data[3] data[4]」の4列にする。</p>
-<button class="btn-ans" onclick="tg(this)">答えを見る</button>
+<div class="af" data-id="4-3">
+<div class="af-row"><label>data ＝</label><input type="text" data-key="3,6,9,12" placeholder="例：1,2,3" autocomplete="off"><span class="af-mark"></span></div>
+<div class="af-btns"><button class="btn-check" onclick="check(this)">答え合わせ</button><button class="btn-ans" onclick="tg(this)">答えを見る</button><span class="af-result"></span></div>
+</div>
 <div class="ans">
 <div class="answer">答：data ＝ {3, 6, 9, 12}</div>
 <div class="tblwrap"><table class="tr">
@@ -566,7 +626,10 @@ for (i を 1 から 4 まで 1 ずつ増やす)
   endif
 endfor</pre>
 <div class="q">問：最後の c は？　また、for が「5 まで」ではなく「4 まで」なのはなぜ？</div>
-<button class="btn-ans" onclick="tg(this)">答えを見る</button>
+<div class="af" data-id="4-4">
+<div class="af-row"><label>c ＝</label><input type="text" data-key="2" placeholder="" autocomplete="off"><span class="af-mark"></span></div>
+<div class="af-btns"><button class="btn-check" onclick="check(this)">答え合わせ</button><button class="btn-ans" onclick="tg(this)">答えを見る</button><span class="af-result"></span></div>
+</div>
 <div class="ans">
 <div class="answer">答：c ＝ 2</div>
 <div class="tblwrap"><table class="tr">
@@ -631,7 +694,11 @@ while (n ＜ 100)
 endwhile</pre>
 <div class="q">問：最後の n と c は？</div>
 <p class="hint">n が 1 → 3 → 9 → … と変わる。「n＜100 が偽になった瞬間」で止まる。</p>
-<button class="btn-ans" onclick="tg(this)">答えを見る</button>
+<div class="af" data-id="5-1">
+<div class="af-row"><label>n ＝</label><input type="text" data-key="243" placeholder="" autocomplete="off"><span class="af-mark"></span></div>
+<div class="af-row"><label>c ＝</label><input type="text" data-key="5" placeholder="" autocomplete="off"><span class="af-mark"></span></div>
+<div class="af-btns"><button class="btn-check" onclick="check(this)">答え合わせ</button><button class="btn-ans" onclick="tg(this)">答えを見る</button><span class="af-result"></span></div>
+</div>
 <div class="ans">
 <div class="answer">答：n ＝ 243、c ＝ 5</div>
 <div class="tblwrap"><table class="tr">
@@ -658,7 +725,10 @@ while (n ＞ 0)
 endwhile</pre>
 <div class="q">問：最後の s は？</div>
 <p class="hint">n mod 10 ＝ 一の位。n ÷ 10 ＝ 一の位を切り落とす（切り捨て）。</p>
-<button class="btn-ans" onclick="tg(this)">答えを見る</button>
+<div class="af" data-id="5-2">
+<div class="af-row"><label>s ＝</label><input type="text" data-key="14" placeholder="" autocomplete="off"><span class="af-mark"></span></div>
+<div class="af-btns"><button class="btn-check" onclick="check(this)">答え合わせ</button><button class="btn-ans" onclick="tg(this)">答えを見る</button><span class="af-result"></span></div>
+</div>
 <div class="ans">
 <div class="answer">答：s ＝ 14（＝5＋7＋2、各桁の和）</div>
 <div class="tblwrap"><table class="tr">
@@ -684,7 +754,11 @@ while (n ＜ 5)          do
   c ← c ＋ 1              c ← c ＋ 1
 endwhile               while (n ＜ 5)</pre>
 <div class="q">問：A と B、それぞれ最後の c は？</div>
-<button class="btn-ans" onclick="tg(this)">答えを見る</button>
+<div class="af" data-id="5-3">
+<div class="af-row"><label>A の c ＝</label><input type="text" data-key="0" placeholder="" autocomplete="off"><span class="af-mark"></span></div>
+<div class="af-row"><label>B の c ＝</label><input type="text" data-key="1" placeholder="" autocomplete="off"><span class="af-mark"></span></div>
+<div class="af-btns"><button class="btn-check" onclick="check(this)">答え合わせ</button><button class="btn-ans" onclick="tg(this)">答えを見る</button><span class="af-result"></span></div>
+</div>
 <div class="ans">
 <div class="answer">答：A は c ＝ 0、B は c ＝ 1</div>
 <p><b>A（前判定）</b>：入る前に判定 → 5＜5 は偽 → 1回も入らない → c ＝ 0</p>
@@ -746,7 +820,10 @@ for (i を 1 から 3 まで 1 ずつ増やす)
 endfor</pre>
 <div class="q">問：最後の s は？</div>
 <p class="hint">i・j の表を作り、「i×j はいくつか」の列を足してから s に足し込む。行数は 3×2＝6行。</p>
-<button class="btn-ans" onclick="tg(this)">答えを見る</button>
+<div class="af" data-id="6-1">
+<div class="af-row"><label>s ＝</label><input type="text" data-key="18" placeholder="" autocomplete="off"><span class="af-mark"></span></div>
+<div class="af-btns"><button class="btn-check" onclick="check(this)">答え合わせ</button><button class="btn-ans" onclick="tg(this)">答えを見る</button><span class="af-result"></span></div>
+</div>
 <div class="ans">
 <div class="answer">答：s ＝ 18</div>
 <div class="tblwrap"><table class="tr">
@@ -771,7 +848,10 @@ for (i を 1 から 3 まで 1 ずつ増やす)
 endfor</pre>
 <div class="q">問：最後の c は？</div>
 <p class="hint">内側の j は「i から」始まる。i が 2 のとき j は 2,3 だけ。i が 3 のとき j は 3 だけ。</p>
-<button class="btn-ans" onclick="tg(this)">答えを見る</button>
+<div class="af" data-id="6-2">
+<div class="af-row"><label>c ＝</label><input type="text" data-key="6" placeholder="" autocomplete="off"><span class="af-mark"></span></div>
+<div class="af-btns"><button class="btn-check" onclick="check(this)">答え合わせ</button><button class="btn-ans" onclick="tg(this)">答えを見る</button><span class="af-result"></span></div>
+</div>
 <div class="ans">
 <div class="answer">答：c ＝ 6（＝3＋2＋1）</div>
 <div class="tblwrap"><table class="tr">
@@ -798,7 +878,10 @@ for (i を 1 から 3 まで 1 ずつ増やす)
   s ← s ＋ m[i, i]
 endfor</pre>
 <div class="q">問：最後の s は？</div>
-<button class="btn-ans" onclick="tg(this)">答えを見る</button>
+<div class="af" data-id="6-3">
+<div class="af-row"><label>s ＝</label><input type="text" data-key="15" placeholder="" autocomplete="off"><span class="af-mark"></span></div>
+<div class="af-btns"><button class="btn-check" onclick="check(this)">答え合わせ</button><button class="btn-ans" onclick="tg(this)">答えを見る</button><span class="af-result"></span></div>
+</div>
 <div class="ans">
 <div class="answer">答：s ＝ 15（＝1＋5＋9、斜めの和）</div>
 <div class="tblwrap"><table class="tr">
@@ -829,7 +912,10 @@ for (i を 1 から 3 まで 1 ずつ増やす)
 endfor</pre>
 <div class="q">問：最後の data は？</div>
 <p class="hint">練習1-2（入れ替え）＋練習4-4（隣どうし）。表は data[1]〜data[4] の4列。</p>
-<button class="btn-ans" onclick="tg(this)">答えを見る</button>
+<div class="af" data-id="7-1">
+<div class="af-row"><label>data ＝</label><input type="text" data-key="2,5,1,8" placeholder="例：1,2,3" autocomplete="off"><span class="af-mark"></span></div>
+<div class="af-btns"><button class="btn-check" onclick="check(this)">答え合わせ</button><button class="btn-ans" onclick="tg(this)">答えを見る</button><span class="af-result"></span></div>
+</div>
 <div class="ans">
 <div class="answer">答：data ＝ {2, 5, 1, 8}</div>
 <div class="tblwrap"><table class="tr">
@@ -860,7 +946,11 @@ for (i を 1 から n － 1 まで 1 ずつ増やす)
 endfor</pre>
 <div class="q">問：最後の data と c（入れ替えた回数）は？</div>
 <p class="hint">まず外側 i の範囲（1 から 2）と、i ごとの内側 j の範囲（n－i まで）を書き出す。</p>
-<button class="btn-ans" onclick="tg(this)">答えを見る</button>
+<div class="af" data-id="7-2">
+<div class="af-row"><label>data ＝</label><input type="text" data-key="1,2,3" placeholder="例：1,2,3" autocomplete="off"><span class="af-mark"></span></div>
+<div class="af-row"><label>c ＝</label><input type="text" data-key="2" placeholder="" autocomplete="off"><span class="af-mark"></span></div>
+<div class="af-btns"><button class="btn-check" onclick="check(this)">答え合わせ</button><button class="btn-ans" onclick="tg(this)">答えを見る</button><span class="af-result"></span></div>
+</div>
 <div class="ans">
 <div class="answer">答：data ＝ {1, 2, 3}、c ＝ 2</div>
 <div class="tblwrap"><table class="tr">
@@ -882,7 +972,10 @@ for (i を 4 から 2 まで 1 ずつ減らす)
 endfor
 data[1] ← 0</pre>
 <div class="q">問：最後の data は？　また、for を「2 から 4 まで増やす」にすると何が起きる？</div>
-<button class="btn-ans" onclick="tg(this)">答えを見る</button>
+<div class="af" data-id="7-3">
+<div class="af-row"><label>data ＝</label><input type="text" data-key="0,1,2,3" placeholder="例：1,2,3" autocomplete="off"><span class="af-mark"></span></div>
+<div class="af-btns"><button class="btn-check" onclick="check(this)">答え合わせ</button><button class="btn-ans" onclick="tg(this)">答えを見る</button><span class="af-result"></span></div>
+</div>
 <div class="ans">
 <div class="answer">答：data ＝ {0, 1, 2, 3}（全体が右に1つずれ、先頭に 0 が入った）</div>
 <div class="tblwrap"><table class="tr">
@@ -915,7 +1008,11 @@ while (i ≦ 5 and pos が －1 と等しい)
 endwhile</pre>
 <div class="q">問：最後の pos と i は？</div>
 <p class="hint"><code>and</code> は「両方とも真のときだけ真」。pos が －1 でなくなった瞬間に条件が偽になる。</p>
-<button class="btn-ans" onclick="tg(this)">答えを見る</button>
+<div class="af" data-id="7-4">
+<div class="af-row"><label>pos ＝</label><input type="text" data-key="2" placeholder="" autocomplete="off"><span class="af-mark"></span></div>
+<div class="af-row"><label>i ＝</label><input type="text" data-key="3" placeholder="" autocomplete="off"><span class="af-mark"></span></div>
+<div class="af-btns"><button class="btn-check" onclick="check(this)">答え合わせ</button><button class="btn-ans" onclick="tg(this)">答えを見る</button><span class="af-result"></span></div>
+</div>
 <div class="ans">
 <div class="answer">答：pos ＝ 2、i ＝ 3</div>
 <div class="tblwrap"><table class="tr">
@@ -949,7 +1046,11 @@ endwhile
 return －1</pre>
 <div class="q">問：return される値は？　また、mid はどんな値をとったか？</div>
 <p class="hint">÷ は切り捨て。<code>return</code> は「この値を答えにして、そこで終わり」（後の行は実行しない）。</p>
-<button class="btn-ans" onclick="tg(this)">答えを見る</button>
+<div class="af" data-id="7-5">
+<div class="af-row"><label>return ＝</label><input type="text" data-key="6" placeholder="" autocomplete="off"><span class="af-mark"></span></div>
+<div class="af-row"><label>mid の順 ＝</label><input type="text" data-key="4,6" placeholder="例：1,2,3" autocomplete="off"><span class="af-mark"></span></div>
+<div class="af-btns"><button class="btn-check" onclick="check(this)">答え合わせ</button><button class="btn-ans" onclick="tg(this)">答えを見る</button><span class="af-result"></span></div>
+</div>
 <div class="ans">
 <div class="answer">答：6（mid は 4 → 6 の順）</div>
 <div class="tblwrap"><table class="tr">
@@ -990,7 +1091,10 @@ return －1</pre>
   endfor
   return s</pre>
 <div class="q">問：sumTo(4) の戻り値は？</div>
-<button class="btn-ans" onclick="tg(this)">答えを見る</button>
+<div class="af" data-id="8-1">
+<div class="af-row"><label>戻り値 ＝</label><input type="text" data-key="10" placeholder="" autocomplete="off"><span class="af-mark"></span></div>
+<div class="af-btns"><button class="btn-check" onclick="check(this)">答え合わせ</button><button class="btn-ans" onclick="tg(this)">答えを見る</button><span class="af-result"></span></div>
+</div>
 <div class="ans">
 <div class="answer">答：10（＝1＋2＋3＋4）</div>
 <p>n ＝ 4 として見本3と同じトレース：s は 1 → 3 → 6 → 10。for を抜けて return 10。</p>
@@ -1017,7 +1121,15 @@ return －1</pre>
 <li><b>エ</b> i ＞ max</li>
 </ul>
 <p class="hint">data ← {4, 9, 2, 7} で4つ全部を試す。答えは 9 になるはず。</p>
-<button class="btn-ans" onclick="tg(this)">答えを見る</button>
+<div class="af" data-id="8-2">
+<div class="af-row af-choice">
+<label><input type="radio" name="q8-2" value="ア" data-key="ア"> ア</label>
+<label><input type="radio" name="q8-2" value="イ" data-key="ア"> イ</label>
+<label><input type="radio" name="q8-2" value="ウ" data-key="ア"> ウ</label>
+<label><input type="radio" name="q8-2" value="エ" data-key="ア"> エ</label>
+<span class="af-mark"></span></div>
+<div class="af-btns"><button class="btn-check" onclick="check(this)">答え合わせ</button><button class="btn-ans" onclick="tg(this)">答えを見る</button><span class="af-result"></span></div>
+</div>
 <div class="ans">
 <div class="answer">答：ア</div>
 <div class="tblwrap"><table class="tr">
@@ -1050,7 +1162,15 @@ return －1</pre>
 <li><b>エ</b> data[i] ÷ 2 が 0 と等しい</li>
 </ul>
 <p class="hint">data ← {4, 8, 5, 12, 7} で試す。偶数は 4,8,12 の3個。</p>
-<button class="btn-ans" onclick="tg(this)">答えを見る</button>
+<div class="af" data-id="8-3">
+<div class="af-row af-choice">
+<label><input type="radio" name="q8-3" value="ア" data-key="ア"> ア</label>
+<label><input type="radio" name="q8-3" value="イ" data-key="ア"> イ</label>
+<label><input type="radio" name="q8-3" value="ウ" data-key="ア"> ウ</label>
+<label><input type="radio" name="q8-3" value="エ" data-key="ア"> エ</label>
+<span class="af-mark"></span></div>
+<div class="af-btns"><button class="btn-check" onclick="check(this)">答え合わせ</button><button class="btn-ans" onclick="tg(this)">答えを見る</button><span class="af-result"></span></div>
+</div>
 <div class="ans">
 <div class="answer">答：ア</div>
 <div class="tblwrap"><table class="tr">
@@ -1078,7 +1198,10 @@ return －1</pre>
   return b</pre>
 <div class="q">問：main() の戻り値は？</div>
 <p class="hint">calc(7) を先に計算して a を決める。次に「その a」を使って calc(a) を計算する。</p>
-<button class="btn-ans" onclick="tg(this)">答えを見る</button>
+<div class="af" data-id="8-4">
+<div class="af-row"><label>戻り値 ＝</label><input type="text" data-key="4" placeholder="" autocomplete="off"><span class="af-mark"></span></div>
+<div class="af-btns"><button class="btn-check" onclick="check(this)">答え合わせ</button><button class="btn-ans" onclick="tg(this)">答えを見る</button><span class="af-result"></span></div>
+</div>
 <div class="ans">
 <div class="answer">答：4</div>
 <div class="tblwrap"><table class="tr">
@@ -1110,7 +1233,15 @@ return －1</pre>
 <li><b>エ</b> n ＋ 1</li>
 </ul>
 <p class="hint">n ＝ 4 で、i ＝ 1 のとき「n－i＋1」は 4。つまり data[1] と data[4] を入れ替える。i ＝ 2 なら data[2] と data[3]。じゃあ i ＝ 3 は？</p>
-<button class="btn-ans" onclick="tg(this)">答えを見る</button>
+<div class="af" data-id="8-5">
+<div class="af-row af-choice">
+<label><input type="radio" name="q8-5" value="ア" data-key="イ"> ア</label>
+<label><input type="radio" name="q8-5" value="イ" data-key="イ"> イ</label>
+<label><input type="radio" name="q8-5" value="ウ" data-key="イ"> ウ</label>
+<label><input type="radio" name="q8-5" value="エ" data-key="イ"> エ</label>
+<span class="af-mark"></span></div>
+<div class="af-btns"><button class="btn-check" onclick="check(this)">答え合わせ</button><button class="btn-ans" onclick="tg(this)">答えを見る</button><span class="af-result"></span></div>
+</div>
 <div class="ans">
 <div class="answer">答：イ（n ÷ 2）</div>
 <div class="tblwrap"><table class="tr">
@@ -1138,7 +1269,12 @@ return －1</pre>
     return "－"
   endif</pre>
 <div class="q">問：check(9)、check(20)、check(45) の戻り値は？　また、1つ目と2つ目の if を入れ替えると check(45) はどうなる？</div>
-<button class="btn-ans" onclick="tg(this)">答えを見る</button>
+<div class="af" data-id="8-6">
+<div class="af-row"><label>check(9) ＝</label><input type="text" data-key="F" placeholder="" autocomplete="off"><span class="af-mark"></span></div>
+<div class="af-row"><label>check(20) ＝</label><input type="text" data-key="B" placeholder="" autocomplete="off"><span class="af-mark"></span></div>
+<div class="af-row"><label>check(45) ＝</label><input type="text" data-key="FB" placeholder="" autocomplete="off"><span class="af-mark"></span></div>
+<div class="af-btns"><button class="btn-check" onclick="check(this)">答え合わせ</button><button class="btn-ans" onclick="tg(this)">答えを見る</button><span class="af-result"></span></div>
+</div>
 <div class="ans">
 <div class="answer">答：check(9)＝"F"、check(20)＝"B"、check(45)＝"FB"</div>
 <div class="tblwrap"><table class="tr">
@@ -1162,7 +1298,10 @@ return －1</pre>
   endif</pre>
 <div class="q">問：fact(4) の戻り値は？</div>
 <p class="hint">fact(4) を出すには fact(3) が要る → fact(3) には fact(2) が要る → … 一番奥（fact(1)）まで潜ってから、順に戻ってくる。</p>
-<button class="btn-ans" onclick="tg(this)">答えを見る</button>
+<div class="af" data-id="8-7">
+<div class="af-row"><label>戻り値 ＝</label><input type="text" data-key="24" placeholder="" autocomplete="off"><span class="af-mark"></span></div>
+<div class="af-btns"><button class="btn-check" onclick="check(this)">答え合わせ</button><button class="btn-ans" onclick="tg(this)">答えを見る</button><span class="af-result"></span></div>
+</div>
 <div class="ans">
 <div class="answer">答：24（＝4×3×2×1）</div>
 <div class="tblwrap"><table class="tr">
@@ -1215,14 +1354,87 @@ return －1</pre>
 </div>
 
 <script>
+function norm(v){
+  return String(v||'')
+    .replace(/[０-９Ａ-Ｚａ-ｚ]/g,function(c){return String.fromCharCode(c.charCodeAt(0)-0xFEE0);})
+    .replace(/[−－ー―‐]/g,'-').replace(/[、，]/g,',').replace(/→/g,',')
+    .replace(/[\"'“”‘’「」『』{}\[\]（）()\s]/g,'')
+    .toUpperCase();
+}
+function ansBox(el){return el.closest('.prob').querySelector('.ans');}
+function ansBtn(el){return el.closest('.prob').querySelector('.btn-ans');}
 function tg(btn){
-  var a=btn.nextElementSibling; a.classList.toggle('open');
+  var a=ansBox(btn); a.classList.toggle('open');
   btn.textContent=a.classList.contains('open')?'答えを隠す':'答えを見る';
 }
 function toggleAll(open){
   document.querySelectorAll('.ans').forEach(function(a){a.classList.toggle('open',open);});
   document.querySelectorAll('.btn-ans').forEach(function(b){b.textContent=open?'答えを隠す':'答えを見る';});
 }
+function check(btn){
+  var af=btn.closest('.af'), all=true, any=false;
+  var choice=af.querySelector('.af-choice');
+  if(choice){
+    var sel=choice.querySelector('input:checked');
+    var mark=choice.querySelector('.af-mark');
+    if(!sel){mark.textContent='';choice.classList.remove('ok','ng');all=false;}
+    else{
+      any=true;
+      var ok=sel.value===sel.dataset.key;
+      choice.classList.toggle('ok',ok);choice.classList.toggle('ng',!ok);
+      mark.textContent=ok?'○':'×';mark.className='af-mark '+(ok?'ok':'ng');
+      if(!ok)all=false;
+    }
+  }else{
+    af.querySelectorAll('input[type=text]').forEach(function(inp){
+      var mark=inp.nextElementSibling;
+      if(!norm(inp.value)){inp.classList.remove('ok','ng');mark.textContent='';all=false;return;}
+      any=true;
+      var ok=norm(inp.value)===norm(inp.dataset.key);
+      inp.classList.toggle('ok',ok);inp.classList.toggle('ng',!ok);
+      mark.textContent=ok?'○':'×';mark.className='af-mark '+(ok?'ok':'ng');
+      if(!ok)all=false;
+    });
+  }
+  var res=af.querySelector('.af-result');
+  if(!any){res.textContent='答えを入力してください';res.className='af-result';return;}
+  if(all){
+    res.textContent='正解！';res.className='af-result ok';
+    var a=ansBox(af); a.classList.add('open'); ansBtn(af).textContent='答えを隠す';
+  }else{
+    res.textContent='おしい。×のところをもう一度';res.className='af-result ng';
+  }
+  af.dataset.done=all?'1':'';
+  save(af); updateScore();
+}
+function updateScore(){
+  var n=document.querySelectorAll('.af').length, ok=document.querySelectorAll('.af[data-done="1"]').length;
+  var el=document.getElementById('score'); if(el)el.textContent='正解 '+ok+' / '+n;
+}
+function save(af){
+  try{
+    var st={};
+    af.querySelectorAll('input[type=text]').forEach(function(inp,i){st['t'+i]=inp.value;});
+    var sel=af.querySelector('input[type=radio]:checked'); if(sel)st.r=sel.value;
+    st.done=af.dataset.done||'';
+    localStorage.setItem('trace:'+af.dataset.id, JSON.stringify(st));
+  }catch(e){}
+}
+function load(){
+  document.querySelectorAll('.af').forEach(function(af){
+    try{
+      var st=JSON.parse(localStorage.getItem('trace:'+af.dataset.id)||'null'); if(!st)return;
+      af.querySelectorAll('input[type=text]').forEach(function(inp,i){if(st['t'+i]!=null)inp.value=st['t'+i];});
+      if(st.r){var r=af.querySelector('input[type=radio][value="'+st.r+'"]'); if(r)r.checked=true;}
+      if(st.done==='1'){af.dataset.done='1'; check(af.querySelector('.btn-check'));}
+    }catch(e){}
+  });
+  updateScore();
+}
+document.addEventListener('keydown',function(e){
+  if(e.key==='Enter'&&e.target.matches('.af input[type=text]')){check(e.target.closest('.af').querySelector('.btn-check'));}
+});
+load();
 </script>
 </body>
 </html>
